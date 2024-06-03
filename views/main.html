@@ -48,25 +48,13 @@
                                             </div>
                                             <p class="changePlanLable">WP</p>
                                         </div>
-                                        <button id="addTaskToRunningList" class="addTaskToRunningList" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
-                                    </div>
-                                    <ul class="runningList-ul" id="runningList-ul">
-                                        <li class="card-ul-item">
-                                            <input class="form-check-input" type="radio">
-                                            <span class="runningList-icon"><i class="fa-solid fa-hourglass-start"></i></span>
-                                            <label class="form-check-label" for="flexCheckDefault">Default checkbox</label>
-                                        </li>
-                                        <li class="card-ul-item">
-                                            <input class="form-check-input" type="radio">
-                                            <span class="runningList-icon"><i class="fa-solid fa-hourglass-half"></i></i></span>
-                                            <label class="form-check-label" for="flexCheckDefault">Default checkbox</label>
-                                        </li>
-                                        <li class="card-ul-item">
-                                            <input class="form-check-input" type="radio">
-                                            <span class="runningList-icon"><i class="fa-solid fa-hourglass-end"></i></i></span>
-                                            <label class="form-check-label" for="flexCheckDefault">Default checkbox</label>
-                                        </li>
-                                    </ul>
+                                        <div>
+                                            <button id="addTaskToRunningList" class="btnTaskInRunningList" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
+                                            <button id="deleteTasksToRunningList" class="btnTaskInRunningList"><i class="fa-solid fa-trash"></i></button>
+                                            <button id="deleteAllTaskToRunningList" class="btnTaskInRunningList" onclick="deleteAllBreakfatsCard()"><i class="fa-solid fa-ban"></i></button>
+                                        </div>
+                                        </div>
+                                    <ul class="runningList-ul" id="runningListCard"></ul>
                                 </div>
                             </div>
                         </div>

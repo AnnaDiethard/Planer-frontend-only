@@ -171,9 +171,10 @@ main.main {
     /* height: fit-content; */
 }
 
-.addTaskToRunningList {
+.btnTaskInRunningList {
     background: none !important;
     border: none !important;
+    padding-inline: 0.5rem;
 }
 
 .runningList-icon {
