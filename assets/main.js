@@ -1,9 +1,5 @@
 let tasks = []
 let doneTasks = []
-
-document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  .forEach(el => new bootstrap.Tooltip(el))
-
 // рендер тудушника из LS
 if (localStorage.getItem('tasksList')) {
 	tasks = JSON.parse(localStorage.getItem('tasksList'))
