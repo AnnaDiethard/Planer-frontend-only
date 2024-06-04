@@ -129,3 +129,9 @@ function deleteAllTasksToRunningList() {
     localStorage.removeItem('doneTasksList')
     window.location.reload();
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const calendarId = document.querySelector("#calendar")
+    const calendar = new VanillaCalendar(calendarId);
+    calendar.init();
+  });

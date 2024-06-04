@@ -1,0 +1,21 @@
+.vanilla-calendar {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: rgb(236, 211, 179) !important;
+}
+
+.vanilla-calendar-day__btn {
+    background-color: rgb(240, 228, 213) !important;
+}
+
+.vanilla-calendar-day__btn {
+    color: rgb(126, 96, 52) !important;
+}
+
+.vanilla-calendar-day__btn_weekend {
+    color: rgb(148, 54, 37) !important;
+}
+
+.vanilla-calendar-day__btn_today {
+    color: blueviolet !important;
+}

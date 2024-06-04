@@ -39,7 +39,7 @@ body {
     align-items: center;
 }
 
-.header-link {
+.link-header {
     font-size: 1.5rem;
     text-decoration: none;
     color: black;
@@ -47,7 +47,7 @@ body {
     margin-left: 2rem;
 }
 
-.header-link:hover {
+.link-header:hover {
     color: rgb(112, 95, 75);
 }
 
@@ -121,7 +121,7 @@ main.main {
     justify-content: center;
 }
 
-.card-body-header {
+.card-body__header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -129,22 +129,22 @@ main.main {
     padding: 1rem 0.5rem 1rem 1rem;
 }
 
-.changePlan {
+.card-body__changePlan {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
 }
 
-.changePlanLable {
+.card-body__change-plan-lable {
     margin: 0;
 }
 
-.form-check {
+.card-body__form-check {
     margin: 0;
 }
 
-.card-header-text {
+.card-header__text {
     margin: 0;
     font-size: 20px;
 }
@@ -189,7 +189,7 @@ main.main {
     padding: 0;
 }
 
-.btnTaskInRunningList {
+.card-body__btn-task-running-list {
     background: none !important;
     border: none !important;
     padding-inline: 0.5rem;
@@ -211,7 +211,7 @@ main.main {
     color: rgb(233, 123, 119);
 }
 
-.card-content-block {
+.card-body-content {
     /* height: fit-content; */
     /* position: absolute; */
 }
