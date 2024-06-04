@@ -43,15 +43,15 @@
                                     <div class="card-body-header">
                                         <div class="changePlan">
                                             <p class="changePlanLable" style="padding-right: 7px ;">RL</p>
-                                            <div class="form-check form-switch">
+                                                <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                                             </div>
                                             <p class="changePlanLable">WP</p>
                                         </div>
                                         <div>
                                             <button id="addTaskToRunningList" class="btnTaskInRunningList" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
-                                            <button id="deleteTasksToRunningList" class="btnTaskInRunningList"><i class="fa-solid fa-trash"></i></button>
-                                            <button id="deleteAllTaskToRunningList" class="btnTaskInRunningList" onclick="deleteAllBreakfatsCard()"><i class="fa-solid fa-ban"></i></button>
+                                            <!-- <button id="deleteTasksFromRunningList"t" onclick="deleteTa class="btnTaskInRunningLissksFromRunningList()"><i class="fa-solid fa-trash"></i></button> -->
+                                            <button id="deleteAllTaskToRunningList" class="btnTaskInRunningList" onclick="deleteAllTaskToRunningList()"><i class="fa-solid fa-ban"></i></button>
                                         </div>
                                         </div>
                                     <ul class="runningList-ul" id="runningListCard"></ul>
@@ -78,16 +78,16 @@
               <input type="text" id="addTaskInput" class="addTaskInput" required>
               <ul class="modal-dialog-addTask">
                 <li class="runningList-li">
-                    <input type="radio" class="runningList-checkbox">
-                    <span class="runningList-icon"><i class="fa-solid fa-hourglass-start"></i></span>
+                    <input type="radio" name="runningListRadio" class="runningListRadio">
+                    <span id="3" class="runningList-icon"><i class="fa-solid fa-hourglass-start"></i></span>
                 </li>
                 <li class="runningList-li">
-                    <input type="radio" class="runningList-checkbox">
-                    <span class="runningList-icon"><i class="fa-solid fa-hourglass-half"></i></span>
+                    <input type="radio" name="runningListRadio" class="runningListRadio">
+                    <span id="2" class="runningList-icon"><i class="fa-solid fa-hourglass-half"></i></span>
                 </li>
                 <li class="runningList-li">
-                    <input type="radio" class="runningList-checkbox">
-                    <span class="runningList-icon"><i class="fa-solid fa-hourglass-end"></i></span>
+                    <input type="radio" name="runningListRadio" class="runningListRadio">
+                    <span id="1" class="runningList-icon"><i class="fa-solid fa-hourglass-end"></i></span>
                 </li>
               </ul>
             </div>

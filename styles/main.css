@@ -126,7 +126,7 @@ main.main {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem 1rem 2rem;
+    padding: 1rem 0.5rem 1rem 1rem;
 }
 
 .changePlan {
@@ -161,14 +161,22 @@ main.main {
     width: 6rem;
 }
 
+.runningList-ul {
+    padding: 0;
+}
+
 .card-ul-item {
     list-style: none;
-    padding-top: 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.card-ul-item:hover {
+    background-color: rgb(245, 239, 234);
 }
 
 /* block-runningList */
 .card-body-runningList {
-    /* height: fit-content; */
+    padding: 0;
 }
 
 .btnTaskInRunningList {
