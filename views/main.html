@@ -48,10 +48,10 @@
                                             </div>
                                             <p class="changePlanLable">WP</p>
                                         </div>
-                                        <div>
-                                            <button id="addTaskToRunningList" class="btnTaskInRunningList" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
-                                            <button id="cleanTasksToRunningList" class="btnTaskInRunningList" onclick="cleanTasksToRunningList()"><i class="fa-solid fa-eraser"></i></button>
-                                            <button id="deleteAllTasksToRunningList" class="btnTaskInRunningList" onclick="deleteAllTasksToRunningList()"><i class="fa-solid fa-ban"></i></button>
+                                        <div> 
+                                            <button id="addTaskToRunningList" class="btn btnTaskInRunningList" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
+                                            <button id="cleanTasksToRunningList" class="btn btnTaskInRunningList" onclick="cleanTasksToRunningList()" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
+                                            <button id="deleteAllTasksToRunningList" class="btn btnTaskInRunningList" onclick="deleteAllTasksToRunningList()" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="удалить все задачи" title="Hello World!"><i class="fa-solid fa-ban"></i></button>
                                         </div>
                                         </div>
                                     <ul class="runningList-ul" id="runningListCard"></ul>

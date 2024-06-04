@@ -1,6 +1,9 @@
 let tasks = []
 let doneTasks = []
 
+document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  .forEach(el => new bootstrap.Tooltip(el))
+
 // рендер тудушника из LS
 if (localStorage.getItem('tasksList')) {
 	tasks = JSON.parse(localStorage.getItem('tasksList'))
@@ -42,7 +45,7 @@ function addNewTaskToRunningList() {
 
     saveTasksListInLocalStorage(tasks)
 
-    renderNewTask(newTask)
+    renderTask(newTask)
 
     // очистка элементов формы
     const addTaskInputValue = document.querySelector("#addTaskInput")
@@ -121,10 +124,11 @@ function deleteTasksFromRunningList(el) {
     tasks = tasks.filter(function(task) {
         return task.id != id
     })
+    saveTasksListInLocalStorage(tasks)
 }
 
 // очистка всего списка задач
-function deleteAllTaskToRunningList() {
+function deleteAllTasksToRunningList() {
     localStorage.removeItem('tasksList')
     localStorage.removeItem('doneTasksList')
     window.location.reload();
