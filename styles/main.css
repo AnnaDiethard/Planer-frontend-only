@@ -184,6 +184,10 @@ main.main {
     text-decoration: line-through;
 }
 
+.card-body__running-list-ul {
+    padding-left: 0;
+}
+
 /* block-runningList */
 .card-body-runningList {
     padding: 0;
@@ -209,11 +213,6 @@ main.main {
 
 .fa-hourglass-end {
     color: rgb(233, 123, 119);
-}
-
-.card-body-content {
-    /* height: fit-content; */
-    /* position: absolute; */
 }
 
 /* modal-dialog-addTask */

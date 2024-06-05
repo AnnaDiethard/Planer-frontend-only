@@ -1,5 +1,8 @@
 let tasks = []
 let doneTasks = []
+let taskDate = ''
+let dropdownMenuItemId = ''
+
 // рендер тудушника из LS
 if (localStorage.getItem('tasksList')) {
 	tasks = JSON.parse(localStorage.getItem('tasksList'))
@@ -22,14 +25,15 @@ function getTasksListFromLocalStorage() {
 // добавление новой задачи
 function addNewTaskToRunningList() {
     const taskInputValue = document.querySelector("#addTaskInput").value
-    const taskStatus = document.querySelector('input[type="radio"]:checked').closest('li').querySelector('span').id
-    const iconClass = document.querySelector('input[type="radio"]:checked').closest('li').querySelector('i').classList.value
-
+    const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
+    const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
+    
     const newTask = {
         id: Date.now(),
         text: taskInputValue,
-        status: taskStatus,
-        icon: iconClass
+        status: taskStatus || '',
+        icon: iconClass || '',
+        date: taskDate || ''
     }
 
     getTasksListFromLocalStorage()
@@ -129,9 +133,3 @@ function deleteAllTasksToRunningList() {
     localStorage.removeItem('doneTasksList')
     window.location.reload();
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    const calendarId = document.querySelector("#calendar")
-    const calendar = new VanillaCalendar(calendarId);
-    calendar.init();
-  });
