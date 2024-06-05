@@ -65,24 +65,34 @@ function addNewTaskToRunningList() {
 // рендер экземпляра новой задачи
 function renderTask(task) {
     const runningListCard = document.querySelector("#runningListCard")
-
+    
     if(task.status === "4") {
         const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <div>
-                            <span class="runningList-icon-done"><i class="${task.icon} runningList-icon-done"></i></span>
-                            <label class="form-check-label-done" for="flexCheckDefault">${task.text}</label>
-                        </div>
-                    </li>`
+                            <div>
+                                <span class="runningList-icon-done"><i class="${task.icon} runningList-icon-done"></i></span>
+                                <label class="form-check-label-done" for="flexCheckDefault">${task.text}</label>
+                            </div>
+                        </li>`
         runningListCard.insertAdjacentHTML('beforeend', taskHTML)
+    } else if(task.date) {
+        const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <div>
+                                <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                <span class="runningList-icon"><i class="${task.icon}"></i></span>
+                                <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
+                            </div>
+                            <span><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTasksFromRunningList(this)"></i></span>
+                        </li>`
+        runningListCard.insertAdjacentHTML('beforebegin', taskHTML)
     } else {
         const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <div>
-                            <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                            <span class="runningList-icon"><i class="${task.icon}"></i></span>
-                            <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
-                        </div>
-                        <span><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTasksFromRunningList(this)"></i></span>
-                    </li>`
+                            <div>
+                                <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                <span class="runningList-icon"><i class="${task.icon}"></i></span>
+                                <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
+                            </div>
+                            <span><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTasksFromRunningList(this)"></i></span>
+                        </li>`
         runningListCard.insertAdjacentHTML('beforebegin', taskHTML)
     }
 }
