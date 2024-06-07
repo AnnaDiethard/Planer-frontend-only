@@ -1,3 +1,6 @@
+[...document.querySelectorAll('[data-bs-toggle="tooltip"]')]
+  .forEach(el => new bootstrap.Tooltip(el))
+
 let tasks = []
 let doneTasks = []
 let taskDate = ''
@@ -87,6 +90,7 @@ function createNewTask() {
 
 function editTask() {
     console.log(234)
+    editTaskOpenDialog()
 }
 
 function checkCorrectRenderTask() {

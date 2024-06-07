@@ -10,6 +10,7 @@ html, body {
 body {
     background-color: rgb(255, 240, 221);
     min-width: 320px;
+    position: relative;
 }
 
 .wrapper {
@@ -73,6 +74,10 @@ main.main {
     background-color: rgb(211, 227, 199);
 }
 
+.card-header {
+    background-color: rgb(236, 211, 179);
+}
+
 .home-card-header p {
     font-weight: bold;
     letter-spacing: 1px;
@@ -127,6 +132,15 @@ main.main {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0.5rem 1rem 1rem;
+    background-color: rgb(240, 228, 213);
+}
+
+.card-body-runningList {
+    background-color: rgb(240, 228, 213);
+}
+
+.nav-link {
+    color: rgb(126, 96, 52)
 }
 
 .card-body__changePlan {
@@ -230,4 +244,18 @@ main.main {
 
 .runningList-li {
     padding-right: 3rem;
+}
+
+.task-dialog {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    width: 30%;
+    background-color: rgb(236, 211, 179);
+}
+
+.modal-dialog {
+    padding: 2rem;
 }

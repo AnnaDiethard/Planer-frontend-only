@@ -61,9 +61,9 @@
                                             </li>
                                         </ul>
                                         <div> 
-                                            <button id="addTaskToRunningList" class="btn card-body__btn-task-running-list" title="добавить задачу" onclick="addTaskOpenDialog()"><i class="fa-solid fa-plus"></i></button>
-                                            <button id="cleanTasksToRunningList" class="btn card-body__btn-task-running-list" onclick="deleteDoneTasks()" title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
-                                            <button id="deleteAllTasksToRunningList" class="btn card-body__btn-task-running-list" onclick="deleteAllTasks()" title="удалить все задачи"><i class="fa-solid fa-ban"></i></button>
+                                            <button id="addTaskToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="addTaskOpenDialog()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="добавить задачу"><i class="fa-solid fa-plus"></i></button>
+                                            <button id="cleanTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteDoneTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
+                                            <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteAllTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить все задачи"><i class="fa-solid fa-ban"></i></button>
                                         </div>
                                     </div>
                                     <div class="card-body__body">
@@ -94,7 +94,7 @@
         </div>
     </div>
 
-        <dialog id="taskDialog">
+        <dialog id="taskDialog" class="task-dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
