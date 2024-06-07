@@ -1,7 +1,7 @@
 let tasks = []
 let doneTasks = []
 let taskDate = ''
-let dropdownMenuItemId = ''
+let dayOfWeek = ''
 
 // рендер тудушника из LS
 if (localStorage.getItem('tasksList')) {
@@ -27,14 +27,19 @@ function addNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
+    const planningDate = checkDayTaskForWeekPlaner()
     
     const newTask = {
         id: Date.now(),
         text: taskInputValue,
         status: taskStatus || '',
         icon: iconClass || '',
-        date: taskDate || ''
+        // определяется в конфиге календаря
+        date: planningDate || '',
+        dayName: dayOfWeek
     }
+
+    checkDayTaskForWeekPlaner()
 
     getTasksListFromLocalStorage()
 
@@ -62,8 +67,17 @@ function addNewTask() {
     window.location.reload();
 }
 
-function renderTaskForWeekPlaner() {
-    console.log('this is date')
+function checkDayTaskForWeekPlaner() {
+
+    const day = new Date(taskDate);
+    const dd = String(day.getDate()).padStart(2, '0');
+    const mm = String(day.getMonth() + 1).padStart(2, '0');
+    const yyyy = day.getFullYear();
+
+    const planDateString = yyyy + mm + dd
+    planDate = Number(planDateString)
+
+    return planDate
 }
 
 // рендер экземпляра новой задачи
@@ -98,7 +112,6 @@ function renderTask(task) {
                             <span><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTasksFromRunningList(this)"></i></span>
                         </li>`
         runningListCard.insertAdjacentHTML('beforebegin', taskHTML)
-        renderTaskForWeekPlaner()
     }
 }
 

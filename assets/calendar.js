@@ -57,6 +57,18 @@ document.addEventListener('DOMContentLoaded', () => {
         actions: {
             clickDay(e, self) {
                 taskDate = self.selectedDates.toString()
+                
+                const gsDayNames = [
+                    'Sunday',
+                    'Monday',
+                    'Tuesday',
+                    'Wednesday',
+                    'Thursday',
+                    'Friday',
+                    'Saturday'
+                ]
+                const date = new Date(taskDate)
+                dayOfWeek = gsDayNames[date.getDay()]
             },
         }
     });
