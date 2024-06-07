@@ -27,7 +27,7 @@ function addNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
-    const planningDate = checkDayTaskForWeekPlaner()
+    const planningDate = Number(taskDate.replaceAll('-', ''))
     
     const newTask = {
         id: Date.now(),
@@ -38,8 +38,7 @@ function addNewTask() {
         date: planningDate || '',
         dayName: dayOfWeek
     }
-
-    checkDayTaskForWeekPlaner()
+    console.log('newTask', newTask)
 
     getTasksListFromLocalStorage()
 
@@ -64,20 +63,7 @@ function addNewTask() {
     } 
 
     // обновление страницы нужно чтобы задача рендерилась где надо
-    window.location.reload();
-}
-
-function checkDayTaskForWeekPlaner() {
-
-    const day = new Date(taskDate);
-    const dd = String(day.getDate()).padStart(2, '0');
-    const mm = String(day.getMonth() + 1).padStart(2, '0');
-    const yyyy = day.getFullYear();
-
-    const planDateString = yyyy + mm + dd
-    planDate = Number(planDateString)
-
-    return planDate
+    // window.location.reload();
 }
 
 // рендер экземпляра новой задачи
