@@ -2,12 +2,12 @@ let tasks = []
 let doneTasks = []
 let taskDate = ''
 let dayOfWeek = ''
+const taskDialog = document.querySelector('#taskDialog')
 
 // рендер тудушника из LS
 if (localStorage.getItem('tasksList')) {
 	tasks = JSON.parse(localStorage.getItem('tasksList'))
-	tasks.forEach((tasksItem) => renderTask(tasksItem))
-
+    checkCorrectRenderTask()
 }
 
 // сохранение задач в LS
@@ -22,8 +22,33 @@ function getTasksListFromLocalStorage() {
     return tasksList
 }
 
+function addTaskOpenDialog() {
+    const title = document.querySelector('#modalTitleEdit')
+    const button = document.querySelector('#editTaskBtn')
+    title.style.display = 'none';
+    button.style.display = 'none';
+    taskDialog.showModal()
+}
+
+function editTaskOpenDialog() {
+    const title = document.querySelector('#modalTitleAdd')
+    const button = document.querySelector('#addTaskBtn')
+    title.style.display = 'none';
+    button.style.display = 'none';
+    taskDialog.showModal()
+}
+
+function closeTaskDialog() {
+    taskDialog.close()
+
+    // обновление страницы нужно чтобы задача рендерилась где надо
+    window.location.reload();
+}
+
 // добавление новой задачи
-function addNewTask() {
+function createNewTask() {
+    // openTaskDialog()
+
     const taskInputValue = document.querySelector("#addTaskInput").value
     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
@@ -34,27 +59,22 @@ function addNewTask() {
         text: taskInputValue,
         status: taskStatus || '',
         icon: iconClass || '',
+        done: false,
         // определяется в конфиге календаря
         date: planningDate || '',
         dayName: dayOfWeek
     }
     console.log('newTask', newTask)
 
-    getTasksListFromLocalStorage()
-
+    // getTasksListFromLocalStorage()
     tasks.push(newTask)
-
-    // тут сортируем массив по статусу задачи
-    tasks.sort((a, b) => parseInt(a.status) - parseInt(b.status))
-
     saveTasksListInLocalStorage(tasks)
 
-    renderTask(newTask)
+    checkCorrectRenderTask()
 
     // очистка элементов формы
     const addTaskInputValue = document.querySelector("#addTaskInput")
 	addTaskInputValue.value = ""
-
     const checkedRadioBtn = document.getElementsByTagName('input');
     for(var i = 0; i < checkedRadioBtn.length; i++) {
         if(checkedRadioBtn[i].type == 'radio') {
@@ -62,15 +82,52 @@ function addNewTask() {
         }
     } 
 
-    // обновление страницы нужно чтобы задача рендерилась где надо
-    // window.location.reload();
+    closeTaskDialog()
+}
+
+function editTask() {
+    console.log(234)
+}
+
+function checkCorrectRenderTask() {
+    const tasksRunningList = [];
+    const tasksWeekPlaner = [];
+    const tasksPlaner = [];
+
+    tasks.forEach((task) => {
+        // planning
+        if(task.date == '' && task.status == '') {
+            tasksPlaner.push(task)
+        } else
+        // runnungList
+        if (task.date == '' && task.status) {
+            tasksRunningList.push(task)
+            // тут сортируем массив по статусу задачи
+            tasksRunningList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+        } else 
+        // weekPlaner
+        if(task.date) {
+            tasksWeekPlaner.push(task)
+        }
+    })
+
+    tasksRunningList.forEach((task) => {
+        renderTaskToRunningList(task)
+    })
+    tasksWeekPlaner.forEach((task) => {
+        renderTaskToWeekPlaner(task)
+    })
+    tasksPlaner.forEach((task) => {
+        renderTaskToPlanningList(task)
+    })
 }
 
 // рендер экземпляра новой задачи
-function renderTask(task) {
+function renderTaskToRunningList(task) {
+    console.log('renderTaskToRunningList')
     const runningListCard = document.querySelector("#runningListCard")
 
-    if(task.status === "4") {
+    if(task.done == true) {
         const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
                             <div>
                                 <span class="runningList-icon-done"><i class="${task.icon} runningList-icon-done"></i></span>
@@ -78,16 +135,58 @@ function renderTask(task) {
                             </div>
                         </li>`
         runningListCard.insertAdjacentHTML('beforeend', taskHTML)
-    } else if(task.date == '') {
+    } 
+    else {
         const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
                             <div>
                                 <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                 <span class="runningList-icon"><i class="${task.icon}"></i></span>
                                 <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
                             </div>
-                            <span><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTasksFromRunningList(this)"></i></span>
+                            <div>
+                            <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil" style="font-size: 14px; color: gray;" onclick="editTask()"></i></span>
+                            <span style="padding-left: 0.5rem"><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTask(this)"></i></span>
+                            </div>
                         </li>`
         runningListCard.insertAdjacentHTML('beforebegin', taskHTML)
+    }
+}
+
+function renderTaskToWeekPlaner(task) {
+    const weekPlanerListCard = document.querySelector("#weekPlanerListCard")
+
+    if(task.done == true) {
+        const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <div>
+                                <span class="runningList-icon-done"><i class="${task.icon} runningList-icon-done"></i></span>
+                                <label class="form-check-label-done" for="flexCheckDefault">${task.text}</label>
+                            </div>
+                        </li>`
+            weekPlanerListCard.insertAdjacentHTML('beforeend', taskHTML)
+    } else {
+        const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <div>
+                            <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                            <span class="runningList-icon"><i class="${task.icon}"></i></span>
+                            <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
+                        </div>
+                        <span><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTasksFromRunningList(this)"></i></span>
+                    </li>`
+            weekPlanerListCard.insertAdjacentHTML('beforebegin', taskHTML)
+    }
+}
+
+function renderTaskToPlanningList(task) {
+    const planningListCard = document.querySelector("#planningListCard")
+
+    if(task.done == true) {
+        const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <div>
+                                <span class="runningList-icon-done"><i class="${task.icon} runningList-icon-done"></i></span>
+                                <label class="form-check-label-done" for="flexCheckDefault">${task.text}</label>
+                            </div>
+                        </li>`
+            planningListCard.insertAdjacentHTML('beforeend', taskHTML)
     } else {
         const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
                             <div>
@@ -97,7 +196,7 @@ function renderTask(task) {
                             </div>
                             <span><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTasksFromRunningList(this)"></i></span>
                         </li>`
-        runningListCard.insertAdjacentHTML('beforebegin', taskHTML)
+        planningListCard.insertAdjacentHTML('beforebegin', taskHTML)
     }
 }
 
@@ -108,7 +207,7 @@ function markTheTaskCompleted(el) {
 
     tasks.forEach((task) => {
         if(task.id == id) {
-            task.status = '4'
+            task.done = true
         } 
     })
 
@@ -117,11 +216,11 @@ function markTheTaskCompleted(el) {
 }
 
 // очистка списка от выполненных задач
-function cleanTasksToRunningList() {
+function deleteDoneTasks() {
     getTasksListFromLocalStorage()
 
     tasks = tasks.filter(function(task) {
-        return task.status != '4'
+        return task.done == false
     })
 
     saveTasksListInLocalStorage(tasks)
@@ -129,7 +228,7 @@ function cleanTasksToRunningList() {
 }
 
 // удаление выбранной задачи
-function deleteTasksFromRunningList(el) {
+function deleteTask(el) {
     const deletedTasks = el.closest('li')
     const id = deletedTasks.id
 
@@ -142,7 +241,7 @@ function deleteTasksFromRunningList(el) {
 }
 
 // очистка всего списка задач
-function deleteAllTasksToRunningList() {
+function deleteAllTasks() {
     localStorage.removeItem('tasksList')
     localStorage.removeItem('doneTasksList')
     window.location.reload();

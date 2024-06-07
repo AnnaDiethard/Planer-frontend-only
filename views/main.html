@@ -55,20 +55,28 @@
                                                 <button class="nav-link" id="week-planer-tab" data-bs-toggle="tab" data-bs-target="#week-planer"
                                                 type="button" role="tab" aria-controls="week-planer" aria-selected="false">week planer</button>
                                             </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
+                                                type="button" role="tab" aria-controls="planning" aria-selected="false">planning</button>
+                                            </li>
                                         </ul>
                                         <div> 
-                                            <button id="addTaskToRunningList" class="btn card-body__btn-task-running-list" data-bs-toggle="modal" data-bs-target="#exampleModal" title="добавить задачу"><i class="fa-solid fa-plus"></i></button>
-                                            <button id="cleanTasksToRunningList" class="btn card-body__btn-task-running-list" onclick="cleanTasksToRunningList()" title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
-                                            <button id="deleteAllTasksToRunningList" class="btn card-body__btn-task-running-list" onclick="deleteAllTasksToRunningList()" title="удалить все задачи"><i class="fa-solid fa-ban"></i></button>
+                                            <button id="addTaskToRunningList" class="btn card-body__btn-task-running-list" title="добавить задачу" onclick="addTask()"><i class="fa-solid fa-plus"></i></button>
+                                            <button id="cleanTasksToRunningList" class="btn card-body__btn-task-running-list" onclick="deleteDoneTasks()" title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
+                                            <button id="deleteAllTasksToRunningList" class="btn card-body__btn-task-running-list" onclick="deleteAllTasks()" title="удалить все задачи"><i class="fa-solid fa-ban"></i></button>
                                         </div>
                                     </div>
                                     <div class="card-body__body">
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
-                                                <ul class="card-body__running-list-ul" id="runningListCard"></ul>
+                                                <ul class="card-body__ul" id="runningListCard"></ul>
                                             </div>
                                             <div class="tab-pane fade" id="week-planer" role="tabpanel" aria-labelledby="week-planer-tab">
-                                                <div id="page"><p>недельный планер</p></div>
+                                                <ul class="card-body__ul" id="weekPlanerListCard"></ul>
+                                            </div>
+                                            <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
+                                                <div id="planningListCard"></div>
+                                                <ul class="card-body__ul" id="planningListCard"></ul>
                                             </div>
                                         </div>
                                     </div>
@@ -86,37 +94,39 @@
         </div>
     </div>
 
-    <div class="modal" tabindex="-1" id="exampleModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">добавить задачу</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <dialog id="taskDialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="modalTitleAdd">добавить задачу</h5>
+                      <h5 class="modal-title" id="modalTitleEdit">редактировать задачу</h5>
+                      <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
+                  </div>
+                  <div class="modal-body">
+                      <div id="addTaskCalendar"></div>
+                      <input type="text" id="addTaskInput" class="addTaskInput" required>
+                      <ul class="modal-dialog-addTask">
+                          <li class="runningList-li">
+                              <input type="radio" name="runningListRadio" class="runningListRadio">
+                              <span id="3" class="runningList-icon"><i class="fa-solid fa-hourglass-start"></i></span>
+                          </li>
+                          <li class="runningList-li">
+                              <input type="radio" name="runningListRadio" class="runningListRadio">
+                              <span id="2" class="runningList-icon"><i class="fa-solid fa-hourglass-half"></i></span>
+                          </li>
+                          <li class="runningList-li">
+                              <input type="radio" name="runningListRadio" class="runningListRadio">
+                              <span id="1" class="runningList-icon"><i class="fa-solid fa-hourglass-end"></i></span>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" id="addTaskBtn" onclick="createNewTask()" data-bs-dismiss="modal">создать</button>
+                      <button type="button" class="btn btn-primary" id="editTaskBtn" onclick="editTask()" data-bs-dismiss="modal">обновить</button>
+                  </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <div id="addTaskCalendar"></div>
-                <input type="text" id="addTaskInput" class="addTaskInput" required>
-                <ul class="modal-dialog-addTask">
-                    <li class="runningList-li">
-                        <input type="radio" name="runningListRadio" class="runningListRadio">
-                        <span id="3" class="runningList-icon"><i class="fa-solid fa-hourglass-start"></i></span>
-                    </li>
-                    <li class="runningList-li">
-                        <input type="radio" name="runningListRadio" class="runningListRadio">
-                        <span id="2" class="runningList-icon"><i class="fa-solid fa-hourglass-half"></i></span>
-                    </li>
-                    <li class="runningList-li">
-                        <input type="radio" name="runningListRadio" class="runningListRadio">
-                        <span id="1" class="runningList-icon"><i class="fa-solid fa-hourglass-end"></i></span>
-                    </li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="addTaskBtn" onclick="addNewTask()" data-bs-dismiss="modal">создать</button>
-            </div>
-          </div>
-        </div>
-    </div>
+        </dialog>
 
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
