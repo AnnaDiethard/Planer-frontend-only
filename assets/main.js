@@ -144,8 +144,8 @@ function renderTaskToRunningList(task) {
                                 <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
                             </div>
                             <div>
-                            <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil" style="font-size: 14px; color: gray;" onclick="editTask()"></i></span>
-                            <span style="padding-left: 0.5rem"><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTask(this)"></i></span>
+                                <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil" style="font-size: 14px; color: gray;" onclick="editTaskOpenDialog()"></i></span>
+                                <span style="padding-left: 0.5rem"><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTask(this)"></i></span>
                             </div>
                         </li>`
         runningListCard.insertAdjacentHTML('beforebegin', taskHTML)
@@ -170,7 +170,10 @@ function renderTaskToWeekPlaner(task) {
                             <span class="runningList-icon"><i class="${task.icon}"></i></span>
                             <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
                         </div>
-                        <span><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTasksFromRunningList(this)"></i></span>
+                        <div>
+                            <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil" style="font-size: 14px; color: gray;" onclick="editTaskOpenDialog()"></i></span>
+                            <span style="padding-left: 0.5rem"><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTask(this)"></i></span>
+                        </div>
                     </li>`
             weekPlanerListCard.insertAdjacentHTML('beforebegin', taskHTML)
     }
@@ -194,7 +197,10 @@ function renderTaskToPlanningList(task) {
                                 <span class="runningList-icon"><i class="${task.icon}"></i></span>
                                 <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
                             </div>
-                            <span><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTasksFromRunningList(this)"></i></span>
+                            <div>
+                                <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil" style="font-size: 14px; color: gray;" onclick="editTaskOpenDialog()"></i></span>
+                                <span style="padding-left: 0.5rem"><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTask(this)"></i></span>
+                            </div>
                         </li>`
         planningListCard.insertAdjacentHTML('beforebegin', taskHTML)
     }
