@@ -38,7 +38,10 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col-4 block-runningList">
-                        <div id="mainCalendar"></div>
+                        <div class="calendar-block">
+                            <button class="btn" id="addDateToCalendarBtn" onclick="addCalendarDateOpenDialog()">запланировать событие</button>
+                            <div id="mainCalendar"></div>
+                        </div>
                         <div class="card card-runningList">
                             <div class="card-header">
                                 <p class="card-header__text">running list</p>
@@ -127,6 +130,25 @@
                 </div>
             </div>
         </dialog>
+
+        <dialog id="calendarDateDialog" class="date-dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="modalTitleAdd">добавить мероприятие</h5>
+                      <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
+                  </div>
+                  <div class="modal-body">
+                      <div id="addDateCalendar"></div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" id="addTaskBtn" onclick="createNewTask()" data-bs-dismiss="modal">создать</button>
+                      <button type="button" class="btn btn-primary" id="editTaskBtn" onclick="editTask()" data-bs-dismiss="modal">обновить</button>
+                  </div>
+                </div>
+            </div>
+        </dialog>
+        
 
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

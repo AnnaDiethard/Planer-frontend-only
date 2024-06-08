@@ -56,6 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         actions: {
             clickDay(e, self) {
+                console.log('e', e)
+                e.target.classList.add('vanilla-calendar-day-check')
+                // e.target.style.backgroundColor = "blueviolet !important"
                 taskDate = self.selectedDates.toString()
                 
                 const gsDayNames = [
@@ -73,5 +76,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     addTaskCalendar.init();
+
+    const addDateCalendarId = document.querySelector("#calendarDateDialog")
+    const addDateCalendar = new VanillaCalendar(addDateCalendarId, {
+        settings: {
+            type: 'default',
+            selection: {
+                day: 'single',
+                month: true,
+                // time: true,
+                holidays: ['2024-06-20'],
+            },
+            visibility: {
+                weekNumbers: true,
+                weekend: true,
+                today: true,
+              },
+        },
+        actions: {
+            clickDay(e, self) {
+                console.log('e', e)
+                e.target.classList.add('vanilla-calendar-day-check')
+            },
+        }
+    });
+    addDateCalendar.init();
 
   });

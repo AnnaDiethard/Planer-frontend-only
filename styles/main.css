@@ -121,6 +121,16 @@ main.main {
     
 }
 
+.calendar-block {
+    display: flex;
+    flex-direction: column;
+}
+
+#addDateToCalendarBtn {
+    background-color: rgb(236, 211, 179);
+    margin-bottom: 0.5rem;
+}
+
 .card-header {
     display: flex;
     justify-content: center;
@@ -258,4 +268,8 @@ main.main {
 
 .modal-dialog {
     padding: 2rem;
+}
+
+.date-dialog {
+    margin-top: 10rem;
 }

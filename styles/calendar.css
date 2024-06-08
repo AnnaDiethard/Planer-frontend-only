@@ -25,3 +25,7 @@
 .holidayStatus {
     background-color: blueviolet !important;
 }
+
+.vanilla-calendar-day__btn_selected {
+    background-color: rgb(170, 137, 201) !important;
+}

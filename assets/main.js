@@ -33,7 +33,7 @@ function addTaskOpenDialog() {
     taskDialog.showModal()
 }
 
-function editTaskOpenDialog() {
+function editTaskOpenDialog(el) {
     const title = document.querySelector('#modalTitleAdd')
     const button = document.querySelector('#addTaskBtn')
     title.style.display = 'none';
@@ -50,8 +50,6 @@ function closeTaskDialog() {
 
 // добавление новой задачи
 function createNewTask() {
-    // openTaskDialog()
-
     const taskInputValue = document.querySelector("#addTaskInput").value
     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
@@ -90,7 +88,8 @@ function createNewTask() {
 
 function editTask() {
     console.log(234)
-    editTaskOpenDialog()
+
+
 }
 
 function checkCorrectRenderTask() {
@@ -128,7 +127,6 @@ function checkCorrectRenderTask() {
 
 // рендер экземпляра новой задачи
 function renderTaskToRunningList(task) {
-    console.log('renderTaskToRunningList')
     const runningListCard = document.querySelector("#runningListCard")
 
     if(task.done == true) {
@@ -148,7 +146,7 @@ function renderTaskToRunningList(task) {
                                 <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
                             </div>
                             <div>
-                                <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil" style="font-size: 14px; color: gray;" onclick="editTaskOpenDialog()"></i></span>
+                                <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil" style="font-size: 14px; color: gray;" onclick="editTaskOpenDialog(this)"></i></span>
                                 <span style="padding-left: 0.5rem"><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTask(this)"></i></span>
                             </div>
                         </li>`
@@ -175,7 +173,7 @@ function renderTaskToWeekPlaner(task) {
                             <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
                         </div>
                         <div>
-                            <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil" style="font-size: 14px; color: gray;" onclick="editTaskOpenDialog()"></i></span>
+                            <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil" style="font-size: 14px; color: gray;" onclick="editTaskOpenDialog(this)"></i></span>
                             <span style="padding-left: 0.5rem"><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTask(this)"></i></span>
                         </div>
                     </li>`
@@ -202,7 +200,7 @@ function renderTaskToPlanningList(task) {
                                 <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
                             </div>
                             <div>
-                                <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil" style="font-size: 14px; color: gray;" onclick="editTaskOpenDialog()"></i></span>
+                                <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil" style="font-size: 14px; color: gray;" onclick="editTaskOpenDialog(this)"></i></span>
                                 <span style="padding-left: 0.5rem"><i class="fa-solid fa-trash" style="font-size: 14px; color: gray;" onclick="deleteTask(this)"></i></span>
                             </div>
                         </li>`
@@ -255,4 +253,9 @@ function deleteAllTasks() {
     localStorage.removeItem('tasksList')
     localStorage.removeItem('doneTasksList')
     window.location.reload();
+}
+
+function addCalendarDateOpenDialog() {
+    const dialog = document.querySelector('#calendarDateDialog')
+    dialog.showModal()
 }
