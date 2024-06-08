@@ -100,6 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         }
     });
-    addDateCalendar.init();
+    // addDateCalendar.init();
 
   });

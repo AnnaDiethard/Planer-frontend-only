@@ -1,25 +1,27 @@
 .vanilla-calendar {
     width: 100%;
     margin-bottom: 1rem;
-    background-color: rgb(236, 211, 179) !important;
+    background-color: var(--light-background) !important;
 }
 
 .vanilla-calendar-day__btn {
-    background-color: rgb(240, 228, 213) !important;
-}
-
-.vanilla-calendar-day__btn {
-    color: rgb(126, 96, 52) !important;
+    background-color: var(--light-btn-background) !important;
+    color: var(--light-text-color) !important;
     font-size: 14px;
 }
 
 .vanilla-calendar-day__btn_weekend {
-    color: rgb(148, 54, 37) !important;
+    color: var(--light-text-color) !important;
     font-size: 14px;
 }
 
+.vanilla-calendar-week__day_weekend {
+    color: var(--dark-text-color) !important;
+}
+
 .vanilla-calendar-day__btn_today {
-    color: blueviolet !important;
+    color: var(--dark-btn-background) !important;
+    color: var(--light-text-color);
 }
 
 .holidayStatus {
