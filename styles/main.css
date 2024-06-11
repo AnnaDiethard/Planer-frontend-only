@@ -18,6 +18,7 @@
 
 }
 
+/* общие стили */
 * {
     margin: 0;
     padding: 0;
@@ -31,6 +32,17 @@ body {
     background-color: var(--extra-light-background);
     min-width: 320px;
     position: relative;
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+li {
+    list-style-type: none;
 }
 
 .wrapper {
@@ -41,16 +53,46 @@ body {
     overflow-x: hidden;
 }
 
+.logo {
+    font-size: 4rem;
+}
+
+.card-body::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Define the thumb style */
+.card-body::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom right, #6d7076 0%, #74767c 100%);
+    border-radius: 5px;
+}
+
+/* Define the track style */
+.card-body::-webkit-scrollbar-track {
+    background-color: #ddd;
+    border: 1px solid #ccc;
+}
+
+/* Define the button style */
+.card-body::-webkit-scrollbar-button {
+    background-color: #6c6e75;
+    border-radius: 5px;
+}
+
+/* Define the button style when being hovered over */
+.card-body::-webkit-scrollbar-button:hover {
+    background-color: #999999;
+}
+
+/* блоки страницы */
+
 .header-row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 4rem;
-}
-
-.logo {
-    font-size: 4rem;
+    padding: 2rem 4rem 2rem 4rem;
 }
 
 .links-block {
@@ -85,6 +127,24 @@ main.main {
     padding: 0 3rem 3rem 3rem
 }
 
+.widgets-row {
+    padding-left: 2rem;
+}
+
+.widget-row {
+    margin-bottom: 1rem;
+}
+
+.col-4 {
+    padding: 0;
+}
+
+.widget-col {
+    padding-inline: 0.5rem;
+}
+
+/* карточки */
+
 .home-card {
     height: 15rem;
     margin-top: 2rem;
@@ -94,10 +154,14 @@ main.main {
     background-color: var(--dark-background);
 }
 
-.home-card-header p {
+.card-header p {
     font-weight: bold;
     letter-spacing: 1px;
     font-size: 20px;
+}
+
+.card-body {
+    background-color: var(--light-background);
 }
 
 .row-content {
@@ -134,9 +198,9 @@ main.main {
     padding: 1rem 0.5rem 1rem 1rem;
 }
 
-.card-body-runningList {
+/* .card-body-runningList {
     background-color: var(--light-background);
-}
+} */
 
 .nav-item {
     background-color: var(--light-background);
@@ -281,14 +345,6 @@ main.main {
 
 .date-dialog {
     margin-top: 10rem;
-}
-
-.widget-brick {
-    width: 100%; 
-    height: 8rem; 
-    background-color: var(--light-background); 
-    color: var(--dark-text-color);
-    border-radius: 10px;
 }
 
 .input-form{

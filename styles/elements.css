@@ -1,0 +1,48 @@
+/* календарь */
+.widget-brick {
+    width: 100%; 
+    height: 8rem; 
+    background-color: var(--light-background); 
+    color: var(--dark-text-color);
+    border-radius: 10px;
+}
+
+/* список */
+.widget-list__card-body {
+    min-height: 15rem;
+    max-height: 15rem;
+    overflow-y: auto;
+}
+
+.widget-list__input-block {
+    display: flex;
+    flex-direction: row;
+}
+
+.widget-list__input-text {
+    width: 100%;
+}
+
+.widget-list__list {
+    padding: 0;
+    margin: 0;
+    margin-top: 1rem;
+}
+
+.widget-list__item {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+.widget-list__item-text {
+    margin: 0;
+    padding-left: 0.5rem;
+}
+
+/* еженедельные дела */
+.everyWeekGoals__list {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+}

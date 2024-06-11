@@ -13,9 +13,14 @@
     <link href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.css" rel="stylesheet">
     <!-- rusmeteo  -->
     <link href="https://api.rusmeteo.net/service/informers/css/widget-brick.min.css" rel="stylesheet" type="text/css">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <!-- css style -->
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/calendar.css">
+    <link rel="stylesheet" href="../styles/elements.css">
 
 </head>
 <body>
@@ -87,9 +92,311 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-8">
-                        <div class="weather-dashboard">
-                            <a href="https://rusmeteo.net/weather/moskva/" class="widget-brick" id="b75499d689da58d5fce2ad1837a0e347">Погода в Москве</a>
+                    <div class="col-8 widgets-row">
+                        <div class="row widget-row" id="row-1">
+                            <div class="col-12 widget-col">
+                                <div class="weather-dashboard">
+                                    <a href="https://rusmeteo.net/weather/moskva/" class="widget-brick" id="b75499d689da58d5fce2ad1837a0e347">Погода в Москве</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row widget-row">
+                            <div class="col-12 widget-col">
+                                <div class="widget-everyWeekGoals">
+                                    <div class="card">
+                                        <div class="card-header card-header__text">
+                                            <p>еженедельные дела</p>
+                                        </div>
+                                        <div class="card-body widget-everyWeekGoals__card-body">
+                                            <div>
+                                                <ul class="nav nav-tabs everyWeekGoals__list" id="myTab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active nav-link-active" id="widget-everyWeekGoals-mon-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-mon"
+                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-mon" aria-selected="true">MON</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="widget-everyWeekGoals-tue-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-tue"
+                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-tue" aria-selected="false">TUE</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="widget-everyWeekGoals-wed-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-wed"
+                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-wed" aria-selected="false">WED</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="widget-everyWeekGoals-thu-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-thu"
+                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-thu" aria-selected="false">THU</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="widget-everyWeekGoals-fri-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-fri"
+                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-fri" aria-selected="false">FRI</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="widget-everyWeekGoals-sat-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-sat"
+                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-sat" aria-selected="false">SAT</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="widget-everyWeekGoals-sun-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-sun"
+                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-sun" aria-selected="false">SUN</button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <div class="tab-content" id="myTabsContent">
+                                                    <div class="tab-pane fade show active" id="widget-everyWeekGoals-mon" role="tabpanel" aria-labelledby="widget-everyWeekGoals-mon-tab">
+                                                        <ul class="card-body__ul" id="runningListCard">
+                                                            <li><p>mon</p></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="widget-everyWeekGoals-tue" role="tabpanel" aria-labelledby="widget-everyWeekGoals-tue-tab">
+                                                        <ul class="card-body__ul" id="weekPlanerListCard">
+                                                            <li><p>tue</p></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="widget-everyWeekGoals-wed" role="tabpanel" aria-labelledby="widget-everyWeekGoals-wed-tab">
+                                                        <div id="planningListCard"></div>
+                                                        <ul class="card-body__ul" id="planningListCard">
+                                                            <li><p>wed</p></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="widget-everyWeekGoals-thu" role="tabpanel" aria-labelledby="widget-everyWeekGoals-thu-tab">
+                                                        <div id="planningListCard"></div>
+                                                        <ul class="card-body__ul" id="planningListCard">
+                                                            <li><p>thu</p></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="widget-everyWeekGoals-fri" role="tabpanel" aria-labelledby="widget-everyWeekGoals-fri-tab">
+                                                        <div id="planningListCard"></div>
+                                                        <ul class="card-body__ul" id="planningListCard">
+                                                            <li><p>fri</p></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="widget-everyWeekGoals-sat" role="tabpanel" aria-labelledby="widget-everyWeekGoals-sat-tab">
+                                                        <div id="planningListCard"></div>
+                                                        <ul class="card-body__ul" id="planningListCard">
+                                                            <li><p>sat</p></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="widget-everyWeekGoals-sun" role="tabpanel" aria-labelledby="widget-everyWeekGoals-sun-tab">
+                                                        <div id="planningListCard"></div>
+                                                        <ul class="card-body__ul" id="planningListCard">
+                                                            <li><p>sun</p></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row widget-row" id="row-3">
+                            <div class="col-4 widget-col">
+                                <div class="widget-list">
+                                    <div class="card ">
+                                        <div class="card-header card-header__text">
+                                            <p>список раз</p>
+                                        </div>
+                                        <div class="card-body widget-list__card-body">
+                                            <div class="input-group widget-list__input-block">
+                                                <input type="text" class="form-control widget-list__input-text" aria-label="Dollar amount (with dot and two decimal places)">
+                                                <span class="input-group-text">+</span>
+                                            </div>
+                                            <ul class="widget-list__list">
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                                <li class="widget-list__item">
+                                                    <input type="checkbox" class="widget-list__item-checkbox">
+                                                    <p class="widget-list__item-text">пункт списка</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 widget-col">
+                                <div class="card">
+                                    <div class="card-header card-header__text">
+                                        <p>список два</p>
+                                    </div>
+                                    <div class="card-body widget-list__card-body">
+                                        <div class="input-group widget-list__input-block">
+                                            <input type="text" class="form-control widget-list__input-text" aria-label="Dollar amount (with dot and two decimal places)">
+                                            <span class="input-group-text">+</span>
+                                        </div>
+                                        <ul class="widget-list__list">
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 widget-col">
+                                <div class="card">
+                                    <div class="card-header card-header__text">
+                                        <p>список три</p>
+                                    </div>
+                                    <div class="card-body widget-list__card-body">
+                                        <div class="input-group widget-list__input-block">
+                                            <input type="text" class="form-control widget-list__input-text" aria-label="Dollar amount (with dot and two decimal places)">
+                                            <span class="input-group-text">+</span>
+                                        </div>
+                                        <ul class="widget-list__list">
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                            <li class="widget-list__item">
+                                                <input type="checkbox" class="widget-list__item-checkbox">
+                                                <p class="widget-list__item-text">пункт списка</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -100,41 +407,36 @@
         <dialog id="taskDialog" class="task-dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="modalTitleAdd">добавить задачу</h5>
-                      <h5 class="modal-title" id="modalTitleEdit">редактировать задачу</h5>
-                      <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
-                  </div>
-                  <div class="modal-body">
-                    
-                      <div id="addTaskCalendar"></div>
-                      
-                      <div class="input-form">
-                        <input type="text" id="addTaskInput" class="add-task-input " autocomplete="off" placeholder = "">
-                        <label for="addTaskInput" class="add-task-input_label">текст задачи</label>
-                      </div>
-                      
-                
-                      <ul class="modal-dialog-addTask">
-                          <li class="runningList-li">
-                              <input type="radio" name="runningListRadio" class="runningListRadio">
-                              <span id="3" class="runningList-icon"><i class="fa-solid fa-hourglass-start"></i></span>
-                          </li>
-                          <li class="runningList-li">
-                              <input type="radio" name="runningListRadio" class="runningListRadio">
-                              <span id="2" class="runningList-icon"><i class="fa-solid fa-hourglass-half"></i></span>
-                          </li>
-                          <li class="runningList-li">
-                              <input type="radio" name="runningListRadio" class="runningListRadio">
-                              <span id="1" class="runningList-icon"><i class="fa-solid fa-hourglass-end"></i></span>
-                          </li>
-                      </ul>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleAdd">добавить задачу</h5>
+                        <h5 class="modal-title" id="modalTitleEdit">редактировать задачу</h5>
+                        <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewTask()">создать</button>
-                      <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
-                      <button type="button" class="btn btn-primary" id="editTaskBtn" onclick="editTask()">обновить</button>
-                    </div>
+                    <div class="modal-body">
+                        <div id="addTaskCalendar"></div>
+                        <div class="input-form">
+                            <input type="text" id="addTaskInput" class="add-task-input " autocomplete="off" placeholder = "">
+                            <label for="addTaskInput" class="add-task-input_label">текст задачи</label>
+                        </div>
+                        <ul class="modal-dialog-addTask">
+                            <li class="runningList-li">
+                                <input type="radio" name="runningListRadio" class="runningListRadio">
+                                <span id="3" class="runningList-icon"><i class="fa-solid fa-hourglass-start"></i></span>
+                            </li>
+                            <li class="runningList-li">
+                                <input type="radio" name="runningListRadio" class="runningListRadio">
+                                <span id="2" class="runningList-icon"><i class="fa-solid fa-hourglass-half"></i></span>
+                            </li>
+                            <li class="runningList-li">
+                                <input type="radio" name="runningListRadio" class="runningListRadio">
+                                <span id="1" class="runningList-icon"><i class="fa-solid fa-hourglass-end"></i></span>
+                            </li>
+                        </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewTask()">создать</button>
+                            <button type="button" class="btn btn-primary" id="editTaskBtn" onclick="editTask()">обновить</button>
+                        </div>
                 </div>
             </div>
         </dialog>
@@ -142,20 +444,19 @@
         <dialog id="calendarDateDialog" class="task-dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="modalTitleAdd">добавить мероприятие</h5>
-                      <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
-                  </div>
-                  <div class="modal-body">
-                    
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleAdd">добавить мероприятие</h5>
+                        <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="modal-body">
                         <div>
                             <div id="addDateCalendar"></div>
                         </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" id="addTaskBtn" onclick="createNewTask()" data-bs-dismiss="modal">создать</button>
-                      <button type="button" class="btn btn-primary" id="editTaskBtn" onclick="editTask()" data-bs-dismiss="modal">обновить</button>
-                  </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="addTaskBtn" onclick="createNewTask()" data-bs-dismiss="modal">создать</button>
+                        <button type="button" class="btn btn-primary" id="editTaskBtn" onclick="editTask()" data-bs-dismiss="modal">обновить</button>
+                    </div>
                 </div>
             </div>
         </dialog>
