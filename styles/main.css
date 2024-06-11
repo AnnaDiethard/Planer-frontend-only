@@ -100,18 +100,10 @@ main.main {
     font-size: 20px;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
-/* Основные стили проекта */
 .row-content {
     height: fit-content;
     padding: 0 4rem 4rem 4rem;
     position: relative;
-    
 }
 
 .calendar-block {
@@ -119,7 +111,7 @@ main.main {
     flex-direction: column;
 }
 
-#addDateToCalendarBtn {
+.dark-batton {
     background-color: var(--dark-btn-background);
     color: var(--light-text-color);
     margin-bottom: 0.5rem;
@@ -231,7 +223,7 @@ main.main {
     padding-left: 0;
 }
 
-/* block-runningList */
+
 .card-body-runningList {
     padding: 0;
 }
@@ -258,7 +250,7 @@ main.main {
     color: var(--icon-high-color);
 }
 
-/* modal-dialog-addTask */
+
 .modal-dialog-addTask {
     list-style: none;
     display: flex;
@@ -299,10 +291,6 @@ main.main {
     border-radius: 10px;
 }
 
-.widget-brick img {
-    color: #23459E;
-}
-
 .input-form{
     position: relative;
     width: 100%;
@@ -311,15 +299,13 @@ main.main {
 
 .add-task-input{
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     border: 2px solid var(--dark-btn-background);
     border-radius: 0.5rem;
     font-family: inherit;
     font-size: inherit;
-    color: rgb(136, 87, 87);
+    color: var(--dark-text-color);
     outline: none;
     padding: 1.25rem;
     background: none;

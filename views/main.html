@@ -39,7 +39,7 @@
                 <div class="row">
                     <div class="col-4 block-runningList">
                         <div class="calendar-block">
-                            <button class="btn" id="addDateToCalendarBtn" onclick="addCalendarDateOpenDialog()">запланировать событие</button>
+                            <button class="btn dark-batton" id="addDateToCalendarBtn" onclick="addCalendarDateOpenDialog()">запланировать событие</button>
                             <div id="mainCalendar"></div>
                         </div>
                         <div class="card card-runningList">
@@ -106,12 +106,15 @@
                       <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                   </div>
                   <div class="modal-body">
+                    
                       <div id="addTaskCalendar"></div>
+                      
                       <div class="input-form">
                         <input type="text" id="addTaskInput" class="add-task-input " autocomplete="off" placeholder = "">
                         <label for="addTaskInput" class="add-task-input_label">текст задачи</label>
                       </div>
-                      </div>
+                      
+                
                       <ul class="modal-dialog-addTask">
                           <li class="runningList-li">
                               <input type="radio" name="runningListRadio" class="runningListRadio">
@@ -126,11 +129,12 @@
                               <span id="1" class="runningList-icon"><i class="fa-solid fa-hourglass-end"></i></span>
                           </li>
                       </ul>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" id="addTaskBtn" onclick="createNewTask()" data-bs-dismiss="modal">создать</button>
-                      <button type="button" class="btn btn-primary" id="editTaskBtn" onclick="editTask()" data-bs-dismiss="modal">обновить</button>
-                  </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewTask()">создать</button>
+                      <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
+                      <button type="button" class="btn btn-primary" id="editTaskBtn" onclick="editTask()">обновить</button>
+                    </div>
                 </div>
             </div>
         </dialog>
@@ -143,10 +147,10 @@
                       <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                   </div>
                   <div class="modal-body">
+                    
                         <div>
                             <div id="addDateCalendar"></div>
                         </div>
-                      
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-primary" id="addTaskBtn" onclick="createNewTask()" data-bs-dismiss="modal">создать</button>
