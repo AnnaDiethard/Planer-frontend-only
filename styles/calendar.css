@@ -28,6 +28,18 @@
     background-color: blueviolet !important;
 }
 
-.vanilla-calendar-day__btn_selected {
+#addTaskCalendar .vanilla-calendar-day__btn_selected {
     background-color: rgb(170, 137, 201) !important;
+}
+
+.vanilla-calendar-month, 
+.vanilla-calendar-year,
+.vanilla-calendar-week__day,
+.vanilla-calendar-week-number,
+.vanilla-calendar-week-numbers__title {
+    color: var(--dark-text-color) !important;
+}
+
+.vanilla-calendar-arrow_next::before {
+    color: var(--dark-text-color) !important;
 }

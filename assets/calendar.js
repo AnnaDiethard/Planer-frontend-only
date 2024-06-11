@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     addTaskCalendar.init();
 
-    const addDateCalendarId = document.querySelector("#calendarDateDialog")
+    const addDateCalendarId = document.querySelector("#addDateCalendar")
     const addDateCalendar = new VanillaCalendar(addDateCalendarId, {
         settings: {
             type: 'default',
@@ -100,6 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         }
     });
-    // addDateCalendar.init();
+    addDateCalendar.init();
 
   });
