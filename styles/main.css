@@ -1,16 +1,17 @@
 :root {
+    /* всякие фоны */
     --light-background: #e2e2e2;
     --extra-light-background: #C1C1C1;
     --dark-background: #7D7D7D;
-    
+    /* фоны кнопок */
     --light-btn-background: #909090;
     --extra-light-btn-background: #CECECE;
     --dark-btn-background: #505050;
-
+    /* цвета текста */
     --light-text-color: #d6d6d6;
     --extra-dark-text-color: #313131;
     --dark-text-color: #606060;
-
+    /* цвета статусов задач */
     --icon-high-color: #9E3131;
     --icon-medium-color: #B28136;
     --icon-light-color: #23459E;
@@ -296,7 +297,10 @@ main.main {
     width: 100%; 
     height: 8rem; 
     background-color: var(--light-background); 
-    color: var(--extra-dark-text-color);
+    color: var(--dark-text-color);
     border-radius: 10px;
 }
 
+.widget-brick img {
+    color: #23459E;
+}

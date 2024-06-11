@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-8">
                         <div class="weather-dashboard">
-                            <a href="https://rusmeteo.net/weather/moskva/" class="widget-brick" id="b1e1a557442f252efa626f7141aa95aa">Погода в Москве</a>
+                            <a href="https://rusmeteo.net/weather/moskva/" class="widget-brick" id="b75499d689da58d5fce2ad1837a0e347">Погода в Москве</a>
                         </div>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
             </div>
         </dialog>
 
-        <dialog id="calendarDateDialog" class="date-dialog">
+        <dialog id="calendarDateDialog" class="task-dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -139,7 +139,10 @@
                       <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                   </div>
                   <div class="modal-body">
-                      <div id="addDateCalendar"></div>
+                        <div>
+                            <div id="addDateCalendar"></div>
+                        </div>
+                      
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-primary" id="addTaskBtn" onclick="createNewTask()" data-bs-dismiss="modal">создать</button>
@@ -157,7 +160,7 @@
     <!-- vanilla calendar -->
     <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.js" defer></script>
     <!-- rusmeteo -->
-    <script async src="https://rusmeteo.net/api/informerV2/b1e1a557442f252efa626f7141aa95aa/" type="text/javascript"></script>
+    <script async src="https://rusmeteo.net/api/informerV2/b75499d689da58d5fce2ad1837a0e347/" type="text/javascript"></script>
     <!-- js -->
     <script src="../assets/main.js"></script>
     <script src="../assets/calendar.js"></script>
