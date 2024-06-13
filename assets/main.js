@@ -315,8 +315,3 @@ function deleteAllTasks() {
     localStorage.removeItem('doneTasksList')
     window.location.reload();
 }
-
-function addCalendarDateOpenDialog() {
-    const dialog = document.querySelector('#calendarDateDialog')
-    dialog.showModal()
-}

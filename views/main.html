@@ -524,7 +524,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewTask()">создать</button>
-                            <button type="button" class="btn btn-primary" id="editTaskBtn" onclick="editTask()">обновить</button>
+                            <button type="button" class="btn dark-batton" id="editTaskBtn" onclick="editTask()">обновить</button>
                         </div>
                 </div>
             </div>
@@ -541,10 +541,23 @@
                         <div>
                             <div id="addDateCalendar"></div>
                         </div>
+                        <div class="input-form-time" style="display: flex; flex-direction: row; width: 10rem;">
+                            <div class="input-form" style="padding-right: 1rem;">
+                                <input type="text" id="addEventInputHour" class="add-task-input " autocomplete="off" placeholder = "">
+                                <label for="addEventInputHour" class="add-task-input_label">час</label>
+                            </div>
+                            <div class="input-form" style="padding-right: 1rem;">
+                                <input type="text" id="addEventInputMin" class="add-task-input " autocomplete="off" placeholder = "">
+                                <label for="addEventInputMin" class="add-task-input_label">мин</label>
+                            </div>
+                        </div>
+                        <div class="input-form">
+                            <input type="text" id="addEventInput" class="add-task-input " autocomplete="off" placeholder = "">
+                            <label for="addEventInput" class="add-task-input_label">мероприятие</label>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="addTaskBtn" onclick="createNewTask()" data-bs-dismiss="modal">создать</button>
-                        <button type="button" class="btn btn-primary" id="editTaskBtn" onclick="editTask()" data-bs-dismiss="modal">обновить</button>
+                        <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewEvent()" data-bs-dismiss="modal">создать</button>
                     </div>
                 </div>
             </div>
