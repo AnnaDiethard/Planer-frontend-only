@@ -38,6 +38,44 @@ function editTaskOpenDialog(el) {
     const button = document.querySelector('#addTaskBtn')
     title.style.display = 'none';
     button.style.display = 'none';
+
+    const getTaskId = el.closest('li').id
+    taskDialog.taskId = getTaskId
+
+    let task = {}
+    
+    tasks.filter((el) => {
+        if(el.id == getTaskId) {
+            task = el
+        }
+        return task
+    })
+
+    const taskDate = task?.date.toString()
+    const taskCalendarDays = document.querySelector("#taskCalendar").querySelectorAll('.vanilla-calendar-day')
+    let calendarDay = {}
+    taskCalendarDays.forEach((el) => {
+        if(el.querySelector('button').getAttribute('Data-calendar-day').replaceAll('-', '') == taskDate) {
+            calendarDay = el
+            calendarDay.querySelector('button').classList.add('vanilla-calendar-day__btn_selected')
+            return calendarDay
+        }
+    })
+
+    const taskText = task.text
+    let taskInput = document.querySelector("#addTaskInput")
+    taskInput.value = taskText
+
+    const taskStatus = task?.status
+    const checkboxList = document.querySelector('#taskDialog').querySelector('.modal-dialog-addTask').querySelectorAll('span')
+    checkboxList.forEach((el) => {
+        if(el.id == taskStatus) {
+            let input = el.closest('li').querySelector('input')
+            input.checked = true
+        }
+        
+    })
+    
     taskDialog.showModal()
 }
 
@@ -67,7 +105,6 @@ function createNewTask() {
     }
     console.log('newTask', newTask)
 
-    // getTasksListFromLocalStorage()
     tasks.push(newTask)
     saveTasksListInLocalStorage(tasks)
 
@@ -87,9 +124,33 @@ function createNewTask() {
 }
 
 function editTask() {
-    console.log(234)
+    const id = document.querySelector('#taskDialog').taskId
+    let changedTask = {}
 
+    tasks.forEach((el) => {
+        if(el.id == id) {
+            changedTask = el
+        }
+        return changedTask
+    })
 
+    const taskIndex = tasks.indexOf(changedTask)
+
+    const taskInputValue = document.querySelector("#addTaskInput").value
+    const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
+    const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
+    const planningDate = Number(taskDate.replaceAll('-', ''))
+
+    changedTask.text = taskInputValue
+    changedTask.status = taskStatus
+    changedTask.icon = iconClass
+    changedTask.date = planningDate
+    changedTask.dayName = dayOfWeek
+
+    tasks[taskIndex] = changedTask
+    saveTasksListInLocalStorage(tasks)
+
+    closeTaskDialog()
 }
 
 function checkCorrectRenderTask() {
@@ -130,20 +191,20 @@ function renderTaskToRunningList(task) {
     const runningListCard = document.querySelector("#runningListCard")
 
     if(task.done == true) {
-        const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
+        const taskHTML = `<li class="card-ul-item" id="${task.id}" >
                             <div>
                                 <span class="runningList-icon-done"><i class="${task.icon} runningList-icon-done"></i></span>
-                                <label class="form-check-label-done" for="flexCheckDefault">${task.text}</label>
+                                <p class="form-check-label-done" for="flexCheckDefault">${task.text}</p>
                             </div>
                         </li>`
         runningListCard.insertAdjacentHTML('beforeend', taskHTML)
     } 
     else {
-        const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
-                            <div>
+        const taskHTML = `<li class="card-ul-item" id="${task.id}">
+                            <div class="task-item-block">
                                 <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                 <span class="runningList-icon"><i class="${task.icon}"></i></span>
-                                <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
+                                <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
                             </div>
                             <div>
                                 <span ><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
@@ -158,19 +219,19 @@ function renderTaskToWeekPlaner(task) {
     const weekPlanerListCard = document.querySelector("#weekPlanerListCard")
 
     if(task.done == true) {
-        const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
+        const taskHTML = `<li class="card-ul-item" id="${task.id}">
                             <div>
                                 <span class="runningList-icon-done"><i class="${task.icon} runningList-icon-done"></i></span>
-                                <label class="form-check-label-done" for="flexCheckDefault">${task.text}</label>
+                                <p class="form-check-label-done" for="flexCheckDefault">${task.text}</p>
                             </div>
                         </li>`
             weekPlanerListCard.insertAdjacentHTML('beforeend', taskHTML)
     } else {
-        const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <div>
+        const taskHTML = `<li class="card-ul-item" id="${task.id}">
+                        <div class="task-item-block">
                             <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                             <span class="runningList-icon"><i class="${task.icon}"></i></span>
-                            <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
+                            <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
                         </div>
                         <div>
                             <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
@@ -185,19 +246,19 @@ function renderTaskToPlanningList(task) {
     const planningListCard = document.querySelector("#planningListCard")
 
     if(task.done == true) {
-        const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
+        const taskHTML = `<li class="card-ul-item" id="${task.id}">
                             <div>
                                 <span class="runningList-icon-done"><i class="${task.icon} runningList-icon-done"></i></span>
-                                <label class="form-check-label-done" for="flexCheckDefault">${task.text}</label>
+                                <p class="form-check-label-done" for="flexCheckDefault">${task.text}</p>
                             </div>
                         </li>`
             planningListCard.insertAdjacentHTML('beforeend', taskHTML)
     } else {
-        const taskHTML = `<li class="card-ul-item" id="${task.id}" style="display: flex; flex-direction: row; justify-content: space-between;">
-                            <div>
+        const taskHTML = `<li class="card-ul-item" id="${task.id}">
+                            <div class="task-item-block">
                                 <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                 <span class="runningList-icon"><i class="${task.icon}"></i></span>
-                                <label class="form-check-label" for="flexCheckDefault">${task.text}</label>
+                                <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
                             </div>
                             <div>
                                 <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>

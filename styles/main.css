@@ -152,6 +152,7 @@ main.main {
 
 .card-header {
     background-color: var(--dark-background);
+    border-color: var(--extra-dark-text-color);
 }
 
 .card-header p {
@@ -263,6 +264,9 @@ main.main {
 .card-ul-item {
     list-style: none;
     padding: 0.5rem 1rem 0.5rem 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .card-ul-item:hover {
@@ -287,6 +291,11 @@ main.main {
     padding-left: 0;
 }
 
+.task-item-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
 .card-body-runningList {
     padding: 0;
@@ -298,8 +307,13 @@ main.main {
     padding-inline: 0.5rem;
 }
 
+.form-check-input {
+    margin: 0;
+    margin-bottom: 3px;
+}
+
 .runningList-icon {
-    padding: 5px;
+    padding-inline: 10px;
 }
 
 .fa-hourglass-start {

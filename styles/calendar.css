@@ -29,7 +29,7 @@
     background-color: blueviolet !important;
 }
 
-#addTaskCalendar .vanilla-calendar-day__btn_selected {
+.vanilla-calendar-day__btn_selected {
     background-color: rgb(170, 137, 201) !important;
 }
 

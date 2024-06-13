@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     mainCalendar.init();
 
-    const addTaskCalendarId = document.querySelector("#addTaskCalendar")
-    const addTaskCalendar = new VanillaCalendar(addTaskCalendarId, {
+    const taskCalendarId = document.querySelector("#taskCalendar")
+    const taskCalendar = new VanillaCalendar(taskCalendarId, {
         settings: {
             type: 'default',
             selection: {
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         }
     });
-    addTaskCalendar.init();
+    taskCalendar.init();
 
     const addDateCalendarId = document.querySelector("#addDateCalendar")
     const addDateCalendar = new VanillaCalendar(addDateCalendarId, {
