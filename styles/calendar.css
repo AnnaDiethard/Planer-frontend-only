@@ -4,6 +4,10 @@
     background-color: var(--light-background) !important;
 }
 
+.vanilla-calendar-week-numbers {
+    display: none;
+}
+
 .vanilla-calendar-day__btn {
     background-color: var(--light-btn-background) !important;
     color: var(--light-text-color) !important;

@@ -4,23 +4,6 @@
 // moment().calendar();
 console.log('calendar', moment().calendar())
 
-// // для подсветки текущего дня в календаре
-// var now = new Date().getDay()
-// console.log('now', now)
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const thisWeek = document.querySelector('.vanilla-calendar-day__btn_today').getAttribute('data-calendar-week-number')
-//     console.log('thisWeek', thisWeek)
-//     let weekPlanerWeekNumber = document.querySelector('#weekPlanerListCard').getAttribute('week-number')
-//     console.log('weekPlanerWeekNumber', weekPlanerWeekNumber)
-//     weekPlanerWeekNumber = thisWeek
-//     console.log('weekPlanerWeekNumber', weekPlanerWeekNumber)
-
-//     return thisWeek
-// });
-
-
-
 // const weekNumber = today('data-calendar-week-number')
 // console.log('weekNumber', weekNumber)
 
@@ -28,6 +11,7 @@ let tasks = []
 let doneTasks = []
 let taskDate = ''
 let dayOfWeek = ''
+let taskWeekNumber = ''
 const taskDialog = document.querySelector('#taskDialog')
 
 // рендер тудушника из LS
@@ -124,8 +108,8 @@ function createNewTask() {
         done: false,
         // определяется в конфиге календаря
         date: planningDate || '',
-        dayName: dayOfWeek,
-        weekNumber: taskWeekNumber
+        dayName: dayOfWeek || '',
+        weekNumber: taskWeekNumber || ''
     }
     console.log('newTask', newTask)
 
@@ -223,12 +207,31 @@ function renderTaskToRunningList(task) {
                         </li>`
         runningListCard.insertAdjacentHTML('beforeend', taskHTML)
     } 
-    else {
+    if(task.done != false || task.date) {
         const taskHTML = `<li class="card-ul-item" id="${task.id}">
                             <div class="task-item-block">
                                 <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                 <span class="runningList-icon"><i class="${task.icon}"></i></span>
-                                <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
+                                <div>
+                                    <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
+                                    <p class="form-date-label">дедлайн ${task.date}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <span ><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                <span ><i class="fa-solid fa-trash card-body__btn-task-running-list" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                            </div>
+                        </li>`
+        runningListCard.insertAdjacentHTML('beforebegin', taskHTML)
+    } else {
+        const taskHTML = `<li class="card-ul-item" id="${task.id}">
+                            <div class="task-item-block">
+                                <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                <span class="runningList-icon"><i class="${task.icon}"></i></span>
+                                <div>
+                                    <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
+                                    
+                                </div>
                             </div>
                             <div>
                                 <span ><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>

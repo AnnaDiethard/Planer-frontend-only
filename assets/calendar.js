@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
             selection: {
                 day: 'single',
                 month: true,
-                // time: true,
                 holidays: ['2024-06-20'],
             },
             visibility: {
