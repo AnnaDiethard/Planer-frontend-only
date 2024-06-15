@@ -208,7 +208,7 @@ main.main {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0.5rem 1rem 1rem;
+    padding: 1rem 0.5rem 0 1rem;
 }
 
 /* .card-body-runningList {
@@ -262,6 +262,13 @@ main.main {
     flex-direction: row;
     justify-content: space-around;
     padding: 1rem;
+}
+
+.btn-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding-inline: 0.5rem;
 }
 
 .card-button {

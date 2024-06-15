@@ -70,18 +70,19 @@
                                         </ul>
                                         <div> 
                                             <button id="addTaskToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="addTaskOpenDialog()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="добавить задачу"><i class="fa-solid fa-plus"></i></button>
-                                            <button id="cleanTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteDoneTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
-                                            <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteAllTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить все задачи"><i class="fa-solid fa-ban"></i></button>
                                         </div>
                                     </div>
                                     <div class="card-body__body">
+                                        <div class="btn-block">
+                                            <button id="cleanTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteDoneTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
+                                            <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteAllTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить все задачи"><i class="fa-solid fa-ban"></i></button>
+                                        </div>
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
                                                 <ul class="card-body__ul" id="runningListCard"></ul>
                                             </div>
                                             <div class="tab-pane fade" id="week-planer" role="tabpanel" aria-labelledby="week-planer-tab">
-                                                <ul class="card-body__ul" id="weekPlanerListCard"></ul>
-                                                <div id="weekPlanerListCardv">
+                                                <div id="weekPlanerListCard" week-number="">
                                                     <div class="card weekDayCard">
                                                         <div class="card-header weekDayCard-header">
                                                             <p class="weekDayCard-title">Monday</p>
@@ -141,7 +142,6 @@
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
-                                                <!-- <div id="planningListCard"></div> -->
                                                 <ul class="card-body__ul" id="planningListCard"></ul>
                                             </div>
                                         </div>
@@ -158,95 +158,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row widget-row">
-                            <div class="col-12 widget-col">
-                                <div class="widget-everyWeekGoals">
-                                    <div class="card">
-                                        <div class="card-header card-header__text">
-                                            <p>еженедельные дела</p>
-                                        </div>
-                                        <div class="card-body widget-everyWeekGoals__card-body">
-                                            <div>
-                                                <ul class="nav nav-tabs everyWeekGoals__list" id="myTab" role="tablist">
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link active nav-link-active" id="widget-everyWeekGoals-mon-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-mon"
-                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-mon" aria-selected="true">MON</button>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link" id="widget-everyWeekGoals-tue-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-tue"
-                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-tue" aria-selected="false">TUE</button>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link" id="widget-everyWeekGoals-wed-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-wed"
-                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-wed" aria-selected="false">WED</button>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link" id="widget-everyWeekGoals-thu-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-thu"
-                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-thu" aria-selected="false">THU</button>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link" id="widget-everyWeekGoals-fri-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-fri"
-                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-fri" aria-selected="false">FRI</button>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link" id="widget-everyWeekGoals-sat-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-sat"
-                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-sat" aria-selected="false">SAT</button>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link" id="widget-everyWeekGoals-sun-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-sun"
-                                                        type="button" role="tab" aria-controls="widget-everyWeekGoals-sun" aria-selected="false">SUN</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <div class="tab-content" id="myTabsContent">
-                                                    <div class="tab-pane fade show active" id="widget-everyWeekGoals-mon" role="tabpanel" aria-labelledby="widget-everyWeekGoals-mon-tab">
-                                                        <ul class="card-body__ul" id="runningListCard">
-                                                            <li><p>mon</p></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="widget-everyWeekGoals-tue" role="tabpanel" aria-labelledby="widget-everyWeekGoals-tue-tab">
-                                                        <ul class="card-body__ul" id="weekPlanerListCard">
-                                                            <li><p>tue</p></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="widget-everyWeekGoals-wed" role="tabpanel" aria-labelledby="widget-everyWeekGoals-wed-tab">
-                                                        <div id="planningListCard"></div>
-                                                        <ul class="card-body__ul" id="planningListCard">
-                                                            <li><p>wed</p></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="widget-everyWeekGoals-thu" role="tabpanel" aria-labelledby="widget-everyWeekGoals-thu-tab">
-                                                        <div id="planningListCard"></div>
-                                                        <ul class="card-body__ul" id="planningListCard">
-                                                            <li><p>thu</p></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="widget-everyWeekGoals-fri" role="tabpanel" aria-labelledby="widget-everyWeekGoals-fri-tab">
-                                                        <div id="planningListCard"></div>
-                                                        <ul class="card-body__ul" id="planningListCard">
-                                                            <li><p>fri</p></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="widget-everyWeekGoals-sat" role="tabpanel" aria-labelledby="widget-everyWeekGoals-sat-tab">
-                                                        <div id="planningListCard"></div>
-                                                        <ul class="card-body__ul" id="planningListCard">
-                                                            <li><p>sat</p></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="widget-everyWeekGoals-sun" role="tabpanel" aria-labelledby="widget-everyWeekGoals-sun-tab">
-                                                        <div id="planningListCard"></div>
-                                                        <ul class="card-body__ul" id="planningListCard">
-                                                            <li><p>sun</p></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+                        
                         <div class="row widget-row">
                             <div class="col-12 widget-col">
                                 <div class="widget-everyWeekGoals">
@@ -631,8 +543,7 @@
     <!-- rusmeteo -->
     <script async src="https://rusmeteo.net/api/informerV2/b75499d689da58d5fce2ad1837a0e347/" type="text/javascript"></script>
     <!-- js -->
-    <script src="../assets/main.js"></script>
     <script src="../assets/calendar.js"></script>
-
+    <script src="../assets/main.js"></script>
 </body>
 </html>

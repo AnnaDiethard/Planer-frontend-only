@@ -11,6 +11,10 @@
     margin: 3px 3px 3px 3px !important;
 }
 
+.vanilla-calendar-week-number {
+    margin: 3px 3px 3px 3px !important;
+}
+
 .vanilla-calendar-day__btn_weekend {
     color: var(--light-text-color) !important;
     font-size: 14px;

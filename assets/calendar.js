@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         actions: {
             clickDay(e, self) {
-                console.log('self', self)
+                console.log('clickDay', self)
             },
             clickWeekNumber(e, number, days, year, self) {
-                console.log('self', self)
+                console.log('clickWeekNumber', days)
             },
         },
         popups: {
@@ -58,7 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
             clickDay(e, self) {
                 console.log('e', e)
                 e.target.classList.add('vanilla-calendar-day-check')
-                // e.target.style.backgroundColor = "blueviolet !important"
+
+                taskWeekNumber = e.target.dataset.calendarWeekNumber
                 taskDate = self.selectedDates.toString()
                 
                 const gsDayNames = [
@@ -102,4 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     addDateCalendar.init();
 
+    const thisWeek = document.querySelector('.vanilla-calendar-day__btn_today').getAttribute('data-calendar-week-number')
+    let weekPlanerWeekNumber = document.querySelector('#weekPlanerListCard').getAttribute('week-number')
+    weekPlanerWeekNumber = thisWeek
+    localStorage.setItem('weekPlanerWeekNumber', JSON.stringify(weekPlanerWeekNumber))
   });
