@@ -162,13 +162,13 @@ function checkCorrectRenderTask() {
         // planning
         if(task.date == '' && task.status == '') {
             tasksPlaner.push(task)
-        } else
+        }
         // runnungList
-        if (task.date == '' && task.status) {
+        if (task.status) {
             tasksRunningList.push(task)
             // тут сортируем массив по статусу задачи
             tasksRunningList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
-        } else 
+        }
         // weekPlaner
         if(task.date) {
             tasksWeekPlaner.push(task)
@@ -216,8 +216,9 @@ function renderTaskToRunningList(task) {
 }
 
 function renderTaskToWeekPlaner(task) {
-    const weekPlanerListCard = document.querySelector("#weekPlanerListCard")
-
+    const taskDay = task.dayName
+    weekDayCard = document.querySelector("[data-name=" + taskDay + "]")
+    
     if(task.done == true) {
         const taskHTML = `<li class="card-ul-item" id="${task.id}">
                             <div>
@@ -225,7 +226,7 @@ function renderTaskToWeekPlaner(task) {
                                 <p class="form-check-label-done" for="flexCheckDefault">${task.text}</p>
                             </div>
                         </li>`
-            weekPlanerListCard.insertAdjacentHTML('beforeend', taskHTML)
+                    weekDayCard.insertAdjacentHTML('beforeend', taskHTML)
     } else {
         const taskHTML = `<li class="card-ul-item" id="${task.id}">
                         <div class="task-item-block">
@@ -238,12 +239,13 @@ function renderTaskToWeekPlaner(task) {
                             <span style="padding-left: 0.5rem"><i class="fa-solid fa-trash card-body__btn-task-running-list" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                         </div>
                     </li>`
-            weekPlanerListCard.insertAdjacentHTML('beforebegin', taskHTML)
+                weekDayCard.insertAdjacentHTML('beforebegin', taskHTML)
     }
 }
 
 function renderTaskToPlanningList(task) {
     const planningListCard = document.querySelector("#planningListCard")
+    console.log('planningListCard', planningListCard)
 
     if(task.done == true) {
         const taskHTML = `<li class="card-ul-item" id="${task.id}">

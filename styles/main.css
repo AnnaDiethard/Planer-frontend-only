@@ -150,15 +150,27 @@ main.main {
     margin-top: 2rem;
 }
 
+.weekDayCard {
+    margin-inline: 2rem;
+    margin-bottom: 1rem;
+}
+
 .card-header {
     background-color: var(--dark-background);
     border-color: var(--extra-dark-text-color);
 }
 
+.weekDayCard-header {
+    height: 2rem;
+}
+
 .card-header p {
     font-weight: bold;
     letter-spacing: 1px;
-    font-size: 20px;
+}
+
+.weekDayCard-title {
+    font-size: 14px;
 }
 
 .card-body {
