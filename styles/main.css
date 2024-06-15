@@ -162,6 +162,7 @@ main.main {
 
 .weekDayCard-header {
     height: 2rem;
+    color: var(--light-text-color);
 }
 
 .card-header p {
