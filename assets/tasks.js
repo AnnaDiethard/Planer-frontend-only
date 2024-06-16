@@ -1,11 +1,9 @@
+// без этого не работают бутстраповские тултипы
 [...document.querySelectorAll('[data-bs-toggle="tooltip"]')]
   .forEach(el => new bootstrap.Tooltip(el))
 
 // moment().calendar();
 console.log('calendar', moment().calendar())
-
-// const weekNumber = today('data-calendar-week-number')
-// console.log('weekNumber', weekNumber)
 
 let tasks = []
 let doneTasks = []
@@ -32,6 +30,7 @@ function getTasksListFromLocalStorage() {
     return tasksList
 }
 
+// открытие окна задачи (добавление)
 function addTaskOpenDialog() {
     const title = document.querySelector('#modalTitleEdit')
     const button = document.querySelector('#editTaskBtn')
@@ -40,6 +39,7 @@ function addTaskOpenDialog() {
     taskDialog.showModal()
 }
 
+// открытие окна задачи (редактирование)
 function editTaskOpenDialog(el) {
     const title = document.querySelector('#modalTitleAdd')
     const button = document.querySelector('#addTaskBtn')
@@ -86,6 +86,7 @@ function editTaskOpenDialog(el) {
     taskDialog.showModal()
 }
 
+// закрытие окна
 function closeTaskDialog() {
     taskDialog.close()
 
@@ -93,7 +94,7 @@ function closeTaskDialog() {
     window.location.reload();
 }
 
-// добавление новой задачи
+// сохранение новой задачи
 function createNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
@@ -131,6 +132,7 @@ function createNewTask() {
     closeTaskDialog()
 }
 
+// сохранение отредактированной задачи
 function editTask() {
     const id = document.querySelector('#taskDialog').taskId
     let changedTask = {}
@@ -161,6 +163,7 @@ function editTask() {
     closeTaskDialog()
 }
 
+// проверка задач и разделение их на списки
 function checkCorrectRenderTask() {
     const tasksRunningList = [];
     const tasksWeekPlaner = [];
@@ -194,7 +197,7 @@ function checkCorrectRenderTask() {
     })
 }
 
-// рендер экземпляра новой задачи
+// рендер экземпляра новой задачи в Rl
 function renderTaskToRunningList(task) {
     const runningListCard = document.querySelector("#runningListCard")
 
@@ -242,6 +245,7 @@ function renderTaskToRunningList(task) {
     }
 }
 
+// рендер экземпляра новой задачи в недельный планер
 function renderTaskToWeekPlaner(task) {
     const taskDay = task.dayName
     const weekDayList = document.querySelector("[data-name=" + taskDay + "]")
@@ -276,6 +280,7 @@ function renderTaskToWeekPlaner(task) {
     }
 }
 
+// рендер экземпляра новой задачи в список планов
 function renderTaskToPlanningList(task) {
     const planningListCard = document.querySelector("#planningListCard")
 
@@ -303,7 +308,7 @@ function renderTaskToPlanningList(task) {
     }
 }
 
-// выделение выполненных задач
+// вычёркивание выполненных задач
 function markTheTaskCompleted(el) {
     getTasksListFromLocalStorage()
     const id = el.closest('li').id
@@ -343,7 +348,7 @@ function deleteTask(el) {
     saveTasksListInLocalStorage(tasks)
 }
 
-// очистка всего списка задач
+// удаление всего списка задач
 function deleteAllTasks() {
     localStorage.removeItem('tasksList')
     localStorage.removeItem('doneTasksList')
