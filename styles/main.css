@@ -57,36 +57,36 @@ li {
     font-size: 4rem;
 }
 
-.card-body::-webkit-scrollbar {
+.card-body::-webkit-scrollbar,
+body::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
 
-/* Define the thumb style */
-.card-body::-webkit-scrollbar-thumb {
+.card-body::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
     background: linear-gradient(to bottom right, #6d7076 0%, #74767c 100%);
     border-radius: 5px;
 }
 
-/* Define the track style */
-.card-body::-webkit-scrollbar-track {
+.card-body::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
     background-color: #ddd;
     border: 1px solid #ccc;
 }
 
-/* Define the button style */
-.card-body::-webkit-scrollbar-button {
+.card-body::-webkit-scrollbar-button,
+body::-webkit-scrollbar-button {
     background-color: #6c6e75;
     border-radius: 5px;
 }
 
-/* Define the button style when being hovered over */
-.card-body::-webkit-scrollbar-button:hover {
+.card-body::-webkit-scrollbar-button:hover,
+body::-webkit-scrollbar-button:hover {
     background-color: #999999;
 }
 
 /* блоки страницы */
-
 .header-row {
     display: flex;
     flex-direction: row;
@@ -135,8 +135,14 @@ main.main {
     margin-bottom: 1rem;
 }
 
-.col-4 {
+.col-4,
+.col-8 
+{
     padding: 0;
+}
+
+.widgets-row {
+    padding-left: 2rem;
 }
 
 .widget-col {
@@ -144,7 +150,6 @@ main.main {
 }
 
 /* карточки */
-
 .home-card {
     height: 15rem;
     margin-top: 2rem;
@@ -195,6 +200,11 @@ main.main {
     margin-bottom: 0.5rem;
 }
 
+.block-button {
+    width: -webkit-fill-available;
+    margin: 0.5rem;
+}
+
 .card-header {
     display: flex;
     justify-content: center;
@@ -211,10 +221,6 @@ main.main {
     align-items: center;
     padding: 1rem 0.5rem 0 1rem;
 }
-
-/* .card-body-runningList {
-    background-color: var(--light-background);
-} */
 
 .nav-item {
     background-color: var(--light-background);
@@ -254,18 +260,18 @@ main.main {
     font-size: 20px;
 }
 
-.card-button-block {
+.card-button-block-col {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 1rem;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 1rem;
 }
 
 .btn-block {
     display: flex;
     flex-direction: row;
     justify-content: end;
-    padding-inline: 0.5rem;
+    padding: 0.5rem 0.5rem 0 0;
 }
 
 .card-button {
