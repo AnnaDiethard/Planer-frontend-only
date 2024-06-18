@@ -254,18 +254,47 @@
                 <div class="modal-body">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">выберите виджет</button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">недельный планер</a></li>
-                            <li><a class="dropdown-item" href="#">список</a></li>
-                            <li><a class="dropdown-item" href="#">трекер привычек</a></li>
-                            <li><a class="dropdown-item" href="#" data-bs-target="#planning" aria-controls="planning">диаграмма</a></li>
-                            
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="week-plans-widget-tab" data-bs-toggle="tab" data-bs-target="#week-plans-widget"
+                                type="button" role="tab" aria-controls="week-plans-widget" aria-selected="false" onclick="cleanWidgetCard()">недельный планер</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="list-widget-tab" data-bs-toggle="tab" data-bs-target="#list-widget"
+                                type="button" role="tab" aria-controls="list-widget" aria-selected="false" onclick="cleanWidgetCard()">список</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
+                                type="button" role="tab" aria-controls="traker" aria-selected="false" onclick="cleanWidgetCard()">трекер</button>
+                            </li>
                         </ul>
                     </div>
-                    
+                    <div class="tab-content widget-content" id="widgetContent">
+                        <div class="tab-pane fade" id="week-plans-widget" role="tabpanel" aria-labelledby="week-plans-widget-tab">
+                            <h5 class="widget-card-title">недельный планер</h5>
+                            <div class="input-form">
+                                <input type="text" id="weekPlansTitleWidgetInput" class="add-task-input " autocomplete="off" placeholder = "">
+                                <label for="weekPlansTitleWidgetInput" class="add-task-input_label">название виджета</label>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="list-widget" role="tabpanel" aria-labelledby="list-widget-tab">
+                            <h5 class="widget-card-title">список</h5>
+                            <div class="input-form">
+                                <input type="text" id="listTitleWidgetInput" class="add-task-input " autocomplete="off" placeholder = "">
+                                <label for="listTitleWidgetInput" class="add-task-input_label">название виджета</label>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="traker" role="tabpanel" aria-labelledby="traker-tab">
+                            <h5 class="widget-card-title">трекер</h5>
+                            <div class="input-form">
+                                <input type="text" id="trackerTitleWidgetInput" class="add-task-input " autocomplete="off" placeholder = "">
+                                <label for="trackerTitleWidgetInput" class="add-task-input_label">название виджета</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewTask()">добавить</button>
+                    <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewWidget()">добавить</button>
                 </div>
             </div>
         </div>

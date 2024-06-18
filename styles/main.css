@@ -368,7 +368,7 @@ main.main {
 }
 
 .modal-body {
-    min-height: 20rem !important;
+    min-height: 10rem;
     height: fit-content;
 }
 

@@ -7,6 +7,14 @@
     width: 100%;
 }
 
+.widget-content {
+    padding: 1rem;
+}
+
+.widget-card-title {
+    padding: 1rem;
+}
+
 /* погода */
 .widget-brick {
     width: 100%; 
