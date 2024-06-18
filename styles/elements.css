@@ -1,3 +1,9 @@
+#widgetsCol {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .dropdown {
     padding-top: 1rem;
 }
@@ -13,6 +19,33 @@
 
 .widget-card-title {
     padding: 1rem;
+}
+
+.dropdown-settings {
+    padding: 0;
+    right: 0;
+}
+
+.widget-card {
+    min-height: 100%;
+}
+
+.card-header-widget {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown-settings-btn {
+    background-color: #7D7D7D;
+    padding: 0;
+}
+
+.dropdown-settings-btn:hover {
+    background-color: #7D7D7D;
+}
+
+.weather-row {
+    padding-bottom: 1rem;
 }
 
 /* погода */

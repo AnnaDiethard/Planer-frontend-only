@@ -146,7 +146,7 @@ main.main {
 }
 
 .widget-col {
-    padding-inline: 0.5rem;
+    padding-inline: 1rem;
 }
 
 /* карточки */
@@ -197,7 +197,8 @@ main.main {
 .dark-batton {
     background-color: var(--dark-btn-background);
     color: var(--light-text-color);
-    margin-bottom: 0.5rem;
+    height: 40%;
+    font-size: 14px;
 }
 
 .block-button {
@@ -263,7 +264,7 @@ main.main {
 .card-button-block-col {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .btn-block {

@@ -1,6 +1,9 @@
-dragula([document.querySelector('.widgets-row'),
-        document.querySelector('.widget-col')        
+dragula([document.querySelector('#widgetsCol'), document.querySelector('.widget-col')        
 ])
+
+if(localStorage.getItem('widgetsCol')) {
+    widgetsCol.innerHTML = localStorage.getItem('widgetsCol')
+}
 
 let inputWidgetValue = ''
 let inputWidgetValueId = ''
@@ -45,11 +48,19 @@ function renderWidget() {
     switch (id) {
         case 'weekPlansTitleWidgetInput':
             id = 'weekPlansTitleWidgetInput'
-            console.log('id-1', id)
-            widget = `<div class="widget-everyWeekGoals">
-                                <div class="card">
-                                    <div class="card-header card-header__text">
+            widget = `<div class="col-12 widget-col">
+                            <div class="widget-everyWeekGoals" style="padding-bottom: 1rem">
+                                <div class="card widget-card">
+                                    <div class="card-header card-header-widget card-header__text">
                                         <p>${inputWidgetValue}</p>
+                                        <div class="dropdown dropstart dropdown-settings">
+                                            <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
+                                                <li><a class="dropdown-item" href="#" onclick="toOneCol(this)">100% ширины</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="toTwoCol(this)">50% ширины</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="deleteWidget(this)">удалить</a></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div class="card-body widget-everyWeekGoals__card-body">
                                         <div>
@@ -130,29 +141,62 @@ function renderWidget() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>`
-            console.log('widget', widget)
+                            </div>
+                        </div>`
             break
         case 'listTitleWidgetInput':
-            console.log('id-2', id)
-            widget = `<div class="widget-list">
-                        <div class="card ">
-                            <div class="card-header card-header__text">
-                                <p>${inputWidgetValue}</p>
-                            </div>
-                            <div class="card-body widget-list__card-body">
-                                <div class="input-group widget-list__input-block">
-                                    <input type="text" class="form-control widget-list__input-text" aria-label="Dollar amount (with dot and two decimal places)">
-                                    <span class="input-group-text">+</span>
+            widget = `<div class="col-12 widget-col">
+                            <div class="widget-list" style="padding-bottom: 1rem">
+                                <div class="card widget-card">
+                                    <div class="card-header card-header__text">
+                                        <p>${inputWidgetValue}</p>
+                                    </div>
+                                    <div class="card-body widget-list__card-body">
+                                        <div class="input-group widget-list__input-block">
+                                            <input type="text" class="form-control widget-list__input-text" aria-label="Dollar amount (with dot and two decimal places)">
+                                            <span class="input-group-text">+</span>
+                                        </div>
+                                        <ul class="widget-list__list"></ul>
+                                    </div>
                                 </div>
-                                <ul class="widget-list__list"></ul>
                             </div>
-                        </div>
-                    </div>`
-            console.log('widget', widget)
+                        </div>`
             break
         case 'trackerTitleWidgetInput':
-            console.log('id-3', id)
             break
     }
+
+    const widgetsCol = document.querySelector('#widgetsCol')
+    widgetsCol.insertAdjacentHTML('afterbegin', widget)
+
+    console.log('widgetsColwidgetsCol', widgetsCol)
+
+    localStorage.setItem('widgetsCol', widgetsCol.innerHTML)
+}
+
+function toOneCol(el) {
+    console.log('el', el)
+    const col = el.closest('.widget-col')
+    console.log('col', col)
+    col.className = ''
+    col.classList.add('col-12')
+    col.classList.add('widget-col')
+}
+
+function toTwoCol(el) {
+    const col = el.closest('.widget-col')
+    col.className = ''
+    col.classList.add('col-6')
+    col.classList.add('widget-col')
+}
+
+function toThreeCol(el) {
+    const col = el.closest('.widget-col')
+    col.className = ''
+    col.classList.add('col-4')
+    col.classList.add('widget-col')
+}
+
+function deleteWidget() {
+    console.log('delete widget')
 }
