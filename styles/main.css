@@ -263,8 +263,7 @@ main.main {
 .card-button-block-col {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding-top: 1rem;
+    justify-content: space-around;
 }
 
 .btn-block {
@@ -368,13 +367,16 @@ main.main {
     margin-top: 2rem;
 }
 
-
+.modal-body {
+    min-height: 20rem !important;
+    height: fit-content;
+}
 
 .runningList-li {
     padding-right: 3rem;
 }
 
-.task-dialog {
+.add-dialog {
     position: absolute;
     left: 50%;
     top: 50%;
