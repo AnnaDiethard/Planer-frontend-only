@@ -151,7 +151,7 @@ function renderWidget() {
                                     <div class="card-header card-header-widget card-header__text">
                                         <div class="card-header-widget__block-header">
                                             <p>${inputWidgetValue}</p>
-                                            <input type="text" class="form-control hide-class widget-list__input-text">
+                                            <input type="text" class="form-control hide-class widget-list__input-text-header">
                                             <button class="btn card-body__btn-widget-header btn-rename" type="button" onclick="renameWidget(this)"><i class="fa-solid fa-pencil"></i></button>
                                             <div class="btn-block-widget hide-class">
                                                 <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>

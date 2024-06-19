@@ -114,6 +114,18 @@
     height: 2rem;
 }
 
+.widget-list__input-text-header {
+    padding: 0;
+    background-color: #7D7D7D;
+    border: none;
+}
+
+.widget-list__input-text-header:focus {
+    padding: 0;
+    background-color: #7D7D7D;
+    border: none;
+}
+
 .widget-list__list {
     padding: 0;
     margin: 0;
