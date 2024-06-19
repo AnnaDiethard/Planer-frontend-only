@@ -236,7 +236,15 @@ function renderWidget() {
                             <div class="widget-list" style="padding-bottom: 1rem">
                                 <div class="card widget-card">
                                     <div class="card-header card-header-widget card-header__text">
-                                        <p>${inputWidgetValue}</p>
+                                        <div class="card-header-widget__block-header">
+                                            <p>${inputWidgetValue}</p>
+                                            <input type="text" class="form-control hide-class widget-list__input-text-header">
+                                            <button class="btn card-body__btn-widget-header btn-rename" type="button" onclick="renameWidget(this)"><i class="fa-solid fa-pencil"></i></button>
+                                            <div class="btn-block-widget hide-class">
+                                                <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
+                                                <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
+                                            </div>
+                                        </div>
                                         <div class="dropdown dropstart dropdown-settings">
                                             <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
