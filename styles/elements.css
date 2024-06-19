@@ -21,6 +21,10 @@
     padding: 1rem;
 }
 
+.hide-class {
+    display: none;
+}
+
 .dropdown-settings {
     padding: 0;
     right: 0;
@@ -66,6 +70,22 @@
     width: 2rem;
     height: 2rem;
     background-color: #7D7D7D;
+}
+
+.card-header-widget__block-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.card-body__btn-widget-header {
+    background: none !important;
+    border: none !important;
+    padding: 0;
+    margin-left: 0.5rem;
+    color: var(--dark-btn-background);
+    opacity: 50%;
+    font-size: 14px;
 }
 
 /* погода */

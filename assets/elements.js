@@ -88,6 +88,48 @@ function toThreeCol(el) {
     saveWidgets()
 }
 
+function renameWidget(el) {
+    const btnBlock = el.closest('.card-header-widget__block-header')
+    btnBlock.querySelector('.btn-rename').classList.add('hide-class')
+    btnBlock.querySelector('.btn-block-widget').classList.remove('hide-class')
+    const text = btnBlock.querySelector('p')
+    text.classList.add('hide-class')
+    let value = text.innerHTML
+    const input = btnBlock.querySelector('input')
+    input.classList.remove('hide-class')
+    input.value = value
+
+    if(window.reload()) {
+        input.classList.add('hide-class')
+    }
+
+    saveWidgets()
+}
+
+function renameWidgetConfirm(el) {
+    const btnBlock = el.closest('.card-header-widget__block-header')
+    let text = btnBlock.querySelector('p')
+    const input = btnBlock.querySelector('input')
+    const newValue = input.value
+    text.innerHTML = newValue
+    text.classList.remove('hide-class')
+    input.classList.add('hide-class')
+    btnBlock.querySelector('.btn-rename').classList.remove('hide-class')
+    btnBlock.querySelector('.btn-block-widget').classList.add('hide-class')
+
+    saveWidgets()
+}
+
+function renameWidgetCancel(el) {
+    const btnBlock = el.closest('.card-header-widget__block-header')
+    btnBlock.querySelector('.btn-rename').classList.remove('hide-class')
+    btnBlock.querySelector('.btn-block-widget').classList.add('hide-class')
+    btnBlock.querySelector('input').classList.add('hide-class')
+    btnBlock.querySelector('p').classList.remove('hide-class')
+
+    saveWidgets()
+}
+
 function deleteWidget(el) {
     const widget = el.closest('.widget-col')
     widget.remove(widget)
@@ -107,7 +149,15 @@ function renderWidget() {
                             <div class="widget-everyWeekGoals" style="padding-bottom: 1rem">
                                 <div class="card widget-card">
                                     <div class="card-header card-header-widget card-header__text">
-                                        <p>${inputWidgetValue}</p>
+                                        <div class="card-header-widget__block-header">
+                                            <p>${inputWidgetValue}</p>
+                                            <input type="text" class="form-control hide-class widget-list__input-text">
+                                            <button class="btn card-body__btn-widget-header btn-rename" type="button" onclick="renameWidget(this)"><i class="fa-solid fa-pencil"></i></button>
+                                            <div class="btn-block-widget hide-class">
+                                                <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
+                                                <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
+                                            </div>
+                                        </div>
                                         <div class="dropdown dropstart dropdown-settings">
                                             <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
@@ -154,44 +204,25 @@ function renderWidget() {
                                         <div>
                                             <div class="tab-content" id="myTabsContent">
                                                 <div class="tab-pane fade show active" id="widget-everyWeekGoals-mon" role="tabpanel" aria-labelledby="widget-everyWeekGoals-mon-tab">
-                                                    <ul class="card-body__ul" id="runningListCard">
-                                                        <li><p>mon</p></li>
-                                                    </ul>
+                                                    <ul class="card-body__ul"</ul>
                                                 </div>
                                                 <div class="tab-pane fade" id="widget-everyWeekGoals-tue" role="tabpanel" aria-labelledby="widget-everyWeekGoals-tue-tab">
-                                                    <ul class="card-body__ul" id="weekPlanerListCard">
-                                                        <li><p>tue</p></li>
-                                                    </ul>
+                                                    <ul class="card-body__ul"</ul>
                                                 </div>
                                                 <div class="tab-pane fade" id="widget-everyWeekGoals-wed" role="tabpanel" aria-labelledby="widget-everyWeekGoals-wed-tab">
-                                                    <div id="planningListCard"></div>
-                                                    <ul class="card-body__ul" id="planningListCard">
-                                                        <li><p>wed</p></li>
-                                                    </ul>
+                                                    <ul class="card-body__ul"></ul>
                                                 </div>
                                                 <div class="tab-pane fade" id="widget-everyWeekGoals-thu" role="tabpanel" aria-labelledby="widget-everyWeekGoals-thu-tab">
-                                                    <div id="planningListCard"></div>
-                                                    <ul class="card-body__ul" id="planningListCard">
-                                                        <li><p>thu</p></li>
-                                                    </ul>
+                                                    <ul class="card-body__ul"></ul>
                                                 </div>
                                                 <div class="tab-pane fade" id="widget-everyWeekGoals-fri" role="tabpanel" aria-labelledby="widget-everyWeekGoals-fri-tab">
-                                                    <div id="planningListCard"></div>
-                                                    <ul class="card-body__ul" id="planningListCard">
-                                                        <li><p>fri</p></li>
-                                                    </ul>
+                                                    <ul class="card-body__ul"></ul>
                                                 </div>
                                                 <div class="tab-pane fade" id="widget-everyWeekGoals-sat" role="tabpanel" aria-labelledby="widget-everyWeekGoals-sat-tab">
-                                                    <div id="planningListCard"></div>
-                                                    <ul class="card-body__ul" id="planningListCard">
-                                                        <li><p>sat</p></li>
-                                                    </ul>
+                                                    <ul class="card-body__ul"></ul>
                                                 </div>
                                                 <div class="tab-pane fade" id="widget-everyWeekGoals-sun" role="tabpanel" aria-labelledby="widget-everyWeekGoals-sun-tab">
-                                                    <div id="planningListCard"></div>
-                                                    <ul class="card-body__ul" id="planningListCard">
-                                                        <li><p>sun</p></li>
-                                                    </ul>
+                                                    <ul class="card-body__ul"></ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -291,4 +322,5 @@ function deleteAllTasksOnListWidget(el) {
 // функции для виджета недельный планер
 function addTaskToEveryWeekGoalsWidget(el) {
     console.log('add')
+    console.log('el', el)
 }
