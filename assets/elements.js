@@ -18,6 +18,7 @@ if(localStorage.getItem('widgetsCol')) {
     })
 }
 
+// общие для виджетов функции
 let inputWidgetValue = ''
 let inputWidgetValueId = ''
 const widgetDialog = document.querySelector('#widgetDialog')
@@ -91,57 +92,8 @@ function toThreeCol(el) {
 function deleteWidget(el) {
     console.log('delete widget')
     const widget = el.closest('.widget-col')
-    widget.parentNode.remove(widget)
-
-    saveWidgets()
-}
-
-function addTaskToListWidget(el) {
-    const widget = el.closest('.card')
-    let taskValue = widget.querySelector('input').value
-    const item = `<li class="widget-list__item">
-                    <input type="checkbox" class="widget-list__item-checkbox" onclick="markTheTaskCompleted(this)">
-                    <p class="widget-list__item-text">${taskValue}</p>
-                </li>`
-    const list = widget.querySelector('.widget-list__list')
-    list.insertAdjacentHTML('beforeend', item)
-    taskValue = ''
-    saveWidgets()
-    window.location.reload();
-}
-
-function markTheTaskCompleted(el) {
-    console.log('mark')
-    const li = el.closest('li')
-    const value =  li.querySelector('p').innerHTML
-    const item = `<li class="widget-list__item widget-list__item-text-done">
-                    <p class="">${value}</p>
-                </li>`
-    const list = li.closest('ul')
-    list.insertAdjacentHTML('beforeend', item)
-    li.parentNode.removeChild(li);
-
-    saveWidgets()
-}
-
-function deleteDoneTasksOnListWidget(el) {
-    const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
-    console.log(listArr)
-    listArr.forEach(el => {
-        if(el.className == "widget-list__item widget-list__item-text-done") {
-            el.parentNode.removeChild(el)
-        }
-    })
-
-    saveWidgets()
-}
-
-function deleteAllTasksOnListWidget(el) {
-    const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
-    console.log(listArr)
-    listArr.forEach(el => {
-        el.parentNode.removeChild(el)
-    })
+    console.log('widget', widget)
+    widget.remove(widget)
 
     saveWidgets()
 }
@@ -200,7 +152,7 @@ function renderWidget() {
                                                     type="button" role="tab" aria-controls="widget-everyWeekGoals-sun" aria-selected="false">SUN</button>
                                                 </li>
                                             </ul>
-                                            <button class="btn add-card-button dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">+</button>
+                                            <button class="btn add-card-button dropdown-settings-btn" type="button" onclick="addTaskToEveryWeekGoalsWidget(this)">+</button>
                                         </div>
                                         <div>
                                             <div class="tab-content" id="myTabsContent">
@@ -289,4 +241,60 @@ function renderWidget() {
     widgetsCol.insertAdjacentHTML('afterbegin', widget)
 
     saveWidgets()
+}
+
+// функции для виджета список
+function addTaskToListWidget(el) {
+    const widget = el.closest('.card')
+    let taskValue = widget.querySelector('input').value
+    const item = `<li class="widget-list__item">
+                    <input type="checkbox" class="widget-list__item-checkbox" onclick="markTheTaskOfListWidgetCompleted(this)">
+                    <p class="widget-list__item-text">${taskValue}</p>
+                </li>`
+    const list = widget.querySelector('.widget-list__list')
+    list.insertAdjacentHTML('beforeend', item)
+    taskValue = ''
+    saveWidgets()
+    window.location.reload();
+}
+
+function markTheTaskOfListWidgetCompleted(el) {
+    console.log('mark')
+    const li = el.closest('li')
+    const value =  li.querySelector('p').innerHTML
+    const item = `<li class="widget-list__item widget-list__item-text-done">
+                    <p class="">${value}</p>
+                </li>`
+    const list = li.closest('ul')
+    list.insertAdjacentHTML('beforeend', item)
+    li.parentNode.removeChild(li);
+
+    saveWidgets()
+}
+
+function deleteDoneTasksOnListWidget(el) {
+    const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
+    console.log(listArr)
+    listArr.forEach(el => {
+        if(el.className == "widget-list__item widget-list__item-text-done") {
+            el.parentNode.removeChild(el)
+        }
+    })
+
+    saveWidgets()
+}
+
+function deleteAllTasksOnListWidget(el) {
+    const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
+    console.log(listArr)
+    listArr.forEach(el => {
+        el.parentNode.removeChild(el)
+    })
+
+    saveWidgets()
+}
+
+// функции для виджета недельный планер
+function addTaskToEveryWeekGoalsWidget(el) {
+    console.log('add')
 }
