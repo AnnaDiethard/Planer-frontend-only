@@ -3,6 +3,14 @@ dragula([document.querySelector('#widgetsCol'), document.querySelector('.widget-
 
 if(localStorage.getItem('widgetsCol')) {
     widgetsCol.innerHTML = localStorage.getItem('widgetsCol')
+    const btnArr = document.querySelectorAll('.dropdown-settings-btn')
+    btnArr.forEach(el => {
+        el.classList.remove('show')
+    })
+    const ddmenuArr = document.querySelectorAll('.dropdown-menu')
+    ddmenuArr.forEach(el => {
+        el.classList.remove('show')
+    })
 }
 
 let inputWidgetValue = ''
@@ -29,6 +37,11 @@ function cleanWidgetCard() {
     });
 }
 
+function saveWidgets() {
+    const widgetsCol = document.querySelector('#widgetsCol')
+    localStorage.setItem('widgetsCol', widgetsCol.innerHTML)
+}
+
 function createNewWidget() {
     console.log('create')
     const inputArr = document.querySelector('.widget-content').querySelectorAll('input')
@@ -50,9 +63,9 @@ function createNewWidget() {
 function renderWidget() {
     console.log('render')
 
-    let id = inputWidgetValueId
+    let valueId = inputWidgetValueId
     let widget = ''
-    switch (id) {
+    switch (valueId) {
         case 'weekPlansTitleWidgetInput':
             id = 'weekPlansTitleWidgetInput'
             widget = `<div class="col-12 widget-col">
@@ -163,7 +176,7 @@ function renderWidget() {
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
                                                 <li><a class="dropdown-item" href="#" onclick="toOneCol(this)">100% ширины</a></li>
                                                 <li><a class="dropdown-item" href="#" onclick="toTwoCol(this)">50% ширины</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="toThreeCol(this)">33% ширины</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="toThreeCol(this)">25% ширины</a></li>
                                                 <li><a class="dropdown-item" href="#" onclick="deleteWidget(this)">удалить</a></li>
                                             </ul>
                                         </div>
@@ -183,12 +196,9 @@ function renderWidget() {
             break
     }
 
-    const widgetsCol = document.querySelector('#widgetsCol')
     widgetsCol.insertAdjacentHTML('afterbegin', widget)
 
-    console.log('widgetsColwidgetsCol', widgetsCol)
-
-    localStorage.setItem('widgetsCol', widgetsCol.innerHTML)
+    saveWidgets()
 }
 
 function toOneCol(el) {
@@ -198,6 +208,8 @@ function toOneCol(el) {
     col.className = ''
     col.classList.add('col-12')
     col.classList.add('widget-col')
+
+    saveWidgets()
 }
 
 function toTwoCol(el) {
@@ -205,6 +217,7 @@ function toTwoCol(el) {
     col.className = ''
     col.classList.add('col-6')
     col.classList.add('widget-col')
+    saveWidgets()
 }
 
 function toThreeCol(el) {
@@ -212,6 +225,7 @@ function toThreeCol(el) {
     col.className = ''
     col.classList.add('col-3')
     col.classList.add('widget-col')
+    saveWidgets()
 }
 
 function deleteWidget() {
