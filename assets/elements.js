@@ -18,17 +18,14 @@ let inputWidgetValueId = ''
 const widgetDialog = document.querySelector('#widgetDialog')
 
 function addWidgetOpenDialog() {
-    console.log('open')
     widgetDialog.showModal()
 }
 
 function addWidgetCloseDialog() {
-    console.log('close')
     widgetDialog.close()
 }
 
 function cleanWidgetCard() {
-    console.log('clean')
     const inputArr = document.querySelector('.widget-content').querySelectorAll('input')
     inputArr.forEach(el => {
         if(el.value) {
@@ -43,7 +40,6 @@ function saveWidgets() {
 }
 
 function createNewWidget() {
-    console.log('create')
     const inputArr = document.querySelector('.widget-content').querySelectorAll('input')
     inputArr.forEach(el => {
         if(el.value) {
@@ -52,17 +48,92 @@ function createNewWidget() {
         }
         return inputWidgetValue, inputWidgetValueId
     });
-    console.log('inputWidgetValue', inputWidgetValue)
-    console.log('inputWidgetValueId', inputWidgetValueId)
 
     renderWidget()
     cleanWidgetCard()
     addWidgetCloseDialog()
 }
 
-function renderWidget() {
-    console.log('render')
+function toOneCol(el) {
+    const col = el.closest('.widget-col')
+    col.className = ''
+    col.classList.add('col-12')
+    col.classList.add('widget-col')
 
+    saveWidgets()
+}
+
+function toTwoCol(el) {
+    const col = el.closest('.widget-col')
+    col.className = ''
+    col.classList.add('col-6')
+    col.classList.add('widget-col')
+    saveWidgets()
+}
+
+function toThreeCol(el) {
+    const col = el.closest('.widget-col')
+    col.className = ''
+    col.classList.add('col-3')
+    col.classList.add('widget-col')
+    saveWidgets()
+}
+
+function deleteWidget() {
+    console.log('delete widget')
+}
+
+function addTaskToListWidget(el) {
+    const widget = el.closest('.card')
+    let taskValue = widget.querySelector('input').value
+    const item = `<li class="widget-list__item">
+                    <input type="checkbox" class="widget-list__item-checkbox" onclick="markTheTaskCompleted(this)">
+                    <p class="widget-list__item-text">${taskValue}</p>
+                </li>`
+    const list = widget.querySelector('.widget-list__list')
+    list.insertAdjacentHTML('beforeend', item)
+    taskValue = ''
+    saveWidgets()
+    window.location.reload();
+}
+
+function markTheTaskCompleted(el) {
+    console.log('mark')
+    const li = el.closest('li')
+    const value =  li.querySelector('p').innerHTML
+    const item = `<li class="widget-list__item widget-list__item-text-done">
+                    <p class="">${value}</p>
+                </li>`
+    const list = li.closest('ul')
+    list.insertAdjacentHTML('beforeend', item)
+    li.parentNode.removeChild(li);
+
+    saveWidgets()
+}
+
+function deleteDoneTasksOnListWidget(el) {
+    const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
+    console.log(listArr)
+    listArr.forEach(el => {
+        if(el.className == "widget-list__item widget-list__item-text-done") {
+            el.parentNode.removeChild(el)
+        }
+    })
+
+    saveWidgets()
+}
+
+function deleteAllTasksOnListWidget(el) {
+    const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
+    console.log(listArr)
+    listArr.forEach(el => {
+        el.parentNode.removeChild(el)
+    })
+
+    saveWidgets()
+}
+
+function renderWidget() {
     let valueId = inputWidgetValueId
     let widget = ''
     switch (valueId) {
@@ -184,7 +255,11 @@ function renderWidget() {
                                     <div class="card-body widget-list__card-body">
                                         <div class="input-group widget-list__input-block">
                                             <input type="text" class="form-control widget-list__input-text" aria-label="Dollar amount (with dot and two decimal places)">
-                                            <span class="input-group-text">+</span>
+                                            <button type="button" class="input-group-text" onclick="addTaskToListWidget(this)">+</button>
+                                            <div class="btn-block-widget">
+                                                <button id="cleanTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteDoneTasksOnListWidget(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
+                                                <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteAllTasksOnListWidget(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить все задачи"><i class="fa-solid fa-ban"></i></button>
+                                            </div>
                                         </div>
                                         <ul class="widget-list__list"></ul>
                                     </div>
@@ -199,35 +274,4 @@ function renderWidget() {
     widgetsCol.insertAdjacentHTML('afterbegin', widget)
 
     saveWidgets()
-}
-
-function toOneCol(el) {
-    console.log('el', el)
-    const col = el.closest('.widget-col')
-    console.log('col', col)
-    col.className = ''
-    col.classList.add('col-12')
-    col.classList.add('widget-col')
-
-    saveWidgets()
-}
-
-function toTwoCol(el) {
-    const col = el.closest('.widget-col')
-    col.className = ''
-    col.classList.add('col-6')
-    col.classList.add('widget-col')
-    saveWidgets()
-}
-
-function toThreeCol(el) {
-    const col = el.closest('.widget-col')
-    col.className = ''
-    col.classList.add('col-3')
-    col.classList.add('widget-col')
-    saveWidgets()
-}
-
-function deleteWidget() {
-    console.log('delete widget')
 }

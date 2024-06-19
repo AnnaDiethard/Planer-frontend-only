@@ -112,6 +112,11 @@
     padding-left: 0.5rem;
 }
 
+.widget-list__item-text-done {
+    text-decoration: line-through;
+    color: #7D7D7D
+}
+
 /* еженедельные дела */
 .everyWeekGoals__list {
     display: flex;
