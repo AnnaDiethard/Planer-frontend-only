@@ -45,7 +45,6 @@ function saveWidgets() {
     if(widgetsCol == null) {
         widgetsCol = ''
     }
-    console.log('widgetsCol', widgetsCol)
     localStorage.setItem('widgetsCol', widgetsCol.innerHTML)
 }
 
@@ -90,9 +89,7 @@ function toThreeCol(el) {
 }
 
 function deleteWidget(el) {
-    console.log('delete widget')
     const widget = el.closest('.widget-col')
-    console.log('widget', widget)
     widget.remove(widget)
 
     saveWidgets()
@@ -259,7 +256,6 @@ function addTaskToListWidget(el) {
 }
 
 function markTheTaskOfListWidgetCompleted(el) {
-    console.log('mark')
     const li = el.closest('li')
     const value =  li.querySelector('p').innerHTML
     const item = `<li class="widget-list__item widget-list__item-text-done">
@@ -274,7 +270,6 @@ function markTheTaskOfListWidgetCompleted(el) {
 
 function deleteDoneTasksOnListWidget(el) {
     const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
-    console.log(listArr)
     listArr.forEach(el => {
         if(el.className == "widget-list__item widget-list__item-text-done") {
             el.parentNode.removeChild(el)
@@ -286,7 +281,6 @@ function deleteDoneTasksOnListWidget(el) {
 
 function deleteAllTasksOnListWidget(el) {
     const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
-    console.log(listArr)
     listArr.forEach(el => {
         el.parentNode.removeChild(el)
     })
