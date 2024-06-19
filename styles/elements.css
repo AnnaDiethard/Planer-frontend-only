@@ -30,9 +30,17 @@
     min-height: 100%;
 }
 
+.widget-card-body-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
 .card-header-widget {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 0;
 }
 
 .dropdown-settings-btn {
@@ -47,6 +55,17 @@
 
 .weather-row {
     padding: 0 0.5rem 1rem 1rem;
+}
+
+.add-card-button {
+    width: 2rem;
+    height: 2rem;
+}
+
+.input-group-text {
+    width: 2rem;
+    height: 2rem;
+    background-color: #7D7D7D;
 }
 
 /* погода */
@@ -72,6 +91,7 @@
 
 .widget-list__input-text {
     width: 100%;
+    height: 2rem;
 }
 
 .widget-list__list {
@@ -96,5 +116,5 @@
 .everyWeekGoals__list {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 1rem;
+    width: -webkit-fill-available;
 }

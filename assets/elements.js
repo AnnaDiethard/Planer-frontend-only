@@ -69,8 +69,8 @@ function renderWidget() {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="card-body widget-everyWeekGoals__card-body">
-                                        <div>
+                                    <div class="card-body widget-list__card-body ">
+                                        <div class="widget-card-body-header">
                                             <ul class="nav nav-tabs everyWeekGoals__list" id="myTab" role="tablist">
                                                 <li class="nav-item" role="presentation">
                                                     <button class="nav-link active nav-link-active" id="widget-everyWeekGoals-mon-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-mon"
@@ -101,6 +101,7 @@ function renderWidget() {
                                                     type="button" role="tab" aria-controls="widget-everyWeekGoals-sun" aria-selected="false">SUN</button>
                                                 </li>
                                             </ul>
+                                            <button class="btn add-card-button dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">+</button>
                                         </div>
                                         <div>
                                             <div class="tab-content" id="myTabsContent">
