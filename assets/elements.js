@@ -63,7 +63,7 @@ function createNewWidget() {
     addWidgetCloseDialog()
 }
 
-function toOneCol(el) {
+function foolCol(el) {
     const col = el.closest('.widget-col')
     col.className = ''
     col.classList.add('col-12')
@@ -72,7 +72,15 @@ function toOneCol(el) {
     saveWidgets()
 }
 
-function toTwoCol(el) {
+function threeQuartersCol(el) {
+    const col = el.closest('.widget-col')
+    col.className = ''
+    col.classList.add('col-9')
+    col.classList.add('widget-col')
+    saveWidgets()
+}
+
+function halfCol(el) {
     const col = el.closest('.widget-col')
     col.className = ''
     col.classList.add('col-6')
@@ -80,7 +88,7 @@ function toTwoCol(el) {
     saveWidgets()
 }
 
-function toThreeCol(el) {
+function quarterCol(el) {
     const col = el.closest('.widget-col')
     col.className = ''
     col.classList.add('col-3')
@@ -161,8 +169,9 @@ function renderWidget() {
                                         <div class="dropdown dropstart dropdown-settings">
                                             <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
-                                                <li><a class="dropdown-item" href="#" onclick="toOneCol(this)">100% ширины</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="toTwoCol(this)">50% ширины</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="foolCol(this)">колонка</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="threeQuartersCol(this)">3/4 колонки</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="halfCol(this)">1/2 колонки</a></li>
                                                 <li><a class="dropdown-item" href="#" onclick="deleteWidget(this)">удалить</a></li>
                                             </ul>
                                         </div>
@@ -248,9 +257,10 @@ function renderWidget() {
                                         <div class="dropdown dropstart dropdown-settings">
                                             <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
-                                                <li><a class="dropdown-item" href="#" onclick="toOneCol(this)">100% ширины</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="toTwoCol(this)">50% ширины</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="toThreeCol(this)">25% ширины</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="foolCol(this)">колонка</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="threeQuartersCol(this)">3/4 колонки</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="halfCol(this)">1/2 колонки</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="quarterCol(this)">1/4 колонки</a></li>
                                                 <li><a class="dropdown-item" href="#" onclick="deleteWidget(this)">удалить</a></li>
                                             </ul>
                                         </div>
