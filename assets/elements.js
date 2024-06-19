@@ -1,6 +1,11 @@
 dragula([document.querySelector('#widgetsCol'), document.querySelector('.widget-col')        
 ])
 
+// проверка для корректного отображения страницы при удалении всех виджетов
+if(localStorage.getItem('widgetsCol') == 'undefined') {
+    localStorage.widgetsCol = `<div></div>`
+}
+
 if(localStorage.getItem('widgetsCol')) {
     widgetsCol.innerHTML = localStorage.getItem('widgetsCol')
     const btnArr = document.querySelectorAll('.dropdown-settings-btn')
@@ -35,7 +40,11 @@ function cleanWidgetCard() {
 }
 
 function saveWidgets() {
-    const widgetsCol = document.querySelector('#widgetsCol')
+    let widgetsCol = document.querySelector('#widgetsCol')
+    if(widgetsCol == null) {
+        widgetsCol = ''
+    }
+    console.log('widgetsCol', widgetsCol)
     localStorage.setItem('widgetsCol', widgetsCol.innerHTML)
 }
 
@@ -79,8 +88,12 @@ function toThreeCol(el) {
     saveWidgets()
 }
 
-function deleteWidget() {
+function deleteWidget(el) {
     console.log('delete widget')
+    const widget = el.closest('.widget-col')
+    widget.parentNode.remove(widget)
+
+    saveWidgets()
 }
 
 function addTaskToListWidget(el) {
@@ -137,6 +150,8 @@ function renderWidget() {
     let valueId = inputWidgetValueId
     let widget = ''
     switch (valueId) {
+        case undefined:
+            widget = `<div></div>`
         case 'weekPlansTitleWidgetInput':
             id = 'weekPlansTitleWidgetInput'
             widget = `<div class="col-12 widget-col">
