@@ -128,7 +128,11 @@ main.main {
 }
 
 .widgets-row {
-    padding-left: 2rem;
+    padding-left: 1.5rem !important;
+}
+
+.block-runningList {
+    padding-left: 1rem !important;
 }
 
 .widget-row {
@@ -146,7 +150,7 @@ main.main {
 }
 
 .widget-col {
-    padding-inline: 1rem;
+    padding-inline: 0.5rem;
 }
 
 /* карточки */

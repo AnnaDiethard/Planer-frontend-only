@@ -7,11 +7,16 @@ if(localStorage.getItem('widgetsCol')) {
 
 let inputWidgetValue = ''
 let inputWidgetValueId = ''
+const widgetDialog = document.querySelector('#widgetDialog')
 
 function addWidgetOpenDialog() {
     console.log('open')
-    const widgetDialog = document.querySelector('#widgetDialog')
     widgetDialog.showModal()
+}
+
+function addWidgetCloseDialog() {
+    console.log('close')
+    widgetDialog.close()
 }
 
 function cleanWidgetCard() {
@@ -38,6 +43,8 @@ function createNewWidget() {
     console.log('inputWidgetValueId', inputWidgetValueId)
 
     renderWidget()
+    cleanWidgetCard()
+    addWidgetCloseDialog()
 }
 
 function renderWidget() {
@@ -148,8 +155,17 @@ function renderWidget() {
             widget = `<div class="col-12 widget-col">
                             <div class="widget-list" style="padding-bottom: 1rem">
                                 <div class="card widget-card">
-                                    <div class="card-header card-header__text">
+                                    <div class="card-header card-header-widget card-header__text">
                                         <p>${inputWidgetValue}</p>
+                                        <div class="dropdown dropstart dropdown-settings">
+                                            <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
+                                                <li><a class="dropdown-item" href="#" onclick="toOneCol(this)">100% ширины</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="toTwoCol(this)">50% ширины</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="toThreeCol(this)">33% ширины</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="deleteWidget(this)">удалить</a></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div class="card-body widget-list__card-body">
                                         <div class="input-group widget-list__input-block">
@@ -193,7 +209,7 @@ function toTwoCol(el) {
 function toThreeCol(el) {
     const col = el.closest('.widget-col')
     col.className = ''
-    col.classList.add('col-4')
+    col.classList.add('col-3')
     col.classList.add('widget-col')
 }
 

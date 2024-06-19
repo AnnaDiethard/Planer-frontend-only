@@ -38,6 +38,7 @@
 .dropdown-settings-btn {
     background-color: #7D7D7D;
     padding: 0;
+    margin-left: 0.5rem;
 }
 
 .dropdown-settings-btn:hover {
@@ -45,7 +46,7 @@
 }
 
 .weather-row {
-    padding-bottom: 1rem;
+    padding: 0 0.5rem 1rem 1rem;
 }
 
 /* погода */
