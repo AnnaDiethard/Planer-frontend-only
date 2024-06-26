@@ -298,7 +298,7 @@ function addTaskToListWidget(el) {
                     <p class="widget-list__item-text">${taskValue}</p>
                 </li>`
     const list = widget.querySelector('.widget-list__list')
-    list.insertAdjacentHTML('beforeend', item)
+    list.insertAdjacentHTML('afterbegin', item)
     taskValue = ''
     saveWidgets()
     window.location.reload();
