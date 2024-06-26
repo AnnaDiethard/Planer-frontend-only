@@ -5,6 +5,10 @@
 // moment().calendar();
 console.log('calendar', moment().calendar())
 
+function alertWindow() {
+    alert('функционал в разработке')
+}
+
 let tasks = []
 let doneTasks = []
 let taskDate = ''
@@ -353,4 +357,8 @@ function deleteAllTasks() {
     localStorage.removeItem('tasksList')
     localStorage.removeItem('doneTasksList')
     window.location.reload();
+}
+
+function addCalendarDateOpenDialog() {
+    alert('функционал в разработке')
 }
