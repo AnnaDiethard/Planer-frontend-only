@@ -313,7 +313,7 @@ main.main {
 
 .form-check-label {
     color: var(--extra-dark-text-color);
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .form-check-label-done {

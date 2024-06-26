@@ -297,6 +297,63 @@
             </div>
         </div>
     </dialog>
+
+    <dialog id="everyWeekGoalWidgetDialog" class="add-dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleAdd">добавить</h5>
+                    <!-- <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleEdit">изменить</h5> -->
+                    <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">выберите день</button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="week-plans-widget-tab" data-bs-toggle="tab" data-bs-target="#week-plans-widget"
+                                type="button" role="tab" aria-controls="week-plans-widget" aria-selected="false" data-day-name="monday" onclick="chooseWeekDay(this)">monday</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="list-widget-tab" data-bs-toggle="tab" data-bs-target="#list-widget"
+                                type="button" role="tab" aria-controls="list-widget" aria-selected="false" data-day-name="tuesday" onclick="chooseWeekDay(this)">tuesday</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
+                                type="button" role="tab" aria-controls="traker" aria-selected="false" data-day-name="wednesday" onclick="chooseWeekDay(this)">wednesday</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
+                                type="button" role="tab" aria-controls="traker" aria-selected="false" data-day-name="thusday" onclick="chooseWeekDay(this)">thusday</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
+                                type="button" role="tab" aria-controls="traker" aria-selected="false" data-day-name="friday" onclick="chooseWeekDay(this)">friday</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
+                                type="button" role="tab" aria-controls="traker" aria-selected="false" data-day-name="saturday" onclick="chooseWeekDay(this)">saturday</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
+                                type="button" role="tab" aria-controls="traker" aria-selected="false" data-day-name="sunday" onclick="chooseWeekDay(this)">sunday</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content widget-content">
+                        <p id="weekDayNameLabel" class="add-value-text-block" data-day-name="">день не выбран</p>
+                        <div class="input-group widget-list__input-block">
+                            <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContent">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark-batton" id="addEveryWeekGoalBtn" onclick="addTaskToEveryWeekGoalWidget()">добавить</button>
+                    <!-- <button type="button" class="btn dark-batton" id="editEveryWeekGoalBtn" onclick="editTaskToEveryWeekGoalWidget()">обновить</button> -->
+                </div>
+            </div>
+        </div>
+    </dialog>
         
 
     <!-- bootstrap -->
