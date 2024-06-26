@@ -292,7 +292,7 @@ function renderWidget() {
 // функции для виджета список
 function addTaskToListWidget(el) {
     const widget = el.closest('.card')
-    let taskValue = widget.querySelector('input').value
+    let taskValue = widget.querySelector('.widget-list__input-text').value
     const item = `<li class="widget-list__item">
                     <input type="checkbox" class="widget-list__item-checkbox" onclick="markTheTaskOfListWidgetCompleted(this)">
                     <p class="widget-list__item-text">${taskValue}</p>
