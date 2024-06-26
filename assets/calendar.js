@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // инициализация календарей
+    // ИНИЦИАЛИЗАЦИЯ КАЛЕНДАРЕЙ
+
+    // основной календарь
     const mainCalendarId = document.querySelector("#mainCalendar")
     const mainCalendar = new VanillaCalendar(mainCalendarId, {
         settings: {
@@ -38,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     mainCalendar.init();
 
+    // календарь для окна добавления/редактирования задачи
     const taskCalendarId = document.querySelector("#taskCalendar")
     const taskCalendar = new VanillaCalendar(taskCalendarId, {
         settings: {
@@ -77,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     taskCalendar.init();
 
+    // календарь для добавления мероприятий
     const addDateCalendarId = document.querySelector("#addDateCalendar")
     const addDateCalendar = new VanillaCalendar(addDateCalendarId, {
         settings: {
@@ -102,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     addDateCalendar.init();
 
+    // определение и сохранение номера текущей недели
     const thisWeek = document.querySelector('.vanilla-calendar-day__btn_today').getAttribute('data-calendar-week-number')
     let weekPlanerWeekNumber = document.querySelector('#weekPlanerListCard').getAttribute('week-number')
     weekPlanerWeekNumber = thisWeek

@@ -6,7 +6,7 @@ dragula([
 if(localStorage.getItem('widgetsCol') == 'undefined') {
     localStorage.widgetsCol = `<div></div>`
 }
-
+// полукостыль для корректного отображения
 if(localStorage.getItem('widgetsCol')) {
     widgetsCol.innerHTML = localStorage.getItem('widgetsCol')
     const btnArr = document.querySelectorAll('.dropdown-settings-btn')
@@ -19,19 +19,21 @@ if(localStorage.getItem('widgetsCol')) {
     })
 }
 
-// общие для виджетов функции
+// ОБЩИЕ ФУНКЦИИ
+
+// название виджета
 let inputWidgetValue = ''
+// тип виджета для рендеринга
 let inputWidgetValueId = ''
+// окно создания нового виджета
 const widgetDialog = document.querySelector('#widgetDialog')
 
+// открытие окна добавления виджета
 function addWidgetOpenDialog() {
     widgetDialog.showModal()
 }
 
-function addWidgetCloseDialog() {
-    widgetDialog.close()
-}
-
+// очистка инпутов
 function cleanWidgetCard() {
     const inputArr = document.querySelector('.widget-content').querySelectorAll('input')
     inputArr.forEach(el => {
@@ -41,6 +43,7 @@ function cleanWidgetCard() {
     });
 }
 
+// сохранение текущей конфигурации страницы
 function saveWidgets() {
     let widgetsCol = document.querySelector('#widgetsCol')
     if(widgetsCol == null) {
@@ -49,6 +52,7 @@ function saveWidgets() {
     localStorage.setItem('widgetsCol', widgetsCol.innerHTML)
 }
 
+// создание нового виджета
 function createNewWidget() {
     const inputArr = document.querySelector('.widget-content').querySelectorAll('input')
     inputArr.forEach(el => {
@@ -61,9 +65,10 @@ function createNewWidget() {
 
     renderWidget()
     cleanWidgetCard()
-    addWidgetCloseDialog()
+    widgetDialog.close()
 }
 
+// ширина виджета - на всю строку
 function foolCol(el) {
     const col = el.closest('.widget-col')
     col.className = ''
@@ -73,6 +78,7 @@ function foolCol(el) {
     saveWidgets()
 }
 
+// ширина виджета - на 3/4 строки
 function threeQuartersCol(el) {
     const col = el.closest('.widget-col')
     col.className = ''
@@ -81,6 +87,7 @@ function threeQuartersCol(el) {
     saveWidgets()
 }
 
+// ширина виджета - на половину строки
 function halfCol(el) {
     const col = el.closest('.widget-col')
     col.className = ''
@@ -89,6 +96,7 @@ function halfCol(el) {
     saveWidgets()
 }
 
+// ширина виджета - на четверть строки
 function quarterCol(el) {
     const col = el.closest('.widget-col')
     col.className = ''
@@ -97,6 +105,7 @@ function quarterCol(el) {
     saveWidgets()
 }
 
+// переименование названия виджета
 function renameWidget(el) {
     const btnBlock = el.closest('.card-header-widget__block-header')
     btnBlock.querySelector('.btn-rename').classList.add('hide-class')
@@ -115,6 +124,7 @@ function renameWidget(el) {
     saveWidgets()
 }
 
+// переименование названия виджета - подтвердить
 function renameWidgetConfirm(el) {
     const btnBlock = el.closest('.card-header-widget__block-header')
     let text = btnBlock.querySelector('p')
@@ -129,6 +139,7 @@ function renameWidgetConfirm(el) {
     saveWidgets()
 }
 
+// переименование названия виджета - отменить
 function renameWidgetCancel(el) {
     const btnBlock = el.closest('.card-header-widget__block-header')
     btnBlock.querySelector('.btn-rename').classList.remove('hide-class')
@@ -139,6 +150,7 @@ function renameWidgetCancel(el) {
     saveWidgets()
 }
 
+// удаление виджета
 function deleteWidget(el) {
     const widget = el.closest('.widget-col')
     widget.remove(widget)
@@ -146,11 +158,13 @@ function deleteWidget(el) {
     saveWidgets()
 }
 
+// рендер виджетов по их типу
 function renderWidget() {
     let valueId = inputWidgetValueId
     let widget = ''
     switch (valueId) {
         case undefined:
+            // рендерим пустой див если нет сохранённых виджетов чтобы корректно отображалась пустая страница
             widget = `<div></div>`
         case 'weekPlansTitleWidgetInput':
             widget = `<div class="col-12 widget-col">
@@ -270,7 +284,7 @@ function renderWidget() {
                                             <input type="text" class="form-control widget-list__input-text" aria-label="Dollar amount (with dot and two decimal places)">
                                             <button type="button" class="input-group-text" onclick="addTaskToListWidget(this)">+</button>
                                             <div class="btn-block-widget">
-                                                <button id="cleanTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteDoneTasksOnListWidget(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
+                                                <button id="cleanTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteDoneTasksFromListWidget(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
                                                 <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteAllTasksOnListWidget(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить все задачи"><i class="fa-solid fa-ban"></i></button>
                                             </div>
                                         </div>
@@ -289,22 +303,25 @@ function renderWidget() {
     saveWidgets()
 }
 
-// функции для виджета список
+// ФУНКЦИИ ДЛЯ ВИДЖЕТА СПИСОК
+
+// добавление пункта списка
 function addTaskToListWidget(el) {
     const widget = el.closest('.card')
     let taskValue = widget.querySelector('.widget-list__input-text').value
     const item = `<li class="widget-list__item">
-                    <input type="checkbox" class="widget-list__item-checkbox" onclick="markTheTaskOfListWidgetCompleted(this)">
+                    <input type="checkbox" class="widget-list__item-checkbox" onclick="markTheCompletedTaskInListWidget(this)">
                     <p class="widget-list__item-text">${taskValue}</p>
                 </li>`
     const list = widget.querySelector('.widget-list__list')
     list.insertAdjacentHTML('afterbegin', item)
-    taskValue = ''
+    cleanWidgetCard()
     saveWidgets()
     window.location.reload();
 }
 
-function markTheTaskOfListWidgetCompleted(el) {
+// выделение пунктов списка
+function markTheCompletedTaskInListWidget(el) {
     const li = el.closest('li')
     const value =  li.querySelector('p').innerHTML
     const item = `<li class="widget-list__item widget-list__item-text-done">
@@ -317,7 +334,8 @@ function markTheTaskOfListWidgetCompleted(el) {
     saveWidgets()
 }
 
-function deleteDoneTasksOnListWidget(el) {
+// удаление отмеченных пунктов
+function deleteDoneTasksFromListWidget(el) {
     const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
     listArr.forEach(el => {
         if(el.className == "widget-list__item widget-list__item-text-done") {
@@ -328,6 +346,7 @@ function deleteDoneTasksOnListWidget(el) {
     saveWidgets()
 }
 
+// очистка виджета
 function deleteAllTasksOnListWidget(el) {
     const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
     listArr.forEach(el => {
@@ -337,12 +356,17 @@ function deleteAllTasksOnListWidget(el) {
     saveWidgets()
 }
 
-// функции для виджета недельный планер
-const addTaskToEveryWeekGoalsWidgetDialog = document.querySelector('#everyWeekGoalWidgetDialog')
-let weekGoalsWidgetDialogTaskId = null
-let widget = null
-let taskToEveryWeekGoalItem = null
+// ФУНКЦИИ ДЛЯ ВИДЖЕТА НЕДЕЛЬНЫЙ ПЛАНЕР
 
+// окно доавления контента в планер
+const addTaskToEveryWeekGoalsWidgetDialog = document.querySelector('#everyWeekGoalWidgetDialog')
+// виджет, с которым ведётся работа
+let widget = null
+// айдишник этого виджета
+let weekGoalsWidgetDialogTaskId = null
+// let taskToEveryWeekGoalItem = null
+
+// выбор виджета для дальнейшей работы
 function addTaskToEveryWeekGoalsWidget(el) {
     // const title = document.querySelector('#everyWeekGoalWidgetModalTitleEdit')
     // const button = document.querySelector('#editEveryWeekGoalBtn')
@@ -357,6 +381,7 @@ function addTaskToEveryWeekGoalsWidget(el) {
     return widget
 }
 
+// выбор дня недели
 function chooseWeekDay(el) {
     const chooseDayName = el.textContent
     const chooseDayNameID = el.getAttribute('data-day-name')
@@ -366,6 +391,7 @@ function chooseWeekDay(el) {
     shooseWeekDayNameLabel.style.color = '#313131'
 }
 
+// добавление контента в виджет
 function addTaskToEveryWeekGoalWidget() {
     const dayName = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('p').getAttribute('data-day-name')
     console.log('dayName', dayName)
@@ -430,8 +456,9 @@ function addTaskToEveryWeekGoalWidget() {
 //     item.querySelector('p').textContent = taskValue
 // }
 
+// удаление контента из списка
 function deleteEveryWeekGoal(el) {
     el.closest('li').remove()
     saveWidgets()
-    window.reload()
+    window.location.reload();
 }
