@@ -210,6 +210,15 @@ main.main {
     font-size: 14px;
 }
 
+.dark-batton:hover {
+    background-color: var(--light-btn-background);
+}
+
+.dark-batton:focus    {
+    background-color: var(--light-btn-background) !important;
+    border: none;
+}
+
 .block-button {
     width: -webkit-fill-available;
     margin: 0.5rem;
