@@ -190,7 +190,7 @@ function renderWidget() {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="card-body widget-list__card-body ">
+                                    <div class="card-body widget-card-body ">
                                         <div class="widget-card-body-header">
                                             <ul class="nav nav-tabs everyWeekGoals__list" id="myTab" role="tablist">
                                                 <li class="nav-item" role="presentation">
@@ -279,7 +279,7 @@ function renderWidget() {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="card-body widget-list__card-body">
+                                    <div class="card-body widget-card-body">
                                         <div class="input-group widget-list__input-block">
                                             <input type="text" class="form-control widget-list__input-text" aria-label="Dollar amount (with dot and two decimal places)">
                                             <button type="button" class="input-group-text" onclick="addTaskToListWidget(this)">+</button>

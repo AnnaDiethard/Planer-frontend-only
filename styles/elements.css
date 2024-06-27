@@ -14,7 +14,7 @@
 }
 
 .widget-content {
-    padding: 1rem;
+    padding: 1rem 0 1rem 0;
 }
 
 .widget-card-title {
@@ -45,6 +45,12 @@
     display: flex;
     justify-content: space-between;
     padding-bottom: 0;
+}
+
+.widget-card-body {
+    min-height: 15rem;
+    max-height: 15rem;
+    overflow-y: auto;
 }
 
 .dropdown-settings-btn {

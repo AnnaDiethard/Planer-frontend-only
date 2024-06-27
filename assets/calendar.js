@@ -26,17 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('clickWeekNumber', days)
             },
         },
-        popups: {
-            '2024-06-28': {
-                modifier: '',
-                html: `<div>
-                    <u><b>12:00 PM</b></u>
-                    <p style="margin: 5px 0 0;">Airplane in Las Vegas</p>
-                </div>`,
-                // or just text
-                // html: 'Airplane in Las Vegas',
-            },
-          }
     });
     mainCalendar.init();
 
@@ -61,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('e', e)
                 e.target.classList.add('vanilla-calendar-day-check')
 
-                taskWeekNumber = e.target.dataset.calendarWeekNumber
+                taskWeekNumber = Number(e.target.dataset.calendarWeekNumber)
                 taskDate = self.selectedDates.toString()
                 
                 const gsDayNames = [
@@ -108,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // определение и сохранение номера текущей недели
     const thisWeek = document.querySelector('.vanilla-calendar-day__btn_today').getAttribute('data-calendar-week-number')
-    let weekPlanerWeekNumber = document.querySelector('#weekPlanerListCard').getAttribute('week-number')
+    console.log('thisWeek', thisWeek)
+    let weekPlanerWeekNumber = document.querySelector('#weekPlanerListCard').setAttribute('week-number', thisWeek)
     weekPlanerWeekNumber = thisWeek
     localStorage.setItem('weekPlanerWeekNumber', JSON.stringify(weekPlanerWeekNumber))
   });

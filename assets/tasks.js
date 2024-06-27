@@ -103,7 +103,6 @@ function createNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
-    const planningDate = Number(taskDate.replaceAll('-', ''))
     
     const newTask = {
         id: Date.now(),
@@ -112,7 +111,7 @@ function createNewTask() {
         icon: iconClass || '',
         done: false,
         // определяется в конфиге календаря
-        date: planningDate || '',
+        date: taskDate || '',
         dayName: dayOfWeek || '',
         weekNumber: taskWeekNumber || ''
     }
@@ -153,12 +152,11 @@ function editTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
-    const planningDate = Number(taskDate.replaceAll('-', ''))
 
     changedTask.text = taskInputValue
     changedTask.status = taskStatus
     changedTask.icon = iconClass
-    changedTask.date = planningDate
+    changedTask.date = taskDate
     changedTask.dayName = dayOfWeek
 
     tasks[taskIndex] = changedTask
@@ -207,14 +205,13 @@ function renderTaskToRunningList(task) {
 
     if(task.done == true) {
         const taskHTML = `<li class="card-ul-item" id="${task.id}" >
-                            <div>
+                            <div class="task-item-block">
                                 <span class="runningList-icon-done"><i class="${task.icon} runningList-icon-done"></i></span>
                                 <p class="form-check-label-done" for="flexCheckDefault">${task.text}</p>
                             </div>
                         </li>`
         runningListCard.insertAdjacentHTML('beforeend', taskHTML)
-    } 
-    if(task.done != false || task.date) {
+    } else if(task.done == false || task.date) {
         const taskHTML = `<li class="card-ul-item" id="${task.id}">
                             <div class="task-item-block">
                                 <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
@@ -261,7 +258,7 @@ function renderTaskToWeekPlaner(task) {
     if(weekNumber == task.weekNumber) {
         if(task.done == true) {
             const taskHTML = `<li class="card-ul-item" id="${task.id}">
-                                <div>
+                                <div class="task-item-block">
                                     <span class="runningList-icon-done"><i class="${task.icon} runningList-icon-done"></i></span>
                                     <p class="form-check-label-done" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -290,7 +287,7 @@ function renderTaskToPlanningList(task) {
 
     if(task.done == true) {
         const taskHTML = `<li class="card-ul-item" id="${task.id}">
-                            <div>
+                            <div class="task-item-block">
                                 <span class="runningList-icon-done"><i class="${task.icon} runningList-icon-done"></i></span>
                                 <p class="form-check-label-done" for="flexCheckDefault">${task.text}</p>
                             </div>
@@ -360,5 +357,5 @@ function deleteAllTasks() {
 }
 
 function addCalendarDateOpenDialog() {
-    alert('функционал в разработке')
+    alertWindow()
 }

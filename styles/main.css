@@ -185,7 +185,11 @@ main.main {
 
 .card-body {
     background-color: var(--light-background);
-    min-height: 15rem;
+}
+
+.week-planer-card-body {
+    min-height: 5rem;
+    padding-inline: 0;
 }
 
 .row-content {
@@ -309,6 +313,7 @@ main.main {
 
 .runningList-icon-done {
     color: var(--light-btn-background) !important;
+    padding-right: 5px;
 }
 
 .form-check-label {
@@ -381,7 +386,7 @@ main.main {
 }
 
 .modal-body {
-    min-height: 10rem;
+    min-height: 15rem;
     height: fit-content;
 }
 
