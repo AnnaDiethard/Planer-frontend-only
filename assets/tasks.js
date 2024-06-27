@@ -213,32 +213,38 @@ function renderTaskToRunningList(task) {
         runningListCard.insertAdjacentHTML('beforeend', taskHTML)
     } else if(task.date) {
         const taskHTML = `<li class="card-ul-item" id="${task.id}">
-                            <div class="task-item-block">
-                                <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                <span class="runningList-icon"><i class="${task.icon}"></i></span>
-                                <div>
-                                    <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
-                                    <p class="form-date-label">дедлайн ${task.date}</p>
+                            <div class="card-ul-item-body">
+                                <div class="task-item-block">
+                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                    <span class="runningList-icon"><i class="${task.icon}"></i></span>
+                                    <div>
+                                        <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
+                                        
+                                    </div>
+                                </div>
+                                <div class="card-item-icons-block">
+                                    <span ><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                    <span ><i class="fa-solid fa-trash card-body__btn-task-running-list" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                 </div>
                             </div>
-                            <div>
-                                <span ><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                <span ><i class="fa-solid fa-trash card-body__btn-task-running-list" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
-                            </div>
+                            <p class="form-date-label">дедлайн ${task.date}</p>
                         </li>`
         runningListCard.insertAdjacentHTML('beforebegin', taskHTML)
     } else {
         const taskHTML = `<li class="card-ul-item" id="${task.id}">
-                            <div class="task-item-block">
-                                <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                <span class="runningList-icon"><i class="${task.icon}"></i></span>
-                                <div>
-                                    <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
+                                <div class="card-ul-item-body">
+                                <div class="task-item-block">
+                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                    <span class="runningList-icon"><i class="${task.icon}"></i></span>
+                                    <div>
+                                        <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
+                                        
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <span ><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                <span ><i class="fa-solid fa-trash card-body__btn-task-running-list" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                <div class="card-item-icons-block">
+                                    <span ><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                    <span ><i class="fa-solid fa-trash card-body__btn-task-running-list" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                </div>
                             </div>
                         </li>`
         runningListCard.insertAdjacentHTML('beforebegin', taskHTML)
@@ -265,16 +271,21 @@ function renderTaskToWeekPlaner(task) {
                         weekDayList.insertAdjacentHTML('beforeend', taskHTML)
         } else {
             const taskHTML = `<li class="card-ul-item" id="${task.id}">
-                            <div class="task-item-block">
-                                <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                <span class="runningList-icon"><i class="${task.icon}"></i></span>
-                                <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
-                            </div>
-                            <div>
-                                <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                <span style="padding-left: 0.5rem"><i class="fa-solid fa-trash card-body__btn-task-running-list" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
-                            </div>
-                        </li>`
+                                    <div class="card-ul-item-body">
+                                    <div class="task-item-block">
+                                        <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                        <span class="runningList-icon"><i class="${task.icon}"></i></span>
+                                        <div>
+                                            <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="card-item-icons-block">
+                                        <span ><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                        <span ><i class="fa-solid fa-trash card-body__btn-task-running-list" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                    </div>
+                                </div>
+                            </li>`
                     weekDayList.insertAdjacentHTML('beforebegin', taskHTML)
         }
     }
@@ -294,16 +305,21 @@ function renderTaskToPlanningList(task) {
             planningListCard.insertAdjacentHTML('beforeend', taskHTML)
     } else {
         const taskHTML = `<li class="card-ul-item" id="${task.id}">
+                            <div class="card-ul-item-body">
                             <div class="task-item-block">
                                 <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                 <span class="runningList-icon"><i class="${task.icon}"></i></span>
-                                <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
+                                <div>
+                                    <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
+                                    
+                                </div>
                             </div>
-                            <div>
-                                <span style="padding-left: 0.5rem"><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                <span style="padding-left: 0.5rem"><i class="fa-solid fa-trash card-body__btn-task-running-list" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                            <div class="card-item-icons-block">
+                                <span ><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                <span ><i class="fa-solid fa-trash card-body__btn-task-running-list" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                             </div>
-                        </li>`
+                        </div>
+                    </li>`
         planningListCard.insertAdjacentHTML('beforebegin', taskHTML)
     }
 }

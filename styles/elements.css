@@ -94,6 +94,11 @@
     font-size: 14px;
 }
 
+.card-item-icons-block {
+    display: flex;
+    align-items: center;
+}
+
 /* погода */
 .widget-brick {
     width: 100%; 
