@@ -250,7 +250,7 @@ function renderWidget() {
                                                 type="button" role="tab" aria-controls="widget-everyWeekGoals-sun${id}" aria-selected="false">SUN</button>
                                             </li>
                                         </ul>
-                                        <button class="btn add-card-button dropdown-settings-btn" type="button" onclick="addTaskToEveryWeekGoalsWidget(this)">+</button>
+                                        <button class="btn dark-batton add-card-button dropdown-settings-btn" type="button" onclick="addTaskToEveryWeekGoalsWidget(this)">+</button>
                                     </div>
                                     <div>
                                         <div class="tab-content widget-tab-content">
@@ -309,8 +309,8 @@ function renderWidget() {
                                     </div>
                                     <div class="card-body widget-card-body">
                                         <div class="input-group widget-list__input-block">
-                                            <input type="text" class="form-control widget-list__input-text" aria-label="Dollar amount (with dot and two decimal places)">
-                                            <button type="button" class="input-group-text" onclick="addTaskToListWidget(this)">+</button>
+                                            <input type="text" class="form-control widget-list__input-text">
+                                            <button type="button" class="input-group-text dark-batton" onclick="addTaskToListWidget(this)">+</button>
                                             <div class="btn-block-widget">
                                                 <button id="cleanTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteDoneTasksFromListWidget(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
                                                 <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteAllTasksOnListWidget(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить все задачи"><i class="fa-solid fa-ban"></i></button>

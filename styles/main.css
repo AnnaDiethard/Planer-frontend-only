@@ -30,6 +30,7 @@ html, body {
 
 body {
     background-color: var(--extra-light-background);
+    background-image: url(../img/light.png);
     min-width: 320px;
     position: relative;
     font-family: "Comfortaa", sans-serif;
