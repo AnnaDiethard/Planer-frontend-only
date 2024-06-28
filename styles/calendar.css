@@ -52,3 +52,7 @@
 .vanilla-calendar-arrow_next::before {
     color: var(--dark-text-color) !important;
 }
+
+#taskCalendar {
+    margin: 0;
+}

@@ -40,6 +40,12 @@ function addTaskOpenDialog() {
     const button = document.querySelector('#editTaskBtn')
     title.style.display = 'none';
     button.style.display = 'none';
+
+    const editBlockArr = document.querySelectorAll('.edit-card-choose-block')
+    editBlockArr.forEach(el => {
+        el.style.display = 'none'
+    })
+
     taskDialog.showModal()
 }
 
@@ -66,26 +72,30 @@ function editTaskOpenDialog(el) {
     const taskCalendarDays = document.querySelector("#taskCalendar").querySelectorAll('.vanilla-calendar-day')
     let calendarDay = {}
     taskCalendarDays.forEach((el) => {
-        if(el.querySelector('button').getAttribute('Data-calendar-day').replaceAll('-', '') == taskDate) {
+        if(el.querySelector('button').getAttribute('Data-calendar-day') == taskDate) {
             calendarDay = el
             calendarDay.querySelector('button').classList.add('vanilla-calendar-day__btn_selected')
             return calendarDay
         }
     })
+    const deleteTaskDateCheckbox = document.querySelector('#deleteTaskDateCheckbox')
+    if(deleteTaskDateCheckbox == 'checked') {
+        taskDate = null
+    }
 
     const taskText = task.text
     let taskInput = document.querySelector("#addTaskInput")
     taskInput.value = taskText
 
     const taskStatus = task?.status
-    const checkboxList = document.querySelector('#taskDialog').querySelector('.modal-dialog-addTask').querySelectorAll('span')
-    checkboxList.forEach((el) => {
-        if(el.id == taskStatus) {
-            let input = el.closest('li').querySelector('input')
-            input.checked = true
-        }
-        
-    })
+    if(taskStatus != '') {
+        const checkboxList = document.querySelector('#taskDialog').querySelectorAll('.task-status-icon')
+        checkboxList.forEach((el) => {
+            if(el.closest('li').querySelector('span').id == taskStatus) {
+                el.checked = true
+            }
+        })
+    }
     
     taskDialog.showModal()
 }
@@ -150,8 +160,19 @@ function editTask() {
     const taskIndex = tasks.indexOf(changedTask)
 
     const taskInputValue = document.querySelector("#addTaskInput").value
-    const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
-    const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
+    const taskStatus = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked')?.closest('li')?.querySelector('span').id
+    console.log('taskStatus', taskStatus)
+    const iconClass = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked')?.closest('li')?.querySelector('i')?.classList.value
+    console.log('iconClass', iconClass)
+    // let taskStatus = null
+    // let iconClass = null
+    // if(document.querySelector('input[type="radio"]:checked')) {
+    //     taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li')?.querySelector('span').id
+    //     iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li')?.querySelector('i').classList.value
+    // } else {
+    //     taskStatus = ''
+    //     iconClass = ''
+    // }
 
     changedTask.text = taskInputValue
     changedTask.status = taskStatus
@@ -163,7 +184,7 @@ function editTask() {
     tasks[taskIndex] = changedTask
     saveTasksListInLocalStorage(tasks)
 
-    closeTaskDialog()
+    // closeTaskDialog()
 }
 
 // проверка задач и разделение их на списки
@@ -174,11 +195,11 @@ function checkCorrectRenderTask() {
 
     tasks.forEach((task) => {
         // planning
-        if(task.date == '' && task.status == '') {
+        if(task.date == '' && task.status == '0') {
             tasksPlaner.push(task)
         }
         // runnungList
-        if (task.status) {
+        if (task.icon) {
             tasksRunningList.push(task)
             // тут сортируем массив по статусу задачи
             tasksRunningList.sort((a, b) => parseInt(a.status) - parseInt(b.status))

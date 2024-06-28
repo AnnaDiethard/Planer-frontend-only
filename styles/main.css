@@ -259,6 +259,18 @@ main.main {
     color: var(--extra-dark-text-color);
 }
 
+.nav-link,
+.active {
+    font-weight: bold;
+    color: var(--extra-dark-text-color);
+}
+
+.edit-card-choose-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
 .card-body__changePlan {
     display: flex;
     flex-direction: row;

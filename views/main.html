@@ -185,24 +185,33 @@
                 </div>
                 <div class="modal-body">
                     <div id="taskCalendar"></div>
+                    <div class="edit-card-choose-block" style="padding-bottom: 2rem;">
+                        <input type="checkbox" name="runningListRadio" class="runningListRadio" style="margin-right: 1rem;" id="deleteTaskDateCheckbox">
+                        <p>delete date</p>
+                    </div>
                     <div class="input-form">
                         <input type="text" id="addTaskInput" class="add-task-input " autocomplete="off" placeholder = "">
                         <label for="addTaskInput" class="add-task-input_label">text</label>
                     </div>
                     <ul class="modal-dialog-addTask">
                         <li class="runningList-li">
-                            <input type="radio" name="runningListRadio" class="runningListRadio">
+                            <input type="radio" name="runningListRadio" class="runningListRadio task-status-icon">
                             <span id="3" class="runningList-icon"><i class="fa-solid fa-hourglass-start"></i></span>
                         </li>
                         <li class="runningList-li">
-                            <input type="radio" name="runningListRadio" class="runningListRadio">
+                            <input type="radio" name="runningListRadio" class="runningListRadio task-status-icon">
                             <span id="2" class="runningList-icon"><i class="fa-solid fa-hourglass-half"></i></span>
                         </li>
                         <li class="runningList-li">
-                            <input type="radio" name="runningListRadio" class="runningListRadio">
+                            <input type="radio" name="runningListRadio" class="runningListRadio task-status-icon">
                             <span id="1" class="runningList-icon"><i class="fa-solid fa-hourglass-end"></i></span>
                         </li>
                     </ul>
+                    <li class="edit-card-choose-block">
+                        <input type="radio" name="runningListRadio" class="runningListRadio" style="margin-right: 1rem;" id="">
+                        <span id="0" class="runningList-icon"><i></i></span>
+                        <p>delete status</p>
+                    </li>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewTask()">create</button>
