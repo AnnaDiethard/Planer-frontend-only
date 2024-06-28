@@ -70,13 +70,13 @@
                                             </li>
                                         </ul>
                                         <div> 
-                                            <button id="addTaskToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="addTaskOpenDialog()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="добавить задачу"><i class="fa-solid fa-plus"></i></button>
+                                            <button id="addTaskToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="addTaskOpenDialog()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="add task"><i class="fa-solid fa-plus"></i></button>
                                         </div>
                                     </div>
                                     <div class="card-body__body">
                                         <div class="btn-block">
-                                            <button id="cleanTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteDoneTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
-                                            <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteAllTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить все задачи"><i class="fa-solid fa-ban"></i></button>
+                                            <button id="cleanTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteDoneTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="delete done tasks"><i class="fa-solid fa-eraser"></i></button>
+                                            <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteAllTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="delete all tasks"><i class="fa-solid fa-ban"></i></button>
                                         </div>
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
@@ -157,8 +157,8 @@
                     <div class="col-8 " id="widgetBlock">
                         <div class="row weather-row" style="padding-left: 2rem;">
                             <div class="col-2 card-button-block-col">
-                                <button class="btn dark-batton" id="addDateToCalendarBtn" onclick="addCalendarDateOpenDialog()">добавить событие</button>
-                                <button class="btn dark-batton" id="addWidgetBtn" onclick="addWidgetOpenDialog()">добавить виджет</button>
+                                <button class="btn dark-batton" id="addDateToCalendarBtn" onclick="addCalendarDateOpenDialog()">add event</button>
+                                <button class="btn dark-batton" id="addWidgetBtn" onclick="addWidgetOpenDialog()">add widget</button>
                             </div>
                             <div class="col-10">
                                 <div class="weather-dashboard">
@@ -179,15 +179,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleAdd">добавить задачу</h5>
-                    <h5 class="modal-title" id="modalTitleEdit">редактировать задачу</h5>
+                    <h5 class="modal-title" id="modalTitleAdd">add task</h5>
+                    <h5 class="modal-title" id="modalTitleEdit">edit task</h5>
                     <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div id="taskCalendar"></div>
                     <div class="input-form">
                         <input type="text" id="addTaskInput" class="add-task-input " autocomplete="off" placeholder = "">
-                        <label for="addTaskInput" class="add-task-input_label">текст задачи</label>
+                        <label for="addTaskInput" class="add-task-input_label">text</label>
                     </div>
                     <ul class="modal-dialog-addTask">
                         <li class="runningList-li">
@@ -205,8 +205,8 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewTask()">создать</button>
-                    <button type="button" class="btn dark-batton" id="editTaskBtn" onclick="editTask()">обновить</button>
+                    <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewTask()">create</button>
+                    <button type="button" class="btn dark-batton" id="editTaskBtn" onclick="editTask()">update</button>
                 </div>
             </div>
         </div>
@@ -216,7 +216,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleAdd">добавить мероприятие</h5>
+                    <h5 class="modal-title" id="modalTitleAdd">add event</h5>
                     <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
@@ -226,20 +226,20 @@
                     <div class="input-form-time" style="display: flex; flex-direction: row; width: 10rem;">
                         <div class="input-form" style="padding-right: 1rem;">
                             <input type="text" id="addEventInputHour" class="add-task-input " autocomplete="off" placeholder = "">
-                            <label for="addEventInputHour" class="add-task-input_label">час</label>
+                            <label for="addEventInputHour" class="add-task-input_label">hour</label>
                         </div>
                         <div class="input-form" style="padding-right: 1rem;">
                             <input type="text" id="addEventInputMin" class="add-task-input " autocomplete="off" placeholder = "">
-                            <label for="addEventInputMin" class="add-task-input_label">мин</label>
+                            <label for="addEventInputMin" class="add-task-input_label">min</label>
                         </div>
                     </div>
                     <div class="input-form">
                         <input type="text" id="addEventInput" class="add-task-input " autocomplete="off" placeholder = "">
-                        <label for="addEventInput" class="add-task-input_label">мероприятие</label>
+                        <label for="addEventInput" class="add-task-input_label">event</label>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewEvent()" data-bs-dismiss="modal">создать</button>
+                    <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewEvent()" data-bs-dismiss="modal">create</button>
                 </div>
             </div>
         </div>
@@ -249,20 +249,20 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleAdd">добавить виджет</h5>
+                    <h5 class="modal-title" id="modalTitleAdd">add widget</h5>
                     <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">выберите виджет</button>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">choose widget</button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="week-plans-widget-tab" data-bs-toggle="tab" data-bs-target="#week-plans-widget"
-                                type="button" role="tab" aria-controls="week-plans-widget" aria-selected="false" onclick="cleanWidgetCard()">недельный планер</button>
+                                type="button" role="tab" aria-controls="week-plans-widget" aria-selected="false" onclick="cleanWidgetCard()">week planer</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="list-widget-tab" data-bs-toggle="tab" data-bs-target="#list-widget"
-                                type="button" role="tab" aria-controls="list-widget" aria-selected="false" onclick="cleanWidgetCard()">список</button>
+                                type="button" role="tab" aria-controls="list-widget" aria-selected="false" onclick="cleanWidgetCard()">list</button>
                             </li>
                             <!-- <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
@@ -272,30 +272,30 @@
                     </div>
                     <div class="tab-content widget-content" id="widgetContent">
                         <div class="tab-pane fade" id="week-plans-widget" role="tabpanel" aria-labelledby="week-plans-widget-tab">
-                            <h5 class="widget-card-title">недельный планер</h5>
+                            <h5 class="widget-card-title">week planer</h5>
                             <div class="input-form">
                                 <input type="text" id="weekPlansTitleWidgetInput" class="add-task-input " autocomplete="off" placeholder = "">
-                                <label for="weekPlansTitleWidgetInput" class="add-task-input_label">название виджета</label>
+                                <label for="weekPlansTitleWidgetInput" class="add-task-input_label">title</label>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="list-widget" role="tabpanel" aria-labelledby="list-widget-tab">
-                            <h5 class="widget-card-title">список</h5>
+                            <h5 class="widget-card-title">list</h5>
                             <div class="input-form">
                                 <input type="text" id="listTitleWidgetInput" class="add-task-input " autocomplete="off" placeholder = "">
-                                <label for="listTitleWidgetInput" class="add-task-input_label">название виджета</label>
+                                <label for="listTitleWidgetInput" class="add-task-input_label">title</label>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="traker" role="tabpanel" aria-labelledby="traker-tab">
-                            <h5 class="widget-card-title">трекер</h5>
+                            <h5 class="widget-card-title">tracker</h5>
                             <div class="input-form">
                                 <input type="text" id="trackerTitleWidgetInput" class="add-task-input " autocomplete="off" placeholder = "">
-                                <label for="trackerTitleWidgetInput" class="add-task-input_label">название виджета</label>
+                                <label for="trackerTitleWidgetInput" class="add-task-input_label">title</label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewWidget()">добавить</button>
+                    <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewWidget()">create</button>
                 </div>
             </div>
         </div>
@@ -305,13 +305,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleAdd">добавить</h5>
+                    <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleAdd">add</h5>
                     <!-- <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleEdit">изменить</h5> -->
                     <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">выберите день</button>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">choose day</button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="week-plans-widget-tab" data-bs-toggle="tab" data-bs-target="#week-plans-widget"
@@ -344,14 +344,14 @@
                         </ul>
                     </div>
                     <div class="tab-content widget-content">
-                        <p id="weekDayNameLabel" class="add-value-text-block" data-day-name="">день не выбран</p>
+                        <p id="weekDayNameLabel" class="add-value-text-block" data-day-name="">no day selected</p>
                         <div class="input-group widget-list__input-block">
                             <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContent">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark-batton" id="addEveryWeekGoalBtn" onclick="addTaskToEveryWeekGoalWidget()">добавить</button>
+                    <button type="button" class="btn dark-batton" id="addEveryWeekGoalBtn" onclick="addTaskToEveryWeekGoalWidget()">add</button>
                     <!-- <button type="button" class="btn dark-batton" id="editEveryWeekGoalBtn" onclick="editTaskToEveryWeekGoalWidget()">обновить</button> -->
                 </div>
             </div>
