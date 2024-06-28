@@ -19,6 +19,31 @@ if(localStorage.getItem('widgetsCol')) {
     })
 }
 
+// установка таба текущего дня в виджетах с неделями
+const thisDayName = new Date().toString().substring(0, 3).toLocaleLowerCase()
+const widgetsArr = document.querySelectorAll('.widget-everyWeekGoals')
+widgetsArr.forEach(el => {
+
+    const navWidgetLinkArr = el.querySelectorAll('.nav-widget-link')
+    navWidgetLinkArr.forEach(el => {
+        if(el.innerText.toLocaleLowerCase() == thisDayName) {
+            el.classList.add('active')
+            el.classList.add('nav-link-active')
+        }
+    })
+
+    const navWidgetTabArr = el.querySelectorAll('.widget-tab-content')
+    navWidgetTabArr.forEach(el => {
+        const arr = el.querySelectorAll('div.tab-pane')
+        arr.forEach(el => {
+            if(el.getAttribute('data-active-day') == thisDayName) {
+                el.classList.add('show')
+                el.classList.add('active')
+            }
+        })
+    })
+})
+
 // ОБЩИЕ ФУНКЦИИ
 
 // название виджета
@@ -158,6 +183,8 @@ function deleteWidget(el) {
     saveWidgets()
 }
 
+//  active nav-link-active
+
 // рендер виджетов по их типу
 function renderWidget() {
     let valueId = inputWidgetValueId
@@ -167,92 +194,93 @@ function renderWidget() {
             // рендерим пустой див если нет сохранённых виджетов чтобы корректно отображалась пустая страница
             widget = `<div></div>`
         case 'weekPlansTitleWidgetInput':
+            const id = Date.now()
             widget = `<div class="col-12 widget-col">
-                            <div class="widget-everyWeekGoals" style="padding-bottom: 1rem" id="">
-                                <div class="card widget-card">
-                                    <div class="card-header card-header-widget card-header__text">
-                                        <div class="card-header-widget__block-header">
-                                            <p>${inputWidgetValue}</p>
-                                            <input type="text" class="form-control hide-class widget-list__input-text-header">
-                                            <button class="btn card-body__btn-widget-header btn-rename" type="button" onclick="renameWidget(this)"><i class="fa-solid fa-pencil"></i></button>
-                                            <div class="btn-block-widget hide-class">
-                                                <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
-                                                <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="dropdown dropstart dropdown-settings">
-                                            <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
-                                                <li><a class="dropdown-item" href="#" onclick="foolCol(this)">колонка</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="threeQuartersCol(this)">3/4 колонки</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="halfCol(this)">1/2 колонки</a></li>
-                                                <li><a class="dropdown-item" href="#" onclick="deleteWidget(this)">удалить</a></li>
-                                            </ul>
+                        <div class="widget-everyWeekGoals" style="padding-bottom: 1rem" id="">
+                            <div class="card widget-card">
+                                <div class="card-header card-header-widget card-header__text">
+                                    <div class="card-header-widget__block-header">
+                                        <p>${inputWidgetValue}</p>
+                                        <input type="text" class="form-control hide-class widget-list__input-text-header">
+                                        <button class="btn card-body__btn-widget-header btn-rename" type="button" onclick="renameWidget(this)"><i class="fa-solid fa-pencil"></i></button>
+                                        <div class="btn-block-widget hide-class">
+                                            <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
+                                            <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
                                         </div>
                                     </div>
-                                    <div class="card-body widget-card-body ">
-                                        <div class="widget-card-body-header">
-                                            <ul class="nav nav-tabs everyWeekGoals__list" id="myTab" role="tablist">
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active nav-link-active" id="widget-everyWeekGoals-mon-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-mon"
-                                                    type="button" role="tab" aria-controls="widget-everyWeekGoals-mon" aria-selected="true">MON</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="widget-everyWeekGoals-tue-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-tue"
-                                                    type="button" role="tab" aria-controls="widget-everyWeekGoals-tue" aria-selected="false">TUE</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="widget-everyWeekGoals-wed-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-wed"
-                                                    type="button" role="tab" aria-controls="widget-everyWeekGoals-wed" aria-selected="false">WED</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="widget-everyWeekGoals-thu-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-thu"
-                                                    type="button" role="tab" aria-controls="widget-everyWeekGoals-thu" aria-selected="false">THU</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="widget-everyWeekGoals-fri-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-fri"
-                                                    type="button" role="tab" aria-controls="widget-everyWeekGoals-fri" aria-selected="false">FRI</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="widget-everyWeekGoals-sat-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-sat"
-                                                    type="button" role="tab" aria-controls="widget-everyWeekGoals-sat" aria-selected="false">SAT</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="widget-everyWeekGoals-sun-tab" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-sun"
-                                                    type="button" role="tab" aria-controls="widget-everyWeekGoals-sun" aria-selected="false">SUN</button>
-                                                </li>
-                                            </ul>
-                                            <button class="btn add-card-button dropdown-settings-btn" type="button" onclick="addTaskToEveryWeekGoalsWidget(this)">+</button>
-                                        </div>
-                                        <div>
-                                            <div class="tab-content" id="myTabsContent">
-                                                <div class="tab-pane fade show active" id="widget-everyWeekGoals-mon" role="tabpanel" aria-labelledby="widget-everyWeekGoals-mon-tab">
-                                                    <ul class="card-body__ul" data-day-name="monday"</ul>
-                                                </div>
-                                                <div class="tab-pane fade" id="widget-everyWeekGoals-tue" role="tabpanel" aria-labelledby="widget-everyWeekGoals-tue-tab">
-                                                    <ul class="card-body__ul" data-day-name="tuesday"</ul>
-                                                </div>
-                                                <div class="tab-pane fade" id="widget-everyWeekGoals-wed" role="tabpanel" aria-labelledby="widget-everyWeekGoals-wed-tab">
-                                                    <ul class="card-body__ul" data-day-name="wednesday"></ul>
-                                                </div>
-                                                <div class="tab-pane fade" id="widget-everyWeekGoals-thu" role="tabpanel" aria-labelledby="widget-everyWeekGoals-thu-tab">
-                                                    <ul class="card-body__ul" data-day-name="thusday"></ul>
-                                                </div>
-                                                <div class="tab-pane fade" id="widget-everyWeekGoals-fri" role="tabpanel" aria-labelledby="widget-everyWeekGoals-fri-tab">
-                                                    <ul class="card-body__ul" data-day-name="friday"></ul>
-                                                </div>
-                                                <div class="tab-pane fade" id="widget-everyWeekGoals-sat" role="tabpanel" aria-labelledby="widget-everyWeekGoals-sat-tab">
-                                                    <ul class="card-body__ul" data-day-name="saturday"></ul>
-                                                </div>
-                                                <div class="tab-pane fade" id="widget-everyWeekGoals-sun" role="tabpanel" aria-labelledby="widget-everyWeekGoals-sun-tab">
-                                                    <ul class="card-body__ul" data-day-name="sunday"></ul>
-                                                </div>
+                                    <div class="dropdown dropstart dropdown-settings">
+                                        <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton${id}" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton${id}"  id="tab${id}" role="tablist">
+                                            <li><a class="dropdown-item" href="#" onclick="foolCol(this)">колонка</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="threeQuartersCol(this)">3/4 колонки</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="halfCol(this)">1/2 колонки</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="deleteWidget(this)">удалить</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body widget-card-body ">
+                                    <div class="widget-card-body-header">
+                                        <ul class="nav nav-tabs everyWeekGoals__list" id="tab${id}" role="tablist">
+                                            <li class="nav-item " role="presentation">
+                                                <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-mon-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-mon${id}"
+                                                type="button" role="tab" aria-controls="widget-everyWeekGoals-mon${id}" aria-selected="true">MON</button>
+                                            </li>
+                                            <li class="nav-item " role="presentation">
+                                                <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-tue-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-tue${id}"
+                                                type="button" role="tab" aria-controls="widget-everyWeekGoals-tue${id}" aria-selected="false">TUE</button>
+                                            </li>
+                                            <li class="nav-item " role="presentation">
+                                                <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-wed-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-wed${id}"
+                                                type="button" role="tab" aria-controls="widget-everyWeekGoals-wed${id}" aria-selected="false">WED</button>
+                                            </li>
+                                            <li class="nav-item " role="presentation">
+                                                <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-thu-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-thu${id}"
+                                                type="button" role="tab" aria-controls="widget-everyWeekGoals-thu${id}" aria-selected="false">THU</button>
+                                            </li>
+                                            <li class="nav-item " role="presentation">
+                                                <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-fri-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-fri${id}"
+                                                type="button" role="tab" aria-controls="widget-everyWeekGoals-fri${id}" aria-selected="false">FRI</button>
+                                            </li>
+                                            <li class="nav-item " role="presentation">
+                                                <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-sat-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-sat${id}"
+                                                type="button" role="tab" aria-controls="widget-everyWeekGoals-sat${id}" aria-selected="false">SAT</button>
+                                            </li>
+                                            <li class="nav-item " role="presentation">
+                                                <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-sun-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-sun${id}"
+                                                type="button" role="tab" aria-controls="widget-everyWeekGoals-sun${id}" aria-selected="false">SUN</button>
+                                            </li>
+                                        </ul>
+                                        <button class="btn add-card-button dropdown-settings-btn" type="button" onclick="addTaskToEveryWeekGoalsWidget(this)">+</button>
+                                    </div>
+                                    <div>
+                                        <div class="tab-content widget-tab-content">
+                                            <div class="tab-pane fade" id="widget-everyWeekGoals-mon${id}" data-active-day="mon" role="tabpanel" aria-labelledby="widget-everyWeekGoals-mon-tab${id}">
+                                                <ul class="card-body__ul" data-day-name="monday"></ul>
+                                            </div>
+                                            <div class="tab-pane fade" id="widget-everyWeekGoals-tue${id}" data-active-day="tue" role="tabpanel" aria-labelledby="widget-everyWeekGoals-tue-tab${id}">
+                                                <ul class="card-body__ul" data-day-name="tuesday"></ul>
+                                            </div>
+                                            <div class="tab-pane fade" id="widget-everyWeekGoals-wed${id}" data-active-day="wed" role="tabpanel" aria-labelledby="widget-everyWeekGoals-wed-tab${id}">
+                                                <ul class="card-body__ul" data-day-name="wednesday"></ul>
+                                            </div>
+                                            <div class="tab-pane fade" id="widget-everyWeekGoals-thu${id}" data-active-day="thu" role="tabpanel" aria-labelledby="widget-everyWeekGoals-thu-tab${id}">
+                                                <ul class="card-body__ul" data-day-name="thusday"></ul>
+                                            </div>
+                                            <div class="tab-pane fade" id="widget-everyWeekGoals-fri${id}" data-active-day="fri" role="tabpanel" aria-labelledby="widget-everyWeekGoals-fri-tab${id}">
+                                                <ul class="card-body__ul" data-day-name="friday"></ul>
+                                            </div>
+                                            <div class="tab-pane fade" id="widget-everyWeekGoals-sat${id}" data-active-day="sat" role="tabpanel" aria-labelledby="widget-everyWeekGoals-sat-tab${id}">
+                                                <ul class="card-body__ul" data-day-name="saturday"></ul>
+                                            </div>
+                                            <div class="tab-pane fade" id="widget-everyWeekGoals-sun${id}" data-active-day="sun" role="tabpanel" aria-labelledby="widget-everyWeekGoals-sun-tab${id}">
+                                                <ul class="card-body__ul" data-day-name="sunday"></ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>`
+                        </div>
+                    </div>`
             break
         case 'listTitleWidgetInput':
             widget = `<div class="col-12 widget-col">
@@ -394,10 +422,7 @@ function chooseWeekDay(el) {
 // добавление контента в виджет
 function addTaskToEveryWeekGoalWidget() {
     const dayName = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('p').getAttribute('data-day-name')
-    console.log('dayName', dayName)
     let taskValue = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('.widget-list__input-text').value
-    console.log('taskValue', taskValue)
-    console.log('widget', widget)
 
     const item = `<li class="widget-list__item card-ul-item" data-task-id="">
                         <div class="task-item-block">
@@ -411,7 +436,6 @@ function addTaskToEveryWeekGoalWidget() {
                 </li>`
 
     const ulArr = widget.querySelector('.tab-content').querySelectorAll('ul')
-    console.log('ulArr', ulArr)
     ulArr.forEach(el => {
         if(el.getAttribute('data-day-name') == dayName) {
             el.insertAdjacentHTML('beforeend', item)
