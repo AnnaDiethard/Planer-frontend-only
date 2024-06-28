@@ -160,19 +160,13 @@ function editTask() {
     const taskIndex = tasks.indexOf(changedTask)
 
     const taskInputValue = document.querySelector("#addTaskInput").value
-    const taskStatus = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked')?.closest('li')?.querySelector('span').id
-    console.log('taskStatus', taskStatus)
-    const iconClass = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked')?.closest('li')?.querySelector('i')?.classList.value
-    console.log('iconClass', iconClass)
-    // let taskStatus = null
-    // let iconClass = null
-    // if(document.querySelector('input[type="radio"]:checked')) {
-    //     taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li')?.querySelector('span').id
-    //     iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li')?.querySelector('i').classList.value
-    // } else {
-    //     taskStatus = ''
-    //     iconClass = ''
-    // }
+    
+    let taskStatus = ''
+    let iconClass = ''
+    if(document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked')) {
+        taskStatus = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked').closest('li').querySelector('span').id
+        iconClass = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked').closest('li').querySelector('i').classList.value
+    }
 
     changedTask.text = taskInputValue
     changedTask.status = taskStatus
@@ -195,7 +189,7 @@ function checkCorrectRenderTask() {
 
     tasks.forEach((task) => {
         // planning
-        if(task.date == '' && task.status == '0') {
+        if(task.date == '' && task.status == '') {
             tasksPlaner.push(task)
         }
         // runnungList
