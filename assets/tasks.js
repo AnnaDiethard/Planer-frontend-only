@@ -158,6 +158,7 @@ function editTask() {
     changedTask.icon = iconClass
     changedTask.date = taskDate
     changedTask.dayName = dayOfWeek
+    changedTask.weekNumber = taskWeekNumber
 
     tasks[taskIndex] = changedTask
     saveTasksListInLocalStorage(tasks)
