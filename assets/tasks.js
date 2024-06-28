@@ -78,10 +78,6 @@ function editTaskOpenDialog(el) {
             return calendarDay
         }
     })
-    const deleteTaskDateCheckbox = document.querySelector('#deleteTaskDateCheckbox')
-    if(deleteTaskDateCheckbox == 'checked') {
-        taskDate = null
-    }
 
     const taskText = task.text
     let taskInput = document.querySelector("#addTaskInput")
@@ -160,7 +156,7 @@ function editTask() {
     const taskIndex = tasks.indexOf(changedTask)
 
     const taskInputValue = document.querySelector("#addTaskInput").value
-    
+
     let taskStatus = ''
     let iconClass = ''
     if(document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked')) {
@@ -168,17 +164,24 @@ function editTask() {
         iconClass = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked').closest('li').querySelector('i').classList.value
     }
 
+    let date = changedTask.date
+    if(document.querySelector('input[type="checkbox"]:checked')) {
+        date = ''
+    } else {
+        date = taskDate
+    } 
+
     changedTask.text = taskInputValue
     changedTask.status = taskStatus
     changedTask.icon = iconClass
-    changedTask.date = taskDate
+    changedTask.date = date
     changedTask.dayName = dayOfWeek
     changedTask.weekNumber = taskWeekNumber
 
     tasks[taskIndex] = changedTask
     saveTasksListInLocalStorage(tasks)
 
-    // closeTaskDialog()
+    closeTaskDialog()
 }
 
 // проверка задач и разделение их на списки
