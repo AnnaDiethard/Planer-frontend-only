@@ -444,7 +444,14 @@ main.main {
     position: relative;
     width: 100%;
     height: 3rem;
-  }
+}
+
+.widget-dropdown-item {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    padding-inline: 1rem;
+}
 
 .add-task-input{
     position: absolute;

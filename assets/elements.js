@@ -221,31 +221,31 @@ function renderWidget() {
                                 <div class="card-body widget-card-body ">
                                     <div class="widget-card-body-header">
                                         <ul class="nav nav-tabs everyWeekGoals__list" id="tab${id}" role="tablist">
-                                            <li class="nav-item " role="presentation">
+                                            <li class="nav-item" role="presentation">
                                                 <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-mon-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-mon${id}"
                                                 type="button" role="tab" aria-controls="widget-everyWeekGoals-mon${id}" aria-selected="true">MON</button>
                                             </li>
-                                            <li class="nav-item " role="presentation">
+                                            <li class="nav-item" role="presentation">
                                                 <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-tue-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-tue${id}"
                                                 type="button" role="tab" aria-controls="widget-everyWeekGoals-tue${id}" aria-selected="false">TUE</button>
                                             </li>
-                                            <li class="nav-item " role="presentation">
+                                            <li class="nav-item" role="presentation">
                                                 <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-wed-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-wed${id}"
                                                 type="button" role="tab" aria-controls="widget-everyWeekGoals-wed${id}" aria-selected="false">WED</button>
                                             </li>
-                                            <li class="nav-item " role="presentation">
+                                            <li class="nav-item" role="presentation">
                                                 <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-thu-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-thu${id}"
                                                 type="button" role="tab" aria-controls="widget-everyWeekGoals-thu${id}" aria-selected="false">THU</button>
                                             </li>
-                                            <li class="nav-item " role="presentation">
+                                            <li class="nav-item" role="presentation">
                                                 <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-fri-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-fri${id}"
                                                 type="button" role="tab" aria-controls="widget-everyWeekGoals-fri${id}" aria-selected="false">FRI</button>
                                             </li>
-                                            <li class="nav-item " role="presentation">
+                                            <li class="nav-item" role="presentation">
                                                 <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-sat-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-sat${id}"
                                                 type="button" role="tab" aria-controls="widget-everyWeekGoals-sat${id}" aria-selected="false">SAT</button>
                                             </li>
-                                            <li class="nav-item " role="presentation">
+                                            <li class="nav-item" role="presentation">
                                                 <button class="nav-link nav-widget-link" id="widget-everyWeekGoals-sun-tab${id}" data-bs-toggle="tab" data-bs-target="#widget-everyWeekGoals-sun${id}"
                                                 type="button" role="tab" aria-controls="widget-everyWeekGoals-sun${id}" aria-selected="false">SUN</button>
                                             </li>
