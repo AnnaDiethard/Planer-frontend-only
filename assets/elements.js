@@ -183,8 +183,6 @@ function deleteWidget(el) {
     saveWidgets()
 }
 
-//  active nav-link-active
-
 // рендер виджетов по их типу
 function renderWidget() {
     let valueId = inputWidgetValueId
@@ -197,7 +195,7 @@ function renderWidget() {
             const id = Date.now()
             widget = `<div class="col-12 widget-col">
                         <div class="widget-everyWeekGoals" style="padding-bottom: 1rem" id="">
-                            <div class="card widget-card">
+                            <div class="card widget-card shadow-style">
                                 <div class="card-header card-header-widget card-header__text">
                                     <div class="card-header-widget__block-header">
                                         <p>${inputWidgetValue}</p>
@@ -285,7 +283,7 @@ function renderWidget() {
         case 'listTitleWidgetInput':
             widget = `<div class="col-12 widget-col">
                             <div class="widget-list" style="padding-bottom: 1rem">
-                                <div class="card widget-card">
+                                <div class="card widget-card shadow-style">
                                     <div class="card-header card-header-widget card-header__text">
                                         <div class="card-header-widget__block-header">
                                             <p>${inputWidgetValue}</p>
@@ -321,8 +319,6 @@ function renderWidget() {
                                 </div>
                             </div>
                         </div>`
-            break
-        case 'trackerTitleWidgetInput':
             break
     }
 

@@ -113,8 +113,9 @@
     height: 8rem; 
     background-color: var(--light-background); 
     color: var(--dark-text-color);
-    border-radius: 10px;
+    font-family: "Comfortaa", sans-serif !important;
 }
+
 
 /* список */
 .widget-list__card-body {

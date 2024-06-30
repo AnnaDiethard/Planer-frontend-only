@@ -38,7 +38,7 @@
 }
 
 .vanilla-calendar-day__btn_selected {
-    background-color: rgb(170, 137, 201) !important;
+    background-color: rgb(104, 104, 104) !important;
 }
 
 .vanilla-calendar-month, 
@@ -47,6 +47,7 @@
 .vanilla-calendar-week-number,
 .vanilla-calendar-week-numbers__title {
     color: var(--dark-text-color) !important;
+    font-family: "Comfortaa", sans-serif !important;
 }
 
 .vanilla-calendar-arrow_next::before {
