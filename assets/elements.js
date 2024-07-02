@@ -28,7 +28,6 @@ widgetsArr.forEach(el => {
     navWidgetLinkArr.forEach(el => {
         if(el.innerText.toLocaleLowerCase() == thisDayName) {
             el.classList.add('active')
-            el.classList.add('nav-link-active')
         }
     })
 
@@ -40,6 +39,21 @@ widgetsArr.forEach(el => {
                 el.classList.add('show')
                 el.classList.add('active')
             }
+        })
+    })
+})
+
+// костыль для починки переключения табов в недельном виджете когда у бутстрапа отлетает кукуха
+widgetsArr.forEach(el => {
+    const navWidgetLinkArr = el.querySelectorAll('.nav-widget-link')
+    navWidgetLinkArr.forEach(el => {
+        el.addEventListener('click', (e) => {
+            console.log('el', el)
+            navWidgetLinkArr.forEach(s => {
+                s.classList.remove('active')
+                console.log('s', s)
+            })
+            el.classList.add('active')
         })
     })
 })
