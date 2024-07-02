@@ -60,12 +60,8 @@ function addWidgetOpenDialog() {
 
 // очистка инпутов
 function cleanWidgetCard() {
-    const inputArr = document.querySelector('.widget-content').querySelectorAll('input')
-    inputArr.forEach(el => {
-        if(el.value) {
-            el.value = ''
-        }
-    });
+    const input = widgetDialog.querySelector('#weekPlansTitleWidgetInput')
+    input.value = ''
 }
 
 // сохранение текущей конфигурации страницы
@@ -89,7 +85,7 @@ addNewWidgetBtn.addEventListener('click', (el) => {
         errorText.classList.remove('hide-class')
     } else {
         inputWidgetValue = input.value
-        inputWidgetValueId = input.id
+        inputWidgetValueId = chooseWidgetName
 
         renderWidget()
         cleanWidgetCard()
@@ -99,10 +95,12 @@ addNewWidgetBtn.addEventListener('click', (el) => {
 
 // отображение поля ввода после выбора тип виджета
 const widgetDropdownLinkArr = document.querySelectorAll('.widget-dropdown-link')
+let chooseWidgetName = ''
 widgetDropdownLinkArr.forEach(el => {
     el.addEventListener('click', (el) => {
         const inputForm = document.querySelector('#widgetDialog').querySelector('.input-form')
         inputForm.classList.remove('hide-class')
+        chooseWidgetName = el.srcElement.innerText
     })
 })
 
@@ -213,7 +211,7 @@ function renderWidget() {
         case undefined:
             // рендерим пустой див если нет сохранённых виджетов чтобы корректно отображалась пустая страница
             widget = `<div></div>`
-        case 'weekPlansTitleWidgetInput':
+        case 'week planer':
             const id = Date.now()
             widget = `<div class="col-12 widget-col">
                         <div class="widget-everyWeekGoals" style="padding-bottom: 1rem" id="">
@@ -302,7 +300,7 @@ function renderWidget() {
                         </div>
                     </div>`
             break
-        case 'listTitleWidgetInput':
+        case 'list':
             widget = `<div class="col-12 widget-col">
                             <div class="widget-list" style="padding-bottom: 1rem">
                                 <div class="card widget-card shadow-style">
