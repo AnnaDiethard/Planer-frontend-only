@@ -6,6 +6,7 @@ dragula([
 if(localStorage.getItem('widgetsCol') == 'undefined') {
     localStorage.widgetsCol = `<div></div>`
 }
+
 // полукостыль для корректного отображения
 if(localStorage.getItem('widgetsCol')) {
     widgetsCol.innerHTML = localStorage.getItem('widgetsCol')
@@ -325,7 +326,7 @@ function renderWidget() {
                                             <input type="text" class="form-control hide-class widget-list__input-text-header">
                                             <button class="btn card-body__btn-widget-header btn-rename" type="button" onclick="renameWidget(this)"><i class="fa-solid fa-pencil"></i></button>
                                             <div class="btn-block-widget hide-class">
-                                                <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
+                                                <button id="renameWidgetConfirm" class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
                                                 <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
                                             </div>
                                         </div>
@@ -357,7 +358,7 @@ function renderWidget() {
             break
     }
 
-    widgetsCol.insertAdjacentHTML('afterbegin', widget)
+    widgetsCol.insertAdjacentHTML('beforeend', widget)
 
     saveWidgets()
 }
