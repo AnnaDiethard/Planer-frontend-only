@@ -47,11 +47,9 @@ widgetsArr.forEach(el => {
 widgetsArr.forEach(el => {
     const navWidgetLinkArr = el.querySelectorAll('.nav-widget-link')
     navWidgetLinkArr.forEach(el => {
-        el.addEventListener('click', (e) => {
-            console.log('el', el)
+        el.addEventListener('click', () => {
             navWidgetLinkArr.forEach(s => {
                 s.classList.remove('active')
-                console.log('s', s)
             })
             el.classList.add('active')
         })
