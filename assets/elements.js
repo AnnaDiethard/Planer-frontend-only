@@ -26,6 +26,7 @@ widgetsArr.forEach(el => {
 
     const navWidgetLinkArr = el.querySelectorAll('.nav-widget-link')
     navWidgetLinkArr.forEach(el => {
+        el.classList.remove('active')
         if(el.innerText.toLocaleLowerCase() == thisDayName) {
             el.classList.add('active')
         }
@@ -35,6 +36,8 @@ widgetsArr.forEach(el => {
     navWidgetTabArr.forEach(el => {
         const arr = el.querySelectorAll('div.tab-pane')
         arr.forEach(el => {
+            el.classList.remove('show')
+            el.classList.remove('active')
             if(el.getAttribute('data-active-day') == thisDayName) {
                 el.classList.add('show')
                 el.classList.add('active')
