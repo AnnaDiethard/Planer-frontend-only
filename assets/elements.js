@@ -353,15 +353,18 @@ function renderWidget() {
 function addTaskToListWidget(el) {
     const widget = el.closest('.card')
     let taskValue = widget.querySelector('.widget-list__input-text').value
-    const item = `<li class="widget-list__item">
+
+    if(taskValue) {
+        const item = `<li class="widget-list__item">
                     <input type="checkbox" class="widget-list__item-checkbox" onclick="markTheCompletedTaskInListWidget(this)">
                     <p class="widget-list__item-text">${taskValue}</p>
                 </li>`
-    const list = widget.querySelector('.widget-list__list')
-    list.insertAdjacentHTML('afterbegin', item)
-    cleanWidgetCard()
-    saveWidgets()
-    window.location.reload();
+        const list = widget.querySelector('.widget-list__list')
+        list.insertAdjacentHTML('afterbegin', item)
+        cleanWidgetCard()
+        saveWidgets()
+        window.location.reload();
+    }
 }
 
 // выделение пунктов списка
