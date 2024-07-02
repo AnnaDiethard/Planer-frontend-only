@@ -191,8 +191,9 @@
                             <p>delete date</p>
                         </div>
                         <div class="input-form">
-                            <input type="text" id="addTaskInput" class="add-task-input " autocomplete="off" placeholder = "">
+                            <input type="text" id="addTaskInput" class="add-task-input " autocomplete="off" placeholder = "" minlength="2" maxlength="32" required>
                             <label for="addTaskInput" class="add-task-input_label">text</label>
+                            <p id="errorText" class="hide-class input-validation-message">field is required</p>
                         </div>
                         <ul class="modal-dialog-addTask">
                             <li class="runningList-li">
@@ -216,8 +217,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewTask()">create</button>
-                    <button type="button" class="btn dark-batton" id="editTaskBtn" onclick="editTask()">update</button>
+                    <button type="button" class="btn dark-batton" id="addTaskBtn">create</button>
+                    <button type="button" class="btn dark-batton" id="editTaskBtn">update</button>
                 </div>
             </div>
         </div>
@@ -284,29 +285,22 @@
                     <div class="tab-content widget-content" id="widgetContent">
                         <div class="tab-pane fade" id="week-plans-widget" role="tabpanel" aria-labelledby="week-plans-widget-tab">
                             <h5 class="widget-card-title">week planer</h5>
-                            <div class="input-form">
-                                <input type="text" id="weekPlansTitleWidgetInput" class="add-task-input " autocomplete="off" placeholder = "">
-                                <label for="weekPlansTitleWidgetInput" class="add-task-input_label">title</label>
-                            </div>
                         </div>
                         <div class="tab-pane fade" id="list-widget" role="tabpanel" aria-labelledby="list-widget-tab">
                             <h5 class="widget-card-title">list</h5>
-                            <div class="input-form">
-                                <input type="text" id="listTitleWidgetInput" class="add-task-input " autocomplete="off" placeholder = "">
-                                <label for="listTitleWidgetInput" class="add-task-input_label">title</label>
-                            </div>
                         </div>
-                        <div class="tab-pane fade" id="traker" role="tabpanel" aria-labelledby="traker-tab">
+                        <!-- <div class="tab-pane fade" id="traker" role="tabpanel" aria-labelledby="traker-tab">
                             <h5 class="widget-card-title">tracker</h5>
-                            <div class="input-form">
-                                <input type="text" id="trackerTitleWidgetInput" class="add-task-input " autocomplete="off" placeholder = "">
-                                <label for="trackerTitleWidgetInput" class="add-task-input_label">title</label>
-                            </div>
-                        </div>
+                        </div> -->
+                    </div>
+                    <div class="input-form hide-class">
+                        <input type="text" id="weekPlansTitleWidgetInput" class="add-task-input " autocomplete="off" placeholder = "">
+                        <label for="weekPlansTitleWidgetInput" class="add-task-input_label">title</label>
+                        <p id="errorText" class="hide-class input-validation-message">field is required</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewWidget()">create</button>
+                    <button type="button" class="btn dark-batton" id="addNewWidgetBtn">create</button>
                 </div>
             </div>
         </div>
@@ -359,6 +353,7 @@
                         <div class="input-group widget-list__input-block">
                             <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContent">
                         </div>
+                        <p id="errorText" class="hide-class input-validation-message">select a day and add text</p>
                     </div>
                 </div>
                 <div class="modal-footer">

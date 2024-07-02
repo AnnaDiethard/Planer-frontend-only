@@ -21,16 +21,16 @@
     width: 100%;
 }
 
+.hide-class {
+    display: none;
+}
+
 .widget-content {
     padding: 1rem 0 1rem 0;
 }
 
 .widget-card-title {
     padding: 1rem;
-}
-
-.hide-class {
-    display: none;
 }
 
 .dropdown-settings {

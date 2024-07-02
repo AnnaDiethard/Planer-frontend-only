@@ -105,84 +105,115 @@ function closeTaskDialog() {
 }
 
 // сохранение новой задачи
-function createNewTask() {
+const addNewTaskButton = document.querySelector('#addTaskBtn')
+addNewTaskButton.addEventListener('click', (el) => {
+    el.preventDefault()
+
     const taskInputValue = document.querySelector("#addTaskInput").value
     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
-    
-    const newTask = {
-        id: Date.now(),
-        text: taskInputValue,
-        status: taskStatus || '',
-        icon: iconClass || '',
-        done: false,
-        // определяется в конфиге календаря
-        date: taskDate || '',
-        dayName: dayOfWeek || '',
-        weekNumber: taskWeekNumber || ''
-    }
-    console.log('newTask', newTask)
 
-    tasks.push(newTask)
-    saveTasksListInLocalStorage(tasks)
-
-    checkCorrectRenderTask()
-
-    // очистка элементов формы
-    const addTaskInputValue = document.querySelector("#addTaskInput")
-	addTaskInputValue.value = ""
-    const checkedRadioBtn = document.getElementsByTagName('input');
-    for(var i = 0; i < checkedRadioBtn.length; i++) {
-        if(checkedRadioBtn[i].type == 'radio') {
-            checkedRadioBtn[i].checked = false;
+    if(taskInputValue == '') {
+        const errorText = document.querySelector('#errorText')
+        errorText.classList.remove('hide-class')
+    } else {
+        const newTask = {
+            id: Date.now(),
+            text: taskInputValue,
+            status: taskStatus || '',
+            icon: iconClass || '',
+            done: false,
+            // определяется в конфиге календаря
+            date: taskDate || '',
+            dayName: dayOfWeek || '',
+            weekNumber: taskWeekNumber || ''
         }
-    } 
-
-    closeTaskDialog()
-}
+    
+        tasks.push(newTask)
+        saveTasksListInLocalStorage(tasks)
+    
+        checkCorrectRenderTask()
+    
+        // очистка элементов формы
+        const addTaskInputValue = document.querySelector("#addTaskInput")
+        addTaskInputValue.value = ""
+        const checkedRadioBtn = document.getElementsByTagName('input');
+        for(var i = 0; i < checkedRadioBtn.length; i++) {
+            if(checkedRadioBtn[i].type == 'radio') {
+                checkedRadioBtn[i].checked = false;
+            }
+        } 
+    
+        closeTaskDialog()
+    }
+})
 
 // сохранение отредактированной задачи
-function editTask() {
-    const id = document.querySelector('#taskDialog').taskId
-    let changedTask = {}
-
-    tasks.forEach((el) => {
-        if(el.id == id) {
-            changedTask = el
-        }
-        return changedTask
-    })
-
-    const taskIndex = tasks.indexOf(changedTask)
+const editTaskBtn = document.querySelector('#editTaskBtn')
+editTaskBtn.addEventListener('click', (el) => {
+    el.preventDefault()
 
     const taskInputValue = document.querySelector("#addTaskInput").value
 
-    let taskStatus = ''
-    let iconClass = ''
-    if(document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked')) {
-        taskStatus = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked').closest('li').querySelector('span').id
-        iconClass = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked').closest('li').querySelector('i').classList.value
-    }
-
-    let date = changedTask.date
-    if(document.querySelector('input[type="checkbox"]:checked')) {
-        date = ''
+    if(taskInputValue == '') {
+        const errorText = document.querySelector('#errorText')
+        errorText.classList.remove('hide-class')
     } else {
-        date = taskDate
-    } 
+        const id = document.querySelector('#taskDialog').taskId
+        let changedTask = {}
 
-    changedTask.text = taskInputValue
-    changedTask.status = taskStatus
-    changedTask.icon = iconClass
-    changedTask.date = date
-    changedTask.dayName = dayOfWeek
-    changedTask.weekNumber = taskWeekNumber
+        tasks.forEach((el) => {
+            if(el.id == id) {
+                changedTask = el
+            }
+            return changedTask
+        })
 
-    tasks[taskIndex] = changedTask
-    saveTasksListInLocalStorage(tasks)
+        const taskIndex = tasks.indexOf(changedTask)
 
-    closeTaskDialog()
-}
+        let taskStatus = ''
+        let iconClass = ''
+        if(document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked')) {
+            taskStatus = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked').closest('li').querySelector('span').id
+            iconClass = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked').closest('li').querySelector('i').classList.value
+        }
+
+        let date = ''
+        if(document.querySelector('input[type="checkbox"]:checked')) {
+            date = ''
+        } else if (taskDate == '') {
+            date = changedTask.date
+        } else {
+            date = taskDate
+        }
+
+        let weekDay = ''
+        if(dayOfWeek == '') {
+            weekDay = changedTask.dayName
+        } else {
+            weekDay = dayOfWeek
+        }
+
+        let weekNumber = ''
+        if(weekNumber == '') {
+            weekNumber = weekNumber
+        } else {
+            weekNumber = taskWeekNumber
+        }
+
+        changedTask.text = taskInputValue
+        changedTask.status = taskStatus
+        changedTask.icon = iconClass
+        changedTask.date = date
+        changedTask.dayName = weekDay
+        changedTask.weekNumber = weekNumber
+
+        tasks[taskIndex] = changedTask
+        saveTasksListInLocalStorage(tasks)
+
+        // closeTaskDialog()
+    }
+})
 
 // проверка задач и разделение их на списки
 function checkCorrectRenderTask() {

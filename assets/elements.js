@@ -60,12 +60,8 @@ function addWidgetOpenDialog() {
 
 // очистка инпутов
 function cleanWidgetCard() {
-    const inputArr = document.querySelector('.widget-content').querySelectorAll('input')
-    inputArr.forEach(el => {
-        if(el.value) {
-            el.value = ''
-        }
-    });
+    const input = widgetDialog.querySelector('#weekPlansTitleWidgetInput')
+    input.value = ''
 }
 
 // сохранение текущей конфигурации страницы
@@ -78,20 +74,35 @@ function saveWidgets() {
 }
 
 // создание нового виджета
-function createNewWidget() {
-    const inputArr = document.querySelector('.widget-content').querySelectorAll('input')
-    inputArr.forEach(el => {
-        if(el.value) {
-            inputWidgetValue = el.value
-            inputWidgetValueId = el.id
-        }
-        return inputWidgetValue, inputWidgetValueId
-    });
+const addNewWidgetBtn = document.querySelector('#addNewWidgetBtn')
+addNewWidgetBtn.addEventListener('click', (el) => {
+    el.preventDefault()
+    
+    const input = document.querySelector('#widgetDialog').querySelector('input')
 
-    renderWidget()
-    cleanWidgetCard()
-    widgetDialog.close()
-}
+    if(input.value == '') {
+        const errorText = document.querySelector('#widgetDialog').querySelector('#errorText')
+        errorText.classList.remove('hide-class')
+    } else {
+        inputWidgetValue = input.value
+        inputWidgetValueId = chooseWidgetName
+
+        renderWidget()
+        cleanWidgetCard()
+        widgetDialog.close()
+    }
+})
+
+// отображение поля ввода после выбора тип виджета
+const widgetDropdownLinkArr = document.querySelectorAll('.widget-dropdown-link')
+let chooseWidgetName = ''
+widgetDropdownLinkArr.forEach(el => {
+    el.addEventListener('click', (el) => {
+        const inputForm = document.querySelector('#widgetDialog').querySelector('.input-form')
+        inputForm.classList.remove('hide-class')
+        chooseWidgetName = el.srcElement.innerText
+    })
+})
 
 // ширина виджета - на всю строку
 function foolCol(el) {
@@ -133,6 +144,8 @@ function quarterCol(el) {
 // переименование названия виджета
 function renameWidget(el) {
     const btnBlock = el.closest('.card-header-widget__block-header')
+    const renameWidgetConfirm = btnBlock.querySelector('#renameWidgetConfirm')
+    renameWidgetConfirm.disabled = false
     btnBlock.querySelector('.btn-rename').classList.add('hide-class')
     btnBlock.querySelector('.btn-block-widget').classList.remove('hide-class')
     const text = btnBlock.querySelector('p')
@@ -154,19 +167,26 @@ function renameWidgetConfirm(el) {
     const btnBlock = el.closest('.card-header-widget__block-header')
     let text = btnBlock.querySelector('p')
     const input = btnBlock.querySelector('input')
-    const newValue = input.value
-    text.innerHTML = newValue
-    text.classList.remove('hide-class')
-    input.classList.add('hide-class')
-    btnBlock.querySelector('.btn-rename').classList.remove('hide-class')
-    btnBlock.querySelector('.btn-block-widget').classList.add('hide-class')
 
-    saveWidgets()
+    if(input.value == '') {
+        el.disabled = true
+    } else {
+        const newValue = input.value
+        text.innerHTML = newValue
+        text.classList.remove('hide-class')
+        input.classList.add('hide-class')
+        btnBlock.querySelector('.btn-rename').classList.remove('hide-class')
+        btnBlock.querySelector('.btn-block-widget').classList.add('hide-class')
+
+        saveWidgets()
+    }
 }
 
 // переименование названия виджета - отменить
 function renameWidgetCancel(el) {
     const btnBlock = el.closest('.card-header-widget__block-header')
+    const renameWidgetConfirm = btnBlock.querySelector('#renameWidgetConfirm')
+    renameWidgetConfirm.disabled = false
     btnBlock.querySelector('.btn-rename').classList.remove('hide-class')
     btnBlock.querySelector('.btn-block-widget').classList.add('hide-class')
     btnBlock.querySelector('input').classList.add('hide-class')
@@ -191,7 +211,7 @@ function renderWidget() {
         case undefined:
             // рендерим пустой див если нет сохранённых виджетов чтобы корректно отображалась пустая страница
             widget = `<div></div>`
-        case 'weekPlansTitleWidgetInput':
+        case 'week planer':
             const id = Date.now()
             widget = `<div class="col-12 widget-col">
                         <div class="widget-everyWeekGoals" style="padding-bottom: 1rem" id="">
@@ -202,7 +222,7 @@ function renderWidget() {
                                         <input type="text" class="form-control hide-class widget-list__input-text-header">
                                         <button class="btn card-body__btn-widget-header btn-rename" type="button" onclick="renameWidget(this)"><i class="fa-solid fa-pencil"></i></button>
                                         <div class="btn-block-widget hide-class">
-                                            <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
+                                            <button id="renameWidgetConfirm" class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
                                             <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
                                         </div>
                                     </div>
@@ -280,7 +300,7 @@ function renderWidget() {
                         </div>
                     </div>`
             break
-        case 'listTitleWidgetInput':
+        case 'list':
             widget = `<div class="col-12 widget-col">
                             <div class="widget-list" style="padding-bottom: 1rem">
                                 <div class="card widget-card shadow-style">
@@ -333,15 +353,18 @@ function renderWidget() {
 function addTaskToListWidget(el) {
     const widget = el.closest('.card')
     let taskValue = widget.querySelector('.widget-list__input-text').value
-    const item = `<li class="widget-list__item">
+
+    if(taskValue) {
+        const item = `<li class="widget-list__item">
                     <input type="checkbox" class="widget-list__item-checkbox" onclick="markTheCompletedTaskInListWidget(this)">
                     <p class="widget-list__item-text">${taskValue}</p>
                 </li>`
-    const list = widget.querySelector('.widget-list__list')
-    list.insertAdjacentHTML('afterbegin', item)
-    cleanWidgetCard()
-    saveWidgets()
-    window.location.reload();
+        const list = widget.querySelector('.widget-list__list')
+        list.insertAdjacentHTML('afterbegin', item)
+        cleanWidgetCard()
+        saveWidgets()
+        window.location.reload();
+    }
 }
 
 // выделение пунктов списка
@@ -406,13 +429,16 @@ function addTaskToEveryWeekGoalsWidget(el) {
 }
 
 // выбор дня недели
+let chooseDayNameID = ''
 function chooseWeekDay(el) {
     const chooseDayName = el.textContent
-    const chooseDayNameID = el.getAttribute('data-day-name')
+    chooseDayNameID = el.getAttribute('data-day-name')
     const shooseWeekDayNameLabel = document.querySelector('#weekDayNameLabel')
     shooseWeekDayNameLabel.textContent = chooseDayName
     shooseWeekDayNameLabel.setAttribute('data-day-name', chooseDayNameID)
     shooseWeekDayNameLabel.style.color = '#313131'
+
+    return chooseDayNameID
 }
 
 // добавление контента в виджет
@@ -420,7 +446,11 @@ function addTaskToEveryWeekGoalWidget() {
     const dayName = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('p').getAttribute('data-day-name')
     let taskValue = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('.widget-list__input-text').value
 
-    const item = `<li class="widget-list__item card-ul-item" data-task-id="">
+    if(chooseDayNameID == '' || taskValue == '') {
+        const errorText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#errorText')
+        errorText.classList.remove('hide-class')
+    } else {
+        const item = `<li class="widget-list__item card-ul-item" data-task-id="">
                         <div class="task-item-block">
                             <input type="checkbox" class="widget-list__item-checkbox" onclick="markTheTaskOfEveryWeekGoalWidgetCompleted(this)">
                             <p class="widget-list__item-text">${taskValue}</p>
@@ -431,18 +461,20 @@ function addTaskToEveryWeekGoalWidget() {
                         </div>
                 </li>`
 
-    const ulArr = widget.querySelector('.tab-content').querySelectorAll('ul')
-    ulArr.forEach(el => {
-        if(el.getAttribute('data-day-name') == dayName) {
-            el.insertAdjacentHTML('beforeend', item)
-        }
-    })
+        const ulArr = widget.querySelector('.tab-content').querySelectorAll('ul')
+        ulArr.forEach(el => {
+            if(el.getAttribute('data-day-name') == dayName) {
+                el.insertAdjacentHTML('beforeend', item)
+            }
+        })
 
-    taskValue = ''
-    saveWidgets()
+        taskValue = ''
+        saveWidgets()
+        
+        addTaskToEveryWeekGoalsWidgetDialog.close()
+        window.location.reload();
+    }
     
-    addTaskToEveryWeekGoalsWidgetDialog.close()
-    window.location.reload();
 }
 
 // TODO а оно вообще надо?
