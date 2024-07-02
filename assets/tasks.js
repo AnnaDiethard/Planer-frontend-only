@@ -128,7 +128,6 @@ addNewTaskButton.addEventListener('click', (el) => {
             dayName: dayOfWeek || '',
             weekNumber: taskWeekNumber || ''
         }
-        console.log('newTask', newTask)
     
         tasks.push(newTask)
         saveTasksListInLocalStorage(tasks)
@@ -157,7 +156,6 @@ editTaskBtn.addEventListener('click', (el) => {
     const taskInputValue = document.querySelector("#addTaskInput").value
 
     if(taskInputValue == '') {
-        console.log(13123)
         const errorText = document.querySelector('#errorText')
         errorText.classList.remove('hide-class')
     } else {
@@ -180,24 +178,40 @@ editTaskBtn.addEventListener('click', (el) => {
             iconClass = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked').closest('li').querySelector('i').classList.value
         }
 
-        let date = changedTask.date
+        let date = ''
         if(document.querySelector('input[type="checkbox"]:checked')) {
             date = ''
+        } else if (taskDate == '') {
+            date = changedTask.date
         } else {
             date = taskDate
-        } 
+        }
+
+        let weekDay = ''
+        if(dayOfWeek == '') {
+            weekDay = changedTask.dayName
+        } else {
+            weekDay = dayOfWeek
+        }
+
+        let weekNumber = ''
+        if(weekNumber == '') {
+            weekNumber = weekNumber
+        } else {
+            weekNumber = taskWeekNumber
+        }
 
         changedTask.text = taskInputValue
         changedTask.status = taskStatus
         changedTask.icon = iconClass
         changedTask.date = date
-        changedTask.dayName = dayOfWeek
-        changedTask.weekNumber = taskWeekNumber
+        changedTask.dayName = weekDay
+        changedTask.weekNumber = weekNumber
 
         tasks[taskIndex] = changedTask
         saveTasksListInLocalStorage(tasks)
 
-        closeTaskDialog()
+        // closeTaskDialog()
     }
 })
 
