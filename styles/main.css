@@ -46,6 +46,16 @@ li {
     list-style-type: none;
 }
 
+.hide-class {
+    display: none;
+}
+
+.input-validation-message {
+    color: #9E3131;
+    padding-top: 3rem;
+    font-size: 14px;
+}
+
 .wrapper {
     min-height: 100%;
     display: flex;
@@ -506,12 +516,5 @@ main.main {
 
 .nav-tabs .nav-link.active {
     font-size: 18px;
-}
-
-.input-validation-message {
-    display: none;
-    padding: 3rem 0 0 1rem; 
-    color: brown; 
-    font-size: 14px;
 }
 

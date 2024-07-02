@@ -78,20 +78,33 @@ function saveWidgets() {
 }
 
 // создание нового виджета
-function createNewWidget() {
-    const inputArr = document.querySelector('.widget-content').querySelectorAll('input')
-    inputArr.forEach(el => {
-        if(el.value) {
-            inputWidgetValue = el.value
-            inputWidgetValueId = el.id
-        }
-        return inputWidgetValue, inputWidgetValueId
-    });
+const addNewWidgetBtn = document.querySelector('#addNewWidgetBtn')
+addNewWidgetBtn.addEventListener('click', (el) => {
+    el.preventDefault()
+    
+    const input = document.querySelector('#widgetDialog').querySelector('input')
 
-    renderWidget()
-    cleanWidgetCard()
-    widgetDialog.close()
-}
+    if(input.value == '') {
+        const errorText = document.querySelector('#widgetDialog').querySelector('#errorText')
+        errorText.classList.remove('hide-class')
+    } else {
+        inputWidgetValue = input.value
+        inputWidgetValueId = input.id
+
+        renderWidget()
+        cleanWidgetCard()
+        widgetDialog.close()
+    }
+})
+
+// отображение поля ввода после выбора тип виджета
+const widgetDropdownLinkArr = document.querySelectorAll('.widget-dropdown-link')
+widgetDropdownLinkArr.forEach(el => {
+    el.addEventListener('click', (el) => {
+        const inputForm = document.querySelector('#widgetDialog').querySelector('.input-form')
+        inputForm.classList.remove('hide-class')
+    })
+})
 
 // ширина виджета - на всю строку
 function foolCol(el) {
@@ -133,6 +146,8 @@ function quarterCol(el) {
 // переименование названия виджета
 function renameWidget(el) {
     const btnBlock = el.closest('.card-header-widget__block-header')
+    const renameWidgetConfirm = btnBlock.querySelector('#renameWidgetConfirm')
+    renameWidgetConfirm.disabled = false
     btnBlock.querySelector('.btn-rename').classList.add('hide-class')
     btnBlock.querySelector('.btn-block-widget').classList.remove('hide-class')
     const text = btnBlock.querySelector('p')
@@ -154,19 +169,26 @@ function renameWidgetConfirm(el) {
     const btnBlock = el.closest('.card-header-widget__block-header')
     let text = btnBlock.querySelector('p')
     const input = btnBlock.querySelector('input')
-    const newValue = input.value
-    text.innerHTML = newValue
-    text.classList.remove('hide-class')
-    input.classList.add('hide-class')
-    btnBlock.querySelector('.btn-rename').classList.remove('hide-class')
-    btnBlock.querySelector('.btn-block-widget').classList.add('hide-class')
 
-    saveWidgets()
+    if(input.value == '') {
+        el.disabled = true
+    } else {
+        const newValue = input.value
+        text.innerHTML = newValue
+        text.classList.remove('hide-class')
+        input.classList.add('hide-class')
+        btnBlock.querySelector('.btn-rename').classList.remove('hide-class')
+        btnBlock.querySelector('.btn-block-widget').classList.add('hide-class')
+
+        saveWidgets()
+    }
 }
 
 // переименование названия виджета - отменить
 function renameWidgetCancel(el) {
     const btnBlock = el.closest('.card-header-widget__block-header')
+    const renameWidgetConfirm = btnBlock.querySelector('#renameWidgetConfirm')
+    renameWidgetConfirm.disabled = false
     btnBlock.querySelector('.btn-rename').classList.remove('hide-class')
     btnBlock.querySelector('.btn-block-widget').classList.add('hide-class')
     btnBlock.querySelector('input').classList.add('hide-class')
@@ -202,7 +224,7 @@ function renderWidget() {
                                         <input type="text" class="form-control hide-class widget-list__input-text-header">
                                         <button class="btn card-body__btn-widget-header btn-rename" type="button" onclick="renameWidget(this)"><i class="fa-solid fa-pencil"></i></button>
                                         <div class="btn-block-widget hide-class">
-                                            <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
+                                            <button id="renameWidgetConfirm" class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
                                             <button class="btn card-body__btn-widget-header" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
                                         </div>
                                     </div>
