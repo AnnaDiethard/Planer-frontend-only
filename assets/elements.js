@@ -428,13 +428,16 @@ function addTaskToEveryWeekGoalsWidget(el) {
 }
 
 // выбор дня недели
+let chooseDayNameID = ''
 function chooseWeekDay(el) {
     const chooseDayName = el.textContent
-    const chooseDayNameID = el.getAttribute('data-day-name')
+    chooseDayNameID = el.getAttribute('data-day-name')
     const shooseWeekDayNameLabel = document.querySelector('#weekDayNameLabel')
     shooseWeekDayNameLabel.textContent = chooseDayName
     shooseWeekDayNameLabel.setAttribute('data-day-name', chooseDayNameID)
     shooseWeekDayNameLabel.style.color = '#313131'
+
+    return chooseDayNameID
 }
 
 // добавление контента в виджет
@@ -442,7 +445,11 @@ function addTaskToEveryWeekGoalWidget() {
     const dayName = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('p').getAttribute('data-day-name')
     let taskValue = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('.widget-list__input-text').value
 
-    const item = `<li class="widget-list__item card-ul-item" data-task-id="">
+    if(chooseDayNameID == '' || taskValue == '') {
+        const errorText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#errorText')
+        errorText.classList.remove('hide-class')
+    } else {
+        const item = `<li class="widget-list__item card-ul-item" data-task-id="">
                         <div class="task-item-block">
                             <input type="checkbox" class="widget-list__item-checkbox" onclick="markTheTaskOfEveryWeekGoalWidgetCompleted(this)">
                             <p class="widget-list__item-text">${taskValue}</p>
@@ -453,18 +460,20 @@ function addTaskToEveryWeekGoalWidget() {
                         </div>
                 </li>`
 
-    const ulArr = widget.querySelector('.tab-content').querySelectorAll('ul')
-    ulArr.forEach(el => {
-        if(el.getAttribute('data-day-name') == dayName) {
-            el.insertAdjacentHTML('beforeend', item)
-        }
-    })
+        const ulArr = widget.querySelector('.tab-content').querySelectorAll('ul')
+        ulArr.forEach(el => {
+            if(el.getAttribute('data-day-name') == dayName) {
+                el.insertAdjacentHTML('beforeend', item)
+            }
+        })
 
-    taskValue = ''
-    saveWidgets()
+        taskValue = ''
+        saveWidgets()
+        
+        addTaskToEveryWeekGoalsWidgetDialog.close()
+        window.location.reload();
+    }
     
-    addTaskToEveryWeekGoalsWidgetDialog.close()
-    window.location.reload();
 }
 
 // TODO а оно вообще надо?
