@@ -194,8 +194,8 @@ editTaskBtn.addEventListener('click', (el) => {
             weekDay = dayOfWeek
         }
 
-        let weekNumber = ''
-        if(weekNumber == '') {
+        let weekNumber = changedTask.weekNumber
+        if(weekNumber == taskWeekNumber) {
             weekNumber = changedTask.weekNumber
         } else {
             weekNumber = taskWeekNumber
