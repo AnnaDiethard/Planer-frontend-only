@@ -340,7 +340,6 @@ function renderTaskToWeekPlaner(task) {
                                 </div>
                             </li>`
             weekDayList.insertAdjacentHTML('beforebegin', taskHTML)
-            
         }
     } else {
         if(task.done == true) {
@@ -452,6 +451,24 @@ function deleteAllTasks() {
     localStorage.removeItem('tasksList')
     localStorage.removeItem('doneTasksList')
     window.location.reload();
+}
+
+// разворачивание карточки недельного планера
+function expandWeekDayCard(el) {
+    const btn = el.closest('div').querySelector('#weekDayCardHeaderBtnClose')
+    el.classList.add('hide-class')
+    btn.classList.remove('hide-class')
+    el.closest('.weekDayCard').querySelector('.card-body').classList.remove('scroll-class')
+    el.closest('.weekDayCard').querySelector('.card-body').classList.add('height-card-class')
+}
+
+// сворачивание карточки недельного планера
+function rollUpWeekDayCard(el) {
+    const btn = el.closest('div').querySelector('#weekDayCardHeaderBtnOpen')
+    el.classList.add('hide-class')
+    btn.classList.remove('hide-class')
+    el.closest('.weekDayCard').querySelector('.card-body').classList.add('scroll-class')
+    el.closest('.weekDayCard').querySelector('.card-body').classList.remove('height-card-class')
 }
 
 function addCalendarDateOpenDialog() {

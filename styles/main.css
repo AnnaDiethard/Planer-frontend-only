@@ -50,6 +50,16 @@ li {
     display: none;
 }
 
+.scroll-class {
+    overflow-y: auto;
+    min-height: 5rem !important;
+    height: 10rem !important;
+}
+
+.height-card-class {
+    height: fit-content !important;
+}
+
 .input-validation-message {
     color: #9E3131;
     padding: 3.5rem 0 0 1rem;
@@ -183,6 +193,9 @@ main.main {
 .weekDayCard-header {
     height: 2rem;
     color: var(--light-text-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between !important;
 }
 
 .card-header p {
@@ -199,7 +212,7 @@ main.main {
 }
 
 .week-planer-card-body {
-    min-height: 5rem;
+    min-height: 1rem !important;
     padding-inline: 0;
 }
 
