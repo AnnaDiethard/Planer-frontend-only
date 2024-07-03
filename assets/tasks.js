@@ -341,24 +341,34 @@ function renderTaskToWeekPlaner(task) {
             
         }
     } else {
-        const taskHTML = `<li class="card-ul-item" id="${task.id}">
-                            <div class="card-ul-item-body">
+        if(task.done == true) {
+            const taskHTML = `<li class="card-ul-item" id="${task.id}">
                                 <div class="task-item-block">
-                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                    <span class="runningList-icon"><i class="${task.icon}"></i></span>
-                                    <div>
-                                        <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
-                                        
+                                    <span class="runningList-icon-done"><i class="${task.icon} runningList-icon-done"></i></span>
+                                    <p class="form-check-label-done" for="flexCheckDefault">${task.text}</p>
+                                </div>
+                            </li>`
+            nextWeekTasksList.insertAdjacentHTML('beforeend', taskHTML)
+        } else {
+            const taskHTML = `<li class="card-ul-item" id="${task.id}">
+                                <div class="card-ul-item-body">
+                                    <div class="task-item-block">
+                                        <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                        <span class="runningList-icon"><i class="${task.icon}"></i></span>
+                                        <div>
+                                            <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="card-item-icons-block">
+                                        <span ><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                        <span ><i class="fa-solid fa-trash card-body__btn-task-running-list" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                     </div>
                                 </div>
-                                <div class="card-item-icons-block">
-                                    <span ><i class="fa-solid fa-pencil card-body__btn-task-running-list" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                    <span ><i class="fa-solid fa-trash card-body__btn-task-running-list" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
-                                </div>
-                            </div>
-                            <p class="form-date-label">дедлайн ${task.date}</p>
-                        </li>`
-            nextWeekTasksList.insertAdjacentHTML('beforebegin', taskHTML)
+                                <p class="form-date-label">дедлайн ${task.date}</p>
+                            </li>`
+                nextWeekTasksList.insertAdjacentHTML('beforebegin', taskHTML)
+        }
     }
 }
 
