@@ -194,8 +194,8 @@ editTaskBtn.addEventListener('click', (el) => {
             weekDay = dayOfWeek
         }
 
-        let weekNumber = changedTask.weekNumber
-        if(weekNumber == taskWeekNumber) {
+        let weekNumber = ''
+        if(taskWeekNumber == '') {
             weekNumber = changedTask.weekNumber
         } else {
             weekNumber = taskWeekNumber
@@ -235,6 +235,8 @@ function checkCorrectRenderTask() {
         // weekPlaner
         if(task.date) {
             tasksWeekPlaner.push(task)
+            // тут сортируем массив по статусу задачи
+            tasksWeekPlaner.sort((a, b) => parseInt(a.status) - parseInt(b.status))
         }
     })
 
