@@ -9,6 +9,19 @@ function alertWindow() {
     alert('функционал в разработке')
 }
 
+// определение текущего дня недели
+const thisDayName = new Date().toString().substring(0, 3).toLocaleLowerCase()
+// открытие карточки текущего дня в недельном планере
+const weekPlanerListCardArr = document.querySelector('#weekPlanerListCard').querySelectorAll('.card-body__list')
+weekPlanerListCardArr.forEach(el => {
+    if(el?.getAttribute('data-name') == thisDayName) {
+        console.log(el)
+        el.closest('div').classList.remove('scroll-class')
+        el.closest('.card').querySelector('#weekDayCardHeaderBtnClose').classList.remove('hide-class')
+        el.closest('.card').querySelector('#weekDayCardHeaderBtnOpen').classList.add('hide-class')
+    }
+})
+
 let tasks = []
 let doneTasks = []
 let taskDate = ''
@@ -478,8 +491,8 @@ function expandWeekDayCard(el) {
     const btn = el.closest('div').querySelector('#weekDayCardHeaderBtnClose')
     el.classList.add('hide-class')
     btn.classList.remove('hide-class')
-    el.closest('.weekDayCard').querySelector('.card-body').classList.remove('scroll-class')
-    el.closest('.weekDayCard').querySelector('.card-body').classList.add('height-card-class')
+    el.closest('.card_day-card').querySelector('.card-body').classList.remove('scroll-class')
+    el.closest('.card_day-card').querySelector('.card-body').classList.add('height-card-class')
 }
 
 // сворачивание карточки недельного планера
@@ -487,8 +500,8 @@ function rollUpWeekDayCard(el) {
     const btn = el.closest('div').querySelector('#weekDayCardHeaderBtnOpen')
     el.classList.add('hide-class')
     btn.classList.remove('hide-class')
-    el.closest('.weekDayCard').querySelector('.card-body').classList.add('scroll-class')
-    el.closest('.weekDayCard').querySelector('.card-body').classList.remove('height-card-class')
+    el.closest('.card_day-card').querySelector('.card-body').classList.add('scroll-class')
+    el.closest('.card_day-card').querySelector('.card-body').classList.remove('height-card-class')
 }
 
 function addCalendarDateOpenDialog() {

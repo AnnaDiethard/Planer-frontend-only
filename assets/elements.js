@@ -21,13 +21,13 @@ if(localStorage.getItem('widgetsCol')) {
 }
 
 // установка таба текущего дня в виджетах с неделями
-const thisDayName = new Date().toString().substring(0, 3).toLocaleLowerCase()
 const widgetsArr = document.querySelectorAll('.widget__every-week-goals')
 widgetsArr.forEach(el => {
 
     const navWidgetLinkArr = el.querySelectorAll('.nav-link')
     navWidgetLinkArr.forEach(el => {
         el.classList.remove('active')
+        // thisDayName определяется в скрипте tasks
         if(el.innerText.toLocaleLowerCase() == thisDayName) {
             el.classList.add('active')
         }
