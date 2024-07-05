@@ -217,7 +217,7 @@
                             <p>delete date</p>
                         </div>
                         <div class="input-form">
-                            <input type="text" id="addTaskInput" class="add-input " autocomplete="off" placeholder = "" required>
+                            <input type="text" id="addTaskInput" class="add-input " autocomplete="off" placeholder = "">
                             <label for="addTaskInput" class="add-input_label">text</label>
                             <p id="errorText" class="hide-class input-validation-message">field is required</p>
                         </div>
@@ -344,7 +344,16 @@
                 <div class="modal-body">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">choose day</button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
+                        <div class="block-wrap">
+                            <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="monday">monday</button>
+                            <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="tuesday">tuesday</button>
+                            <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="wednesday">wednesday</button>
+                            <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="thusday">thusday</button>
+                            <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="friday">friday</button>
+                            <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="saturday">saturday</button>
+                            <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="sunday">sunday</button>
+                        </div>
+                        <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="week-plans-widget-tab" data-bs-toggle="tab" data-bs-target="#week-plans-widget"
                                 type="button" role="tab" aria-controls="week-plans-widget" aria-selected="false" data-day-name="monday" onclick="chooseWeekDay(this)">monday</button>
@@ -373,10 +382,10 @@
                                 <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
                                 type="button" role="tab" aria-controls="traker" aria-selected="false" data-day-name="sunday" onclick="chooseWeekDay(this)">sunday</button>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                     <div class="tab-content widget-content">
-                        <p id="weekDayNameLabel" class="add-value-text-block" data-day-name="">no day selected</p>
+                        <!-- <p id="weekDayNameLabel" class="add-value-text-block" data-day-name="">no day selected</p> -->
                         <div class="input-group widget-list__input-block">
                             <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContent">
                         </div>
