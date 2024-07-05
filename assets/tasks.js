@@ -132,22 +132,13 @@ function closeTaskDialog() {
 const addNewTaskButton = document.querySelector('#addTaskBtn')
 addNewTaskButton.addEventListener('click', (el) => {
     el.preventDefault()
-    createNewTask()
-    closeTaskDialog()
-})
 
-const addMoreNewTaskButton = document.querySelector('#addMoreTaskBtn')
-addMoreNewTaskButton.addEventListener('click', (el) => {
-    el.preventDefault()
-    createNewTask()
-})
-
-function createNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
 
     if(taskInputValue == '') {
+        console.log(345)
         const errorText = document.querySelector('#errorText')
         errorText.classList.remove('hide-class')
     } else {
@@ -177,8 +168,91 @@ function createNewTask() {
                 checkedRadioBtn[i].checked = false;
             }
         } 
+        closeTaskDialog()
     }
-}
+})
+
+const addMoreNewTaskButton = document.querySelector('#addMoreTaskBtn')
+addMoreNewTaskButton.addEventListener('click', (el) => {
+    el.preventDefault()
+    const taskInputValue = document.querySelector("#addTaskInput").value
+    const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
+    const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
+
+    if(taskInputValue == '') {
+        console.log(345)
+        const errorText = document.querySelector('#errorText')
+        errorText.classList.remove('hide-class')
+    } else {
+        const newTask = {
+            id: Date.now(),
+            text: taskInputValue,
+            status: taskStatus || '',
+            icon: iconClass || '',
+            done: false,
+            // определяется в конфиге календаря
+            date: taskDate || '',
+            dayName: dayOfWeek || '',
+            weekNumber: taskWeekNumber || ''
+        }
+    
+        tasks.push(newTask)
+        saveTasksListInLocalStorage(tasks)
+    
+        checkCorrectRenderTask()
+    
+        // очистка элементов формы
+        const addTaskInputValue = document.querySelector("#addTaskInput")
+        addTaskInputValue.value = ""
+        const checkedRadioBtn = document.getElementsByTagName('input');
+        for(var i = 0; i < checkedRadioBtn.length; i++) {
+            if(checkedRadioBtn[i].type == 'radio') {
+                checkedRadioBtn[i].checked = false;
+            }
+        }
+    }
+})
+
+// function createNewTask() {
+//     const taskInputValue = document.querySelector("#addTaskInput").value
+//     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
+//     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
+
+//     if(taskInputValue == '') {
+//         console.log(345)
+//         const errorText = document.querySelector('#errorText')
+//         errorText.classList.remove('hide-class')
+//     } else {
+//         const newTask = {
+//             id: Date.now(),
+//             text: taskInputValue,
+//             status: taskStatus || '',
+//             icon: iconClass || '',
+//             done: false,
+//             // определяется в конфиге календаря
+//             date: taskDate || '',
+//             dayName: dayOfWeek || '',
+//             weekNumber: taskWeekNumber || ''
+//         }
+    
+//         tasks.push(newTask)
+//         saveTasksListInLocalStorage(tasks)
+    
+//         checkCorrectRenderTask()
+    
+//         // очистка элементов формы
+//         const addTaskInputValue = document.querySelector("#addTaskInput")
+//         addTaskInputValue.value = ""
+//         const checkedRadioBtn = document.getElementsByTagName('input');
+//         for(var i = 0; i < checkedRadioBtn.length; i++) {
+//             if(checkedRadioBtn[i].type == 'radio') {
+//                 checkedRadioBtn[i].checked = false;
+//             }
+//         } 
+//         closeTaskDialog()
+//     }
+    
+// }
 
 // сохранение отредактированной задачи
 const editTaskBtn = document.querySelector('#editTaskBtn')
@@ -188,6 +262,7 @@ editTaskBtn.addEventListener('click', (el) => {
     const taskInputValue = document.querySelector("#addTaskInput").value
 
     if(taskInputValue == '') {
+        console.log(123)
         const errorText = document.querySelector('#errorText')
         errorText.classList.remove('hide-class')
     } else {
@@ -243,7 +318,7 @@ editTaskBtn.addEventListener('click', (el) => {
         tasks[taskIndex] = changedTask
         saveTasksListInLocalStorage(tasks)
 
-        closeTaskDialog()
+        // closeTaskDialog()
     }
 })
 
