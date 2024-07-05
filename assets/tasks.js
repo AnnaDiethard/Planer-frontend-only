@@ -15,7 +15,6 @@ const thisDayName = new Date().toString().substring(0, 3).toLocaleLowerCase()
 const weekPlanerListCardArr = document.querySelector('#weekPlanerListCard').querySelectorAll('.card-body__list')
 weekPlanerListCardArr.forEach(el => {
     if(el?.getAttribute('data-name') == thisDayName) {
-        console.log(el)
         el.closest('div').classList.remove('scroll-class')
         el.closest('.card').querySelector('#weekDayCardHeaderBtnClose').classList.remove('hide-class')
         el.closest('.card').querySelector('#weekDayCardHeaderBtnOpen').classList.add('hide-class')

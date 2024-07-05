@@ -26,7 +26,7 @@
 }
 
 .widget-content {
-    padding: 1rem 0 1rem 0;
+    padding: 3rem 0 1rem 0;
 }
 
 .widget-card-title {
@@ -46,7 +46,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0.5rem 0 1rem 0;
+    padding: 0.5rem 0 0 0;
 }
 
 .form-check-label_done {
@@ -136,9 +136,9 @@
     top: 0;
     display: flex;
     flex-direction: row;
-    padding-inline: 1rem;
+    /* padding-inline: 1rem; */
     z-index: 10;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
 }
 
 .widget-list__input-text {
@@ -197,7 +197,11 @@
 .widget-every-week-goal__item {
     display: flex;
     justify-content: space-between;
-    padding-inline: 1rem;
+    padding: 0.2rem 1rem 0.2rem 1rem;
+}
+
+.widget-every-week-goal__item:hover {
+    background-color: var(--extra-light-background);
 }
 
 .widget-every-week-goal__item-text {

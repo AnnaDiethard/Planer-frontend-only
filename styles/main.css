@@ -56,6 +56,10 @@ li {
     height: 10rem !important;
 }
 
+.light-text-class {
+    color: #909090;
+}
+
 .card {
     padding: 0 !important;
 }
@@ -212,6 +216,7 @@ main.main {
 
 .widget-btn-block__button {
     padding-inline: 0.3rem;
+    font-size: 18px;
 }
 
 .card-body {

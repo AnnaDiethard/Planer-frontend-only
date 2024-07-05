@@ -287,6 +287,10 @@ function renderWidget() {
                                         <button class="btn card-body__icon-button" type="button" onclick="addTaskToEveryWeekGoalsWidget(this)"><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                     <div>
+                                        <div class="block_left">
+                                            <button class="btn card-body__icon-button" type="button" onclick="reloadTasksInEveryWeekGoalsWidget(this)"><i class="fa-solid fa-rotate-right widget-btn-block__button"></i></button>
+                                            <button class="btn card-body__icon-button" type="button" onclick="deleteTasksFromEveryWeekGoalsWidget(this)"><i class="fa-solid fa-ban widget-btn-block__button"></i></button>
+                                        </div>
                                         <div class="tab-content widget-tab-content">
                                             <div class="tab-pane fade" id="widget__every-week-goals-mon${id}" data-active-day="mon" role="tabpanel" aria-labelledby="widget__every-week-goals-mon-tab${id}">
                                                 <ul class="card-body__list" data-day-name="monday"></ul>
@@ -466,7 +470,7 @@ function addTaskToEveryWeekGoalWidget() {
         const errorText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#errorText')
         errorText.classList.remove('hide-class')
     } else {
-        const item = `<li class="widget-every-week-goal__item card-ul-item" data-task-id="">
+        const item = `<li class="widget-every-week-goal__item " data-task-id="">
                         <div class="block-between">
                             <input type="checkbox" class="widget-list__every-week-goal-checkbox" onclick="markTheTaskOfEveryWeekGoalWidgetCompleted(this)">
                             <p class="widget-list__item-text">${taskValue}</p>
@@ -490,7 +494,36 @@ function addTaskToEveryWeekGoalWidget() {
         addTaskToEveryWeekGoalsWidgetDialog.close()
         window.location.reload();
     }
+}
+
+// выделение элементов недельного виджета как выполненных
+function markTheTaskOfEveryWeekGoalWidgetCompleted(el) {
+    const item = el.closest('li')
+    item.classList.add('light-text-class')
     
+    saveWidgets()
+}
+
+// сброс отмеченных задач в недельном виджете
+function reloadTasksInEveryWeekGoalsWidget(el) {
+    const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
+    items.forEach(el => {
+        if(el.classList.contains('light-text-class')) {
+            el.classList.remove('light-text-class')
+        }
+    })
+
+    saveWidgets()
+}
+
+// удаление всего контента из виджета
+function deleteTasksFromEveryWeekGoalsWidget(el) {
+    const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
+    items.forEach(el => {
+        el.remove()
+    })
+
+    saveWidgets()
 }
 
 // TODO а оно вообще надо?
@@ -506,7 +539,7 @@ function addTaskToEveryWeekGoalWidget() {
 //     const taskLabel = document.querySelector('#weekDayNameLabel')
 //     taskLabel.textContent = taskDay
 
-//     const taskText = el.closest('.card-ul-item').querySelector('p').textContent
+//     const taskText = el.closest('.').querySelector('p').textContent
 //     const taskInput = document.querySelector('#everyWeekGoalWidgetContent')
 //     taskInput.value = taskText
 
