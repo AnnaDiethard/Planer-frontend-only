@@ -54,13 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 taskDate = self.selectedDates.toString()
                 
                 const gsDayNames = [
-                    'Sunday',
-                    'Monday',
-                    'Tuesday',
-                    'Wednesday',
-                    'Thursday',
-                    'Friday',
-                    'Saturday'
+                    'sun',
+                    'mon',
+                    'tue',
+                    'wed',
+                    'thu',
+                    'fri',
+                    'sat'
                 ]
                 const date = new Date(taskDate)
                 dayOfWeek = gsDayNames[date.getDay()]

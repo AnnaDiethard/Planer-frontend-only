@@ -44,138 +44,136 @@
         <div class="row row-content">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-4 block-runningList">
+                    <div class="col-4">
                         <div class="calendar-block">
-                            <div id="mainCalendar" class="shadow-style"></div>
+                            <div id="mainCalendar" class="shadow-class"></div>
                         </div>
-                        <div class="card card-runningList shadow-style">
+                        <div class="card shadow-class">
                             <div class="card-header">
                                 <p class="card-header__text">tasks</p>
                             </div>
-                            <div class="card-body card-body-runningList">
-                                <div class="card-body-content">
-                                    <div class="card-body__header">
-                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link active nav-link-active" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
-                                                type="button" role="tab" aria-controls="running-list" aria-selected="true">running list</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="week-planer-tab" data-bs-toggle="tab" data-bs-target="#week-planer"
-                                                type="button" role="tab" aria-controls="week-planer" aria-selected="false">week planer</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
-                                                type="button" role="tab" aria-controls="planning" aria-selected="false">planning</button>
-                                            </li>
-                                        </ul>
-                                        <div> 
-                                            <button id="addTaskToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="addTaskOpenDialog()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="add task"><i class="fa-solid fa-plus"></i></button>
-                                        </div>
+                            <div class="card-body card-body__content">
+                                <div class="card-body__header">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active nav-link-active" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
+                                            type="button" role="tab" aria-controls="running-list" aria-selected="true">running list</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="week-planer-tab" data-bs-toggle="tab" data-bs-target="#week-planer"
+                                            type="button" role="tab" aria-controls="week-planer" aria-selected="false">week planer</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
+                                            type="button" role="tab" aria-controls="planning" aria-selected="false">planning</button>
+                                        </li>
+                                    </ul>
+                                    <div> 
+                                        <button id="addTaskToRunningList" type="button" class="btn card-body__icon-button" onclick="addTaskOpenDialog()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="add task"><i class="fa-solid fa-plus"></i></button>
                                     </div>
-                                    <div class="card-body__body">
-                                        <div class="btn-block">
-                                            <button id="cleanTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteDoneTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="delete done tasks"><i class="fa-solid fa-eraser"></i></button>
-                                            <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__btn-task-running-list" onclick="deleteAllTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="delete all tasks"><i class="fa-solid fa-ban"></i></button>
+                                </div>
+                                <div class="card-body__body">
+                                    <div class="block_left">
+                                        <button id="cleanTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="deleteDoneTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="delete done tasks"><i class="fa-solid fa-eraser"></i></button>
+                                        <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="deleteAllTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="delete all tasks"><i class="fa-solid fa-ban"></i></button>
+                                    </div>
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
+                                            <ul class="card-body__list" id="runningListCard"></ul>
                                         </div>
-                                        <div class="tab-content" id="myTabContent">
-                                            <div class="tab-pane fade show active" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
-                                                <ul class="card-body__ul" id="runningListCard"></ul>
-                                            </div>
-                                            <div class="tab-pane fade" id="week-planer" role="tabpanel" aria-labelledby="week-planer-tab">
-                                                <div id="weekPlanerListCard" week-number="">
-                                                    <div class="card weekDayCard">
-                                                        <div class="card-header weekDayCard-header">
-                                                            <p class="weekDayCard-title">Monday</p>
-                                                            <div>
-                                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="dropdown-settings-btn"><i class="fa-solid fa-chevron-down"></i></button>
-                                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="dropdown-settings-btn hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body week-planer-card-body scroll-class">
-                                                            <ul class="card-body__ul" data-name="Monday"></ul>
+                                        <div class="tab-pane fade" id="week-planer" role="tabpanel" aria-labelledby="week-planer-tab">
+                                            <div id="weekPlanerListCard" week-number="">
+                                                <div class="card card_day-card">
+                                                    <div class="card-header card-header_day-card">
+                                                        <p class="card-header__text">monday</p>
+                                                        <div>
+                                                            <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="card-header__icon-button"><i class="fa-solid fa-chevron-down"></i></button>
+                                                            <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="card-header__icon-button hide-class"><i class="fa-solid fa-angle-up"></i></button>
                                                         </div>
                                                     </div>
-                                                    <div class="card weekDayCard">
-                                                        <div class="card-header weekDayCard-header">
-                                                            <p class="weekDayCard-title">Tuesday</p>
-                                                            <div>
-                                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="dropdown-settings-btn"><i class="fa-solid fa-chevron-down"></i></button>
-                                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="dropdown-settings-btn hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body week-planer-card-body scroll-class">
-                                                            <ul class="card-body__ul" data-name="Tuesday"></ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card weekDayCard">
-                                                        <div class="card-header weekDayCard-header">
-                                                            <p class="weekDayCard-title">Wednesday</p>
-                                                            <div>
-                                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="dropdown-settings-btn"><i class="fa-solid fa-chevron-down"></i></button>
-                                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="dropdown-settings-btn hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body week-planer-card-body scroll-class">
-                                                            <ul class="card-body__ul" data-name="Wednesday"></ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card weekDayCard">
-                                                        <div class="card-header weekDayCard-header">
-                                                            <p class="weekDayCard-title">Thursday</p>
-                                                            <div>
-                                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="dropdown-settings-btn"><i class="fa-solid fa-chevron-down"></i></button>
-                                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="dropdown-settings-btn hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body week-planer-card-body scroll-class">
-                                                            <ul class="card-body__ul" data-name="Thursday"></ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card weekDayCard">
-                                                        <div class="card-header weekDayCard-header">
-                                                            <p class="weekDayCard-title">Friday</p>
-                                                            <div>
-                                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="dropdown-settings-btn"><i class="fa-solid fa-chevron-down"></i></button>
-                                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="dropdown-settings-btn hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body week-planer-card-body scroll-class">
-                                                            <ul class="card-body__ul" data-name="Friday"></ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card weekDayCard">
-                                                        <div class="card-header weekDayCard-header">
-                                                            <p class="weekDayCard-title">Saturday</p>
-                                                            <div>
-                                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="dropdown-settings-btn"><i class="fa-solid fa-chevron-down"></i></button>
-                                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="dropdown-settings-btn hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body week-planer-card-body scroll-class">
-                                                            <ul class="card-body__ul" data-name="Saturday"></ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card weekDayCard">
-                                                        <div class="card-header weekDayCard-header">
-                                                            <p class="weekDayCard-title">Sunday</p>
-                                                            <div>
-                                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="dropdown-settings-btn"><i class="fa-solid fa-chevron-down"></i></button>
-                                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="dropdown-settings-btn hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body week-planer-card-body scroll-class">
-                                                            <ul class="card-body__ul" data-name="Sunday"></ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="next-week-tasks-block scroll-class card-body">
-                                                        <ul class="card-body__ul" id="nextWeekTasks"></ul>
+                                                    <div class="card-body week-planer-card-body scroll-class">
+                                                        <ul class="card-body__list" data-name="mon"></ul>
                                                     </div>
                                                 </div>
+                                                <div class="card card_day-card">
+                                                    <div class="card-header card-header_day-card">
+                                                        <p class="card-header__text">tuesday</p>
+                                                        <div>
+                                                            <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="card-header__icon-button"><i class="fa-solid fa-chevron-down"></i></button>
+                                                            <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="card-header__icon-button hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body week-planer-card-body scroll-class">
+                                                        <ul class="card-body__list" data-name="tue"></ul>
+                                                    </div>
+                                                </div>
+                                                <div class="card card_day-card">
+                                                    <div class="card-header card-header_day-card">
+                                                        <p class="card-header__text">wednesday</p>
+                                                        <div>
+                                                            <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="card-header__icon-button"><i class="fa-solid fa-chevron-down"></i></button>
+                                                            <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="card-header__icon-button hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body week-planer-card-body scroll-class">
+                                                        <ul class="card-body__list" data-name="wed"></ul>
+                                                    </div>
+                                                </div>
+                                                <div class="card card_day-card">
+                                                    <div class="card-header card-header_day-card">
+                                                        <p class="card-header__text">thursday</p>
+                                                        <div>
+                                                            <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="card-header__icon-button"><i class="fa-solid fa-chevron-down"></i></button>
+                                                            <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="card-header__icon-button hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body week-planer-card-body scroll-class">
+                                                        <ul class="card-body__list" data-name="thu"></ul>
+                                                    </div>
+                                                </div>
+                                                <div class="card card_day-card">
+                                                    <div class="card-header card-header_day-card">
+                                                        <p class="card-header__text">friday</p>
+                                                        <div>
+                                                            <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="card-header__icon-button"><i class="fa-solid fa-chevron-down"></i></button>
+                                                            <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="card-header__icon-button hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body week-planer-card-body scroll-class">
+                                                        <ul class="card-body__list" data-name="fri"></ul>
+                                                    </div>
+                                                </div>
+                                                <div class="card card_day-card">
+                                                    <div class="card-header card-header_day-card">
+                                                        <p class="card-header__text">saturday</p>
+                                                        <div>
+                                                            <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="card-header__icon-button"><i class="fa-solid fa-chevron-down"></i></button>
+                                                            <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="card-header__icon-button hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body week-planer-card-body scroll-class">
+                                                        <ul class="card-body__list" data-name="sat"></ul>
+                                                    </div>
+                                                </div>
+                                                <div class="card card_day-card">
+                                                    <div class="card-header card-header_day-card">
+                                                        <p class="card-header__text">sunday</p>
+                                                        <div>
+                                                            <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="card-header__icon-button"><i class="fa-solid fa-chevron-down"></i></button>
+                                                            <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="card-header__icon-button hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body week-planer-card-body scroll-class">
+                                                        <ul class="card-body__list" data-name="sun"></ul>
+                                                    </div>
+                                                </div>
+                                                <div class="next-week-tasks-block scroll-class card-body">
+                                                    <ul class="card-body__list" id="nextWeekTasks"></ul>
+                                                </div>
                                             </div>
-                                            <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
-                                                <ul class="card-body__ul" id="planningListCard"></ul>
-                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
+                                            <ul class="card-body__list" id="planningListCard"></ul>
                                         </div>
                                     </div>
                                 </div>
@@ -185,11 +183,11 @@
                     <div class="col-8 " id="widgetBlock">
                         <div class="row weather-row" style="padding-left: 2rem;">
                             <div class="col-2 card-button-block-col">
-                                <button class="btn dark-batton shadow-style" id="addDateToCalendarBtn" onclick="addCalendarDateOpenDialog()">add event</button>
-                                <button class="btn dark-batton shadow-style" id="addWidgetBtn" onclick="addWidgetOpenDialog()">add widget</button>
+                                <button class="btn button-dark shadow-class" id="addDateToCalendarBtn" onclick="addCalendarDateOpenDialog()">add event</button>
+                                <button class="btn button-dark shadow-class" id="addWidgetBtn" onclick="addWidgetOpenDialog()">add widget</button>
                             </div>
                             <div class="col-10">
-                                <div class="weather-dashboard shadow-style">
+                                <div class="weather-dashboard shadow-class">
                                     <a href="https://rusmeteo.net/weather/moskva/" class="widget-brick" id="b75499d689da58d5fce2ad1837a0e347">Погода в Москве</a>
                                 </div>
                             </div>
@@ -208,45 +206,46 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitleAdd">add task</h5>
-                    <h5 class="modal-title" id="modalTitleEdit">edit task</h5>
-                    <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
+                    <h5 class="modal-title hide-class" id="modalTitleEdit">edit task</h5>
+                    <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div id="taskCalendar"></div>
                     <div style="padding-inline: 1rem;">
-                        <div class="edit-card-choose-block" style="padding-bottom: 2rem;">
-                            <input type="checkbox" name="runningListRadio" class="runningListRadio" style="margin-right: 1rem;" id="deleteTaskDateCheckbox">
+                        <div class="block_right hide-class" style="padding-bottom: 2rem;" id="cardEditDateBlock">
+                            <input type="checkbox" name="runningListRadio"  style="margin-right: 1rem;" id="deleteTaskDateCheckbox">
                             <p>delete date</p>
                         </div>
                         <div class="input-form">
-                            <input type="text" id="addTaskInput" class="add-task-input " autocomplete="off" placeholder = "" required>
-                            <label for="addTaskInput" class="add-task-input_label">text</label>
+                            <input type="text" id="addTaskInput" class="add-input " autocomplete="off" placeholder = "" required>
+                            <label for="addTaskInput" class="add-input_label">text</label>
                             <p id="errorText" class="hide-class input-validation-message">field is required</p>
                         </div>
                         <ul class="modal-dialog-addTask">
                             <li class="runningList-li">
                                 <input type="radio" name="runningListRadio" class="runningListRadio task-status-icon">
-                                <span id="3" class="runningList-icon"><i class="fa-solid fa-hourglass-start"></i></span>
+                                <span id="3" class="status-icon"><i class="fa-solid fa-hourglass-start"></i></span>
                             </li>
                             <li class="runningList-li">
                                 <input type="radio" name="runningListRadio" class="runningListRadio task-status-icon">
-                                <span id="2" class="runningList-icon"><i class="fa-solid fa-hourglass-half"></i></span>
+                                <span id="2" class="status-icon"><i class="fa-solid fa-hourglass-half"></i></span>
                             </li>
                             <li class="runningList-li">
                                 <input type="radio" name="runningListRadio" class="runningListRadio task-status-icon">
-                                <span id="1" class="runningList-icon"><i class="fa-solid fa-hourglass-end"></i></span>
+                                <span id="1" class="status-icon"><i class="fa-solid fa-hourglass-end"></i></span>
                             </li>
                         </ul>
-                        <li class="edit-card-choose-block">
-                            <input type="radio" name="runningListRadio" class="runningListRadio" id="">
-                            <span id="" class="runningList-icon"><i></i></span>
+                        <li class="block_right hide-class" id="cardEditStatusBlock">
+                            <input type="radio" name="runningListRadio">
+                            <span id="" class="status-icon"><i></i></span>
                             <p>delete status</p>
                         </li>   
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark-batton" id="addTaskBtn">create</button>
-                    <button type="button" class="btn dark-batton" id="editTaskBtn">update</button>
+                    <button type="button" class="btn button-dark" id="addTaskBtn">add</button>
+                    <button type="reset" class="btn button-dark" id="addMoreTaskBtn">add more</button>
+                    <button type="button" class="btn button-dark hide-class" id="editTaskBtn">update</button>
                 </div>
             </div>
         </div>
@@ -257,7 +256,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitleAdd">add event</h5>
-                    <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div>
@@ -265,21 +264,21 @@
                     </div>
                     <div class="input-form-time" style="display: flex; flex-direction: row; width: 10rem;">
                         <div class="input-form" style="padding-right: 1rem;">
-                            <input type="text" id="addEventInputHour" class="add-task-input " autocomplete="off" placeholder = "">
-                            <label for="addEventInputHour" class="add-task-input_label">hour</label>
+                            <input type="text" id="addEventInputHour" class="add-input " autocomplete="off" placeholder = "">
+                            <label for="addEventInputHour" class="add-input_label">hour</label>
                         </div>
                         <div class="input-form" style="padding-right: 1rem;">
-                            <input type="text" id="addEventInputMin" class="add-task-input " autocomplete="off" placeholder = "">
-                            <label for="addEventInputMin" class="add-task-input_label">min</label>
+                            <input type="text" id="addEventInputMin" class="add-input " autocomplete="off" placeholder = "">
+                            <label for="addEventInputMin" class="add-input_label">min</label>
                         </div>
                     </div>
                     <div class="input-form">
-                        <input type="text" id="addEventInput" class="add-task-input " autocomplete="off" placeholder = "">
-                        <label for="addEventInput" class="add-task-input_label">event</label>
+                        <input type="text" id="addEventInput" class="add-input " autocomplete="off" placeholder = "">
+                        <label for="addEventInput" class="add-input_label">event</label>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark-batton" id="addTaskBtn" onclick="createNewEvent()" data-bs-dismiss="modal">create</button>
+                    <button type="button" class="btn button-dark" id="addTaskBtn" onclick="createNewEvent()" data-bs-dismiss="modal">create</button>
                 </div>
             </div>
         </div>
@@ -290,7 +289,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitleAdd">add widget</h5>
-                    <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div class="dropdown">
@@ -322,13 +321,13 @@
                         </div> -->
                     </div>
                     <div class="input-form hide-class">
-                        <input type="text" id="weekPlansTitleWidgetInput" class="add-task-input " autocomplete="off" placeholder = "">
-                        <label for="weekPlansTitleWidgetInput" class="add-task-input_label">title</label>
+                        <input type="text" id="weekPlansTitleWidgetInput" class="add-input " autocomplete="off" placeholder = "">
+                        <label for="weekPlansTitleWidgetInput" class="add-input_label">title</label>
                         <p id="errorText" class="hide-class input-validation-message">field is required</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark-batton" id="addNewWidgetBtn">create</button>
+                    <button type="button" class="btn button-dark" id="addNewWidgetBtn">create</button>
                 </div>
             </div>
         </div>
@@ -340,7 +339,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleAdd">add</h5>
                     <!-- <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleEdit">изменить</h5> -->
-                    <button type="button" class="btn card-body__btn-task-running-list" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div class="dropdown">
@@ -385,8 +384,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark-batton" id="addEveryWeekGoalBtn" onclick="addTaskToEveryWeekGoalWidget()">add</button>
-                    <!-- <button type="button" class="btn dark-batton" id="editEveryWeekGoalBtn" onclick="editTaskToEveryWeekGoalWidget()">обновить</button> -->
+                    <button type="button" class="btn button-dark" id="addEveryWeekGoalBtn" onclick="addTaskToEveryWeekGoalWidget()">add</button>
+                    <!-- <button type="button" class="btn button-dark" id="editEveryWeekGoalBtn" onclick="editTaskToEveryWeekGoalWidget()">обновить</button> -->
                 </div>
             </div>
         </div>
