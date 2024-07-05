@@ -56,6 +56,16 @@ li {
     height: 10rem !important;
 }
 
+.card {
+    padding: 0 !important;
+}
+
+.shadow-class {
+    -webkit-box-shadow: 0px 0px 10px 5px rgba(34, 60, 80, 0.15);
+    -moz-box-shadow: 0px 0px 10px 5px rgba(34, 60, 80, 0.15);
+    box-shadow: 0px 0px 10px 5px rgba(34, 60, 80, 0.15);
+}
+
 .height-card-class {
     height: fit-content !important;
 }
@@ -152,9 +162,7 @@ main.main {
     padding-left: 1.5rem !important;
 }
 
-.block-runningList {
-    padding-left: 1rem !important;
-}
+
 
 .widget-row {
     margin-bottom: 1rem;
@@ -190,17 +198,12 @@ main.main {
     border-color: var(--extra-dark-text-color);
 }
 
-.weekDayCard-header {
+.card-header_day-card {
     height: 2rem;
     color: var(--light-text-color);
     display: flex;
     flex-direction: row;
     justify-content: space-between !important;
-}
-
-.card-header p {
-    font-weight: bold;
-    letter-spacing: 1px;
 }
 
 .weekDayCard-title {
@@ -227,18 +230,18 @@ main.main {
     flex-direction: column;
 }
 
-.dark-batton {
+.button-dark {
     background-color: var(--dark-btn-background);
     color: var(--light-text-color);
     height: 40%;
     font-size: 14px;
 }
 
-.dark-batton:hover {
+.button-dark:hover {
     background-color: var(--light-btn-background);
 }
 
-.dark-batton:focus    {
+.button-dark:focus    {
     background-color: var(--light-btn-background) !important;
     border: none;
 }
@@ -255,14 +258,18 @@ main.main {
 
 .card-header__text {
     color: var(--light-text-color);
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .card-body__header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0.5rem 0 1rem;
+    /* align-items: center; */
+    padding: 1rem 1rem 0 0.5rem;
 }
 
 .nav-item {
@@ -289,7 +296,7 @@ main.main {
     color: var(--extra-dark-text-color);
 }
 
-.edit-card-choose-block {
+.block_right {
     display: flex;
     flex-direction: row;
     justify-content: start;
@@ -310,25 +317,29 @@ main.main {
     margin: 0;
 }
 
-.card-header__text {
-    margin: 0;
-    font-size: 16px;
-}
-
 .card-button-block-col {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.btn-block {
+.block_left {
     display: flex;
     flex-direction: row;
     justify-content: end;
-    padding: 0.5rem 0.5rem 0 0;
+    padding-right: 1rem;
 }
 
-.btn-block-widget {
+.block-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.widget-btn-block {
     display: flex;
     flex-direction: row;
     justify-content: end;
@@ -344,25 +355,25 @@ main.main {
     padding: 0;
 }
 
-.card-ul-item {
+.card-list__item {
     list-style: none;
-    padding: 0.5rem 1.5rem 0.5rem 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.card-ul-item:hover {
+.card-list__item:hover {
     background-color: var(--extra-light-background);
 }
 
-.card-ul-item-body {
+.card-list__item-body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.runningList-icon-done {
+.status-icon_done {
     color: var(--light-btn-background) !important;
     padding-right: 5px;
 }
@@ -372,7 +383,7 @@ main.main {
     font-size: 18px;
 }
 
-.form-check-label-done {
+.form-check-label_done {
     color: var(--dark-text-color);
     font-style: italic;
     text-decoration: line-through;
@@ -385,21 +396,25 @@ main.main {
     padding-left: 1.5rem;
 }
 
-.card-body__ul {
+.card-body__list {
     padding-left: 0;
 }
 
-.task-item-block {
+.card-list__item-block {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.card-body-runningList {
+.card_day-card {
+    margin: 1.5rem;
+}
+
+.card-body__content {
     padding: 0;
 }
 
-.card-body__btn-task-running-list {
+.card-body__icon-button {
     background: none !important;
     border: none !important;
     padding-inline: 0.5rem;
@@ -412,7 +427,7 @@ main.main {
     margin-bottom: 3px;
 }
 
-.runningList-icon {
+.status-icon {
     padding-inline: 10px;
 }
 
@@ -477,7 +492,7 @@ main.main {
     padding-inline: 1rem;
 }
 
-.add-task-input{
+.add-input{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -491,14 +506,14 @@ main.main {
     background: none;
 }
 
-.add-task-input:hover{
+.add-input:hover{
     border-color: var(--light-btn-background)
 }
-.add-task-input:focus{
+.add-input:focus{
     border-color: var(--light-btn-background);
 }
 
-.add-task-input_label{
+.add-input_label{
     position: absolute;
     color: var(--dark-text-color);
     left: 1rem;
@@ -511,17 +526,13 @@ main.main {
     background-color: var(--light-background);
 }
 
-.input-form .add-task-input:focus~.add-task-input_label,
-.input-form .add-task-input:not(:placeholder-shown)~.add-task-input_label {
+.input-form .add-input:focus~.add-input_label,
+.input-form .add-input:not(:placeholder-shown)~.add-input_label {
   top: 0;
   transform: translateY(-50%) scale(0.75);
 }
 
-.shadow-style {
-    -webkit-box-shadow: 0px 0px 10px 5px rgba(34, 60, 80, 0.15);
-    -moz-box-shadow: 0px 0px 10px 5px rgba(34, 60, 80, 0.15);
-    box-shadow: 0px 0px 10px 5px rgba(34, 60, 80, 0.15);
-}
+
 
 .nav-tabs .nav-link.active {
     font-size: 18px;

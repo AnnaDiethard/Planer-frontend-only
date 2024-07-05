@@ -46,10 +46,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 1rem 1rem 0;
+    padding-bottom: 1rem;
 }
 
-.card-header-widget {
+.form-check-label_done {
     display: flex;
     justify-content: space-between;
     padding-bottom: 0;
@@ -59,10 +59,10 @@
     min-height: 15rem;
     max-height: 15rem;
     overflow-y: auto;
-    padding-inline: 0;
+    padding:  0;
 }
 
-.dropdown-settings-btn {
+.card-header__icon-button {
     background-color: #7D7D7D;
     padding: 0;
     margin-left: 0.5rem;
@@ -70,7 +70,7 @@
     font-size: 16px;
 }
 
-.dropdown-settings-btn:hover {
+.card-header__icon-button:hover {
     background-color: #7D7D7D;
 }
 
@@ -89,13 +89,13 @@
     background-color: #7D7D7D;
 }
 
-.card-header-widget__block-header {
+.form-check-label_done__block-header {
     display: flex;
     flex-direction: row;
     justify-content: start;
 }
 
-.card-body__btn-widget-header {
+.card-body__widget-header-btn {
     background: none !important;
     border: none !important;
     padding: 0;
@@ -105,10 +105,14 @@
     font-size: 14px;
 }
 
-.card-item-icons-block {
+/* .card-item-icons-block {
     display: flex;
     align-items: center;
-}
+} */
+
+/* .card-header-widget {
+    display: ;
+} */
 
 /* погода */
 .widget-brick {
@@ -169,6 +173,10 @@
     padding-inline: 1rem;
 }
 
+.widget-list-card-body {
+    padding-top: 1rem;
+}
+
 .widget-list__item-text {
     margin: 0;
     padding-left: 0.5rem;
@@ -180,10 +188,21 @@
 }
 
 /* еженедельные дела */
-.everyWeekGoals__list {
+.widget-every-week-goal__nav {
     display: flex;
     justify-content: space-between;
     width: -webkit-fill-available;
+    padding: 0.5rem 2rem 0 0;
+}
+
+.widget-every-week-goal__item {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 1rem;
+}
+
+.widget-every-week-goal__item-text {
+    padding-left: 0.5rem;
 }
 
 .add-value-text-block {
