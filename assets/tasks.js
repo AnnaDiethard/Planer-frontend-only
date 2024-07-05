@@ -53,8 +53,10 @@ function addTaskOpenDialog() {
 function editTaskOpenDialog(el) {
     const titleAdd = document.querySelector('#modalTitleAdd')
     const buttonAdd = document.querySelector('#addTaskBtn')
+    const buttonAddMore = document.querySelector('#addMoreTaskBtn')
     titleAdd.classList.add('hide-class')
     buttonAdd.classList.add('hide-class')
+    buttonAddMore.classList.add('hide-class')
 
     const titleEdit = document.querySelector('#modalTitleEdit')
     const buttonEdit = document.querySelector('#editTaskBtn')
@@ -118,7 +120,17 @@ function closeTaskDialog() {
 const addNewTaskButton = document.querySelector('#addTaskBtn')
 addNewTaskButton.addEventListener('click', (el) => {
     el.preventDefault()
+    createNewTask()
+    closeTaskDialog()
+})
 
+const addMoreNewTaskButton = document.querySelector('#addMoreTaskBtn')
+addMoreNewTaskButton.addEventListener('click', (el) => {
+    el.preventDefault()
+    createNewTask()
+})
+
+function createNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
@@ -153,10 +165,8 @@ addNewTaskButton.addEventListener('click', (el) => {
                 checkedRadioBtn[i].checked = false;
             }
         } 
-    
-        closeTaskDialog()
     }
-})
+}
 
 // сохранение отредактированной задачи
 const editTaskBtn = document.querySelector('#editTaskBtn')

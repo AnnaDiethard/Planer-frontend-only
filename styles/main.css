@@ -210,6 +210,10 @@ main.main {
     font-size: 14px;
 }
 
+.widget-btn-block__button {
+    padding-inline: 0.3rem;
+}
+
 .card-body {
     background-color: var(--light-background);
 }
@@ -343,7 +347,7 @@ main.main {
     display: flex;
     flex-direction: row;
     justify-content: end;
-    padding-left: 1rem;
+    padding-inline: 1rem;
 }
 
 .card-button {
