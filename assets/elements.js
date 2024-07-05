@@ -449,24 +449,31 @@ function addTaskToEveryWeekGoalsWidget(el) {
 }
 
 // выбор дня недели
-let chooseDayNameID = ''
+let chooseDayNameIDArr = []
 function chooseWeekDay(el) {
-    const chooseDayName = el.textContent
-    chooseDayNameID = el.getAttribute('data-day-name')
-    const shooseWeekDayNameLabel = document.querySelector('#weekDayNameLabel')
-    shooseWeekDayNameLabel.textContent = chooseDayName
-    shooseWeekDayNameLabel.setAttribute('data-day-name', chooseDayNameID)
-    shooseWeekDayNameLabel.style.color = '#313131'
+    const chooseDayNameID = el.getAttribute('data-day-name')
 
-    return chooseDayNameID
+    if(el.classList.contains('btn-outline-dark')) {
+        el.classList.remove('btn-outline-dark')
+        chooseDayNameIDArr.forEach(el => {
+            if(el == chooseDayNameID) {
+                chooseDayNameIDArr = chooseDayNameIDArr.filter(item => item !== el)
+            }
+        })
+    } else {
+        chooseDayNameIDArr.push(chooseDayNameID)
+        el.classList.add('btn-outline-dark')
+    }  
+
+    return chooseDayNameIDArr
 }
 
 // добавление контента в виджет
 function addTaskToEveryWeekGoalWidget() {
-    const dayName = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('p').getAttribute('data-day-name')
+    const dayNames = chooseDayNameIDArr
     let taskValue = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('.widget-list__input-text').value
 
-    if(chooseDayNameID == '' || taskValue == '') {
+    if(taskValue == '') {
         const errorText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#errorText')
         errorText.classList.remove('hide-class')
     } else {
@@ -483,9 +490,11 @@ function addTaskToEveryWeekGoalWidget() {
 
         const ulArr = widget.querySelector('.tab-content').querySelectorAll('ul')
         ulArr.forEach(el => {
-            if(el.getAttribute('data-day-name') == dayName) {
-                el.insertAdjacentHTML('beforeend', item)
-            }
+            dayNames.forEach(e => {
+                if(e = el.getAttribute('data-day-name') == e) {
+                    el.insertAdjacentHTML('beforeend', item)
+                }
+            })
         })
 
         taskValue = ''
