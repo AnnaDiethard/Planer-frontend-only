@@ -391,7 +391,7 @@ function renderTaskToRunningList(task) {
         runningListCard.insertAdjacentHTML('beforebegin', taskHTML)
     } else {
         const taskHTML = `<li class="card-list__item" id="${task.id}">
-                                <div>
+                                <div class="block-between">
                                     <div class="card-list__item-block">
                                         <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                         <span class="status-icon"><i class="${task.icon}"></i></span>
