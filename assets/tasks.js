@@ -138,7 +138,6 @@ addNewTaskButton.addEventListener('click', (el) => {
     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
 
     if(taskInputValue == '') {
-        console.log(345)
         const errorText = document.querySelector('#errorText')
         errorText.classList.remove('hide-class')
     } else {
@@ -180,7 +179,6 @@ addMoreNewTaskButton.addEventListener('click', (el) => {
     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
 
     if(taskInputValue == '') {
-        console.log(345)
         const errorText = document.querySelector('#errorText')
         errorText.classList.remove('hide-class')
     } else {
@@ -262,7 +260,6 @@ editTaskBtn.addEventListener('click', (el) => {
     const taskInputValue = document.querySelector("#addTaskInput").value
 
     if(taskInputValue == '') {
-        console.log(123)
         const errorText = document.querySelector('#errorText')
         errorText.classList.remove('hide-class')
     } else {
@@ -318,7 +315,7 @@ editTaskBtn.addEventListener('click', (el) => {
         tasks[taskIndex] = changedTask
         saveTasksListInLocalStorage(tasks)
 
-        // closeTaskDialog()
+        closeTaskDialog()
     }
 })
 
