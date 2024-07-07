@@ -473,7 +473,7 @@ function addTaskToEveryWeekGoalWidget() {
     const dayNames = chooseDayNameIDArr
     let taskValue = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('.widget-list__input-text').value
 
-    if(taskValue == '') {
+    if(taskValue == '' || dayNames == '') {
         const errorText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#errorText')
         errorText.classList.remove('hide-class')
     } else {
