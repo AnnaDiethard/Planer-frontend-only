@@ -563,8 +563,6 @@ main.main {
   transform: translateY(-50%) scale(0.75);
 }
 
-
-
 .nav-tabs .nav-link.active {
     font-size: 18px;
 }

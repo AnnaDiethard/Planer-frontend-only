@@ -338,7 +338,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleAdd">add</h5>
-                    <!-- <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleEdit">изменить</h5> -->
                     <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
@@ -354,15 +353,22 @@
                         </div>
                     </div>
                     <div class="tab-content widget-content">
-                        <div class="input-group widget-list__input-block">
-                            <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContent">
+                        <div>
+                            <div class="form-check-label__block-header">
+                                <p class="form-check-label__block-header-text">text*</p>
+                                <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContentText">
+                            </div>
+                            <a href=""></a>
+                            <div class="form-check-label__block-header">
+                                <p class="form-check-label__block-header-text">url</p>
+                                <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContentUrl">
+                            </div>
                         </div>
-                        <p id="errorText" class="hide-class input-validation-message">select a day and add text</p>
+                        <p id="errorText" class="hide-class input-validation-message" style="padding: 0;">select a day and add text</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn button-dark" id="addEveryWeekGoalBtn" onclick="addTaskToEveryWeekGoalWidget()">add</button>
-                    <!-- <button type="button" class="btn button-dark" id="editEveryWeekGoalBtn" onclick="editTaskToEveryWeekGoalWidget()">обновить</button> -->
                 </div>
             </div>
         </div>

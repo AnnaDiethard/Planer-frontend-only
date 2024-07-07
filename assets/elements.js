@@ -471,23 +471,37 @@ function chooseWeekDay(el) {
 // добавление контента в виджет
 function addTaskToEveryWeekGoalWidget() {
     const dayNames = chooseDayNameIDArr
-    let taskValue = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('.widget-list__input-text').value
-
-    if(taskValue == '' || dayNames == '') {
-        const errorText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#errorText')
-        errorText.classList.remove('hide-class')
-    } else {
-        const item = `<li class="widget-every-week-goal__item " data-task-id="">
+    let taskValueText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#everyWeekGoalWidgetContentText').value
+    let taskValueUrl = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#everyWeekGoalWidgetContentUrl').value
+    let item = ''
+    if(taskValueUrl == '') {
+        item = `<li class="widget-every-week-goal__item " data-task-id="">
                         <div class="block-between">
                             <input type="checkbox" class="widget-list__every-week-goal-checkbox" onclick="markTheTaskOfEveryWeekGoalWidgetCompleted(this)">
-                            <p class="widget-list__item-text">${taskValue}</p>
+                            <p class="widget-list__item-text">${taskValueText}</p>
                         </div>
                         <div>
-                            <span class="hide-class"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeEveryWeekGoal(this)"></i></span>
+                            <span class="remove-icon hide-class"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeEveryWeekGoal(this)"></i></span>
                             <span ><i class="fa-solid fa-trash widget-btn-block__button" style="font-size: 14px;" onclick="deleteEveryWeekGoal(this)"></i></span>
                         </div>
                 </li>`
+    } else {
+        item = `<li class="widget-every-week-goal__item " data-task-id="">
+                        <div class="block-between">
+                            <input type="checkbox" class="widget-list__every-week-goal-checkbox" onclick="markTheTaskOfEveryWeekGoalWidgetCompleted(this)">
+                            <a class="widget-list__item-text" href="${taskValueUrl}">${taskValueText}</a>
+                        </div>
+                        <div>
+                            <span class="remove-icon hide-class"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeEveryWeekGoal(this)"></i></span>
+                            <span ><i class="fa-solid fa-trash widget-btn-block__button" style="font-size: 14px;" onclick="deleteEveryWeekGoal(this)"></i></span>
+                        </div>
+                </li>`
+    }
 
+    if(taskValueText == '' || dayNames == '') {
+        const errorText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#errorText')
+        errorText.classList.remove('hide-class')
+    } else {
         const ulArr = widget.querySelector('.tab-content').querySelectorAll('ul')
         ulArr.forEach(el => {
             dayNames.forEach(e => {
@@ -497,7 +511,7 @@ function addTaskToEveryWeekGoalWidget() {
             })
         })
 
-        taskValue = ''
+        taskValueText = ''
         saveWidgets()
         
         addTaskToEveryWeekGoalsWidgetDialog.close()
@@ -532,6 +546,7 @@ function reloadTasksInEveryWeekGoalsWidget(el) {
         if(el.classList.contains('light-text-class')) {
             el.classList.remove('light-text-class')
             el.querySelector('input').classList.remove('hide-class')
+            el.querySelector('.remove-icon').classList.add('hide-class')
         }
     })
 
