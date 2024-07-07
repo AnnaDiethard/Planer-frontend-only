@@ -382,8 +382,8 @@ function renderTaskToRunningList(task) {
                                     </div>
                                 </div>
                                 <div class="card-item-icons-block">
-                                    <span ><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                    <span ><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                    <span class="card-item-icon"><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                    <span class="card-item-icon"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                 </div>
                             </div>
                             <p class="form-date-label">дедлайн ${task.date}</p>
@@ -401,8 +401,8 @@ function renderTaskToRunningList(task) {
                                         </div>
                                     </div>
                                     <div class="card-item-icons-block">
-                                        <span ><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                        <span ><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                     </div>
                                 </div>
                             </li>`
@@ -441,8 +441,8 @@ function renderTaskToWeekPlaner(task) {
                                         </div>
                                     </div>
                                     <div class="card-item-icons-block">
-                                        <span ><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                        <span ><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                     </div>
                                 </div>
                             </li>`
@@ -469,8 +469,8 @@ function renderTaskToWeekPlaner(task) {
                                         </div>
                                     </div>
                                     <div class="card-item-icons-block">
-                                        <span ><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                        <span ><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                     </div>
                                 </div>
                                 <p class="form-date-label">дедлайн ${task.date}</p>
@@ -504,8 +504,8 @@ function renderTaskToPlanningList(task) {
                                     </div>
                                 </div>
                                 <div class="card-item-icons-block">
-                                    <span ><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                    <span ><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                    <span class="card-item-icon"><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                    <span class="card-item-icon"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                 </div>
                             </div>
                         </li>`  
