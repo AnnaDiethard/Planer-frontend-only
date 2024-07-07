@@ -1,3 +1,7 @@
+// без этого не работают бутстраповские тултипы
+[...document.querySelectorAll('[data-bs-toggle="tooltip"]')]
+  .forEach(el => new bootstrap.Tooltip(el))
+
 dragula([
     document.getElementById('widgetsCol')
 ])
@@ -236,14 +240,14 @@ function renderWidget() {
                                     <div class="card-widget__block-header block-between">
                                         <p>${inputWidgetValue}</p>
                                         <input type="text" class="form-control hide-class widget-list__input-text-header">
-                                        <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)"><i class="fa-solid fa-pencil"></i></button>
+                                        <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil"></i></button>
                                         <div class="widget-btn-block hide-class">
                                             <button id="renameWidgetConfirm" class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
                                             <button class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
                                         </div>
                                     </div>
                                     <div class="dropdown dropstart dropdown-settings">
-                                        <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton${id}" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
+                                        <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton${id}" data-bs-toggle="dropdown" aria-expanded="false" title="settings"><i class="fa-solid fa-ellipsis"></i></button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton${id}"  id="tab${id}" role="tablist">
                                             <li><a class="dropdown-item" href="#" onclick="foolCol(this)">колонка</a></li>
                                             <li><a class="dropdown-item" href="#" onclick="threeQuartersCol(this)">3/4 колонки</a></li>
@@ -284,12 +288,12 @@ function renderWidget() {
                                                 type="button" role="tab" aria-controls="widget__every-week-goals-sun${id}" aria-selected="false">SUN</button>
                                             </li>
                                         </ul>
-                                        <button class="btn card-body__icon-button" type="button" onclick="addTaskToEveryWeekGoalsWidget(this)"><i class="fa-solid fa-plus"></i></button>
+                                        <button class="btn card-body__icon-button" type="button" onclick="addTaskToEveryWeekGoalsWidget(this)" title="add"><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                     <div>
                                         <div class="block_left">
-                                            <button class="btn card-body__icon-button" type="button" onclick="reloadTasksInEveryWeekGoalsWidget(this)"><i class="fa-solid fa-rotate-right widget-btn-block__button"></i></button>
-                                            <button class="btn card-body__icon-button" type="button" onclick="deleteTasksFromEveryWeekGoalsWidget(this)"><i class="fa-solid fa-ban widget-btn-block__button"></i></button>
+                                            <button class="btn card-body__icon-button" type="button" onclick="reloadTasksInEveryWeekGoalsWidget(this)" title="remove selection"><i class="fa-solid fa-rotate-right widget-btn-block__button"></i></button>
+                                            <button class="btn card-body__icon-button" type="button" onclick="deleteTasksFromEveryWeekGoalsWidget(this)" title="delete all content"><i class="fa-solid fa-ban widget-btn-block__button"></i></button>
                                         </div>
                                         <div class="tab-content widget-tab-content">
                                             <div class="tab-pane fade" id="widget__every-week-goals-mon${id}" data-active-day="mon" role="tabpanel" aria-labelledby="widget__every-week-goals-mon-tab${id}">
@@ -328,14 +332,14 @@ function renderWidget() {
                                         <div class="card-widget__block-header block-between">
                                             <p>${inputWidgetValue}</p>
                                             <input type="text" class="form-control hide-class widget-list__input-text-header">
-                                            <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)"><i class="fa-solid fa-pencil"></i></button>
+                                            <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil"></i></button>
                                             <div class="widget-btn-block hide-class">
                                                 <button id="renameWidgetConfirm" class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
                                                 <button class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
                                             </div>
                                         </div>
                                         <div class="dropdown dropstart dropdown-settings">
-                                            <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
+                                            <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" title="settings"><i class="fa-solid fa-ellipsis"></i></button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
                                                 <li><a class="dropdown-item" href="#" onclick="foolCol(this)">колонка</a></li>
                                                 <li><a class="dropdown-item" href="#" onclick="threeQuartersCol(this)">3/4 колонки</a></li>
@@ -351,8 +355,8 @@ function renderWidget() {
                                             <button type="button" class="input-group-text button-dark" onclick="addTaskToListWidget(this)">+</button>
                                         </div>
                                         <div class="widget-btn-block">
-                                                <button id="cleanTasksToRunningList" type="button" class="btn widget-btn-block__button" onclick="deleteDoneTasksFromListWidget(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
-                                                <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button" onclick="deleteAllTasksOnListWidget(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить все задачи"><i class="fa-solid fa-ban"></i></button>
+                                                <button id="cleanTasksToRunningList" type="button" class="btn widget-btn-block__button" onclick="deleteDoneTasksFromListWidget(this)" title="delete done"><i class="fa-solid fa-eraser"></i></button>
+                                                <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                             </div>
                                         <ul class="widget-list__list"></ul>
                                     </div>
