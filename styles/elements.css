@@ -105,10 +105,16 @@
     font-size: 14px;
 }
 
-/* .card-item-icons-block {
+.card-item-icons-block {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-} */
+}
+
+.card-item-icon {
+    padding-inline: 5px;
+}
 
 /* .card-header-widget {
     display: ;
