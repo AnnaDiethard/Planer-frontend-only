@@ -439,10 +439,6 @@ let weekGoalsWidgetDialogTaskId = null
 
 // выбор виджета для дальнейшей работы
 function addTaskToEveryWeekGoalsWidget(el) {
-    // const title = document.querySelector('#everyWeekGoalWidgetModalTitleEdit')
-    // const button = document.querySelector('#editEveryWeekGoalBtn')
-    // title.style.display = 'none';
-    // button.style.display = 'none';
     addTaskToEveryWeekGoalsWidgetDialog.showModal()
 
     widget = el.closest('.widget__every-week-goals')
@@ -487,7 +483,7 @@ function addTaskToEveryWeekGoalWidget() {
                             <p class="widget-list__item-text">${taskValue}</p>
                         </div>
                         <div>
-                            <!-- <span ><i class="fa-solid fa-pencil widget-btn-block__button" style="font-size: 14px;" onclick="editEveryWeekGoalOpenDialog(this)"></i></span> -->
+                            <span class="hide-class"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeEveryWeekGoal(this)"></i></span>
                             <span ><i class="fa-solid fa-trash widget-btn-block__button" style="font-size: 14px;" onclick="deleteEveryWeekGoal(this)"></i></span>
                         </div>
                 </li>`
@@ -509,20 +505,33 @@ function addTaskToEveryWeekGoalWidget() {
     }
 }
 
-// выделение элементов недельного виджета как выполненных
+// выделение элемента недельного виджета как выполненного
 function markTheTaskOfEveryWeekGoalWidgetCompleted(el) {
     const item = el.closest('li')
     item.classList.add('light-text-class')
+    item.querySelector('.hide-class').classList.remove('hide-class')
+    item.querySelector('input').classList.add('hide-class')
     
     saveWidgets()
 }
 
-// сброс отмеченных задач в недельном виджете
+// отмена выделения у выбранного элемента недельного планера
+function removeEveryWeekGoal(el) {
+    el.classList.add('hide-class')
+    const item = el.closest('li')
+    item.classList.remove('light-text-class')
+    item.querySelector('input').classList.remove('hide-class')
+
+    saveWidgets()
+}
+
+// сброс всех отмеченных задач в недельном виджете
 function reloadTasksInEveryWeekGoalsWidget(el) {
     const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
     items.forEach(el => {
         if(el.classList.contains('light-text-class')) {
             el.classList.remove('light-text-class')
+            el.querySelector('input').classList.remove('hide-class')
         }
     })
 
@@ -538,37 +547,6 @@ function deleteTasksFromEveryWeekGoalsWidget(el) {
 
     saveWidgets()
 }
-
-// TODO а оно вообще надо?
-// function editEveryWeekGoalOpenDialog(el) {
-//     const title = document.querySelector('#everyWeekGoalWidgetModalTitleAdd')
-//     const button = document.querySelector('#addEveryWeekGoalBtn')
-//     title.style.display = 'none';
-//     button.style.display = 'none';
-
-//     taskToEveryWeekGoalItem = el.closest('li')
-
-//     const taskDay = el.closest('ul').getAttribute('data-day-name')
-//     const taskLabel = document.querySelector('#weekDayNameLabel')
-//     taskLabel.textContent = taskDay
-
-//     const taskText = el.closest('.').querySelector('p').textContent
-//     const taskInput = document.querySelector('#everyWeekGoalWidgetContent')
-//     taskInput.value = taskText
-
-//     addTaskToEveryWeekGoalsWidgetDialog.showModal()
-
-//     return taskToEveryWeekGoalItem
-// }
-
-// function editTaskToEveryWeekGoalWidget() {
-//     console.log('edit')
-//     console.log('taskToEveryWeekGoalItem', taskToEveryWeekGoalItem)
-//     const item = taskToEveryWeekGoalItem
-//     const dayName = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('p').getAttribute('data-day-name')
-//     const taskValue = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('.widget-list__input-text').value
-//     item.querySelector('p').textContent = taskValue
-// }
 
 // удаление контента из списка
 function deleteEveryWeekGoal(el) {
