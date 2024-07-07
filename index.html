@@ -56,11 +56,11 @@
                                 <div class="card-body__header">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link active nav-link-active" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
+                                            <button class="nav-link" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
                                             type="button" role="tab" aria-controls="running-list" aria-selected="true">running list</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="week-planer-tab" data-bs-toggle="tab" data-bs-target="#week-planer"
+                                            <button class="nav-link active nav-link-active" id="week-planer-tab" data-bs-toggle="tab" data-bs-target="#week-planer"
                                             type="button" role="tab" aria-controls="week-planer" aria-selected="false">week planer</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
@@ -69,19 +69,19 @@
                                         </li>
                                     </ul>
                                     <div> 
-                                        <button id="addTaskToRunningList" type="button" class="btn card-body__icon-button" onclick="addTaskOpenDialog()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="add task"><i class="fa-solid fa-plus"></i></button>
+                                        <button id="addTaskToRunningList" type="button" class="btn card-body__icon-button" onclick="addTaskOpenDialog()" title="add task"><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
                                 <div class="card-body__body">
                                     <div class="block_left">
-                                        <button id="cleanTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="deleteDoneTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="delete done tasks"><i class="fa-solid fa-eraser"></i></button>
-                                        <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="deleteAllTasks()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="delete all tasks"><i class="fa-solid fa-ban"></i></button>
+                                        <button id="cleanTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="deleteDoneTasks()" title="delete done tasks"><i class="fa-solid fa-eraser"></i></button>
+                                        <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="deleteAllTasks()" title="delete all tasks"><i class="fa-solid fa-ban"></i></button>
                                     </div>
                                     <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
+                                        <div class="tab-pane fade" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
                                             <ul class="card-body__list" id="runningListCard"></ul>
                                         </div>
-                                        <div class="tab-pane fade" id="week-planer" role="tabpanel" aria-labelledby="week-planer-tab">
+                                        <div class="tab-pane fade show active" id="week-planer" role="tabpanel" aria-labelledby="week-planer-tab">
                                             <div id="weekPlanerListCard" week-number="">
                                                 <div class="card card_day-card">
                                                     <div class="card-header card-header_day-card">
@@ -338,12 +338,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleAdd">add</h5>
-                    <!-- <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleEdit">изменить</h5> -->
                     <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">choose day</button>
                         <div class="block-wrap">
                             <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="monday">monday</button>
                             <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="tuesday">tuesday</button>
@@ -353,48 +351,24 @@
                             <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="saturday">saturday</button>
                             <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="sunday">sunday</button>
                         </div>
-                        <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="week-plans-widget-tab" data-bs-toggle="tab" data-bs-target="#week-plans-widget"
-                                type="button" role="tab" aria-controls="week-plans-widget" aria-selected="false" data-day-name="monday" onclick="chooseWeekDay(this)">monday</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="list-widget-tab" data-bs-toggle="tab" data-bs-target="#list-widget"
-                                type="button" role="tab" aria-controls="list-widget" aria-selected="false" data-day-name="tuesday" onclick="chooseWeekDay(this)">tuesday</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
-                                type="button" role="tab" aria-controls="traker" aria-selected="false" data-day-name="wednesday" onclick="chooseWeekDay(this)">wednesday</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
-                                type="button" role="tab" aria-controls="traker" aria-selected="false" data-day-name="thusday" onclick="chooseWeekDay(this)">thusday</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
-                                type="button" role="tab" aria-controls="traker" aria-selected="false" data-day-name="friday" onclick="chooseWeekDay(this)">friday</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
-                                type="button" role="tab" aria-controls="traker" aria-selected="false" data-day-name="saturday" onclick="chooseWeekDay(this)">saturday</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
-                                type="button" role="tab" aria-controls="traker" aria-selected="false" data-day-name="sunday" onclick="chooseWeekDay(this)">sunday</button>
-                            </li>
-                        </ul> -->
                     </div>
                     <div class="tab-content widget-content">
-                        <!-- <p id="weekDayNameLabel" class="add-value-text-block" data-day-name="">no day selected</p> -->
-                        <div class="input-group widget-list__input-block">
-                            <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContent">
+                        <div>
+                            <div class="form-check-label__block-header">
+                                <p class="form-check-label__block-header-text">text*</p>
+                                <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContentText">
+                            </div>
+                            <a href=""></a>
+                            <div class="form-check-label__block-header">
+                                <p class="form-check-label__block-header-text">url</p>
+                                <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContentUrl">
+                            </div>
                         </div>
-                        <p id="errorText" class="hide-class input-validation-message">select a day and add text</p>
+                        <p id="errorText" class="hide-class input-validation-message" style="padding: 0;">select a day and add text</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn button-dark" id="addEveryWeekGoalBtn" onclick="addTaskToEveryWeekGoalWidget()">add</button>
-                    <!-- <button type="button" class="btn button-dark" id="editEveryWeekGoalBtn" onclick="editTaskToEveryWeekGoalWidget()">обновить</button> -->
                 </div>
             </div>
         </div>

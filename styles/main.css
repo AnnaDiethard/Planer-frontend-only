@@ -94,8 +94,8 @@ li {
 
 .card-body::-webkit-scrollbar,
 body::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
 }
 
 .card-body::-webkit-scrollbar-thumb,
@@ -562,8 +562,6 @@ main.main {
   top: 0;
   transform: translateY(-50%) scale(0.75);
 }
-
-
 
 .nav-tabs .nav-link.active {
     font-size: 18px;

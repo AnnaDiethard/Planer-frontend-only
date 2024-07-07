@@ -130,57 +130,26 @@ function closeTaskDialog() {
 
 // сохранение новой задачи
 const addNewTaskButton = document.querySelector('#addTaskBtn')
-addNewTaskButton.addEventListener('click', (el) => {
-    el.preventDefault()
-
-    const taskInputValue = document.querySelector("#addTaskInput").value
-    const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
-    const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
-
-    if(taskInputValue == '') {
-        console.log(345)
-        const errorText = document.querySelector('#errorText')
-        errorText.classList.remove('hide-class')
-    } else {
-        const newTask = {
-            id: Date.now(),
-            text: taskInputValue,
-            status: taskStatus || '',
-            icon: iconClass || '',
-            done: false,
-            // определяется в конфиге календаря
-            date: taskDate || '',
-            dayName: dayOfWeek || '',
-            weekNumber: taskWeekNumber || ''
-        }
-    
-        tasks.push(newTask)
-        saveTasksListInLocalStorage(tasks)
-    
-        checkCorrectRenderTask()
-    
-        // очистка элементов формы
-        const addTaskInputValue = document.querySelector("#addTaskInput")
-        addTaskInputValue.value = ""
-        const checkedRadioBtn = document.getElementsByTagName('input');
-        for(var i = 0; i < checkedRadioBtn.length; i++) {
-            if(checkedRadioBtn[i].type == 'radio') {
-                checkedRadioBtn[i].checked = false;
-            }
-        } 
-        closeTaskDialog()
-    }
+addNewTaskButton.addEventListener('click', () => {
+    createNewTask()
+    cleanTaskForm()
+    closeTaskDialog()
 })
 
+// сохранение новой (следующей) задачи
 const addMoreNewTaskButton = document.querySelector('#addMoreTaskBtn')
-addMoreNewTaskButton.addEventListener('click', (el) => {
-    el.preventDefault()
+addMoreNewTaskButton.addEventListener('click', () => {
+    createNewTask()
+    cleanTaskForm()
+})
+
+// создание новой задачи
+function createNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
 
     if(taskInputValue == '') {
-        console.log(345)
         const errorText = document.querySelector('#errorText')
         errorText.classList.remove('hide-class')
     } else {
@@ -200,59 +169,31 @@ addMoreNewTaskButton.addEventListener('click', (el) => {
         saveTasksListInLocalStorage(tasks)
     
         checkCorrectRenderTask()
-    
-        // очистка элементов формы
-        const addTaskInputValue = document.querySelector("#addTaskInput")
-        addTaskInputValue.value = ""
-        const checkedRadioBtn = document.getElementsByTagName('input');
-        for(var i = 0; i < checkedRadioBtn.length; i++) {
-            if(checkedRadioBtn[i].type == 'radio') {
-                checkedRadioBtn[i].checked = false;
-            }
-        }
+
+        console.log('taskDate', taskDate)
     }
-})
+}
 
-// function createNewTask() {
-//     const taskInputValue = document.querySelector("#addTaskInput").value
-//     const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
-//     const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
+// очистка элементов формы создания задачи
+function cleanTaskForm() {
+    const addTaskInputValue = document.querySelector("#addTaskInput")
+    addTaskInputValue.value = ""
 
-//     if(taskInputValue == '') {
-//         console.log(345)
-//         const errorText = document.querySelector('#errorText')
-//         errorText.classList.remove('hide-class')
-//     } else {
-//         const newTask = {
-//             id: Date.now(),
-//             text: taskInputValue,
-//             status: taskStatus || '',
-//             icon: iconClass || '',
-//             done: false,
-//             // определяется в конфиге календаря
-//             date: taskDate || '',
-//             dayName: dayOfWeek || '',
-//             weekNumber: taskWeekNumber || ''
-//         }
-    
-//         tasks.push(newTask)
-//         saveTasksListInLocalStorage(tasks)
-    
-//         checkCorrectRenderTask()
-    
-//         // очистка элементов формы
-//         const addTaskInputValue = document.querySelector("#addTaskInput")
-//         addTaskInputValue.value = ""
-//         const checkedRadioBtn = document.getElementsByTagName('input');
-//         for(var i = 0; i < checkedRadioBtn.length; i++) {
-//             if(checkedRadioBtn[i].type == 'radio') {
-//                 checkedRadioBtn[i].checked = false;
-//             }
-//         } 
-//         closeTaskDialog()
-//     }
-    
-// }
+    const checkedRadioBtn = document.getElementsByTagName('input');
+    for(var i = 0; i < checkedRadioBtn.length; i++) {
+        if(checkedRadioBtn[i].type == 'radio') {
+            checkedRadioBtn[i].checked = false;
+        }
+    } 
+
+    taskDate = ''
+    const taskCalendarBtnArr = document.querySelector('#taskCalendar').querySelectorAll('button')
+    taskCalendarBtnArr.forEach(el => {
+        if(el.classList.contains('vanilla-calendar-day__btn_selected')) {
+            el.classList.remove('vanilla-calendar-day__btn_selected')
+        }
+    })
+}
 
 // сохранение отредактированной задачи
 const editTaskBtn = document.querySelector('#editTaskBtn')
@@ -262,7 +203,6 @@ editTaskBtn.addEventListener('click', (el) => {
     const taskInputValue = document.querySelector("#addTaskInput").value
 
     if(taskInputValue == '') {
-        console.log(123)
         const errorText = document.querySelector('#errorText')
         errorText.classList.remove('hide-class')
     } else {
@@ -318,7 +258,7 @@ editTaskBtn.addEventListener('click', (el) => {
         tasks[taskIndex] = changedTask
         saveTasksListInLocalStorage(tasks)
 
-        // closeTaskDialog()
+        closeTaskDialog()
     }
 })
 
@@ -382,8 +322,8 @@ function renderTaskToRunningList(task) {
                                     </div>
                                 </div>
                                 <div class="card-item-icons-block">
-                                    <span ><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                    <span ><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                    <span class="card-item-icon"><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                    <span class="card-item-icon"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                 </div>
                             </div>
                             <p class="form-date-label">дедлайн ${task.date}</p>
@@ -401,8 +341,8 @@ function renderTaskToRunningList(task) {
                                         </div>
                                     </div>
                                     <div class="card-item-icons-block">
-                                        <span ><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                        <span ><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                     </div>
                                 </div>
                             </li>`
@@ -441,8 +381,8 @@ function renderTaskToWeekPlaner(task) {
                                         </div>
                                     </div>
                                     <div class="card-item-icons-block">
-                                        <span ><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                        <span ><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                     </div>
                                 </div>
                             </li>`
@@ -469,8 +409,8 @@ function renderTaskToWeekPlaner(task) {
                                         </div>
                                     </div>
                                     <div class="card-item-icons-block">
-                                        <span ><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                        <span ><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                     </div>
                                 </div>
                                 <p class="form-date-label">дедлайн ${task.date}</p>
@@ -504,8 +444,8 @@ function renderTaskToPlanningList(task) {
                                     </div>
                                 </div>
                                 <div class="card-item-icons-block">
-                                    <span ><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                    <span ><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                    <span class="card-item-icon"><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                    <span class="card-item-icon"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                 </div>
                             </div>
                         </li>`  

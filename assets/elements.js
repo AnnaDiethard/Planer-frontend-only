@@ -1,3 +1,7 @@
+// без этого не работают бутстраповские тултипы
+[...document.querySelectorAll('[data-bs-toggle="tooltip"]')]
+  .forEach(el => new bootstrap.Tooltip(el))
+
 dragula([
     document.getElementById('widgetsCol')
 ])
@@ -236,14 +240,14 @@ function renderWidget() {
                                     <div class="card-widget__block-header block-between">
                                         <p>${inputWidgetValue}</p>
                                         <input type="text" class="form-control hide-class widget-list__input-text-header">
-                                        <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)"><i class="fa-solid fa-pencil"></i></button>
+                                        <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil"></i></button>
                                         <div class="widget-btn-block hide-class">
                                             <button id="renameWidgetConfirm" class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
                                             <button class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
                                         </div>
                                     </div>
                                     <div class="dropdown dropstart dropdown-settings">
-                                        <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton${id}" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
+                                        <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton${id}" data-bs-toggle="dropdown" aria-expanded="false" title="settings"><i class="fa-solid fa-ellipsis"></i></button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton${id}"  id="tab${id}" role="tablist">
                                             <li><a class="dropdown-item" href="#" onclick="foolCol(this)">колонка</a></li>
                                             <li><a class="dropdown-item" href="#" onclick="threeQuartersCol(this)">3/4 колонки</a></li>
@@ -284,12 +288,12 @@ function renderWidget() {
                                                 type="button" role="tab" aria-controls="widget__every-week-goals-sun${id}" aria-selected="false">SUN</button>
                                             </li>
                                         </ul>
-                                        <button class="btn card-body__icon-button" type="button" onclick="addTaskToEveryWeekGoalsWidget(this)"><i class="fa-solid fa-plus"></i></button>
+                                        <button class="btn card-body__icon-button" type="button" onclick="addTaskToEveryWeekGoalsWidget(this)" title="add"><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                     <div>
                                         <div class="block_left">
-                                            <button class="btn card-body__icon-button" type="button" onclick="reloadTasksInEveryWeekGoalsWidget(this)"><i class="fa-solid fa-rotate-right widget-btn-block__button"></i></button>
-                                            <button class="btn card-body__icon-button" type="button" onclick="deleteTasksFromEveryWeekGoalsWidget(this)"><i class="fa-solid fa-ban widget-btn-block__button"></i></button>
+                                            <button class="btn card-body__icon-button" type="button" onclick="reloadTasksInEveryWeekGoalsWidget(this)" title="remove selection"><i class="fa-solid fa-rotate-right widget-btn-block__button"></i></button>
+                                            <button class="btn card-body__icon-button" type="button" onclick="deleteTasksFromEveryWeekGoalsWidget(this)" title="delete all content"><i class="fa-solid fa-ban widget-btn-block__button"></i></button>
                                         </div>
                                         <div class="tab-content widget-tab-content">
                                             <div class="tab-pane fade" id="widget__every-week-goals-mon${id}" data-active-day="mon" role="tabpanel" aria-labelledby="widget__every-week-goals-mon-tab${id}">
@@ -328,14 +332,14 @@ function renderWidget() {
                                         <div class="card-widget__block-header block-between">
                                             <p>${inputWidgetValue}</p>
                                             <input type="text" class="form-control hide-class widget-list__input-text-header">
-                                            <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)"><i class="fa-solid fa-pencil"></i></button>
+                                            <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil"></i></button>
                                             <div class="widget-btn-block hide-class">
                                                 <button id="renameWidgetConfirm" class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
                                                 <button class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
                                             </div>
                                         </div>
                                         <div class="dropdown dropstart dropdown-settings">
-                                            <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
+                                            <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" title="settings"><i class="fa-solid fa-ellipsis"></i></button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
                                                 <li><a class="dropdown-item" href="#" onclick="foolCol(this)">колонка</a></li>
                                                 <li><a class="dropdown-item" href="#" onclick="threeQuartersCol(this)">3/4 колонки</a></li>
@@ -351,8 +355,8 @@ function renderWidget() {
                                             <button type="button" class="input-group-text button-dark" onclick="addTaskToListWidget(this)">+</button>
                                         </div>
                                         <div class="widget-btn-block">
-                                                <button id="cleanTasksToRunningList" type="button" class="btn widget-btn-block__button" onclick="deleteDoneTasksFromListWidget(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить выполненные задачи"><i class="fa-solid fa-eraser"></i></button>
-                                                <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button" onclick="deleteAllTasksOnListWidget(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="удалить все задачи"><i class="fa-solid fa-ban"></i></button>
+                                                <button id="cleanTasksToRunningList" type="button" class="btn widget-btn-block__button" onclick="deleteDoneTasksFromListWidget(this)" title="delete done"><i class="fa-solid fa-eraser"></i></button>
+                                                <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                             </div>
                                         <ul class="widget-list__list"></ul>
                                     </div>
@@ -435,10 +439,6 @@ let weekGoalsWidgetDialogTaskId = null
 
 // выбор виджета для дальнейшей работы
 function addTaskToEveryWeekGoalsWidget(el) {
-    // const title = document.querySelector('#everyWeekGoalWidgetModalTitleEdit')
-    // const button = document.querySelector('#editEveryWeekGoalBtn')
-    // title.style.display = 'none';
-    // button.style.display = 'none';
     addTaskToEveryWeekGoalsWidgetDialog.showModal()
 
     widget = el.closest('.widget__every-week-goals')
@@ -471,23 +471,37 @@ function chooseWeekDay(el) {
 // добавление контента в виджет
 function addTaskToEveryWeekGoalWidget() {
     const dayNames = chooseDayNameIDArr
-    let taskValue = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('.widget-list__input-text').value
-
-    if(taskValue == '') {
-        const errorText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#errorText')
-        errorText.classList.remove('hide-class')
-    } else {
-        const item = `<li class="widget-every-week-goal__item " data-task-id="">
+    let taskValueText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#everyWeekGoalWidgetContentText').value
+    let taskValueUrl = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#everyWeekGoalWidgetContentUrl').value
+    let item = ''
+    if(taskValueUrl == '') {
+        item = `<li class="widget-every-week-goal__item " data-task-id="">
                         <div class="block-between">
                             <input type="checkbox" class="widget-list__every-week-goal-checkbox" onclick="markTheTaskOfEveryWeekGoalWidgetCompleted(this)">
-                            <p class="widget-list__item-text">${taskValue}</p>
+                            <p class="widget-list__item-text">${taskValueText}</p>
                         </div>
                         <div>
-                            <!-- <span ><i class="fa-solid fa-pencil widget-btn-block__button" style="font-size: 14px;" onclick="editEveryWeekGoalOpenDialog(this)"></i></span> -->
+                            <span class="remove-icon hide-class"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeEveryWeekGoal(this)"></i></span>
                             <span ><i class="fa-solid fa-trash widget-btn-block__button" style="font-size: 14px;" onclick="deleteEveryWeekGoal(this)"></i></span>
                         </div>
                 </li>`
+    } else {
+        item = `<li class="widget-every-week-goal__item " data-task-id="">
+                        <div class="block-between">
+                            <input type="checkbox" class="widget-list__every-week-goal-checkbox" onclick="markTheTaskOfEveryWeekGoalWidgetCompleted(this)">
+                            <a class="widget-list__item-text" href="${taskValueUrl}">${taskValueText}</a>
+                        </div>
+                        <div>
+                            <span class="remove-icon hide-class"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeEveryWeekGoal(this)"></i></span>
+                            <span ><i class="fa-solid fa-trash widget-btn-block__button" style="font-size: 14px;" onclick="deleteEveryWeekGoal(this)"></i></span>
+                        </div>
+                </li>`
+    }
 
+    if(taskValueText == '' || dayNames == '') {
+        const errorText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#errorText')
+        errorText.classList.remove('hide-class')
+    } else {
         const ulArr = widget.querySelector('.tab-content').querySelectorAll('ul')
         ulArr.forEach(el => {
             dayNames.forEach(e => {
@@ -497,7 +511,7 @@ function addTaskToEveryWeekGoalWidget() {
             })
         })
 
-        taskValue = ''
+        taskValueText = ''
         saveWidgets()
         
         addTaskToEveryWeekGoalsWidgetDialog.close()
@@ -505,20 +519,34 @@ function addTaskToEveryWeekGoalWidget() {
     }
 }
 
-// выделение элементов недельного виджета как выполненных
+// выделение элемента недельного виджета как выполненного
 function markTheTaskOfEveryWeekGoalWidgetCompleted(el) {
     const item = el.closest('li')
     item.classList.add('light-text-class')
+    item.querySelector('.hide-class').classList.remove('hide-class')
+    item.querySelector('input').classList.add('hide-class')
     
     saveWidgets()
 }
 
-// сброс отмеченных задач в недельном виджете
+// отмена выделения у выбранного элемента недельного планера
+function removeEveryWeekGoal(el) {
+    el.classList.add('hide-class')
+    const item = el.closest('li')
+    item.classList.remove('light-text-class')
+    item.querySelector('input').classList.remove('hide-class')
+
+    saveWidgets()
+}
+
+// сброс всех отмеченных задач в недельном виджете
 function reloadTasksInEveryWeekGoalsWidget(el) {
     const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
     items.forEach(el => {
         if(el.classList.contains('light-text-class')) {
             el.classList.remove('light-text-class')
+            el.querySelector('input').classList.remove('hide-class')
+            el.querySelector('.remove-icon').classList.add('hide-class')
         }
     })
 
@@ -534,37 +562,6 @@ function deleteTasksFromEveryWeekGoalsWidget(el) {
 
     saveWidgets()
 }
-
-// TODO а оно вообще надо?
-// function editEveryWeekGoalOpenDialog(el) {
-//     const title = document.querySelector('#everyWeekGoalWidgetModalTitleAdd')
-//     const button = document.querySelector('#addEveryWeekGoalBtn')
-//     title.style.display = 'none';
-//     button.style.display = 'none';
-
-//     taskToEveryWeekGoalItem = el.closest('li')
-
-//     const taskDay = el.closest('ul').getAttribute('data-day-name')
-//     const taskLabel = document.querySelector('#weekDayNameLabel')
-//     taskLabel.textContent = taskDay
-
-//     const taskText = el.closest('.').querySelector('p').textContent
-//     const taskInput = document.querySelector('#everyWeekGoalWidgetContent')
-//     taskInput.value = taskText
-
-//     addTaskToEveryWeekGoalsWidgetDialog.showModal()
-
-//     return taskToEveryWeekGoalItem
-// }
-
-// function editTaskToEveryWeekGoalWidget() {
-//     console.log('edit')
-//     console.log('taskToEveryWeekGoalItem', taskToEveryWeekGoalItem)
-//     const item = taskToEveryWeekGoalItem
-//     const dayName = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('p').getAttribute('data-day-name')
-//     const taskValue = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('.widget-list__input-text').value
-//     item.querySelector('p').textContent = taskValue
-// }
 
 // удаление контента из списка
 function deleteEveryWeekGoal(el) {

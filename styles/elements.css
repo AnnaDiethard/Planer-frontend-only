@@ -4,6 +4,17 @@
     flex-wrap: wrap;
 }
 
+a {
+    color: var(--extra-dark-text-color);
+    text-decoration: none;
+    font-style: italic;
+}
+
+.widget-list__every-week-goal-checkbox {
+    height: 1rem;
+    width: 1rem;
+}
+
 .dropdown {
     padding-top: 1rem;
 }
@@ -89,10 +100,20 @@
     background-color: #7D7D7D;
 }
 
-.form-check-label_done__block-header {
+.input-group {
+    width: auto;
+}
+
+.form-check-label__block-header {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content:space-between;
+}
+
+.form-check-label__block-header-text {
+    display: flex;
+    align-items: center;
+    width: 15%;
 }
 
 .card-body__widget-header-btn {
@@ -105,10 +126,16 @@
     font-size: 14px;
 }
 
-/* .card-item-icons-block {
+.card-item-icons-block {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-} */
+}
+
+.card-item-icon {
+    padding-inline: 5px;
+}
 
 /* .card-header-widget {
     display: ;
@@ -136,9 +163,8 @@
     top: 0;
     display: flex;
     flex-direction: row;
-    /* padding-inline: 1rem; */
     z-index: 10;
-    /* margin-top: 1rem; */
+    width: 100%;
 }
 
 .widget-list__input-text {
