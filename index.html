@@ -54,7 +54,7 @@
                             </div>
                             <div class="card-body card-body__content">
                                 <div class="card-body__header">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <ul class="nav nav-tabs" id="tasksTab" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
                                             type="button" role="tab" aria-controls="running-list" aria-selected="true">running list</button>
@@ -67,6 +67,10 @@
                                             <button class="nav-link" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
                                             type="button" role="tab" aria-controls="planning" aria-selected="false">planning</button>
                                         </li>
+                                        <!-- <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="search-tab" data-bs-toggle="tab" data-bs-target="#search"
+                                            type="button" role="tab" aria-controls="search" aria-selected="false">S</button>
+                                        </li> -->
                                     </ul>
                                     <div> 
                                         <button id="addTaskToRunningList" type="button" class="btn card-body__icon-button" onclick="addTaskOpenDialog()" title="add task"><i class="fa-solid fa-plus"></i></button>
@@ -74,10 +78,12 @@
                                 </div>
                                 <div class="card-body__body">
                                     <div class="block_left">
+                                        <input type="text" id="searchTasksInput">
+                                        <button id="searchTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="searchTasks()" title="delete done tasks"><i class="fa-solid fa-magnifying-glass"></i></button>
                                         <button id="cleanTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="deleteDoneTasks()" title="delete done tasks"><i class="fa-solid fa-eraser"></i></button>
                                         <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="deleteAllTasks()" title="delete all tasks"><i class="fa-solid fa-ban"></i></button>
                                     </div>
-                                    <div class="tab-content" id="myTabContent">
+                                    <div class="tab-content" id="tasksTabContent">
                                         <div class="tab-pane fade" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
                                             <ul class="card-body__list" id="runningListCard"></ul>
                                         </div>
@@ -174,6 +180,9 @@
                                         </div>
                                         <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
                                             <ul class="card-body__list" id="planningListCard"></ul>
+                                        </div>
+                                        <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
+                                            <ul class="card-body__list" id="searchListCard"></ul>
                                         </div>
                                     </div>
                                 </div>

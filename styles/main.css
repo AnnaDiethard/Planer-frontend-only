@@ -121,6 +121,23 @@ body::-webkit-scrollbar-button:hover {
     background-color: #999999;
 }
 
+#search {
+    min-height: 5rem;
+}
+
+#searchTasksInput {
+    height: 2rem;
+    width: -webkit-fill-available;
+    margin-left: 1rem;
+    background-color: #d4d4d4;
+    border: none;
+}
+
+#searchTasksInput:focus-visible {
+    border: none !important;
+    outline-width: 0;
+}
+
 /* блоки страницы */
 .header-row {
     display: flex;

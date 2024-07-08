@@ -516,6 +516,105 @@ function rollUpWeekDayCard(el) {
     el.closest('.card_day-card').querySelector('.card-body').classList.remove('height-card-class')
 }
 
+// поиск по задачам
+
+function searchTasks() {
+    const searchListCardItems = document.querySelector("#search").querySelectorAll('li')
+    searchListCardItems.forEach(el => {
+        el.remove()
+    })
+
+    const tasksTabContentItems = document.querySelector('#tasksTabContent').querySelectorAll('.tab-pane')
+    tasksTabContentItems.forEach(el => {
+        if(el.classList.contains('active')) {
+            el.classList.remove('show')
+            el.classList.remove('active')
+        }
+    })
+    const tasksNavContentItems = document.querySelector('#tasksTab').querySelectorAll('.nav-link')
+    tasksNavContentItems.forEach(el => {
+        if(el.classList.contains('active')) {
+            el.classList.remove('active')
+        }
+    })
+
+    const searchListCard = document.querySelector('#search')
+    searchListCard.classList.add('show')
+    searchListCard.classList.add('active')
+    const searchTasksInputValue = document.querySelector('#searchTasksInput').value
+
+    tasks.forEach(el => {
+        if(el.text.includes(searchTasksInputValue)) {
+            renderTaskForSearch(el)
+        }
+    })
+}
+
+// рендер задачи для поиска
+function renderTaskForSearch(task) {
+    const searchListCard = document.querySelector("#searchListCard")
+
+    if(task.done == true) {
+        const taskHTML = `<li class="card-list__item" id="${task.id}" >
+                            <div class="card-list__item-block">
+                                <span class="status-icon_done"><i class="${task.icon} status-icon_done"></i></span>
+                                <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                            </div>
+                        </li>`
+        searchListCard.insertAdjacentHTML('beforeend', taskHTML)
+    } else if(task.date) {
+        const taskHTML = `<li class="card-list__item" id="${task.id}">
+                            <div class="block-between">
+                                <div class="card-list__item-block">
+                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                    <span class="status-icon"><i class="${task.icon}"></i></span>
+                                    <div>
+                                        <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
+                                        
+                                    </div>
+                                </div>
+                                <div class="card-item-icons-block">
+                                    <span class="card-item-icon"><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                    <span class="card-item-icon"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                </div>
+                            </div>
+                            <p class="form-date-label">дедлайн ${task.date}</p>
+                        </li>`
+        searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
+    } else {
+        const taskHTML = `<li class="card-list__item" id="${task.id}">
+                                <div class="block-between">
+                                    <div class="card-list__item-block">
+                                        <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                        <span class="status-icon"><i class="${task.icon}"></i></span>
+                                        <div>
+                                            <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="card-item-icons-block">
+                                        <span class="card-item-icon"><i class="fa-solid fa-pencil " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                        <span class="card-item-icon"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                    </div>
+                                </div>
+                            </li>`
+        searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
+    } 
+}
+
+// очистка строки поиска
+function cleanSearchInput() {
+    const searchTasksInput = document.querySelector('#searchTasksInput')
+    searchTasksInput.value = ''
+}
+
+const tasksTabItems = document.querySelector('#tasksTab').querySelectorAll('.nav-link')
+tasksTabItems.forEach(el => {
+    el.addEventListener('click', () => {
+        cleanSearchInput()
+    })
+})
+
 function addCalendarDateOpenDialog() {
     alertWindow()
 }
