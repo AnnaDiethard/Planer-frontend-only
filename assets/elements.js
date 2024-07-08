@@ -485,7 +485,7 @@ function addLinkToLinkListWidget(el) {
 
     if(linkValue && linkUrl) {
         const item = `<li class="widget-list__item">
-                        <a href="${linkUrl}" class="widget-list__item-text">${linkValue}</a>
+                        <a href="${linkUrl}" class="widget-list__item-link">${linkValue}</a>
                         <span onclick="deleteLink(this)"><i class="fa-solid fa-trash widget-btn-block__button" style="font-size: 14px;"></i></span>
                     </li>`
         const list = widget.querySelector('.widget-link-list__list')
@@ -564,7 +564,7 @@ function addTaskToEveryWeekGoalWidget() {
         item = `<li class="widget-every-week-goal__item " data-task-id="">
                         <div class="block-between">
                             <input type="checkbox" class="widget-list__every-week-goal-checkbox" onclick="markTheTaskOfEveryWeekGoalWidgetCompleted(this)">
-                            <a class="widget-list__item-text" href="${taskValueUrl}">${taskValueText}</a>
+                            <a class="widget-list__item-link" href="${taskValueUrl}">${taskValueText}</a>
                         </div>
                         <div>
                             <span class="remove-icon hide-class"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeEveryWeekGoal(this)"></i></span>
