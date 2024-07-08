@@ -197,9 +197,14 @@ a {
 .widget-list__item {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     list-style-type: none;
     padding: 3px;
     padding-inline: 1rem;
+}
+
+.widget-link-list__list {
+    padding: 0;
 }
 
 .widget-list__item-text {
@@ -210,6 +215,12 @@ a {
 .widget-list__item-text-done {
     text-decoration: line-through;
     color: #7D7D7D
+}
+
+/*  */
+.widget-link-list__input-block {
+    display: flex;
+    flex-direction: row;
 }
 
 /* еженедельные дела */

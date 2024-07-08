@@ -169,8 +169,6 @@ function createNewTask() {
         saveTasksListInLocalStorage(tasks)
     
         checkCorrectRenderTask()
-
-        console.log('taskDate', taskDate)
     }
 }
 
