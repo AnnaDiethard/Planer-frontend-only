@@ -124,7 +124,7 @@ function editTaskOpenDialog(el) {
     let taskInput = document.querySelector("#addTaskInput")
     taskInput.value = taskText
 
-    const taskStatus = task?.status
+    let taskStatus = task?.status
     if(taskStatus != '') {
         const btnList = document.querySelector('#taskDialog').querySelectorAll('.btn-outline-light')
         btnList.forEach((el) => {
@@ -183,17 +183,21 @@ function chooseIcon(el) {
 
 // установка цвета текста задачи
 let textColor = ''
+const dropdownBtn = document.querySelector('#taskTextColorDropdown')
 function chooseTaskTextColor(el) {
-    const dropdownBtn = document.querySelector('#taskTextColorDropdown')
-    dropdownBtn.classList = ''
-    dropdownBtn.classList.add('btn')
-    dropdownBtn.classList.add('btn-secondary')
-    dropdownBtn.classList.add('dropdown-toggle')
+    cleanTaskTextColorDropdownClass()
     
     const colorClass = el.getAttribute('data-color')
     textColor = colorClass
     dropdownBtn.classList.add(colorClass)
     dropdownBtn.setAttribute('data-color', textColor)
+}
+
+function cleanTaskTextColorDropdownClass() {
+    dropdownBtn.classList = ''
+    dropdownBtn.classList.add('btn')
+    dropdownBtn.classList.add('btn-secondary')
+    dropdownBtn.classList.add('dropdown-toggle')
 }
 
 function createNewTask() {
@@ -227,21 +231,26 @@ function createNewTask() {
 function cleanTaskForm() {
     const addTaskInputValue = document.querySelector("#addTaskInput")
     addTaskInputValue.value = ""
+    taskStatus = ''
+    iconClass = ''
+    taskDate = ''
+    textColor = 'base-text-color'
 
     const checkedBtn = document.querySelector('#taskDialog').querySelectorAll('.btn-outline-light')
     checkedBtn.forEach(el => {
         if(el.classList.contains('active')) {
             el.classList.remove('active')
         }
-    }) 
-
-    taskDate = ''
+    })
+    
     const taskCalendarBtnArr = document.querySelector('#taskCalendar').querySelectorAll('button')
     taskCalendarBtnArr.forEach(el => {
         if(el.classList.contains('vanilla-calendar-day__btn_selected')) {
             el.classList.remove('vanilla-calendar-day__btn_selected')
         }
     })
+
+    cleanTaskTextColorDropdownClass()
 }
 
 // сохранение отредактированной задачи
