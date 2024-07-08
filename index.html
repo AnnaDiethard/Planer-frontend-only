@@ -211,6 +211,20 @@
         </div>
     </div>
 
+    <dialog id="validationDialog" class="add-dialog" taskId="">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p>are you sure?</p>
+                </div>
+                <div class="modal-body validation-dialog__btn-block">
+                    <button type="button" class="btn button-dark button-dark-lg" onclick="validationDialogCancel()">cancel</button>
+                    <button type="button" class="btn button-dark button-dark-lg" onclick="validationDialogConfirm()" id="validationDialogConfirm">do it</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
     <dialog id="taskDialog" class="add-dialog" taskId="">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -265,7 +279,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn button-dark" id="addTaskBtn">add</button>
+                    <button type="button" class="btn button-dark" id="addTaskBtn" onclick="openValidationDialog()">add</button>
                     <button type="reset" class="btn button-dark" id="addMoreTaskBtn">add more</button>
                     <button type="button" class="btn button-dark hide-class" id="editTaskBtn">update</button>
                 </div>

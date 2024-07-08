@@ -27,6 +27,7 @@ let taskDate = ''
 let dayOfWeek = ''
 let taskWeekNumber = ''
 const taskDialog = document.querySelector('#taskDialog')
+const openValidationDialogBtn = document.querySelector('#validationDialogConfirm')
 
 // рендер тудушника из LS
 if (localStorage.getItem('tasksList')) {
@@ -44,6 +45,21 @@ function getTasksListFromLocalStorage() {
     tasksList = JSON.parse(localStorage.getItem('tasksList'))
 
     return tasksList
+}
+
+const validationDialog = document.querySelector('#validationDialog')
+// окно валидации для подтверждения действия
+function openValidationDialog() {
+    console.log('validation')
+    validationDialog.showModal()
+}
+
+function validationDialogCancel() {
+    window.location.reload()
+}
+
+function validationDialogConfirm() {
+    validationDialog.close()
 }
 
 // открытие окна задачи (добавление)
@@ -508,14 +524,17 @@ function markTheTaskCompleted(el) {
 
 // очистка списка от выполненных задач
 function deleteDoneTasks() {
-    getTasksListFromLocalStorage()
+    openValidationDialog()
+    openValidationDialogBtn.addEventListener('click', () => {
+        getTasksListFromLocalStorage()
 
-    tasks = tasks.filter(function(task) {
-        return task.done == false
+        tasks = tasks.filter(function(task) {
+            return task.done == false
+        })
+
+        saveTasksListInLocalStorage(tasks)
+        window.location.reload();
     })
-
-    saveTasksListInLocalStorage(tasks)
-    window.location.reload();
 }
 
 // удаление выбранной задачи
@@ -533,9 +552,12 @@ function deleteTask(el) {
 
 // удаление всего списка задач
 function deleteAllTasks() {
-    localStorage.removeItem('tasksList')
-    localStorage.removeItem('doneTasksList')
-    window.location.reload();
+    openValidationDialog()
+    openValidationDialogBtn.addEventListener('click', () => {
+        localStorage.removeItem('tasksList')
+        localStorage.removeItem('doneTasksList')
+        window.location.reload();
+    })
 }
 
 // разворачивание карточки недельного планера
@@ -642,12 +664,13 @@ function renderTaskForSearch(task) {
     } 
 }
 
-// очистка строки поиска
+// очистка строки поиска по кнопке
 function cleanSearchInput() {
     const searchTasksInput = document.querySelector('#searchTasksInput')
     searchTasksInput.value = ''
 }
 
+// очистка строки поиска при выборе табов с задачами
 const tasksTabItems = document.querySelector('#tasksTab').querySelectorAll('.nav-link')
 tasksTabItems.forEach(el => {
     el.addEventListener('click', () => {

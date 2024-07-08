@@ -217,6 +217,13 @@ main.main {
     padding-inline: 0.5rem;
 }
 
+.validation-dialog__btn-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 /* карточки */
 .home-card {
     height: 15rem;
@@ -284,6 +291,11 @@ main.main {
 .button-dark:focus    {
     background-color: var(--light-btn-background) !important;
     border: none;
+}
+
+.button-dark-lg {
+    height: 3rem;
+    width: 10rem;
 }
 
 .block-button {

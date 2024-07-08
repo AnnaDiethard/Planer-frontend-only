@@ -217,10 +217,13 @@ function renameWidgetCancel(el) {
 
 // удаление виджета
 function deleteWidget(el) {
-    const widget = el.closest('.widget-col')
-    widget.remove(widget)
+    openValidationDialog()
+    openValidationDialogBtn.addEventListener('click', () => {
+        const widget = el.closest('.widget-col')
+        widget.remove(widget)
 
-    saveWidgets()
+        saveWidgets()
+    })
 }
 
 // рендер виджетов по их типу
@@ -467,12 +470,15 @@ function deleteDoneTasksFromListWidget(el) {
 
 // очистка виджета
 function deleteAllTasksOnListWidget(el) {
-    const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
-    listArr.forEach(el => {
-        el.parentNode.removeChild(el)
-    })
+    openValidationDialog()
+    openValidationDialogBtn.addEventListener('click', () => {
+        const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
+        listArr.forEach(el => {
+            el.parentNode.removeChild(el)
+        })
 
-    saveWidgets()
+        saveWidgets()
+    })
 }
 
 // ФУНКЦИИ ДЛЯ ВИДЖЕТА СПИСОК ССЫЛОК
@@ -616,26 +622,32 @@ function removeEveryWeekGoal(el) {
 
 // сброс всех отмеченных задач в недельном виджете
 function reloadTasksInEveryWeekGoalsWidget(el) {
-    const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
-    items.forEach(el => {
-        if(el.classList.contains('light-text-class')) {
-            el.classList.remove('light-text-class')
-            el.querySelector('input').classList.remove('hide-class')
-            el.querySelector('.remove-icon').classList.add('hide-class')
-        }
-    })
+    openValidationDialog()
+    openValidationDialogBtn.addEventListener('click', () => {
+        const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
+        items.forEach(el => {
+            if(el.classList.contains('light-text-class')) {
+                el.classList.remove('light-text-class')
+                el.querySelector('input').classList.remove('hide-class')
+                el.querySelector('.remove-icon').classList.add('hide-class')
+            }
+        })
 
-    saveWidgets()
+        saveWidgets()
+    })
 }
 
 // удаление всего контента из виджета
 function deleteTasksFromEveryWeekGoalsWidget(el) {
-    const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
-    items.forEach(el => {
-        el.remove()
-    })
+    openValidationDialog()
+    openValidationDialogBtn.addEventListener('click', () => {
+        const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
+        items.forEach(el => {
+            el.remove()
+        })
 
-    saveWidgets()
+        saveWidgets()
+    })
 }
 
 // удаление контента из списка
