@@ -79,7 +79,8 @@
                                 <div class="card-body__body">
                                     <div class="block_left">
                                         <input type="text" id="searchTasksInput">
-                                        <button id="searchTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="searchTasks()" title="delete done tasks"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                        <button id="cleanSearchInput" type="button" class="btn card-body__icon-button card-body__icon-button-left" onclick="cleanSearchInput()" title="search"><i class="fa-solid fa-xmark" ></i></button>
+                                        <button id="searchTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="searchTasks()" title="search"><i class="fa-solid fa-magnifying-glass"></i></button>
                                         <button id="cleanTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="deleteDoneTasks()" title="delete done tasks"><i class="fa-solid fa-eraser"></i></button>
                                         <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="deleteAllTasks()" title="delete all tasks"><i class="fa-solid fa-ban"></i></button>
                                     </div>
