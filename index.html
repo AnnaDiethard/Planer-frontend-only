@@ -54,7 +54,7 @@
                             </div>
                             <div class="card-body card-body__content">
                                 <div class="card-body__header">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <ul class="nav nav-tabs" id="tasksTab" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
                                             type="button" role="tab" aria-controls="running-list" aria-selected="true">running list</button>
@@ -67,6 +67,10 @@
                                             <button class="nav-link" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
                                             type="button" role="tab" aria-controls="planning" aria-selected="false">planning</button>
                                         </li>
+                                        <!-- <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="search-tab" data-bs-toggle="tab" data-bs-target="#search"
+                                            type="button" role="tab" aria-controls="search" aria-selected="false">S</button>
+                                        </li> -->
                                     </ul>
                                     <div> 
                                         <button id="addTaskToRunningList" type="button" class="btn card-body__icon-button" onclick="addTaskOpenDialog()" title="add task"><i class="fa-solid fa-plus"></i></button>
@@ -74,10 +78,13 @@
                                 </div>
                                 <div class="card-body__body">
                                     <div class="block_left">
+                                        <input type="text" id="searchTasksInput">
+                                        <button id="cleanSearchInput" type="button" class="btn card-body__icon-button card-body__icon-button-left" onclick="cleanSearchInput()" title="search"><i class="fa-solid fa-xmark" ></i></button>
+                                        <button id="searchTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="searchTasks()" title="search"><i class="fa-solid fa-magnifying-glass"></i></button>
                                         <button id="cleanTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="deleteDoneTasks()" title="delete done tasks"><i class="fa-solid fa-eraser"></i></button>
                                         <button id="deleteAllTasksToRunningList" type="button" class="btn card-body__icon-button" onclick="deleteAllTasks()" title="delete all tasks"><i class="fa-solid fa-ban"></i></button>
                                     </div>
-                                    <div class="tab-content" id="myTabContent">
+                                    <div class="tab-content" id="tasksTabContent">
                                         <div class="tab-pane fade" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
                                             <ul class="card-body__list" id="runningListCard"></ul>
                                         </div>
@@ -175,6 +182,9 @@
                                         <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
                                             <ul class="card-body__list" id="planningListCard"></ul>
                                         </div>
+                                        <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
+                                            <ul class="card-body__list" id="searchListCard"></ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -201,6 +211,20 @@
         </div>
     </div>
 
+    <dialog id="validationDialog" class="add-dialog" taskId="">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p>are you sure?</p>
+                </div>
+                <div class="modal-body validation-dialog__btn-block">
+                    <button type="button" class="btn button-dark button-dark-lg" onclick="validationDialogCancel()">cancel</button>
+                    <button type="button" class="btn button-dark button-dark-lg" onclick="validationDialogConfirm()" id="validationDialogConfirm">do it</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
     <dialog id="taskDialog" class="add-dialog" taskId="">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -221,20 +245,32 @@
                             <label for="addTaskInput" class="add-input_label">text</label>
                             <p id="errorText" class="hide-class input-validation-message">field is required</p>
                         </div>
-                        <ul class="modal-dialog-addTask">
-                            <li class="runningList-li">
-                                <input type="radio" name="runningListRadio" class="runningListRadio task-status-icon">
-                                <span id="3" class="status-icon"><i class="fa-solid fa-hourglass-start"></i></span>
-                            </li>
-                            <li class="runningList-li">
-                                <input type="radio" name="runningListRadio" class="runningListRadio task-status-icon">
-                                <span id="2" class="status-icon"><i class="fa-solid fa-hourglass-half"></i></span>
-                            </li>
-                            <li class="runningList-li">
-                                <input type="radio" name="runningListRadio" class="runningListRadio task-status-icon">
-                                <span id="1" class="status-icon"><i class="fa-solid fa-hourglass-end"></i></span>
-                            </li>
-                        </ul>
+                        <div class="block-between">
+                            <div>
+                                <div class="dropdown color-dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="taskTextColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">choose text color</button>
+                                    <ul class="dropdown-menu" aria-labelledby="taskTextColorDropdown"  id="myTab" role="tablist">
+                                        <li class="nav-item widget-dropdown-item" role="presentation">
+                                            <button class="nav-link widget-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseTaskTextColor(this)">base</button>
+                                        </li>
+                                        <li class="nav-item widget-dropdown-item" role="presentation">
+                                            <button class="nav-link widget-dropdown-link" id="" type="button" data-color="green-text-color" onclick="chooseTaskTextColor(this)">green</button>
+                                        </li>
+                                        <li class="nav-item widget-dropdown-item" role="presentation">
+                                            <button class="nav-link widget-dropdown-link" id="" type="button" data-color="violet-text-color" onclick="chooseTaskTextColor(this)">violet</button>
+                                        </li>
+                                        <li class="nav-item widget-dropdown-item" role="presentation">
+                                            <button class="nav-link widget-dropdown-link" id="" type="button" data-color="orange-text-color" onclick="chooseTaskTextColor(this)">orange</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="modal-dialog__btn-block">
+                                <button id="3" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-start"></i></button>
+                                <button id="2" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-half"></i></button>
+                                <button id="1" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-end"></i></button>
+                            </div>
+                        </div>
                         <li class="block_right hide-class" id="cardEditStatusBlock">
                             <input type="radio" name="runningListRadio">
                             <span id="" class="status-icon"><i></i></span>
@@ -243,7 +279,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn button-dark" id="addTaskBtn">add</button>
+                    <button type="button" class="btn button-dark" id="addTaskBtn" onclick="openValidationDialog()">add</button>
                     <button type="reset" class="btn button-dark" id="addMoreTaskBtn">add more</button>
                     <button type="button" class="btn button-dark hide-class" id="editTaskBtn">update</button>
                 </div>
@@ -303,6 +339,10 @@
                                 <button class="nav-link widget-dropdown-link" id="list-widget-tab" data-bs-toggle="tab" data-bs-target="#list-widget"
                                 type="button" role="tab" aria-controls="list-widget" aria-selected="false" onclick="cleanWidgetCard()">list</button>
                             </li>
+                            <li class="nav-item widget-dropdown-item" role="presentation">
+                                <button class="nav-link widget-dropdown-link" id="link-list-widget-tab" data-bs-toggle="tab" data-bs-target="#link-list-widget"
+                                type="button" role="tab" aria-controls="link-list-widget" aria-selected="false" onclick="cleanWidgetCard()">link list</button>
+                            </li>
                             <!-- <li class="nav-item widget-dropdown-item" role="presentation">
                                 <button class="nav-link widget-dropdown-link" id="traker-tab" data-bs-toggle="tab" data-bs-target="#traker"
                                 type="button" role="tab" aria-controls="traker" aria-selected="false" onclick="cleanWidgetCard()">трекер</button>
@@ -315,6 +355,9 @@
                         </div>
                         <div class="tab-pane fade" id="list-widget" role="tabpanel" aria-labelledby="list-widget-tab">
                             <h5 class="widget-card-title">list</h5>
+                        </div>
+                        <div class="tab-pane fade" id="link-list-widget" role="tabpanel" aria-labelledby="link-list-widget-tab">
+                            <h5 class="widget-card-title">link list</h5>
                         </div>
                         <!-- <div class="tab-pane fade" id="traker" role="tabpanel" aria-labelledby="traker-tab">
                             <h5 class="widget-card-title">tracker</h5>

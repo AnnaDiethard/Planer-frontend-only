@@ -4,12 +4,6 @@
     flex-wrap: wrap;
 }
 
-a {
-    color: var(--extra-dark-text-color);
-    text-decoration: none;
-    font-style: italic;
-}
-
 .widget-list__every-week-goal-checkbox {
     height: 1rem;
     width: 1rem;
@@ -197,9 +191,14 @@ a {
 .widget-list__item {
     display: flex;
     flex-direction: row;
+    justify-content: start;
     list-style-type: none;
     padding: 3px;
     padding-inline: 1rem;
+}
+
+.widget-link-list__list {
+    padding: 0;
 }
 
 .widget-list__item-text {
@@ -210,6 +209,22 @@ a {
 .widget-list__item-text-done {
     text-decoration: line-through;
     color: #7D7D7D
+}
+
+/*  */
+.widget-link-list__input-block {
+    display: flex;
+    flex-direction: row;
+}
+
+.widget-list__item-link {
+    color: var(--extra-dark-text-color);
+    text-decoration: none;
+    font-style: italic;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-inline: 1rem;
 }
 
 /* еженедельные дела */

@@ -121,6 +121,37 @@ body::-webkit-scrollbar-button:hover {
     background-color: #999999;
 }
 
+.base-text-color {
+    color: var(--extra-dark-text-color);
+}
+
+.green-text-color {
+    color: rgb(9, 196, 9) !important;
+}
+.violet-text-color {
+    color: rgb(135, 6, 167) !important;
+}
+.orange-text-color {
+    color: rgb(226, 131, 23) !important;
+}
+
+#search {
+    min-height: 5rem;
+}
+
+#searchTasksInput {
+    height: 2rem;
+    width: -webkit-fill-available;
+    margin-left: 1rem;
+    background-color: #d4d4d4;
+    border: none;
+}
+
+#searchTasksInput:focus-visible {
+    border: none !important;
+    outline-width: 0;
+}
+
 /* блоки страницы */
 .header-row {
     display: flex;
@@ -184,6 +215,13 @@ main.main {
 
 .widget-col {
     padding-inline: 0.5rem;
+}
+
+.validation-dialog__btn-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
 /* карточки */
@@ -253,6 +291,11 @@ main.main {
 .button-dark:focus    {
     background-color: var(--light-btn-background) !important;
     border: none;
+}
+
+.button-dark-lg {
+    height: 3rem;
+    width: 10rem;
 }
 
 .block-button {
@@ -453,6 +496,15 @@ main.main {
     font-size: 20px;
 }
 
+.card-body__icon-button-left {
+    position: relative; 
+    left: -2rem;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    height: 2rem;
+}
+
 .form-check-input {
     margin: 0;
     margin-bottom: 3px;
@@ -475,12 +527,12 @@ main.main {
 }
 
 
-.modal-dialog-addTask {
-    list-style: none;
+.modal-dialog__btn-block {
     display: flex;
     flex-direction: row;
     padding: 0;
-    margin-top: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .modal-body {
@@ -489,7 +541,7 @@ main.main {
 }
 
 .runningList-li {
-    padding-right: 3rem;
+    padding-right: 1.5rem;
 }
 
 .add-dialog {

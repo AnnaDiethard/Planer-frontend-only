@@ -217,10 +217,13 @@ function renameWidgetCancel(el) {
 
 // удаление виджета
 function deleteWidget(el) {
-    const widget = el.closest('.widget-col')
-    widget.remove(widget)
+    openValidationDialog()
+    openValidationDialogBtn.addEventListener('click', () => {
+        const widget = el.closest('.widget-col')
+        widget.remove(widget)
 
-    saveWidgets()
+        saveWidgets()
+    })
 }
 
 // рендер виджетов по их типу
@@ -364,6 +367,54 @@ function renderWidget() {
                             </div>
                         </div>`
             break
+            case 'link list':
+                widget = `<div class="col-12 widget-col">
+                                <div class="widget-link-list" style="padding-bottom: 1rem">
+                                    <div class="card widget-card shadow-class">
+                                        <div class="card-header block-between card-header__text">
+                                            <div class="card-widget__block-header block-between">
+                                                <p>${inputWidgetValue}</p>
+                                                <input type="text" class="form-control hide-class widget-list__input-text-header">
+                                                <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil"></i></button>
+                                                <div class="widget-btn-block hide-class">
+                                                    <button id="renameWidgetConfirm" class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
+                                                    <button class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown dropstart dropdown-settings">
+                                                <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" title="settings"><i class="fa-solid fa-ellipsis"></i></button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
+                                                    <li><a class="dropdown-item" href="#" onclick="foolCol(this)">колонка</a></li>
+                                                    <li><a class="dropdown-item" href="#" onclick="threeQuartersCol(this)">3/4 колонки</a></li>
+                                                    <li><a class="dropdown-item" href="#" onclick="halfCol(this)">1/2 колонки</a></li>
+                                                    <li><a class="dropdown-item" href="#" onclick="quarterCol(this)">1/4 колонки</a></li>
+                                                    <li><a class="dropdown-item" href="#" onclick="deleteWidget(this)">удалить</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card-body widget-card-body widget-link-list-card-body">
+                                            <div class="widget-link-list__input-block ">
+                                                <div style="width: 100%; padding-left: 1rem">
+                                                    <div class="block-between">
+                                                        <p style="width: 3rem">text</p>
+                                                        <input type="text" class="form-control widget-link-list__input-text" id="linkListWidgetContentText">
+                                                    </div>
+                                                    <div class="block-between">
+                                                        <p style="width: 3rem">url</p>
+                                                        <input type="text" class="form-control widget-link-list__input-text" id="linkListWidgetContentUrl">
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="input-group-text button-dark" style="height: 5rem" onclick="addLinkToLinkListWidget(this)">+</button>
+                                            </div>
+                                            <div class="widget-btn-block">
+                                                <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
+                                            </div>
+                                            <ul class="widget-link-list__list"></ul>
+                                        </.div>
+                                    </div>
+                                </div>
+                            </div>`
+                break
     }
 
     widgetsCol.insertAdjacentHTML('beforeend', widget)
@@ -419,11 +470,41 @@ function deleteDoneTasksFromListWidget(el) {
 
 // очистка виджета
 function deleteAllTasksOnListWidget(el) {
-    const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
-    listArr.forEach(el => {
-        el.parentNode.removeChild(el)
-    })
+    openValidationDialog()
+    openValidationDialogBtn.addEventListener('click', () => {
+        const listArr = el.closest('.card').querySelectorAll('.widget-list__item')
+        listArr.forEach(el => {
+            el.parentNode.removeChild(el)
+        })
 
+        saveWidgets()
+    })
+}
+
+// ФУНКЦИИ ДЛЯ ВИДЖЕТА СПИСОК ССЫЛОК
+
+// добавление пункта списка
+function addLinkToLinkListWidget(el) {
+    const widget = el.closest('.card')
+    let linkValue = widget.querySelector('#linkListWidgetContentText').value
+    let linkUrl = widget.querySelector('#linkListWidgetContentUrl').value
+
+    if(linkValue && linkUrl) {
+        const item = `<li class="widget-list__item-link">
+                        <a href="${linkUrl}" class="widget-list__item-link">${linkValue}</a>
+                        <span onclick="deleteLink(this)"><i class="fa-solid fa-trash widget-btn-block__button" style="font-size: 14px;"></i></span>
+                    </li>`
+        const list = widget.querySelector('.widget-link-list__list')
+        list.insertAdjacentHTML('beforeend', item)
+        cleanWidgetCard()
+        saveWidgets()
+        window.location.reload();
+    }
+}
+
+// Удаление ссылки
+function deleteLink(el) {
+    el.closest('li').remove()
     saveWidgets()
 }
 
@@ -489,7 +570,7 @@ function addTaskToEveryWeekGoalWidget() {
         item = `<li class="widget-every-week-goal__item " data-task-id="">
                         <div class="block-between">
                             <input type="checkbox" class="widget-list__every-week-goal-checkbox" onclick="markTheTaskOfEveryWeekGoalWidgetCompleted(this)">
-                            <a class="widget-list__item-text" href="${taskValueUrl}">${taskValueText}</a>
+                            <a class="widget-list__item-link" href="${taskValueUrl}">${taskValueText}</a>
                         </div>
                         <div>
                             <span class="remove-icon hide-class"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeEveryWeekGoal(this)"></i></span>
@@ -541,26 +622,32 @@ function removeEveryWeekGoal(el) {
 
 // сброс всех отмеченных задач в недельном виджете
 function reloadTasksInEveryWeekGoalsWidget(el) {
-    const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
-    items.forEach(el => {
-        if(el.classList.contains('light-text-class')) {
-            el.classList.remove('light-text-class')
-            el.querySelector('input').classList.remove('hide-class')
-            el.querySelector('.remove-icon').classList.add('hide-class')
-        }
-    })
+    openValidationDialog()
+    openValidationDialogBtn.addEventListener('click', () => {
+        const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
+        items.forEach(el => {
+            if(el.classList.contains('light-text-class')) {
+                el.classList.remove('light-text-class')
+                el.querySelector('input').classList.remove('hide-class')
+                el.querySelector('.remove-icon').classList.add('hide-class')
+            }
+        })
 
-    saveWidgets()
+        saveWidgets()
+    })
 }
 
 // удаление всего контента из виджета
 function deleteTasksFromEveryWeekGoalsWidget(el) {
-    const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
-    items.forEach(el => {
-        el.remove()
-    })
+    openValidationDialog()
+    openValidationDialogBtn.addEventListener('click', () => {
+        const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
+        items.forEach(el => {
+            el.remove()
+        })
 
-    saveWidgets()
+        saveWidgets()
+    })
 }
 
 // удаление контента из списка
