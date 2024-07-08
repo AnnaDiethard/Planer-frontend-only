@@ -50,7 +50,6 @@ function getTasksListFromLocalStorage() {
 const validationDialog = document.querySelector('#validationDialog')
 // окно валидации для подтверждения действия
 function openValidationDialog() {
-    console.log('validation')
     validationDialog.showModal()
 }
 
@@ -270,13 +269,12 @@ editTaskBtn.addEventListener('click', (el) => {
 
         const btnList = document.querySelector('#taskDialog').querySelectorAll('.btn-outline-light')
         btnList.forEach((el) => {
-            if(el.id == changedTask.taskStatus) {
-                el.classList.add('active')
+            if(el.classList.contains('active')) {
                 taskStatus = el.id
-            }
-            if(el.querySelector('i').classList.value == changedTask.iconClass) {
-                el.classList.add('active')
                 iconClass = el.querySelector('i').classList.value
+            } else {
+                taskStatus = taskStatus
+                iconClass = iconClass
             }
         })
 
@@ -317,7 +315,7 @@ editTaskBtn.addEventListener('click', (el) => {
         tasks[taskIndex] = changedTask
         saveTasksListInLocalStorage(tasks)
 
-        closeTaskDialog()
+        // closeTaskDialog()
     }
 })
 
