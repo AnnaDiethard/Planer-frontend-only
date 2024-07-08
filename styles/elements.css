@@ -191,7 +191,7 @@
 .widget-list__item {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: start;
     list-style-type: none;
     padding: 3px;
     padding-inline: 1rem;
@@ -221,6 +221,10 @@
     color: var(--extra-dark-text-color);
     text-decoration: none;
     font-style: italic;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-inline: 1rem;
 }
 
 /* еженедельные дела */

@@ -490,7 +490,7 @@ function addLinkToLinkListWidget(el) {
     let linkUrl = widget.querySelector('#linkListWidgetContentUrl').value
 
     if(linkValue && linkUrl) {
-        const item = `<li class="widget-list__item">
+        const item = `<li class="widget-list__item-link">
                         <a href="${linkUrl}" class="widget-list__item-link">${linkValue}</a>
                         <span onclick="deleteLink(this)"><i class="fa-solid fa-trash widget-btn-block__button" style="font-size: 14px;"></i></span>
                     </li>`
