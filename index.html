@@ -233,7 +233,23 @@
                         </div>
                         <div class="block-between">
                             <div>
-                                <p>123</p>
+                                <div class="dropdown color-dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="taskTextColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">choose text color</button>
+                                    <ul class="dropdown-menu" aria-labelledby="taskTextColorDropdown"  id="myTab" role="tablist">
+                                        <li class="nav-item widget-dropdown-item" role="presentation">
+                                            <button class="nav-link widget-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseTaskTextColor(this)">base</button>
+                                        </li>
+                                        <li class="nav-item widget-dropdown-item" role="presentation">
+                                            <button class="nav-link widget-dropdown-link" id="" type="button" data-color="green-text-color" onclick="chooseTaskTextColor(this)">green</button>
+                                        </li>
+                                        <li class="nav-item widget-dropdown-item" role="presentation">
+                                            <button class="nav-link widget-dropdown-link" id="" type="button" data-color="violet-text-color" onclick="chooseTaskTextColor(this)">violet</button>
+                                        </li>
+                                        <li class="nav-item widget-dropdown-item" role="presentation">
+                                            <button class="nav-link widget-dropdown-link" id="" type="button" data-color="orange-text-color" onclick="chooseTaskTextColor(this)">orange</button>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="modal-dialog__btn-block">
                                 <button id="3" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-start"></i></button>

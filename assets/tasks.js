@@ -114,11 +114,15 @@ function editTaskOpenDialog(el) {
         const btnList = document.querySelector('#taskDialog').querySelectorAll('.btn-outline-light')
         btnList.forEach((el) => {
             if(el.id == taskStatus) {
-                console.log('el', el)
                 el.classList.add('active')
             }
         })
     }
+
+    const colorBtn = document.querySelector('#taskTextColorDropdown')
+    const taskTextColor = task?.color
+    colorBtn.classList.add(taskTextColor)
+    colorBtn.setAttribute('data-color', taskTextColor)
     
     taskDialog.showModal()
 }
@@ -136,7 +140,7 @@ const addNewTaskButton = document.querySelector('#addTaskBtn')
 addNewTaskButton.addEventListener('click', () => {
     createNewTask()
     cleanTaskForm()
-    // closeTaskDialog()
+    closeTaskDialog()
 })
 
 // сохранение новой (следующей) задачи
@@ -162,6 +166,21 @@ function chooseIcon(el) {
     el.classList.add('active')
 }
 
+// установка цвета текста задачи
+let textColor = ''
+function chooseTaskTextColor(el) {
+    const dropdownBtn = document.querySelector('#taskTextColorDropdown')
+    dropdownBtn.classList = ''
+    dropdownBtn.classList.add('btn')
+    dropdownBtn.classList.add('btn-secondary')
+    dropdownBtn.classList.add('dropdown-toggle')
+    
+    const colorClass = el.getAttribute('data-color')
+    textColor = colorClass
+    dropdownBtn.classList.add(colorClass)
+    dropdownBtn.setAttribute('data-color', textColor)
+}
+
 function createNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
 
@@ -174,14 +193,13 @@ function createNewTask() {
             text: taskInputValue,
             status: taskStatus || '',
             icon: iconClass || '',
+            color: textColor || 'base-text-color',
             done: false,
             // определяется в конфиге календаря
             date: taskDate || '',
             dayName: dayOfWeek || '',
             weekNumber: taskWeekNumber || ''
         }
-
-        console.log('newTask', newTask)
     
         tasks.push(newTask)
         saveTasksListInLocalStorage(tasks)
@@ -246,6 +264,9 @@ editTaskBtn.addEventListener('click', (el) => {
             }
         })
 
+        const dropdownBtn = document.querySelector('#taskTextColorDropdown')
+        textColor = dropdownBtn.getAttribute('data-color')
+
         let date = ''
         if(document.querySelector('input[type="checkbox"]:checked')) {
             date = ''
@@ -271,6 +292,7 @@ editTaskBtn.addEventListener('click', (el) => {
 
         changedTask.text = taskInputValue
         changedTask.status = taskStatus
+        changedTask.color = textColor
         changedTask.icon = iconClass
         changedTask.date = date
         changedTask.dayName = weekDay
@@ -279,7 +301,7 @@ editTaskBtn.addEventListener('click', (el) => {
         tasks[taskIndex] = changedTask
         saveTasksListInLocalStorage(tasks)
 
-        // closeTaskDialog()
+        closeTaskDialog()
     }
 })
 
@@ -338,8 +360,7 @@ function renderTaskToRunningList(task) {
                                     <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                     <span class="status-icon"><i class="${task.icon}"></i></span>
                                     <div>
-                                        <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
-                                        
+                                        <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
                                     </div>
                                 </div>
                                 <div class="card-item-icons-block">
@@ -357,8 +378,7 @@ function renderTaskToRunningList(task) {
                                         <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                         <span class="status-icon"><i class="${task.icon}"></i></span>
                                         <div>
-                                            <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
-                                            
+                                            <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
                                         </div>
                                     </div>
                                     <div class="card-item-icons-block">
@@ -397,8 +417,7 @@ function renderTaskToWeekPlaner(task) {
                                         <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                         <span class="status-icon"><i class="${task.icon}"></i></span>
                                         <div>
-                                            <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
-                                            
+                                            <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
                                         </div>
                                     </div>
                                     <div class="card-item-icons-block">
@@ -425,8 +444,7 @@ function renderTaskToWeekPlaner(task) {
                                         <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                         <span class="status-icon"><i class="${task.icon}"></i></span>
                                         <div>
-                                            <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
-                                            
+                                            <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
                                         </div>
                                     </div>
                                     <div class="card-item-icons-block">
@@ -460,8 +478,7 @@ function renderTaskToPlanningList(task) {
                                     <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                     <span class="status-icon"><i class="${task.icon}"></i></span>
                                     <div>
-                                        <p class="form-check-label" for="flexCheckDefault">${task.text}</p>
-                                        
+                                        <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
                                     </div>
                                 </div>
                                 <div class="card-item-icons-block">

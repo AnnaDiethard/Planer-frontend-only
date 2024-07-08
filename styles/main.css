@@ -121,6 +121,20 @@ body::-webkit-scrollbar-button:hover {
     background-color: #999999;
 }
 
+.base-text-color {
+    color: var(--extra-dark-text-color);
+}
+
+.green-text-color {
+    color: rgb(9, 196, 9) !important;
+}
+.violet-text-color {
+    color: rgb(135, 6, 167) !important;
+}
+.orange-text-color {
+    color: rgb(226, 131, 23) !important;
+}
+
 #search {
     min-height: 5rem;
 }
