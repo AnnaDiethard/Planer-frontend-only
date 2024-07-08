@@ -231,20 +231,16 @@
                             <label for="addTaskInput" class="add-input_label">text</label>
                             <p id="errorText" class="hide-class input-validation-message">field is required</p>
                         </div>
-                        <ul class="modal-dialog-addTask">
-                            <li class="runningList-li">
-                                <input type="radio" name="runningListRadio" class="runningListRadio task-status-icon">
-                                <span id="3" class="status-icon"><i class="fa-solid fa-hourglass-start"></i></span>
-                            </li>
-                            <li class="runningList-li">
-                                <input type="radio" name="runningListRadio" class="runningListRadio task-status-icon">
-                                <span id="2" class="status-icon"><i class="fa-solid fa-hourglass-half"></i></span>
-                            </li>
-                            <li class="runningList-li">
-                                <input type="radio" name="runningListRadio" class="runningListRadio task-status-icon">
-                                <span id="1" class="status-icon"><i class="fa-solid fa-hourglass-end"></i></span>
-                            </li>
-                        </ul>
+                        <div class="block-between">
+                            <div>
+                                <p>123</p>
+                            </div>
+                            <div class="modal-dialog__btn-block">
+                                <button id="3" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-start"></i></button>
+                                <button id="2" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-half"></i></button>
+                                <button id="1" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-end"></i></button>
+                            </div>
+                        </div>
                         <li class="block_right hide-class" id="cardEditStatusBlock">
                             <input type="radio" name="runningListRadio">
                             <span id="" class="status-icon"><i></i></span>

@@ -501,12 +501,12 @@ main.main {
 }
 
 
-.modal-dialog-addTask {
-    list-style: none;
+.modal-dialog__btn-block {
     display: flex;
     flex-direction: row;
     padding: 0;
-    margin-top: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .modal-body {
@@ -515,7 +515,7 @@ main.main {
 }
 
 .runningList-li {
-    padding-right: 3rem;
+    padding-right: 1.5rem;
 }
 
 .add-dialog {

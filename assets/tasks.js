@@ -63,6 +63,8 @@ function addTaskOpenDialog() {
 
 // открытие окна задачи (редактирование)
 function editTaskOpenDialog(el) {
+    cleanTaskForm()
+
     const titleAdd = document.querySelector('#modalTitleAdd')
     const buttonAdd = document.querySelector('#addTaskBtn')
     const buttonAddMore = document.querySelector('#addMoreTaskBtn')
@@ -109,10 +111,11 @@ function editTaskOpenDialog(el) {
 
     const taskStatus = task?.status
     if(taskStatus != '') {
-        const checkboxList = document.querySelector('#taskDialog').querySelectorAll('.task-status-icon')
-        checkboxList.forEach((el) => {
-            if(el.closest('li').querySelector('span').id == taskStatus) {
-                el.checked = true
+        const btnList = document.querySelector('#taskDialog').querySelectorAll('.btn-outline-light')
+        btnList.forEach((el) => {
+            if(el.id == taskStatus) {
+                console.log('el', el)
+                el.classList.add('active')
             }
         })
     }
@@ -133,7 +136,7 @@ const addNewTaskButton = document.querySelector('#addTaskBtn')
 addNewTaskButton.addEventListener('click', () => {
     createNewTask()
     cleanTaskForm()
-    closeTaskDialog()
+    // closeTaskDialog()
 })
 
 // сохранение новой (следующей) задачи
@@ -144,10 +147,23 @@ addMoreNewTaskButton.addEventListener('click', () => {
 })
 
 // создание новой задачи
+let taskStatus = ''
+let iconClass = ''
+
+function chooseIcon(el) {
+    taskStatus = el.id
+    iconClass = el.querySelector('i').classList.value
+    const btnArr = el.closest('.modal-dialog__btn-block').querySelectorAll('.btn-outline-light')
+    btnArr.forEach(el => {
+        if(el.classList.contains('active')) {
+            el.classList.remove('active')
+        }
+    })
+    el.classList.add('active')
+}
+
 function createNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
-    const taskStatus = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('span').id
-    const iconClass = document.querySelector('input[type="radio"]:checked')?.closest('li').querySelector('i').classList.value
 
     if(taskInputValue == '') {
         const errorText = document.querySelector('#errorText')
@@ -164,6 +180,8 @@ function createNewTask() {
             dayName: dayOfWeek || '',
             weekNumber: taskWeekNumber || ''
         }
+
+        console.log('newTask', newTask)
     
         tasks.push(newTask)
         saveTasksListInLocalStorage(tasks)
@@ -177,12 +195,12 @@ function cleanTaskForm() {
     const addTaskInputValue = document.querySelector("#addTaskInput")
     addTaskInputValue.value = ""
 
-    const checkedRadioBtn = document.getElementsByTagName('input');
-    for(var i = 0; i < checkedRadioBtn.length; i++) {
-        if(checkedRadioBtn[i].type == 'radio') {
-            checkedRadioBtn[i].checked = false;
+    const checkedBtn = document.querySelector('#taskDialog').querySelectorAll('.btn-outline-light')
+    checkedBtn.forEach(el => {
+        if(el.classList.contains('active')) {
+            el.classList.remove('active')
         }
-    } 
+    }) 
 
     taskDate = ''
     const taskCalendarBtnArr = document.querySelector('#taskCalendar').querySelectorAll('button')
@@ -216,12 +234,17 @@ editTaskBtn.addEventListener('click', (el) => {
 
         const taskIndex = tasks.indexOf(changedTask)
 
-        let taskStatus = ''
-        let iconClass = ''
-        if(document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked')) {
-            taskStatus = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked').closest('li').querySelector('span').id
-            iconClass = document.querySelector('#taskDialog').querySelector('input[type="radio"]:checked').closest('li').querySelector('i').classList.value
-        }
+        const btnList = document.querySelector('#taskDialog').querySelectorAll('.btn-outline-light')
+        btnList.forEach((el) => {
+            if(el.id == changedTask.taskStatus) {
+                el.classList.add('active')
+                taskStatus = el.id
+            }
+            if(el.querySelector('i').classList.value == changedTask.iconClass) {
+                el.classList.add('active')
+                iconClass = el.querySelector('i').classList.value
+            }
+        })
 
         let date = ''
         if(document.querySelector('input[type="checkbox"]:checked')) {
@@ -256,7 +279,7 @@ editTaskBtn.addEventListener('click', (el) => {
         tasks[taskIndex] = changedTask
         saveTasksListInLocalStorage(tasks)
 
-        closeTaskDialog()
+        // closeTaskDialog()
     }
 })
 
