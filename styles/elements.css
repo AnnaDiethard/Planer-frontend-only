@@ -27,7 +27,7 @@
 }
 
 .hide-class {
-    display: none;
+    display: none !important;
 }
 
 .widget-content {

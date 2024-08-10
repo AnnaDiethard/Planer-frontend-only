@@ -537,6 +537,7 @@ function chooseWeekDay(el) {
     const chooseDayNameID = el.getAttribute('data-day-name')
 
     if(el.classList.contains('btn-outline-dark')) {
+        console.log(222)
         el.classList.remove('btn-outline-dark')
         chooseDayNameIDArr.forEach(el => {
             if(el == chooseDayNameID) {
@@ -548,7 +549,49 @@ function chooseWeekDay(el) {
         el.classList.add('btn-outline-dark')
     }  
 
+    console.log('chooseDayNameIDArr', chooseDayNameIDArr)
     return chooseDayNameIDArr
+}
+
+function chooseAllWeekDays() {
+    const dataDayNamesBlock = document.querySelector('#dataDayNamesBlock')
+    console.log('dataDayNamesBlock', dataDayNamesBlock)
+    const dataDayNames = dataDayNamesBlock.querySelectorAll('.data-day-name')
+    console.log('dataDayNames', dataDayNames)
+
+    dataDayNames.forEach(el => {
+        if(el.classList.contains('btn-outline-light')) {
+            const chooseDayNameID = el.getAttribute('data-day-name')
+            chooseDayNameIDArr.push(chooseDayNameID)
+            el.classList.remove('btn-outline-light')
+            el.classList.add('btn-outline-dark')
+        }
+    })
+
+    // if(el.classList.contains('btn-outline-dark')) {
+    //     el.classList.remove('btn-outline-dark')
+    //     chooseDayNameIDArr.forEach(el => {
+    //         if(el == chooseDayNameID) {
+    //             chooseDayNameIDArr = chooseDayNameIDArr.filter(item => item !== el)
+    //         }
+    //     })
+    // } else {
+    //     chooseDayNameIDArr.push(chooseDayNameID)
+    //     el.classList.add('btn-outline-dark')
+    // }  
+
+    // return chooseDayNameIDArr
+
+    console.log('chooseDayNameIDArr', chooseDayNameIDArr)
+}
+
+
+// добавление ссылки
+function addUrlToEveryWeekGoalWidgetItem() {
+    const addUrlToEveryWeekGoalWidgetItemBlock = document.querySelector('#addUrlToEveryWeekGoalWidgetItemBlock')
+    addUrlToEveryWeekGoalWidgetItemBlock.classList.remove('hide-class')
+    const addUrlBtn = document.querySelector('#addUrlToEveryWeekGoalWidgetItem')
+    addUrlBtn.classList.add('hide-class')
 }
 
 // добавление контента в виджет

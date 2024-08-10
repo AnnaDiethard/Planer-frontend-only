@@ -377,14 +377,15 @@
                     <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
-                    <div class="block-wrap">
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="monday">monday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="tuesday">tuesday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="wednesday">wednesday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="thusday">thusday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="friday">friday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="saturday">saturday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="sunday">sunday</button>
+                    <div class="block-wrap" id="dataDayNamesBlock">
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="monday">monday</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="tuesday">tuesday</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="wednesday">wednesday</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="thusday">thusday</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="friday">friday</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="saturday">saturday</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="sunday">sunday</button>
+                        <button type="button" class="btn btn-outline-light" onclick="chooseAllWeekDays()">choose all</button>
                     </div>
                     <div class="tab-content widget-content">
                         <div style="width: -webkit-fill-available;">
@@ -392,8 +393,8 @@
                                 <p class="form-check-label__block-header-text">text*</p>
                                 <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContentText">
                             </div>
-                            <a href=""></a>
-                            <div class="form-check-label__block-header">
+                            <button class="btn btn-outline-light-min" id="addUrlToEveryWeekGoalWidgetItem" onclick="addUrlToEveryWeekGoalWidgetItem()">add url</button>
+                            <div class="form-check-label__block-header hide-class" id="addUrlToEveryWeekGoalWidgetItemBlock">
                                 <p class="form-check-label__block-header-text">url</p>
                                 <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContentUrl">
                             </div>

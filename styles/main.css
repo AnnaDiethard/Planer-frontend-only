@@ -56,9 +56,11 @@ li {
     height: 10rem !important;
 }
 
-/* .light-text-class {
-    color: #909090;
-} */
+.light-text-class {
+    color: var(--seconday-light-color);
+    text-decoration: line-through;
+    font-style: italic;
+}
 
 .card {
     padding: 0 !important;
@@ -581,6 +583,15 @@ main.main {
     margin: 0.5rem;
 }
 
+.btn-outline-light-min {
+    color: var(--primaty-base-color);
+    border-color: var(--primaty-base-color);
+    margin: 0; 
+    height: 2rem; 
+    width: 5rem; 
+    font-size: 12px;
+}
+
 .btn-outline-light:hover {
     color: var(--primaty-base-color);
     border-color: var(--primaty-base-color);
@@ -598,8 +609,8 @@ main.main {
 
 .btn-outline-dark {
     color: #2c2c2c;
-    border-color: #2c2c2c;
-    background-color: #b1b1b1;
+    border-color: #2c2c2c !important;
+    /* background-color: #b1b1b1; */
     margin: 0.5rem;
 }
 
@@ -663,7 +674,7 @@ main.main {
 }
 
 .form-check-label_done {
-    /* color: var(--dark-text-color); */
+    color: var(--seconday-light-color);
     font-style: italic;
     text-decoration: line-through;
 }
