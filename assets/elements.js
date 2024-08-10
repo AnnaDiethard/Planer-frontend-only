@@ -34,6 +34,7 @@ widgetsArr.forEach(el => {
         // thisDayName определяется в скрипте tasks
         if(el.innerText.toLocaleLowerCase() == thisDayName) {
             el.classList.add('active')
+            el.classList.add('nav-widget-active-link')
         }
     })
 
@@ -46,6 +47,7 @@ widgetsArr.forEach(el => {
             if(el.getAttribute('data-active-day') == thisDayName) {
                 el.classList.add('show')
                 el.classList.add('active')
+                
             }
         })
     })
@@ -238,12 +240,12 @@ function renderWidget() {
             const id = Date.now()
             widget = `<div class="col-12 widget-col">
                         <div style="padding-bottom: 1rem" class="widget__every-week-goals">
-                            <div class="card widget-card shadow-class">
-                                <div class="card-header block-between  card-header__text">
+                            <div class="card widget-card border__widget-card shadow-class">
+                                <div class="card-header block-between widget-card-header card-header__text">
                                     <div class="card-widget__block-header block-between">
                                         <p>${inputWidgetValue}</p>
                                         <input type="text" class="form-control hide-class widget-list__input-text-header">
-                                        <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil"></i></button>
+                                        <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil button-icon-accent "></i></button>
                                         <div class="widget-btn-block hide-class">
                                             <button id="renameWidgetConfirm" class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
                                             <button class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
@@ -291,13 +293,11 @@ function renderWidget() {
                                                 type="button" role="tab" aria-controls="widget__every-week-goals-sun${id}" aria-selected="false">SUN</button>
                                             </li>
                                         </ul>
-                                        <button class="btn card-body__icon-button" type="button" onclick="addTaskToEveryWeekGoalsWidget(this)" title="add"><i class="fa-solid fa-plus"></i></button>
+                                        <button class="btn card-body__icon-button" type="button" onclick="addTaskToEveryWeekGoalsWidget(this)" title="add"><i class="fa-solid fa-plus button-icon-accent"></i></button>
+                                        <button class="btn card-body__icon-button" type="button" onclick="reloadTasksInEveryWeekGoalsWidget(this)" title="remove selection"><i class="icon-secondary fa-solid fa-rotate-right widget-btn-block__button"></i></button>
+                                        <button class="btn card-body__icon-button" type="button" onclick="deleteTasksFromEveryWeekGoalsWidget(this)" title="delete all content"><i class="icon-secondary fa-solid fa-ban widget-btn-block__button"></i></button>
                                     </div>
                                     <div>
-                                        <div class="block_left">
-                                            <button class="btn card-body__icon-button" type="button" onclick="reloadTasksInEveryWeekGoalsWidget(this)" title="remove selection"><i class="fa-solid fa-rotate-right widget-btn-block__button"></i></button>
-                                            <button class="btn card-body__icon-button" type="button" onclick="deleteTasksFromEveryWeekGoalsWidget(this)" title="delete all content"><i class="fa-solid fa-ban widget-btn-block__button"></i></button>
-                                        </div>
                                         <div class="tab-content widget-tab-content">
                                             <div class="tab-pane fade" id="widget__every-week-goals-mon${id}" data-active-day="mon" role="tabpanel" aria-labelledby="widget__every-week-goals-mon-tab${id}">
                                                 <ul class="card-body__list" data-day-name="monday"></ul>
@@ -330,14 +330,14 @@ function renderWidget() {
         case 'list':
             widget = `<div class="col-12 widget-col">
                             <div class="widget-list" style="padding-bottom: 1rem">
-                                <div class="card widget-card shadow-class">
-                                    <div class="card-header block-between card-header__text">
+                                <div class="card widget-card border__widget-card shadow-class">
+                                    <div class="card-header block-between widget-card-header card-header__text">
                                         <div class="card-widget__block-header block-between">
                                             <p>${inputWidgetValue}</p>
                                             <input type="text" class="form-control hide-class widget-list__input-text-header">
-                                            <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil"></i></button>
+                                            <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil button-icon-accent "></i></button>
                                             <div class="widget-btn-block hide-class">
-                                                <button id="renameWidgetConfirm" class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
+                                                <button id="renameWidgetConfirm" class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetConfirm(this)"><i class="button-icon-accent fa-solid fa-check"></i></button>
                                                 <button class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
                                             </div>
                                         </div>
@@ -356,11 +356,12 @@ function renderWidget() {
                                         <div class="input-group widget-list__input-block">
                                             <input type="text" class="form-control widget-list__input-text">
                                             <button type="button" class="input-group-text button-dark" onclick="addTaskToListWidget(this)">+</button>
-                                        </div>
-                                        <div class="widget-btn-block">
-                                                <button id="cleanTasksToRunningList" type="button" class="btn widget-btn-block__button" onclick="deleteDoneTasksFromListWidget(this)" title="delete done"><i class="fa-solid fa-eraser"></i></button>
-                                                <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
+                                            <div class="widget-btn-block">
+                                                <button id="cleanTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteDoneTasksFromListWidget(this)" title="delete done"><i class="fa-solid fa-eraser"></i></button>
+                                                <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                             </div>
+                                        </div>
+                                        
                                         <ul class="widget-list__list"></ul>
                                     </div>
                                 </div>
@@ -370,12 +371,12 @@ function renderWidget() {
             case 'link list':
                 widget = `<div class="col-12 widget-col">
                                 <div class="widget-link-list" style="padding-bottom: 1rem">
-                                    <div class="card widget-card shadow-class">
-                                        <div class="card-header block-between card-header__text">
+                                    <div class="card widget-card border__widget-card shadow-class">
+                                        <div class="card-header block-between widget-card-header card-header__text">
                                             <div class="card-widget__block-header block-between">
                                                 <p>${inputWidgetValue}</p>
                                                 <input type="text" class="form-control hide-class widget-list__input-text-header">
-                                                <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil"></i></button>
+                                                <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil button-icon-accent "></i></button>
                                                 <div class="widget-btn-block hide-class">
                                                     <button id="renameWidgetConfirm" class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetConfirm(this)"><i class="fa-solid fa-check"></i></button>
                                                     <button class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
@@ -405,9 +406,10 @@ function renderWidget() {
                                                     </div>
                                                 </div>
                                                 <button type="button" class="input-group-text button-dark" style="height: 5rem" onclick="addLinkToLinkListWidget(this)">+</button>
+                                                <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                             </div>
                                             <div class="widget-btn-block">
-                                                <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
+                                                
                                             </div>
                                             <ul class="widget-link-list__list"></ul>
                                         </.div>
@@ -562,8 +564,8 @@ function addTaskToEveryWeekGoalWidget() {
                             <p class="widget-list__item-text">${taskValueText}</p>
                         </div>
                         <div>
-                            <span class="remove-icon hide-class"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeEveryWeekGoal(this)"></i></span>
-                            <span ><i class="fa-solid fa-trash widget-btn-block__button" style="font-size: 14px;" onclick="deleteEveryWeekGoal(this)"></i></span>
+                            <span class="remove-icon icon-secondary hide-class"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeEveryWeekGoal(this)"></i></span>
+                            <span ><i class="fa-solid fa-trash widget-btn-block__button icon-secondary" style="font-size: 14px;" onclick="deleteEveryWeekGoal(this)"></i></span>
                         </div>
                 </li>`
     } else {
@@ -573,8 +575,8 @@ function addTaskToEveryWeekGoalWidget() {
                             <a class="widget-list__item-link" href="${taskValueUrl}">${taskValueText}</a>
                         </div>
                         <div>
-                            <span class="remove-icon hide-class"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeEveryWeekGoal(this)"></i></span>
-                            <span ><i class="fa-solid fa-trash widget-btn-block__button" style="font-size: 14px;" onclick="deleteEveryWeekGoal(this)"></i></span>
+                            <span class="remove-icon icon-secondary hide-class"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeEveryWeekGoal(this)"></i></span>
+                            <span ><i class="fa-solid fa-trash widget-btn-block__button icon-secondary" style="font-size: 14px;" onclick="deleteEveryWeekGoal(this)"></i></span>
                         </div>
                 </li>`
     }

@@ -1,7 +1,7 @@
 .vanilla-calendar {
     width: 100%;
     margin-bottom: 1rem;
-    background-color: var(--light-background) !important;
+    background-color: var(--primaty-background-color) !important;
 }
 
 .vanilla-calendar-week-numbers {
@@ -9,18 +9,19 @@
 }
 
 .vanilla-calendar-day__btn {
-    background-color: var(--light-btn-background) !important;
-    color: var(--light-text-color) !important;
+    background-color: var(--primaty-light-color) !important;
+    color: var(--seconday-base-color) !important;
     font-size: 14px;
     margin: 3px 3px 3px 3px !important;
 }
 
 .vanilla-calendar-week-number {
     margin: 3px 3px 3px 3px !important;
+    
 }
 
 .vanilla-calendar-day__btn_weekend {
-    color: var(--light-text-color) !important;
+    color: var(--seconday-base-color) !important;
     font-size: 14px;
 }
 
@@ -29,8 +30,11 @@
 }
 
 .vanilla-calendar-day__btn_today {
-    color: var(--dark-btn-background) !important;
-    color: var(--light-text-color);
+    background-color: var(--primaty-active-color) !important;
+    color: var(--seconday-base-color);
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
 }
 
 .holidayStatus {
@@ -38,20 +42,28 @@
 }
 
 .vanilla-calendar-day__btn_selected {
-    background-color: rgb(104, 104, 104) !important;
+    background-color: var(--accent-base-color) !important;
 }
 
 .vanilla-calendar-month, 
-.vanilla-calendar-year,
 .vanilla-calendar-week__day,
 .vanilla-calendar-week-number,
 .vanilla-calendar-week-numbers__title {
-    color: var(--dark-text-color) !important;
+    color: var(--seconday-base-color) !important;
     font-family: "Comfortaa", sans-serif !important;
+    text-transform: uppercase;
 }
 
-.vanilla-calendar-arrow_next::before {
-    color: var(--dark-text-color) !important;
+.vanilla-calendar-year {
+    display: none;
+}
+
+.vanilla-calendar-arrow {
+    color: blueviolet !important;
+}
+
+.vanilla-calendar-header__content {
+    color: var(--dark-btn-background);
 }
 
 #taskCalendar {
