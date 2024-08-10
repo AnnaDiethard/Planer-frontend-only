@@ -160,7 +160,7 @@ const addNewTaskButton = document.querySelector('#addTaskBtn')
 addNewTaskButton.addEventListener('click', () => {
     createNewTask()
     cleanTaskForm()
-    // closeTaskDialog()
+    closeTaskDialog()
 })
 
 // сохранение новой (следующей) задачи
@@ -208,9 +208,7 @@ function cleanTaskTextColorDropdownClass() {
 function createNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
     let storypointsInputValue = document.querySelector("#storypointsTaskInput").value
-    console.log('storypointsInputValuee', storypointsInputValue)
-    let taskStorypoints = Number(storypointsInputValue); 
-    console.log('storypointsInputValue', storypointsInputValue)
+    let taskStorypoints = Number(storypointsInputValue)
 
     if(taskInputValue == '') {
         const errorText = document.querySelector('#errorText')
@@ -300,11 +298,8 @@ editTaskBtn.addEventListener('click', (el) => {
 
         const cardEditStatusDelete = document.querySelector('#cardEditStatusDelete')
         if(cardEditStatusDelete.checked) {
-            console.log(123)
             taskStatus = ''
-            console.log('taskStatus', taskStatus)
             iconClass = ''
-            console.log('iconClass', iconClass)
         }
 
         const dropdownBtn = document.querySelector('#taskTextColorDropdown')
