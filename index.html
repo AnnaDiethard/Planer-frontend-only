@@ -161,7 +161,9 @@
                                             <ul class="card-body__list" data-name="sun"></ul>
                                         </div>
                                     </div>
+                                    <hr/>
                                     <div class="next-week-tasks-block scroll-class card-body">
+                                        <h3 class="card-header__text" style="padding-bottom: 1rem;">next weeks tasks</h3>
                                         <ul class="card-body__list" id="nextWeekTasks"></ul>
                                     </div>
                                 </div>
@@ -233,7 +235,7 @@
                     </div>
                     <div class="task-settings-block">
                         <div class="dropdown">
-                            <button class="btn btn-secondary shadow-class dropdown-toggle color-dropdown" type="button" id="taskTextColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">choose text color</button>
+                            <button class="btn shadow-class dropdown-toggle color-dropdown btn-outline-light" type="button" id="taskTextColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">choose text color</button>
                             <ul class="dropdown-menu" aria-labelledby="taskTextColorDropdown"  id="myTab" role="tablist">
                                 <li class="nav-item widget-dropdown-item" role="presentation">
                                     <button class="nav-link widget-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseTaskTextColor(this)">base</button>
@@ -246,6 +248,12 @@
                                 </li>
                                 <li class="nav-item widget-dropdown-item" role="presentation">
                                     <button class="nav-link widget-dropdown-link" id="" type="button" data-color="orange-text-color" onclick="chooseTaskTextColor(this)">orange</button>
+                                </li>
+                                <li class="nav-item widget-dropdown-item" role="presentation">
+                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="red-text-color" onclick="chooseTaskTextColor(this)">red</button>
+                                </li>
+                                <li class="nav-item widget-dropdown-item" role="presentation">
+                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="blue-text-color" onclick="chooseTaskTextColor(this)">blue</button>
                                 </li>
                             </ul>
                         </div>
@@ -265,38 +273,6 @@
                                 <p>delete status</p>
                             </li>
                         </div>
-
-                        <!-- <div class="block-between">
-                            <div>
-                                <div class="dropdown color-dropdown">
-                                    <button class="btn btn-secondary shadow-class dropdown-toggle" type="button" id="taskTextColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">choose text color</button>
-                                    <ul class="dropdown-menu" aria-labelledby="taskTextColorDropdown"  id="myTab" role="tablist">
-                                        <li class="nav-item widget-dropdown-item" role="presentation">
-                                            <button class="nav-link widget-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseTaskTextColor(this)">base</button>
-                                        </li>
-                                        <li class="nav-item widget-dropdown-item" role="presentation">
-                                            <button class="nav-link widget-dropdown-link" id="" type="button" data-color="green-text-color" onclick="chooseTaskTextColor(this)">green</button>
-                                        </li>
-                                        <li class="nav-item widget-dropdown-item" role="presentation">
-                                            <button class="nav-link widget-dropdown-link" id="" type="button" data-color="violet-text-color" onclick="chooseTaskTextColor(this)">violet</button>
-                                        </li>
-                                        <li class="nav-item widget-dropdown-item" role="presentation">
-                                            <button class="nav-link widget-dropdown-link" id="" type="button" data-color="orange-text-color" onclick="chooseTaskTextColor(this)">orange</button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="modal-dialog__btn-block">
-                                <button id="3" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-start"></i></button>
-                                <button id="2" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-half"></i></button>
-                                <button id="1" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-end"></i></button>
-                            </div>
-                        </div>
-                        <li class="block_right hide-class" id="cardEditStatusBlock">
-                            <input type="radio" name="runningListRadio">
-                            <span id="" class="status-icon"><i></i></span>
-                            <p>delete status</p>
-                        </li>    -->
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -401,14 +377,15 @@
                     <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
-                    <div class="block-wrap">
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="monday">monday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="tuesday">tuesday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="wednesday">wednesday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="thusday">thusday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="friday">friday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="saturday">saturday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseWeekDay(this)" data-day-name="sunday">sunday</button>
+                    <div class="block-wrap" id="dataDayNamesBlock">
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="monday">monday</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="tuesday">tuesday</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="wednesday">wednesday</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="thusday">thusday</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="friday">friday</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="saturday">saturday</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="sunday">sunday</button>
+                        <button type="button" class="btn btn-outline-light" onclick="chooseAllWeekDays()">choose all</button>
                     </div>
                     <div class="tab-content widget-content">
                         <div style="width: -webkit-fill-available;">
@@ -416,8 +393,8 @@
                                 <p class="form-check-label__block-header-text">text*</p>
                                 <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContentText">
                             </div>
-                            <a href=""></a>
-                            <div class="form-check-label__block-header">
+                            <button class="btn btn-outline-light-min" id="addUrlToEveryWeekGoalWidgetItem" onclick="addUrlToEveryWeekGoalWidgetItem()">add url</button>
+                            <div class="form-check-label__block-header hide-class" id="addUrlToEveryWeekGoalWidgetItemBlock">
                                 <p class="form-check-label__block-header-text">url</p>
                                 <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContentUrl">
                             </div>

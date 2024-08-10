@@ -56,9 +56,11 @@ li {
     height: 10rem !important;
 }
 
-/* .light-text-class {
-    color: #909090;
-} */
+.light-text-class {
+    color: var(--seconday-light-color);
+    /* text-decoration: line-through; */
+    font-style: italic;
+}
 
 .card {
     padding: 0 !important;
@@ -123,7 +125,7 @@ body::-webkit-scrollbar-button:hover {
 }
 
 .base-text-color {
-    color: var(--extra-dark-text-color);
+    color: var(--seconday-base-color);
 }
 
 .green-text-color {
@@ -134,6 +136,12 @@ body::-webkit-scrollbar-button:hover {
 }
 .orange-text-color {
     color: rgb(226, 131, 23) !important;
+}
+.red-text-color {
+    color: rgb(231, 61, 61) !important;
+}
+.blue-text-color {
+    color: rgb(58, 83, 223) !important;
 }
 
 #search {
@@ -575,6 +583,15 @@ main.main {
     margin: 0.5rem;
 }
 
+.btn-outline-light-min {
+    color: var(--primaty-base-color);
+    border-color: var(--primaty-base-color);
+    margin: 0; 
+    height: 2rem; 
+    width: 5rem; 
+    font-size: 12px;
+}
+
 .btn-outline-light:hover {
     color: var(--primaty-base-color);
     border-color: var(--primaty-base-color);
@@ -585,14 +602,15 @@ main.main {
 .btn-outline-light:focus-visible {
     color: var(--accent-base-color);
     border-color: var(--accent-base-color);
-    background-color: var(--accent-light-color);
+    /* background-color: var(--accent-light-color); */
+    background: none !important;
     margin: 0.5rem;
 }
 
 .btn-outline-dark {
     color: #2c2c2c;
-    border-color: #2c2c2c;
-    background-color: #b1b1b1;
+    border-color: #2c2c2c !important;
+    /* background-color: #b1b1b1; */
     margin: 0.5rem;
 }
 
@@ -656,7 +674,7 @@ main.main {
 }
 
 .form-check-label_done {
-    /* color: var(--dark-text-color); */
+    color: var(--seconday-light-color);
     font-style: italic;
     text-decoration: line-through;
 }
@@ -845,8 +863,8 @@ main.main {
 }
 
 .btn-secondary {
-    background-color: var(--accent-base-color);
-    border-color: var(--accent-light-color);
+    background: none !important;
+    border-color: var(--primaty-base-color);
 }
 
 .add-input{
