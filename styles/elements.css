@@ -10,7 +10,7 @@
 }
 
 .dropdown {
-    padding-top: 1rem;
+    padding-top: 1.5rem;
 }
 
 .dropdown-toggle,
@@ -32,19 +32,120 @@
 
 .widget-content {
     padding: 3rem 0 1rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-widget-link {
+    color: var(--seconday-base-color);
+    /* background-color: var(--primaty-light-color) !important; */
+    width: 4rem;
+    height: 2rem;
+    border-radius: 6px;
+    border: none !important;
+    /* margin: 1rem 0 1rem 0; */
+    letter-spacing: 2px;
+    /* font-weight: bold; */
+    /* margin-inline: 1rem; */
+    font-size: 12px;
+    padding: 0;
+    /* background: none !important; */
+}
+
+.add-value-text-block {
+}
+
+.every-week-goals__widget-card {
+    /* border-radius: 10px; */
+    
+}
+
+.border__widget-card {
+    border-top-right-radius: 22px !important;
+}
+
+.widget-card-header {
+    height: 2.5rem;
+    color: var(--seconday-base-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between !important;
+    align-items: center;
+    background-color: var(--primaty-light-color);
+    /* border-radius: 15px !important; */
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 100px !important;
+    border-bottom-right-radius: 100px !important;
+    padding: 0;
+    border: none;
+}
+
+.dropdown-settings-btn {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 100px;
+    border: none;
+    background-color: var(--primaty-light-color);
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-settings-btn:hover {
+    background-color: var(--primaty-light-color);
+}
+
+.dropdown-settings-btn:active {
+    background-color: var(--primaty-light-color);
+}
+
+.nav-widget-link  {
+    color: var(--seconday-base-color);
+    font-size: 12px;
+
+}
+
+.nav-widget-active-link {
+    font-size: 14px;
+    font-weight: 900;
+    background-color: var(--primaty-background-color) !important;
 }
 
 .widget-card-title {
     padding: 1rem;
 }
 
+.dropdown-item {
+    background-color: var(--primaty-background-color);
+}
+
+.dropdown-item:hover {
+    background-color: var(--primaty-light-color);
+}
+
+.widget-dropdown-item {
+    background-color: var(--primaty-background-color);
+}
+
+.widget-dropdown-item:hover {
+    background-color: var(--primaty-light-color);
+}
+
 .dropdown-settings {
     padding: 0;
     right: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.card-widget__block-header {
+    padding-left: 1rem;
+    font-size: 18px;
 }
 
 .widget-card {
     min-height: 100%;
+    /* background-color: var(--primaty-background-color); */
+    background: none;
 }
 
 .widget-card-body-header {
@@ -102,6 +203,7 @@
     display: flex;
     flex-direction: row;
     justify-content:space-between;
+    width: 100%;
 }
 
 .form-check-label__block-header-text {
@@ -139,8 +241,8 @@
 .widget-brick {
     width: 100%; 
     height: 8rem; 
-    background-color: var(--light-background); 
-    color: var(--dark-text-color);
+    background-color: var(--primaty-background-color);
+    color: var(--seconday-base-color);
     font-family: "Comfortaa", sans-serif !important;
 }
 
@@ -173,13 +275,13 @@
 
 .widget-list__input-text-header {
     padding: 0;
-    background-color: #7D7D7D;
+    background: none;
     border: none;
 }
 
 .widget-list__input-text-header:focus {
     padding: 0;
-    background-color: #7D7D7D;
+    background: none;
     border: none;
 }
 
@@ -233,6 +335,7 @@
     justify-content: space-between;
     width: -webkit-fill-available;
     margin: 0 2rem 0 0;
+    border: none;
 }
 
 .widget-every-week-goal__item {
