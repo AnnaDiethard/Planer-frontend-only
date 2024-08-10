@@ -160,7 +160,7 @@ const addNewTaskButton = document.querySelector('#addTaskBtn')
 addNewTaskButton.addEventListener('click', () => {
     createNewTask()
     cleanTaskForm()
-    closeTaskDialog()
+    // closeTaskDialog()
 })
 
 // сохранение новой (следующей) задачи
@@ -207,9 +207,9 @@ function cleanTaskTextColorDropdownClass() {
 
 function createNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
-    let storypointsInputValuee = document.querySelector("#storypointsTaskInput").value
-    console.log('storypointsInputValuee', storypointsInputValuee)
-    let storypointsInputValue = Number(storypointsInputValuee); 
+    let storypointsInputValue = document.querySelector("#storypointsTaskInput").value
+    console.log('storypointsInputValuee', storypointsInputValue)
+    let taskStorypoints = Number(storypointsInputValue); 
     console.log('storypointsInputValue', storypointsInputValue)
 
     if(taskInputValue == '') {
@@ -220,7 +220,7 @@ function createNewTask() {
             id: Date.now(),
             text: taskInputValue,
             status: taskStatus || '',
-            storypoints: storypointsInputValue,
+            storypoints: taskStorypoints,
             icon: iconClass || '',
             color: textColor || 'base-text-color',
             done: false,
@@ -271,8 +271,8 @@ editTaskBtn.addEventListener('click', (el) => {
     el.preventDefault()
 
     const taskInputValue = document.querySelector("#addTaskInput").value
-    const storypointsInputValue = document.querySelector("#storypointsTaskInput").value
-    storypointsInputValue.replace(/^"(.+(?="$))"$/, '$1')
+    let storypointsInputValue = document.querySelector("#storypointsTaskInput").value
+    storypointsInputValue = Number(storypointsInputValue)
 
     if(taskInputValue == '') {
         const errorText = document.querySelector('#errorText')
@@ -295,11 +295,17 @@ editTaskBtn.addEventListener('click', (el) => {
             if(el.classList.contains('active')) {
                 taskStatus = el.id
                 iconClass = el.querySelector('i').classList.value
-            } else {
-                taskStatus = taskStatus
-                iconClass = iconClass
             }
         })
+
+        const cardEditStatusDelete = document.querySelector('#cardEditStatusDelete')
+        if(cardEditStatusDelete.checked) {
+            console.log(123)
+            taskStatus = ''
+            console.log('taskStatus', taskStatus)
+            iconClass = ''
+            console.log('iconClass', iconClass)
+        }
 
         const dropdownBtn = document.querySelector('#taskTextColorDropdown')
         textColor = dropdownBtn.getAttribute('data-color')
@@ -339,7 +345,7 @@ editTaskBtn.addEventListener('click', (el) => {
         tasks[taskIndex] = changedTask
         saveTasksListInLocalStorage(tasks)
 
-        closeTaskDialog()
+        // closeTaskDialog()
     }
 })
 
@@ -388,7 +394,7 @@ function renderTaskToRunningList(task) {
                             <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
                         </li>`
         runningListCard.insertAdjacentHTML('beforeend', taskHTML)
-    } else if(task.date && task.storypoints == '') {
+    } else if(task.date && task.storypoints == 0) {
         const taskHTML = `<li class="running-list__item" id="${task.id}">
                             <div class="running-list__task-block">
                                 <div class="running-list__task-block-info">
