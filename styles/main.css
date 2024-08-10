@@ -58,7 +58,7 @@ li {
 
 .light-text-class {
     color: var(--seconday-light-color);
-    text-decoration: line-through;
+    /* text-decoration: line-through; */
     font-style: italic;
 }
 
