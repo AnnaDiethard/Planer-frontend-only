@@ -853,6 +853,7 @@ function renderTaskForSearch(task) {
 function cleanSearchInput() {
     const searchTasksInput = document.querySelector('#searchTasksInput')
     searchTasksInput.value = ''
+    window.location.reload()
 }
 
 // очистка строки поиска при выборе табов с задачами
