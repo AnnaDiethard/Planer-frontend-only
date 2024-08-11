@@ -9,6 +9,18 @@ function alertWindow() {
     alert('функционал в разработке')
 }
 
+const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
+let thisWeekNumber = document.querySelector('#weekPlanerListCard').getAttribute('week-number')
+thisWeekNumber = getThisWeekNumber
+const getTasksForCheckWeekNumber = JSON.parse(localStorage.getItem('tasksList'))
+if(getTasksForCheckWeekNumber != null) {
+    getTasksForCheckWeekNumber.forEach(el => {
+        if(el.weekNumber < thisWeekNumber) {
+            el.weekNumber = ""
+        }
+    })
+}
+
 // определение текущего дня недели
 const thisDayName = new Date().toString().substring(0, 3).toLocaleLowerCase()
 // открытие карточки текущего дня в недельном планере
@@ -517,7 +529,7 @@ function renderTaskToWeekPlaner(task) {
                             </li>`
             weekDayList.insertAdjacentHTML('beforebegin', taskHTML)
         }
-    } else {
+    } else if(weekNumber < task.weekNumber) {
         if(task.done == true) {
             const taskHTML = `<li class="day-card-list__item" id="${task.id}">
                                 <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
