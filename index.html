@@ -61,7 +61,7 @@
 
                         <div class="search-tasks">
                             <input type="text" id="searchTasksInput" class="shadow-class">
-                            <!-- <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search"><i class="fa-solid fa-xmark" ></i></button> -->
+                            <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button>
                             <button id="searchTasksToRunningList" type="button" class="btn" onclick="searchTasks()" title="search"><i class="button-icon-extra-light fa-solid fa-magnifying-glass"></i></button>
                         </div>
 
@@ -162,9 +162,17 @@
                                         </div>
                                     </div>
                                     <hr/>
-                                    <div class="next-week-tasks-block scroll-class card-body">
-                                        <h3 class="card-header__text" style="padding-bottom: 1rem;">next weeks tasks</h3>
-                                        <ul class="card-body__list" id="nextWeekTasks"></ul>
+                                    <div class="card card_day-card border-bottom-right-radius">
+                                        <div class="card-header card-header_day-card shadow-class">
+                                            <p class="card-header__text">next weeks tasks</p>
+                                            <div>
+                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
+                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body week-planer-card-body hide-class">
+                                            <ul class="card-body__list" id="nextWeekTasks"></ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -235,7 +243,7 @@
                     </div>
                     <div class="task-settings-block">
                         <div class="dropdown">
-                            <button class="btn shadow-class dropdown-toggle color-dropdown btn-outline-light" type="button" id="taskTextColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">choose text color</button>
+                            <button class="btn dropdown-toggle color-dropdown btn-outline-light" type="button" id="taskTextColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">choose text color</button>
                             <ul class="dropdown-menu" aria-labelledby="taskTextColorDropdown"  id="myTab" role="tablist">
                                 <li class="nav-item widget-dropdown-item" role="presentation">
                                     <button class="nav-link widget-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseTaskTextColor(this)">base</button>
@@ -257,12 +265,19 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="input-form shadow-class storypoints-input">
-                            <input type="text" id="storypointsTaskInput" class="add-input"  autocomplete="off" placeholder = "">
-                            <label for="storypointsTaskInput" class="add-input_label">storypoints</label>
+                        <div class="storypoints-input" id="checkedStorypointsBlock">
+                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">1</button>
+                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">3</button>
+                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">5</button>
+                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">8</button>
+                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">13</button>
+                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">21</button>
+                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">34</button>
+                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">55</button>
+                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">89</button>
                         </div>
                         <div>
-                            <div class="modal-dialog__btn-block">
+                            <div class="modal-dialog__btn-block" id="checkedIconBlock">
                                 <button id="3" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-start"></i></button>
                                 <button id="2" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-half"></i></button>
                                 <button id="1" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-end"></i></button>

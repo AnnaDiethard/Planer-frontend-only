@@ -10,7 +10,7 @@
 }
 
 .dropdown {
-    padding-top: 1.5rem;
+    /* padding-top: 1.5rem; */
 }
 
 .dropdown-toggle,
@@ -297,6 +297,11 @@
     list-style-type: none;
     padding: 3px;
     padding-inline: 1rem;
+    cursor: pointer;
+}
+
+.widget-list__item:hover {
+    background-color: var(--seconday-extra-light-color);
 }
 
 .widget-link-list__list {
