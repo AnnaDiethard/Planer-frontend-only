@@ -432,8 +432,7 @@ function addTaskToListWidget(el) {
     let taskValue = widget.querySelector('.widget-list__input-text').value
 
     if(taskValue) {
-        const item = `<li class="widget-list__item">
-                        <input type="checkbox" class="widget-list__item-checkbox" onclick="markTheCompletedTaskInListWidget(this)">
+        const item = `<li class="widget-list__item" onclick="markTheCompletedTaskInListWidget(this)">
                         <p class="widget-list__item-text">${taskValue}</p>
                     </li>`
         const list = widget.querySelector('.widget-list__list')
@@ -444,16 +443,15 @@ function addTaskToListWidget(el) {
     }
 }
 
-// выделение пунктов списка
+// выделение пункта список
 function markTheCompletedTaskInListWidget(el) {
-    const li = el.closest('li')
-    const value =  li.querySelector('p').innerHTML
+    const value =  el.querySelector('p').innerHTML
     const item = `<li class="widget-list__item widget-list__item-text-done">
                     <p class="">${value}</p>
                 </li>`
-    const list = li.closest('ul')
+    const list = el.closest('ul')
     list.insertAdjacentHTML('beforeend', item)
-    li.parentNode.removeChild(li);
+    el.parentNode.removeChild(el);
 
     saveWidgets()
 }
