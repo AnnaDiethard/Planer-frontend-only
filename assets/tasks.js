@@ -571,6 +571,23 @@ function renderTaskToPlanningList(task) {
                             <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
                         </li>`
             planningListCard.insertAdjacentHTML('beforeend', taskHTML)
+    } else if(task.storypoints != 0) {
+        const taskHTML = `<li class="running-list__item" id="${task.id}">
+                            <div class="running-list__task-block">
+                                <div class="running-list__task-block-info">
+                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                    <div class="running-list__task-block-settings">
+                                        <button class="running-list__storypoints">${task.storypoints}</button>
+                                    </div>
+                                    <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                </div>
+                            </div>
+                            <div class="task-list__icon-block">
+                                <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                            </div>
+                        </li>` 
+        planningListCard.insertAdjacentHTML('beforebegin', taskHTML)
     } else {
         const taskHTML = `<li class="plan-list__item" id="${task.id}">
                             <div class="plan-list__task-block">
