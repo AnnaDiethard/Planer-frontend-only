@@ -46,6 +46,11 @@ li {
     list-style-type: none;
 }
 
+input {
+    background-color: var(--primaty-background-color) !important;
+    border: none !important;
+}
+
 .hide-class {
     display: none;
 }
