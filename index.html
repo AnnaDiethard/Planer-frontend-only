@@ -50,9 +50,9 @@
                         </div>
 
                         <div class="nav-tasks" id="tasksTab" role="tablist">
-                            <button class="nav-link tasks-link shadow-class" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
+                            <button class="nav-link tasks-link shadow-class active nav-link-active" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
                                 type="button" role="tab" aria-controls="running-list" aria-selected="true">running list</button>
-                            <button class="nav-link tasks-link shadow-class active nav-link-active" id="week-planer-tab" data-bs-toggle="tab" data-bs-target="#week-planer"
+                            <button class="nav-link tasks-link shadow-class " id="week-planer-tab" data-bs-toggle="tab" data-bs-target="#week-planer"
                                 type="button" role="tab" aria-controls="week-planer" aria-selected="false">week planer</button>
                             <button class="nav-link tasks-link shadow-class" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
                                 type="button" role="tab" aria-controls="planning" aria-selected="false">planning</button>
@@ -61,7 +61,7 @@
 
                         <div class="search-tasks">
                             <input type="text" id="searchTasksInput" class="shadow-class">
-                            <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button>
+                            <!-- <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button> -->
                             <button id="searchTasksToRunningList" type="button" class="btn" onclick="searchTasks()" title="search"><i class="button-icon-extra-light fa-solid fa-magnifying-glass"></i></button>
                         </div>
 
@@ -72,10 +72,10 @@
                         </div>
                         
                         <div class="tab-content" id="tasksTabContent">
-                            <div class="tab-pane fade" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
+                            <div class="tab-pane fade show active" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
                                 <ul class="card-body__list" id="runningListCard"></ul>
                             </div>
-                            <div class="tab-pane fade show active" id="week-planer" role="tabpanel" aria-labelledby="week-planer-tab">
+                            <div class="tab-pane fade " id="week-planer" role="tabpanel" aria-labelledby="week-planer-tab">
                                 <div id="weekPlanerListCard" week-number="">
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">

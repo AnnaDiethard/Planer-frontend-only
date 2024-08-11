@@ -28,7 +28,7 @@ if(getTasksForCheckWeekNumber != null) {
     })
 }
 
-// определение текущего дня недели
+// определение текущего дня недели  
 const thisDayName = new Date().toString().substring(0, 3).toLocaleLowerCase()
 // открытие карточки текущего дня в недельном планере
 const weekPlanerListCardArr = document.querySelector('#weekPlanerListCard').querySelectorAll('.card-body__list')
@@ -853,7 +853,7 @@ function renderTaskForSearch(task) {
 function cleanSearchInput() {
     const searchTasksInput = document.querySelector('#searchTasksInput')
     searchTasksInput.value = ''
-    window.location.reload()
+    // window.location.reload()
 }
 
 // очистка строки поиска при выборе табов с задачами
