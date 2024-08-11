@@ -2,6 +2,13 @@
 [...document.querySelectorAll('[data-bs-toggle="tooltip"]')]
   .forEach(el => new bootstrap.Tooltip(el))
 
+  try {
+    console.log('С Днём Рождения!')
+    } catch(error) {
+    // я не уверен, что он сегодня
+    console.error('Error: ${error}')
+}
+
 // moment().calendar();
 console.log('calendar', moment().calendar())
 
@@ -137,15 +144,25 @@ function editTaskOpenDialog(el) {
     let taskInput = document.querySelector("#addTaskInput")
     taskInput.value = taskText
 
-    const taskStorypoints = task.storypoints
-    let storypointsInput = document.querySelector("#storypointsTaskInput")
-    storypointsInput.value = taskStorypoints
+    // const taskStorypoints = task.storypoints
+    // let storypointsInput = document.querySelector("#storypointsTaskInput")
+    // storypointsInput.value = taskStorypoints
 
     let taskStatus = task?.status
     if(taskStatus != '') {
-        const btnList = document.querySelector('#taskDialog').querySelectorAll('.btn-outline-light')
+        const btnList = document.querySelector('#checkedIconBlock').querySelectorAll('.btn-outline-light')
         btnList.forEach((el) => {
             if(el.id == taskStatus) {
+                el.classList.add('active')
+            }
+        })
+    }
+
+    let storypointsNumber = task?.storypoints
+    if(storypointsNumber != '') {
+        const btnList = document.querySelector('#checkedStorypointsBlock').querySelectorAll('.btn-outline-light')
+        btnList.forEach(el => {
+            if(el.innerHTML == storypointsNumber) {
                 el.classList.add('active')
             }
         })
@@ -185,11 +202,26 @@ addMoreNewTaskButton.addEventListener('click', () => {
 // создание новой задачи
 let taskStatus = ''
 let iconClass = ''
+let taskStorypoints = ''
 
 function chooseIcon(el) {
     taskStatus = el.id
     iconClass = el.querySelector('i').classList.value
+
     const btnArr = el.closest('.modal-dialog__btn-block').querySelectorAll('.btn-outline-light')
+    btnArr.forEach(el => {
+        if(el.classList.contains('active')) {
+            el.classList.remove('active')
+        }
+    })
+    el.classList.add('active')
+}
+
+function chooseStorypoints(el) {
+    let storypoints = el.innerHTML
+    taskStorypoints = Number(storypoints)
+
+    const btnArr = el.closest('.storypoints-input').querySelectorAll('.btn-outline-light')
     btnArr.forEach(el => {
         if(el.classList.contains('active')) {
             el.classList.remove('active')
@@ -219,8 +251,6 @@ function cleanTaskTextColorDropdownClass() {
 
 function createNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
-    let storypointsInputValue = document.querySelector("#storypointsTaskInput").value
-    let taskStorypoints = Number(storypointsInputValue)
 
     if(taskInputValue == '') {
         const errorText = document.querySelector('#errorText')
@@ -251,15 +281,20 @@ function createNewTask() {
 function cleanTaskForm() {
     const addTaskInputValue = document.querySelector("#addTaskInput")
     addTaskInputValue.value = ""
-    const storypointsTaskInputValue = document.querySelector("#storypointsTaskInput")
-    storypointsTaskInputValue.value = ""
     taskStatus = ''
     iconClass = ''
     taskDate = ''
     textColor = 'base-text-color'
 
-    const checkedBtn = document.querySelector('#taskDialog').querySelectorAll('.btn-outline-light')
-    checkedBtn.forEach(el => {
+    const checkedIconBtn = document.querySelector('#checkedIconBlock').querySelectorAll('.btn-outline-light')
+    checkedIconBtn.forEach(el => {
+        if(el.classList.contains('active')) {
+            el.classList.remove('active')
+        }
+    })
+
+    const checkedStorypointsBtn = document.querySelector('#checkedStorypointsBlock').querySelectorAll('.btn-outline-light')
+    checkedStorypointsBtn.forEach(el => {
         if(el.classList.contains('active')) {
             el.classList.remove('active')
         }
@@ -281,8 +316,6 @@ editTaskBtn.addEventListener('click', (el) => {
     el.preventDefault()
 
     const taskInputValue = document.querySelector("#addTaskInput").value
-    let storypointsInputValue = document.querySelector("#storypointsTaskInput").value
-    storypointsInputValue = Number(storypointsInputValue)
 
     if(taskInputValue == '') {
         const errorText = document.querySelector('#errorText')
@@ -300,11 +333,18 @@ editTaskBtn.addEventListener('click', (el) => {
 
         const taskIndex = tasks.indexOf(changedTask)
 
-        const btnList = document.querySelector('#taskDialog').querySelectorAll('.btn-outline-light')
-        btnList.forEach((el) => {
+        const btnIconList = document.querySelector('#checkedIconBlock').querySelectorAll('.btn-outline-light')
+        btnIconList.forEach((el) => {
             if(el.classList.contains('active')) {
                 taskStatus = el.id
                 iconClass = el.querySelector('i').classList.value
+            }
+        })
+
+        const btnStorypointsList = document.querySelector('#checkedStorypointsBlock').querySelectorAll('.btn-outline-light')
+        btnStorypointsList.forEach((el) => {
+            if(el.classList.contains('active')) {
+                taskStorypoints = el.innerHTML
             }
         })
 
@@ -341,7 +381,7 @@ editTaskBtn.addEventListener('click', (el) => {
         }
 
         changedTask.text = taskInputValue
-        changedTask.storypoints = storypointsInputValue
+        changedTask.storypoints = taskStorypoints
         changedTask.status = taskStatus
         changedTask.color = textColor
         changedTask.icon = iconClass
