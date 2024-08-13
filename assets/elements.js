@@ -352,8 +352,7 @@ function renderWidget() {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="card-body widget-card-body widget-list-card-body">
-                                        <div class="input-group widget-list__input-block">
+                                    <div class="input-group widget-list__input-block">
                                             <input type="text" class="form-control widget-list__input-text">
                                             <button type="button" class="input-group-text button-dark" onclick="addTaskToListWidget(this)">+</button>
                                             <div class="widget-btn-block">
@@ -361,7 +360,7 @@ function renderWidget() {
                                                 <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                             </div>
                                         </div>
-                                        
+                                    <div class="card-body widget-card-body widget-list-card-body">
                                         <ul class="widget-list__list"></ul>
                                     </div>
                                 </div>
@@ -393,8 +392,7 @@ function renderWidget() {
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="card-body widget-card-body widget-link-list-card-body">
-                                            <div class="widget-link-list__input-block ">
+                                        <div class="widget-link-list__input-block ">
                                                 <div style="width: 100%; padding-left: 1rem">
                                                     <div class="block-between">
                                                         <p style="width: 3rem">text</p>
@@ -408,11 +406,9 @@ function renderWidget() {
                                                 <button type="button" class="input-group-text button-dark" style="height: 5rem" onclick="addLinkToLinkListWidget(this)">+</button>
                                                 <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                             </div>
-                                            <div class="widget-btn-block">
-                                                
-                                            </div>
+                                        <div class="card-body widget-card-body widget-link-list-card-body">
                                             <ul class="widget-link-list__list"></ul>
-                                        </.div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>`
