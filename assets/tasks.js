@@ -2,13 +2,6 @@
 [...document.querySelectorAll('[data-bs-toggle="tooltip"]')]
   .forEach(el => new bootstrap.Tooltip(el))
 
-  try {
-    console.log('С Днём Рождения!')
-    } catch(error) {
-    // я не уверен, что он сегодня
-    console.error('Error: ${error}')
-}
-
 // moment().calendar();
 console.log('calendar', moment().calendar())
 
@@ -40,6 +33,39 @@ weekPlanerListCardArr.forEach(el => {
         el.closest('.card_day-card').classList.remove('border-bottom-right-radius')
     }
 })
+
+// установка активного таба задач
+let getActiveTaskTabItem = sessionStorage.getItem('saveActiveTaskTabItem')
+
+if(getActiveTaskTabItem == null) {
+    const baseTaskBtn = document.querySelector('#week-planer-tab')
+    baseTaskBtn.classList.add('active')
+    baseTaskBtn.classList.add('nav-link-active')
+    const baseTaskTab = document.querySelector('#week-planer')
+    baseTaskTab.classList.add('show')
+    baseTaskTab.classList.add('active')
+} else {
+    const tasksTabContentBtnItems = document.querySelector('#tasksTab').querySelectorAll('.nav-link')
+    tasksTabContentBtnItems.forEach(el => {
+        if(getActiveTaskTabItem.includes(el.id)) {
+            el.classList.add('active')
+            el.classList.add('nav-link-active')
+        }
+    })
+    const tasksTabContentBlockItems = document.querySelector('#tasksTabContent').querySelectorAll('.tab-pane')
+    tasksTabContentBlockItems.forEach(el => {
+        if(getActiveTaskTabItem.includes(el.id)) {
+            el.classList.add('show')
+            el.classList.add('active')
+        }
+    })
+}
+
+function saveActiveTaskTab(el) {
+    const saveActiveTaskTabId = el.id
+    getActiveTaskTabItem = saveActiveTaskTabId
+    sessionStorage.setItem('saveActiveTaskTabItem', JSON.stringify(getActiveTaskTabItem))
+}
 
 let tasks = []
 let doneTasks = []
