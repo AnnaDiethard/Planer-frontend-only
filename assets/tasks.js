@@ -2,13 +2,6 @@
 [...document.querySelectorAll('[data-bs-toggle="tooltip"]')]
   .forEach(el => new bootstrap.Tooltip(el))
 
-  try {
-    console.log('С Днём Рождения!')
-    } catch(error) {
-    // я не уверен, что он сегодня
-    console.error('Error: ${error}')
-}
-
 // moment().calendar();
 console.log('calendar', moment().calendar())
 
@@ -40,6 +33,39 @@ weekPlanerListCardArr.forEach(el => {
         el.closest('.card_day-card').classList.remove('border-bottom-right-radius')
     }
 })
+
+// установка активного таба задач
+let getActiveTaskTabItem = sessionStorage.getItem('saveActiveTaskTabItem')
+
+if(getActiveTaskTabItem == null) {
+    const baseTaskBtn = document.querySelector('#week-planer-tab')
+    baseTaskBtn.classList.add('active')
+    baseTaskBtn.classList.add('nav-link-active')
+    const baseTaskTab = document.querySelector('#week-planer')
+    baseTaskTab.classList.add('show')
+    baseTaskTab.classList.add('active')
+} else {
+    const tasksTabContentBtnItems = document.querySelector('#tasksTab').querySelectorAll('.nav-link')
+    tasksTabContentBtnItems.forEach(el => {
+        if(getActiveTaskTabItem.includes(el.id)) {
+            el.classList.add('active')
+            el.classList.add('nav-link-active')
+        }
+    })
+    const tasksTabContentBlockItems = document.querySelector('#tasksTabContent').querySelectorAll('.tab-pane')
+    tasksTabContentBlockItems.forEach(el => {
+        if(getActiveTaskTabItem.includes(el.id)) {
+            el.classList.add('show')
+            el.classList.add('active')
+        }
+    })
+}
+
+function saveActiveTaskTab(el) {
+    const saveActiveTaskTabId = el.id
+    getActiveTaskTabItem = saveActiveTaskTabId
+    sessionStorage.setItem('saveActiveTaskTabItem', JSON.stringify(getActiveTaskTabItem))
+}
 
 let tasks = []
 let doneTasks = []
@@ -80,6 +106,77 @@ function validationDialogCancel() {
 function validationDialogConfirm() {
     validationDialog.close()
 }
+
+// всплывающий блок с информацией по задачам дневной карточки
+const weekPlanerCardHeaders = document.querySelector('#weekPlanerListCard').querySelectorAll('.card-header__text')
+weekPlanerCardHeaders.forEach(el => {
+    el.addEventListener('mouseover', function handleMouseOver() {
+        const card = el.closest('.card')
+        const allTasksArr = card.querySelectorAll('li')
+        const allTasksSum = allTasksArr.length
+        let allStorypointsSum = 0
+        allTasksArr.forEach(el => {
+            let storypoints = el.querySelector('.running-list__storypoints').innerText
+            storypoints = Number(storypoints)
+            allStorypointsSum = allStorypointsSum + storypoints
+        })
+
+        const doneTasksArr = card.querySelector('.card-body').querySelectorAll('.day-card-list__item-block')
+        const doneTasksSum = doneTasksArr.length
+        let doneStorypointsSum = 0
+        doneTasksArr.forEach(el => {
+            let storypoints = el.querySelector('.running-list__storypoints').innerText
+            storypoints = Number(storypoints)
+            doneStorypointsSum = doneStorypointsSum + storypoints
+        })
+
+        const tasksInProgressArr = card.querySelector('.card-body').querySelectorAll('.running-list__task-block')
+        const tasksInProgressSum = tasksInProgressArr.length
+        let storypointsInProgressSum = 0
+        tasksInProgressArr.forEach(el => {
+            let storypoints = el.querySelector('.running-list__storypoints').innerText
+            storypoints = Number(storypoints)
+            storypointsInProgressSum = storypointsInProgressSum + storypoints
+        })
+
+
+        const label = el.closest('.card-header').querySelector('.card-header__label')
+        labelHTML = `<table class="table">
+                        <tr class="table-row">
+                            <td class="table-row-item">tasks</td>
+                            <td class="table-row-item">${allTasksSum}</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-row-item">storypoints</td>
+                            <td class="table-row-item">${allStorypointsSum}</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-row-item">done tasks</td>
+                            <td class="table-row-item">${doneTasksSum}</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-row-item">done storypoints</td>
+                            <td class="table-row-item">${doneStorypointsSum}</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-row-item">tasks in progress</td>
+                            <td class="table-row-item">${tasksInProgressSum}</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-row-item">storypoints in progress</td>
+                            <td class="table-row-item">${storypointsInProgressSum}</td>
+                        </tr>
+                    </table>`
+        
+        label.insertAdjacentHTML('beforebegin', labelHTML)
+        const table = el.closest('.card-header').querySelector('.table')
+        table.style.display = 'block'
+    })
+    el.addEventListener('mouseout', function handleMouseOut() {
+        const table = el.closest('.card-header').querySelector('.table')
+        table.style.display = 'none'
+    })
+})
 
 // открытие окна задачи (добавление)
 function addTaskOpenDialog() {
@@ -530,6 +627,7 @@ function renderTaskToWeekPlaner(task) {
     if(weekNumber == task.weekNumber) {
         if(task.done == true) {
             const taskHTML = `<li class="day-card-list__item-block" id="${task.id}">
+                                <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
                                 <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
                             </li>`
                         weekDayList.insertAdjacentHTML('beforeend', taskHTML)

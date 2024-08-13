@@ -50,13 +50,12 @@
                         </div>
 
                         <div class="nav-tasks" id="tasksTab" role="tablist">
-                            <button class="nav-link tasks-link shadow-class active nav-link-active" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
-                                type="button" role="tab" aria-controls="running-list" aria-selected="true">running list</button>
+                            <button class="nav-link tasks-link shadow-class" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
+                                type="button" role="tab" aria-controls="running-list" aria-selected="true" onclick="saveActiveTaskTab(this)">running list</button>
                             <button class="nav-link tasks-link shadow-class " id="week-planer-tab" data-bs-toggle="tab" data-bs-target="#week-planer"
-                                type="button" role="tab" aria-controls="week-planer" aria-selected="false">week planer</button>
+                                type="button" role="tab" aria-controls="week-planer" aria-selected="false" onclick="saveActiveTaskTab(this)">week planer</button>
                             <button class="nav-link tasks-link shadow-class" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
-                                type="button" role="tab" aria-controls="planning" aria-selected="false">planning</button>
-                            
+                                type="button" role="tab" aria-controls="planning" aria-selected="false" onclick="saveActiveTaskTab(this)">planning</button>
                         </div>
 
                         <div class="search-tasks">
@@ -72,14 +71,15 @@
                         </div>
                         
                         <div class="tab-content" id="tasksTabContent">
-                            <div class="tab-pane fade show active" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
+                            <div class="tab-pane fade" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
                                 <ul class="card-body__list" id="runningListCard"></ul>
                             </div>
-                            <div class="tab-pane fade " id="week-planer" role="tabpanel" aria-labelledby="week-planer-tab">
+                            <div class="tab-pane fade" id="week-planer" role="tabpanel" aria-labelledby="week-planer-tab">
                                 <div id="weekPlanerListCard" week-number="">
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
                                             <p class="card-header__text">monday</p>
+                                            <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
@@ -92,6 +92,7 @@
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
                                             <p class="card-header__text">tuesday</p>
+                                            <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
@@ -104,6 +105,7 @@
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
                                             <p class="card-header__text">wednesday</p>
+                                            <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
@@ -116,6 +118,7 @@
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
                                             <p class="card-header__text">thursday</p>
+                                            <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
@@ -128,6 +131,7 @@
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
                                             <p class="card-header__text">friday</p>
+                                            <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
@@ -140,6 +144,7 @@
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
                                             <p class="card-header__text">saturday</p>
+                                            <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
@@ -152,6 +157,7 @@
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
                                             <p class="card-header__text">sunday</p>
+                                            <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
@@ -165,6 +171,7 @@
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
                                             <p class="card-header__text">next weeks tasks</p>
+                                            <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
