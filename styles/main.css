@@ -185,6 +185,29 @@ body::-webkit-scrollbar-button:hover {
     margin-left: auto;
 }
 
+.card-header__label {
+    display: none;
+}
+    
+/* .card-header__text:hover + .card-header__label {
+    display: block;
+} */
+
+.card-header__label {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    /* background-color: var(--seconday-extra-light-color); */
+    display: none;
+}
+
+.table {
+    display: none;
+    z-index: 1;
+}
+
+.table-row-item {
+    background-color: var(--seconday-extra-light-color) !important;
+}
+
 .icon-tasks {
     padding-top: 2rem;
     display: flex;
