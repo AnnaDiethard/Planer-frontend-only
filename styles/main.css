@@ -510,6 +510,7 @@ main.main {
 .done-list__item {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .search-tasks {

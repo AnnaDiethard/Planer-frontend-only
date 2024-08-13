@@ -561,22 +561,6 @@ function chooseAllWeekDays() {
             el.classList.add('btn-outline-dark')
         }
     })
-
-    // if(el.classList.contains('btn-outline-dark')) {
-    //     el.classList.remove('btn-outline-dark')
-    //     chooseDayNameIDArr.forEach(el => {
-    //         if(el == chooseDayNameID) {
-    //             chooseDayNameIDArr = chooseDayNameIDArr.filter(item => item !== el)
-    //         }
-    //     })
-    // } else {
-    //     chooseDayNameIDArr.push(chooseDayNameID)
-    //     el.classList.add('btn-outline-dark')
-    // }  
-
-    // return chooseDayNameIDArr
-
-    console.log('chooseDayNameIDArr', chooseDayNameIDArr)
 }
 
 

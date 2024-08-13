@@ -241,10 +241,6 @@ function editTaskOpenDialog(el) {
     let taskInput = document.querySelector("#addTaskInput")
     taskInput.value = taskText
 
-    // const taskStorypoints = task.storypoints
-    // let storypointsInput = document.querySelector("#storypointsTaskInput")
-    // storypointsInput.value = taskStorypoints
-
     let taskStatus = task?.status
     if(taskStatus != '') {
         const btnList = document.querySelector('#checkedIconBlock').querySelectorAll('.btn-outline-light')
@@ -536,6 +532,7 @@ function renderTaskToRunningList(task) {
     if(task.done == true) {
         const taskHTML = `<li class="done-list__item" id="${task.id}" >
                             <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                            <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                         </li>`
         runningListCard.insertAdjacentHTML('beforeend', taskHTML)
     } else if(task.date && task.storypoints == 0) {
@@ -626,9 +623,12 @@ function renderTaskToWeekPlaner(task) {
 
     if(weekNumber == task.weekNumber) {
         if(task.done == true) {
-            const taskHTML = `<li class="day-card-list__item-block" id="${task.id}">
-                                <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
-                                <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+            const taskHTML = `<li class="day-card-list__item-block done-list__item" id="${task.id}">
+                                <div>
+                                    <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
+                                    <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                                </div>
+                                <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                             </li>`
                         weekDayList.insertAdjacentHTML('beforeend', taskHTML)
         } else if(task.storypoints) {
@@ -669,8 +669,9 @@ function renderTaskToWeekPlaner(task) {
         }
     } else if(weekNumber < task.weekNumber) {
         if(task.done == true) {
-            const taskHTML = `<li class="day-card-list__item" id="${task.id}">
+            const taskHTML = `<li class="day-card-list__item done-list__item" id="${task.id}">
                                 <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                                <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                             </li>`
             nextWeekTasksList.insertAdjacentHTML('beforeend', taskHTML)
         } else if(task.storypoints) {
@@ -719,6 +720,7 @@ function renderTaskToPlanningList(task) {
     if(task.done == true) {
         const taskHTML = `<li class="done-list__item" id="${task.id}">
                             <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                            <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                         </li>`
             planningListCard.insertAdjacentHTML('beforeend', taskHTML)
     } else if(task.storypoints != 0) {
@@ -764,6 +766,19 @@ function markTheTaskCompleted(el) {
         if(task.id == id) {
             task.done = true
         } 
+    })
+
+    saveTasksListInLocalStorage(tasks)
+    window.location.reload();
+}
+
+// отмена выделения выполненных задач
+function removeDoneTask(el) {
+    const taskId = el.closest('li').id
+    tasks.forEach(el => {
+        if(taskId == el.id) {
+            el.done = false
+        }
     })
 
     saveTasksListInLocalStorage(tasks)
