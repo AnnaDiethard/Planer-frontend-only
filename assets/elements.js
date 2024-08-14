@@ -31,6 +31,7 @@ widgetsArr.forEach(el => {
     const navWidgetLinkArr = el.querySelectorAll('.nav-link')
     navWidgetLinkArr.forEach(el => {
         el.classList.remove('active')
+        el.classList.remove('nav-widget-active-link')
         // thisDayName определяется в скрипте tasks
         if(el.innerText.toLocaleLowerCase() == thisDayName) {
             el.classList.add('active')
@@ -54,17 +55,18 @@ widgetsArr.forEach(el => {
 })
 
 // костыль для починки переключения табов в недельном виджете когда у бутстрапа отлетает кукуха
-widgetsArr.forEach(el => {
-    const navWidgetLinkArr = el.querySelectorAll('.nav-link')
-    navWidgetLinkArr.forEach(el => {
-        el.addEventListener('click', () => {
-            navWidgetLinkArr.forEach(s => {
-                s.classList.remove('active')
-            })
-            el.classList.add('active')
-        })
-    })
-})
+// widgetsArr.forEach(el => {
+//     const navWidgetLinkArr = el.querySelectorAll('.nav-link')
+//     console.log('navWidgetLinkArr', navWidgetLinkArr)
+//     navWidgetLinkArr.forEach(el => {
+//         el.addEventListener('click', () => {
+//             navWidgetLinkArr.forEach(s => {
+//                 s.classList.remove('active')
+//             })
+//             el.classList.add('active')
+//         })
+//     })
+// })
 
 // ОБЩИЕ ФУНКЦИИ
 
