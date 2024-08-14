@@ -31,6 +31,7 @@ widgetsArr.forEach(el => {
     const navWidgetLinkArr = el.querySelectorAll('.nav-link')
     navWidgetLinkArr.forEach(el => {
         el.classList.remove('active')
+        el.classList.remove('nav-widget-active-link')
         // thisDayName определяется в скрипте tasks
         if(el.innerText.toLocaleLowerCase() == thisDayName) {
             el.classList.add('active')
@@ -49,19 +50,6 @@ widgetsArr.forEach(el => {
                 el.classList.add('active')
                 
             }
-        })
-    })
-})
-
-// костыль для починки переключения табов в недельном виджете когда у бутстрапа отлетает кукуха
-widgetsArr.forEach(el => {
-    const navWidgetLinkArr = el.querySelectorAll('.nav-link')
-    navWidgetLinkArr.forEach(el => {
-        el.addEventListener('click', () => {
-            navWidgetLinkArr.forEach(s => {
-                s.classList.remove('active')
-            })
-            el.classList.add('active')
         })
     })
 })
@@ -352,8 +340,7 @@ function renderWidget() {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="card-body widget-card-body widget-list-card-body">
-                                        <div class="input-group widget-list__input-block">
+                                    <div class="input-group widget-list__input-block">
                                             <input type="text" class="form-control widget-list__input-text">
                                             <button type="button" class="input-group-text button-dark" onclick="addTaskToListWidget(this)">+</button>
                                             <div class="widget-btn-block">
@@ -361,7 +348,7 @@ function renderWidget() {
                                                 <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                             </div>
                                         </div>
-                                        
+                                    <div class="card-body widget-card-body widget-list-card-body">
                                         <ul class="widget-list__list"></ul>
                                     </div>
                                 </div>
@@ -393,8 +380,7 @@ function renderWidget() {
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="card-body widget-card-body widget-link-list-card-body">
-                                            <div class="widget-link-list__input-block ">
+                                        <div class="widget-link-list__input-block ">
                                                 <div style="width: 100%; padding-left: 1rem">
                                                     <div class="block-between">
                                                         <p style="width: 3rem">text</p>
@@ -408,11 +394,9 @@ function renderWidget() {
                                                 <button type="button" class="input-group-text button-dark" style="height: 5rem" onclick="addLinkToLinkListWidget(this)">+</button>
                                                 <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                             </div>
-                                            <div class="widget-btn-block">
-                                                
-                                            </div>
+                                        <div class="card-body widget-card-body widget-link-list-card-body">
                                             <ul class="widget-link-list__list"></ul>
-                                        </.div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>`
@@ -535,7 +519,6 @@ function chooseWeekDay(el) {
     const chooseDayNameID = el.getAttribute('data-day-name')
 
     if(el.classList.contains('btn-outline-dark')) {
-        console.log(222)
         el.classList.remove('btn-outline-dark')
         chooseDayNameIDArr.forEach(el => {
             if(el == chooseDayNameID) {
@@ -547,15 +530,13 @@ function chooseWeekDay(el) {
         el.classList.add('btn-outline-dark')
     }  
 
-    console.log('chooseDayNameIDArr', chooseDayNameIDArr)
     return chooseDayNameIDArr
 }
 
+// выбор всех дней
 function chooseAllWeekDays() {
     const dataDayNamesBlock = document.querySelector('#dataDayNamesBlock')
-    console.log('dataDayNamesBlock', dataDayNamesBlock)
     const dataDayNames = dataDayNamesBlock.querySelectorAll('.data-day-name')
-    console.log('dataDayNames', dataDayNames)
 
     dataDayNames.forEach(el => {
         if(el.classList.contains('btn-outline-light')) {
@@ -565,24 +546,7 @@ function chooseAllWeekDays() {
             el.classList.add('btn-outline-dark')
         }
     })
-
-    // if(el.classList.contains('btn-outline-dark')) {
-    //     el.classList.remove('btn-outline-dark')
-    //     chooseDayNameIDArr.forEach(el => {
-    //         if(el == chooseDayNameID) {
-    //             chooseDayNameIDArr = chooseDayNameIDArr.filter(item => item !== el)
-    //         }
-    //     })
-    // } else {
-    //     chooseDayNameIDArr.push(chooseDayNameID)
-    //     el.classList.add('btn-outline-dark')
-    // }  
-
-    // return chooseDayNameIDArr
-
-    console.log('chooseDayNameIDArr', chooseDayNameIDArr)
 }
-
 
 // добавление ссылки
 function addUrlToEveryWeekGoalWidgetItem() {
@@ -593,10 +557,10 @@ function addUrlToEveryWeekGoalWidgetItem() {
 }
 
 // добавление контента в виджет
-function addTaskToEveryWeekGoalWidget() {
+function addContentToEveryWeekGoalWidget() {
+    let taskValueText = document.querySelector('#everyWeekGoalWidgetContentText').value
+    let taskValueUrl = document.querySelector('#everyWeekGoalWidgetContentUrl').value
     const dayNames = chooseDayNameIDArr
-    let taskValueText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#everyWeekGoalWidgetContentText').value
-    let taskValueUrl = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#everyWeekGoalWidgetContentUrl').value
     let item = ''
     if(taskValueUrl == '') {
         item = `<li class="widget-every-week-goal__item " data-task-id="">
@@ -637,10 +601,38 @@ function addTaskToEveryWeekGoalWidget() {
 
         taskValueText = ''
         saveWidgets()
-        
-        addTaskToEveryWeekGoalsWidgetDialog.close()
-        window.location.reload();
     }
+}
+
+// очистка элементов окна добавления контента
+function cleanEveryWeekGoalWidgetDialog() {
+    const everyWeekGoalWidgetContentText = document.querySelector('#everyWeekGoalWidgetContentText')
+    everyWeekGoalWidgetContentText.value = ''
+    const everyWeekGoalWidgetContentUrl = document.querySelector('#everyWeekGoalWidgetContentUrl')
+    everyWeekGoalWidgetContentUrl.value = ''
+    chooseDayNameIDArr = []
+    const dataDayNamesBlock = document.querySelector('#dataDayNamesBlock')
+    const dataDayNames = dataDayNamesBlock.querySelectorAll('.data-day-name')
+    dataDayNames.forEach(el => {
+        if(el.classList.contains('btn-outline-dark')) {
+            el.classList.add('btn-outline-light')
+            el.classList.remove('btn-outline-dark')
+        }
+    })
+}
+
+// добавление элемента в виджет
+function addTaskToEveryWeekGoalWidget() {
+    addContentToEveryWeekGoalWidget()
+    cleanEveryWeekGoalWidgetDialog()
+    addTaskToEveryWeekGoalsWidgetDialog.close()
+    window.location.reload();
+}
+
+// добавление следующего элемента в виджет
+function addMoreTaskToEveryWeekGoalWidget() {
+    addContentToEveryWeekGoalWidget()
+    cleanEveryWeekGoalWidgetDialog()
 }
 
 // выделение элемента недельного виджета как выполненного

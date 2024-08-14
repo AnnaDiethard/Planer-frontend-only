@@ -9,6 +9,7 @@ function alertWindow() {
     alert('функционал в разработке')
 }
 
+// сброс номера недели задачи при смене недели на следующую
 const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
 let thisWeekNumber = document.querySelector('#weekPlanerListCard').getAttribute('week-number')
 thisWeekNumber = getThisWeekNumber
@@ -61,12 +62,14 @@ if(getActiveTaskTabItem == null) {
     })
 }
 
+// сохранение в течении сессии выбранного таба задач
 function saveActiveTaskTab(el) {
     const saveActiveTaskTabId = el.id
     getActiveTaskTabItem = saveActiveTaskTabId
     sessionStorage.setItem('saveActiveTaskTabItem', JSON.stringify(getActiveTaskTabItem))
 }
 
+// устнановка глобальных переменных
 let tasks = []
 let doneTasks = []
 let taskDate = ''
@@ -98,14 +101,157 @@ const validationDialog = document.querySelector('#validationDialog')
 function openValidationDialog() {
     validationDialog.showModal()
 }
-
 function validationDialogCancel() {
     window.location.reload()
 }
-
 function validationDialogConfirm() {
     validationDialog.close()
 }
+
+// открытие/скрытие поиска
+function openSearchBlock() {
+    const searchTasksBlock = document.querySelector('#searchTasksBlock')
+    if(searchTasksBlock.classList.contains('hide-class')) {
+        searchTasksBlock.classList.remove('hide-class')
+    } else {
+        searchTasksBlock.classList.add('hide-class')
+    }
+}
+
+// поиск по задачам
+function searchTasks() {
+    const searchListCardItems = document.querySelector("#search").querySelectorAll('li')
+    searchListCardItems.forEach(el => {
+        el.remove()
+    })
+
+    const tasksTabContentItems = document.querySelector('#tasksTabContent').querySelectorAll('.tab-pane')
+    tasksTabContentItems.forEach(el => {
+        if(el.classList.contains('active')) {
+            el.classList.remove('show')
+            el.classList.remove('active')
+        }
+    })
+    const tasksNavContentItems = document.querySelector('#tasksTab').querySelectorAll('.nav-link')
+    tasksNavContentItems.forEach(el => {
+        if(el.classList.contains('active')) {
+            el.classList.remove('active')
+        }
+    })
+
+    const searchListCard = document.querySelector('#search')
+    searchListCard.classList.add('show')
+    searchListCard.classList.add('active')
+    const searchTasksInputValue = document.querySelector('#searchTasksInput').value
+
+    tasks.forEach(el => {
+        if(el.text.includes(searchTasksInputValue)) {
+            renderTaskForSearch(el)
+        }
+    })
+}
+
+// рендер задачи для поиска
+function renderTaskForSearch(task) {
+    const searchListCard = document.querySelector("#searchListCard")
+
+    if(task.done == true) {
+        const taskHTML = `<li class="card-list__item" id="${task.id}" >
+                            <div class="card-list__item-block">
+                                <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                            </div>
+                        </li>`
+        searchListCard.insertAdjacentHTML('beforeend', taskHTML)
+    } else if(task.date && task.storypoints == 0) {
+        const taskHTML = `<li class="running-list__item" id="${task.id}">
+                            <div class="running-list__task-block">
+                                <div class="running-list__task-block-info">
+                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                    <div class="running-list__task-block-settings">
+                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
+                                    </div>
+                                    <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                </div>
+                                <p class="form-date-label">дедлайн ${task.date}</p>
+                            </div>
+                            <div class="task-list__icon-block">
+                                <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                            </div>
+                        </li>`
+        searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
+    } else if(task.storypoints && task.date == '') {
+        const taskHTML = `<li class="running-list__item" id="${task.id}">
+                            <div class="running-list__task-block">
+                                <div class="running-list__task-block-info">
+                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                    <div class="running-list__task-block-settings">
+                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
+                                        <button class="running-list__storypoints">${task.storypoints}</button>
+                                    </div>
+                                    <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                </div>
+                            </div>
+                            <div class="task-list__icon-block">
+                                <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                            </div>
+                        </li>`
+        searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
+    } else if(task.date && task.storypoints) {
+        const taskHTML = `<li class="running-list__item" id="${task.id}">
+                            <div class="running-list__task-block">
+                                <div class="running-list__task-block-info">
+                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                    <div class="running-list__task-block-settings">
+                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
+                                        <button class="running-list__storypoints">${task.storypoints}</button>
+                                    </div>
+                                    <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                </div>
+                                <p class="form-date-label">дедлайн ${task.date}</p>
+                            </div>
+                            <div class="task-list__icon-block">
+                                <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                            </div>
+                        </li>`
+        searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
+    } else {
+        const taskHTML = `<li class="running-list__item" id="${task.id}">
+                            <div class="running-list__task-block">
+                                <div class="running-list__task-block-info">
+                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                    <div class="running-list__task-block-settings">
+                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
+                                        <button class="running-list__storypoints">${task.storypoints}</button>
+                                    </div>
+                                    <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                </div>
+                            </div>
+                            <div class="task-list__icon-block">
+                                <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                            </div>
+                        </li>`
+        searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
+    }
+}
+
+// очистка строки поиска по кнопке
+function cleanSearchInput() {
+    const searchTasksInput = document.querySelector('#searchTasksInput')
+    searchTasksInput.value = ''
+    // window.location.reload()
+}
+
+// очистка строки поиска при выборе табов с задачами
+const tasksTabItems = document.querySelector('#tasksTab').querySelectorAll('.nav-link')
+tasksTabItems.forEach(el => {
+    el.addEventListener('click', () => {
+        cleanSearchInput()
+    })
+})
 
 // всплывающий блок с информацией по задачам дневной карточки
 const weekPlanerCardHeaders = document.querySelector('#weekPlanerListCard').querySelectorAll('.card-header__text')
@@ -241,10 +387,6 @@ function editTaskOpenDialog(el) {
     let taskInput = document.querySelector("#addTaskInput")
     taskInput.value = taskText
 
-    // const taskStorypoints = task.storypoints
-    // let storypointsInput = document.querySelector("#storypointsTaskInput")
-    // storypointsInput.value = taskStorypoints
-
     let taskStatus = task?.status
     if(taskStatus != '') {
         const btnList = document.querySelector('#checkedIconBlock').querySelectorAll('.btn-outline-light')
@@ -296,11 +438,12 @@ addMoreNewTaskButton.addEventListener('click', () => {
     cleanTaskForm()
 })
 
-// создание новой задачи
+// переменные для создания задачи
 let taskStatus = ''
 let iconClass = ''
 let taskStorypoints = ''
 
+// выбор иконки
 function chooseIcon(el) {
     taskStatus = el.id
     iconClass = el.querySelector('i').classList.value
@@ -314,6 +457,7 @@ function chooseIcon(el) {
     el.classList.add('active')
 }
 
+// выбор сторипоинтов
 function chooseStorypoints(el) {
     let storypoints = el.innerHTML
     taskStorypoints = Number(storypoints)
@@ -339,6 +483,7 @@ function chooseTaskTextColor(el) {
     dropdownBtn.setAttribute('data-color', textColor)
 }
 
+// очистка дропдауна выбора цвета текста задачи
 function cleanTaskTextColorDropdownClass() {
     dropdownBtn.classList = ''
     dropdownBtn.classList.add('btn')
@@ -346,6 +491,7 @@ function cleanTaskTextColorDropdownClass() {
     dropdownBtn.classList.add('dropdown-toggle')
 }
 
+// создание новой задачи
 function createNewTask() {
     const taskInputValue = document.querySelector("#addTaskInput").value
 
@@ -536,6 +682,7 @@ function renderTaskToRunningList(task) {
     if(task.done == true) {
         const taskHTML = `<li class="done-list__item" id="${task.id}" >
                             <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                            <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                         </li>`
         runningListCard.insertAdjacentHTML('beforeend', taskHTML)
     } else if(task.date && task.storypoints == 0) {
@@ -626,9 +773,12 @@ function renderTaskToWeekPlaner(task) {
 
     if(weekNumber == task.weekNumber) {
         if(task.done == true) {
-            const taskHTML = `<li class="day-card-list__item-block" id="${task.id}">
-                                <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
-                                <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+            const taskHTML = `<li class="day-card-list__item-block done-list__item" id="${task.id}">
+                                <div>
+                                    <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
+                                    <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                                </div>
+                                <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                             </li>`
                         weekDayList.insertAdjacentHTML('beforeend', taskHTML)
         } else if(task.storypoints) {
@@ -669,8 +819,9 @@ function renderTaskToWeekPlaner(task) {
         }
     } else if(weekNumber < task.weekNumber) {
         if(task.done == true) {
-            const taskHTML = `<li class="day-card-list__item" id="${task.id}">
+            const taskHTML = `<li class="day-card-list__item done-list__item" id="${task.id}">
                                 <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                                <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                             </li>`
             nextWeekTasksList.insertAdjacentHTML('beforeend', taskHTML)
         } else if(task.storypoints) {
@@ -719,6 +870,7 @@ function renderTaskToPlanningList(task) {
     if(task.done == true) {
         const taskHTML = `<li class="done-list__item" id="${task.id}">
                             <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                            <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                         </li>`
             planningListCard.insertAdjacentHTML('beforeend', taskHTML)
     } else if(task.storypoints != 0) {
@@ -764,6 +916,19 @@ function markTheTaskCompleted(el) {
         if(task.id == id) {
             task.done = true
         } 
+    })
+
+    saveTasksListInLocalStorage(tasks)
+    window.location.reload();
+}
+
+// отмена выделения выполненных задач
+function removeDoneTask(el) {
+    const taskId = el.closest('li').id
+    tasks.forEach(el => {
+        if(taskId == el.id) {
+            el.done = false
+        }
     })
 
     saveTasksListInLocalStorage(tasks)
@@ -825,142 +990,6 @@ function rollUpWeekDayCard(el) {
     el.closest('.card_day-card').querySelector('.card-body').classList.add('hide-class')
     el.closest('.card_day-card').classList.add('border-bottom-right-radius')
 }
-
-// поиск по задачам
-
-function searchTasks() {
-    const searchListCardItems = document.querySelector("#search").querySelectorAll('li')
-    searchListCardItems.forEach(el => {
-        el.remove()
-    })
-
-    const tasksTabContentItems = document.querySelector('#tasksTabContent').querySelectorAll('.tab-pane')
-    tasksTabContentItems.forEach(el => {
-        if(el.classList.contains('active')) {
-            el.classList.remove('show')
-            el.classList.remove('active')
-        }
-    })
-    const tasksNavContentItems = document.querySelector('#tasksTab').querySelectorAll('.nav-link')
-    tasksNavContentItems.forEach(el => {
-        if(el.classList.contains('active')) {
-            el.classList.remove('active')
-        }
-    })
-
-    const searchListCard = document.querySelector('#search')
-    searchListCard.classList.add('show')
-    searchListCard.classList.add('active')
-    const searchTasksInputValue = document.querySelector('#searchTasksInput').value
-
-    tasks.forEach(el => {
-        if(el.text.includes(searchTasksInputValue)) {
-            renderTaskForSearch(el)
-        }
-    })
-}
-
-// рендер задачи для поиска
-function renderTaskForSearch(task) {
-    const searchListCard = document.querySelector("#searchListCard")
-
-    if(task.done == true) {
-        const taskHTML = `<li class="card-list__item" id="${task.id}" >
-                            <div class="card-list__item-block">
-                                <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
-                            </div>
-                        </li>`
-        searchListCard.insertAdjacentHTML('beforeend', taskHTML)
-    } else if(task.date && task.storypoints == 0) {
-        const taskHTML = `<li class="running-list__item" id="${task.id}">
-                            <div class="running-list__task-block">
-                                <div class="running-list__task-block-info">
-                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                    <div class="running-list__task-block-settings">
-                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
-                                    </div>
-                                    <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
-                                </div>
-                                <p class="form-date-label">дедлайн ${task.date}</p>
-                            </div>
-                            <div class="task-list__icon-block">
-                                <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
-                            </div>
-                        </li>`
-        searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
-    } else if(task.storypoints && task.date == '') {
-        const taskHTML = `<li class="running-list__item" id="${task.id}">
-                            <div class="running-list__task-block">
-                                <div class="running-list__task-block-info">
-                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                    <div class="running-list__task-block-settings">
-                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
-                                        <button class="running-list__storypoints">${task.storypoints}</button>
-                                    </div>
-                                    <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
-                                </div>
-                            </div>
-                            <div class="task-list__icon-block">
-                                <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
-                            </div>
-                        </li>`
-        searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
-    } else if(task.date && task.storypoints) {
-        const taskHTML = `<li class="running-list__item" id="${task.id}">
-                            <div class="running-list__task-block">
-                                <div class="running-list__task-block-info">
-                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                    <div class="running-list__task-block-settings">
-                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
-                                        <button class="running-list__storypoints">${task.storypoints}</button>
-                                    </div>
-                                    <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
-                                </div>
-                                <p class="form-date-label">дедлайн ${task.date}</p>
-                            </div>
-                            <div class="task-list__icon-block">
-                                <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
-                            </div>
-                        </li>`
-        searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
-    } else {
-        const taskHTML = `<li class="running-list__item" id="${task.id}">
-                            <div class="running-list__task-block">
-                                <div class="running-list__task-block-info">
-                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                    <div class="running-list__task-block-settings">
-                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
-                                        <button class="running-list__storypoints">${task.storypoints}</button>
-                                    </div>
-                                    <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
-                                </div>
-                            </div>
-                            <div class="task-list__icon-block">
-                                <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
-                            </div>
-                        </li>`
-        searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
-    }
-}
-
-// очистка строки поиска по кнопке
-function cleanSearchInput() {
-    const searchTasksInput = document.querySelector('#searchTasksInput')
-    searchTasksInput.value = ''
-    // window.location.reload()
-}
-
-// очистка строки поиска при выборе табов с задачами
-const tasksTabItems = document.querySelector('#tasksTab').querySelectorAll('.nav-link')
-tasksTabItems.forEach(el => {
-    el.addEventListener('click', () => {
-        cleanSearchInput()
-    })
-})
 
 function addCalendarDateOpenDialog() {
     alertWindow()

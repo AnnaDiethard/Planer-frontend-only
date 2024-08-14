@@ -288,6 +288,7 @@
 .widget-list__list {
     padding: 0;
     margin: 0;
+    overflow-y: auto;
 }
 
 .widget-list__item {

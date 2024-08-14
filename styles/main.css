@@ -209,7 +209,7 @@ body::-webkit-scrollbar-button:hover {
 }
 
 .icon-tasks {
-    padding-top: 2rem;
+    padding-top: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: end;
@@ -510,6 +510,7 @@ main.main {
 .done-list__item {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .search-tasks {
@@ -637,6 +638,11 @@ main.main {
     margin: 0.5rem;
 }
 
+.nav-tabs .nav-link.active {
+    background: none;
+    color: var(--accent-base-color);
+}
+
 .btn-outline-light:focus-visible {
     color: var(--accent-base-color);
     border-color: var(--accent-base-color);
@@ -664,7 +670,7 @@ main.main {
     justify-content: center;
 }
 
-.fa-magnifying-glass {
+.icon-max {
     font-size: 26px;
     padding-top: 3px;
 }
@@ -820,7 +826,7 @@ main.main {
 }
 
 .modal-body {
-    min-height: 15rem;
+    min-height: 8rem;
     height: fit-content;
 }
 
