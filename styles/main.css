@@ -209,7 +209,7 @@ body::-webkit-scrollbar-button:hover {
 }
 
 .icon-tasks {
-    padding-top: 2rem;
+    padding-top: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: end;
@@ -665,7 +665,7 @@ main.main {
     justify-content: center;
 }
 
-.fa-magnifying-glass {
+.icon-max {
     font-size: 26px;
     padding-top: 3px;
 }
