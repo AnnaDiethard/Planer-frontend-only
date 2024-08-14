@@ -54,20 +54,6 @@ widgetsArr.forEach(el => {
     })
 })
 
-// костыль для починки переключения табов в недельном виджете когда у бутстрапа отлетает кукуха
-// widgetsArr.forEach(el => {
-//     const navWidgetLinkArr = el.querySelectorAll('.nav-link')
-//     console.log('navWidgetLinkArr', navWidgetLinkArr)
-//     navWidgetLinkArr.forEach(el => {
-//         el.addEventListener('click', () => {
-//             navWidgetLinkArr.forEach(s => {
-//                 s.classList.remove('active')
-//             })
-//             el.classList.add('active')
-//         })
-//     })
-// })
-
 // ОБЩИЕ ФУНКЦИИ
 
 // название виджета
@@ -533,7 +519,6 @@ function chooseWeekDay(el) {
     const chooseDayNameID = el.getAttribute('data-day-name')
 
     if(el.classList.contains('btn-outline-dark')) {
-        console.log(222)
         el.classList.remove('btn-outline-dark')
         chooseDayNameIDArr.forEach(el => {
             if(el == chooseDayNameID) {
@@ -545,15 +530,13 @@ function chooseWeekDay(el) {
         el.classList.add('btn-outline-dark')
     }  
 
-    console.log('chooseDayNameIDArr', chooseDayNameIDArr)
     return chooseDayNameIDArr
 }
 
+// выбор всех дней
 function chooseAllWeekDays() {
     const dataDayNamesBlock = document.querySelector('#dataDayNamesBlock')
-    console.log('dataDayNamesBlock', dataDayNamesBlock)
     const dataDayNames = dataDayNamesBlock.querySelectorAll('.data-day-name')
-    console.log('dataDayNames', dataDayNames)
 
     dataDayNames.forEach(el => {
         if(el.classList.contains('btn-outline-light')) {
@@ -565,7 +548,6 @@ function chooseAllWeekDays() {
     })
 }
 
-
 // добавление ссылки
 function addUrlToEveryWeekGoalWidgetItem() {
     const addUrlToEveryWeekGoalWidgetItemBlock = document.querySelector('#addUrlToEveryWeekGoalWidgetItemBlock')
@@ -575,10 +557,10 @@ function addUrlToEveryWeekGoalWidgetItem() {
 }
 
 // добавление контента в виджет
-function addTaskToEveryWeekGoalWidget() {
+function addContentToEveryWeekGoalWidget() {
+    let taskValueText = document.querySelector('#everyWeekGoalWidgetContentText').value
+    let taskValueUrl = document.querySelector('#everyWeekGoalWidgetContentUrl').value
     const dayNames = chooseDayNameIDArr
-    let taskValueText = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#everyWeekGoalWidgetContentText').value
-    let taskValueUrl = document.querySelector('#everyWeekGoalWidgetDialog').querySelector('#everyWeekGoalWidgetContentUrl').value
     let item = ''
     if(taskValueUrl == '') {
         item = `<li class="widget-every-week-goal__item " data-task-id="">
@@ -619,10 +601,38 @@ function addTaskToEveryWeekGoalWidget() {
 
         taskValueText = ''
         saveWidgets()
-        
-        addTaskToEveryWeekGoalsWidgetDialog.close()
-        window.location.reload();
     }
+}
+
+// очистка элементов окна добавления контента
+function cleanEveryWeekGoalWidgetDialog() {
+    const everyWeekGoalWidgetContentText = document.querySelector('#everyWeekGoalWidgetContentText')
+    everyWeekGoalWidgetContentText.value = ''
+    const everyWeekGoalWidgetContentUrl = document.querySelector('#everyWeekGoalWidgetContentUrl')
+    everyWeekGoalWidgetContentUrl.value = ''
+    chooseDayNameIDArr = []
+    const dataDayNamesBlock = document.querySelector('#dataDayNamesBlock')
+    const dataDayNames = dataDayNamesBlock.querySelectorAll('.data-day-name')
+    dataDayNames.forEach(el => {
+        if(el.classList.contains('btn-outline-dark')) {
+            el.classList.add('btn-outline-light')
+            el.classList.remove('btn-outline-dark')
+        }
+    })
+}
+
+// добавление элемента в виджет
+function addTaskToEveryWeekGoalWidget() {
+    addContentToEveryWeekGoalWidget()
+    cleanEveryWeekGoalWidgetDialog()
+    addTaskToEveryWeekGoalsWidgetDialog.close()
+    window.location.reload();
+}
+
+// добавление следующего элемента в виджет
+function addMoreTaskToEveryWeekGoalWidget() {
+    addContentToEveryWeekGoalWidget()
+    cleanEveryWeekGoalWidgetDialog()
 }
 
 // выделение элемента недельного виджета как выполненного
