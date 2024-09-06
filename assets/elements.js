@@ -394,7 +394,7 @@ function renderWidget() {
                                                         <input type="text" class="form-control widget-link-list__input-text" id="linkListWidgetContentUrl">
                                                     </div>
                                                 </div>
-                                                <button type="button" class="input-group-text button-dark" style="height: 5rem" onclick="addLinkToLinkListWidget(this)">+</button>
+                                                <button type="button" class="input-group-text button-dark" style="height: 4.5rem; border-radius: 0;" onclick="addLinkToLinkListWidget(this)">+</button>
                                                 <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                             </div>
                                             <div class="card-body widget-link-list-card-body">

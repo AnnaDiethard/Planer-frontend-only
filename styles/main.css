@@ -184,10 +184,6 @@ body::-webkit-scrollbar-button:hover {
     right: 0;
     margin-left: auto;
 }
-
-.card-header__label {
-    display: none;
-}
     
 /* .card-header__text:hover + .card-header__label {
     display: block;
@@ -312,7 +308,7 @@ main.main {
 }
 
 .card-header_day-card {
-    height: 4rem;
+    height: 3rem;
     color: var(--seconday-base-color);
     display: flex;
     flex-direction: row;
@@ -327,8 +323,8 @@ main.main {
 }
 
 .task-card-header__icon-button {
-    height: 4rem;
-    width: 4rem;
+    height: 3rem;
+    width: 3rem;
     border-radius: 100px;
     border: none;
     background-color: var(--primaty-light-color);
