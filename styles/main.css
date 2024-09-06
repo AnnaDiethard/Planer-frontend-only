@@ -10,8 +10,9 @@
     --seconday-light-color: rgb(136, 136, 136);
     --seconday-extra-light-color: rgb(204, 204, 204);
     /* акцентный цвет */
-    --accent-base-color: rgb(221, 137, 42);
+    --accent-base-color: rgb(250, 175, 89);
     --accent-light-color: rgba(196, 121, 35, 0.5);
+    --accent-dark-color: rgb(209, 119, 16);
     /* цвета статусов задач */
     --icon-high-color: #9E3131;
     --icon-medium-color: #B28136;
@@ -559,6 +560,7 @@ main.main {
     width: 1.5rem;
     margin-left: 5px;
     margin-bottom: 3px;
+    padding-top: 3px;
     font-size: 14px;
 }
 
