@@ -347,6 +347,7 @@ main.main {
 .widget-btn-block__button {
     padding-inline: 0.3rem;
     font-size: 18px;
+    color: var(--seconday-light-color);
 }
 
 .card-body {
