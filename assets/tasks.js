@@ -262,7 +262,12 @@ weekPlanerCardHeaders.forEach(el => {
         const allTasksSum = allTasksArr.length
         let allStorypointsSum = 0
         allTasksArr.forEach(el => {
-            let storypoints = el.querySelector('.running-list__storypoints').innerText
+            let storypoints = '' 
+            if(el.querySelector('.running-list__storypoints')) {
+                storypoints = el.querySelector('.running-list__storypoints').innerText
+            } else {
+                storypoints = 0
+            }
             storypoints = Number(storypoints)
             allStorypointsSum = allStorypointsSum + storypoints
         })
@@ -271,7 +276,12 @@ weekPlanerCardHeaders.forEach(el => {
         const doneTasksSum = doneTasksArr.length
         let doneStorypointsSum = 0
         doneTasksArr.forEach(el => {
-            let storypoints = el.querySelector('.running-list__storypoints').innerText
+            let storypoints = '' 
+            if(el.querySelector('.running-list__storypoints')) {
+                storypoints = el.querySelector('.running-list__storypoints').innerText
+            } else {
+                storypoints = 0
+            }
             storypoints = Number(storypoints)
             doneStorypointsSum = doneStorypointsSum + storypoints
         })
@@ -280,7 +290,12 @@ weekPlanerCardHeaders.forEach(el => {
         const tasksInProgressSum = tasksInProgressArr.length
         let storypointsInProgressSum = 0
         tasksInProgressArr.forEach(el => {
-            let storypoints = el.querySelector('.running-list__storypoints').innerText
+            let storypoints = '' 
+            if(el.querySelector('.running-list__storypoints')) {
+                storypoints = el.querySelector('.running-list__storypoints').innerText
+            } else {
+                storypoints = 0
+            }
             storypoints = Number(storypoints)
             storypointsInProgressSum = storypointsInProgressSum + storypoints
         })
@@ -336,6 +351,25 @@ function addTaskOpenDialog() {
         el.style.display = 'none'
     })
 
+    // выбор номера недели (без выбора дня)
+    let taskCalendarDaysArr = ''
+    taskCalendarDaysArr = document.querySelector("#taskCalendar").querySelectorAll('.vanilla-calendar-week-number')
+    let arrowBtnArr = document.querySelector("#taskCalendar").querySelectorAll('.vanilla-calendar-arrow')
+    arrowBtnArr.forEach(el => {
+        el.addEventListener('click', () => {
+            // этот кринж нужен чтобы корректно подцеплять номера недель
+            setTimeout(() => {
+                taskCalendarDaysArr = document.querySelector("#taskCalendar").querySelectorAll('.vanilla-calendar-week-number')
+            }, 100);
+            
+        })
+    })
+    taskCalendarDaysArr.forEach(el => {
+        el.addEventListener('click', () => {
+            taskWeekNumber = el.innerHTML
+        })
+    })
+
     taskDialog.showModal()
 }
 
@@ -370,6 +404,25 @@ function editTaskOpenDialog(el) {
             task = el
         }
         return task
+    })
+
+    // выбор номера недели (без выбора дня)
+    let taskCalendarDaysArr = ''
+    taskCalendarDaysArr = document.querySelector("#taskCalendar").querySelectorAll('.vanilla-calendar-week-number')
+    let arrowBtnArr = document.querySelector("#taskCalendar").querySelectorAll('.vanilla-calendar-arrow')
+    arrowBtnArr.forEach(el => {
+        el.addEventListener('click', () => {
+            // этот кринж нужен чтобы корректно подцеплять номера недель
+            setTimeout(() => {
+                taskCalendarDaysArr = document.querySelector("#taskCalendar").querySelectorAll('.vanilla-calendar-week-number')
+            }, 100);
+            
+        })
+    })
+    taskCalendarDaysArr.forEach(el => {
+        el.addEventListener('click', () => {
+            taskWeekNumber = el.innerHTML
+        })
     })
 
     const taskDate = task?.date.toString()
@@ -600,15 +653,6 @@ editTaskBtn.addEventListener('click', (el) => {
         const dropdownBtn = document.querySelector('#taskTextColorDropdown')
         textColor = dropdownBtn.getAttribute('data-color')
 
-        let date = ''
-        if(document.querySelector('input[type="checkbox"]:checked')) {
-            date = ''
-        } else if (taskDate == '') {
-            date = changedTask.date
-        } else {
-            date = taskDate
-        }
-
         let weekDay = ''
         if(dayOfWeek == '') {
             weekDay = changedTask.dayName
@@ -621,6 +665,17 @@ editTaskBtn.addEventListener('click', (el) => {
             weekNumber = changedTask.weekNumber
         } else {
             weekNumber = taskWeekNumber
+        }
+
+        let date = ''
+        if(document.querySelector('input[type="checkbox"]:checked')) {
+            date = ''
+            weekDay = ''
+            weekNumber = ''
+        } else if (taskDate == '') {
+            date = changedTask.date
+        } else {
+            date = taskDate
         }
 
         changedTask.text = taskInputValue
@@ -641,13 +696,17 @@ editTaskBtn.addEventListener('click', (el) => {
 
 // проверка задач и разделение их на списки
 function checkCorrectRenderTask() {
-    const tasksRunningList = [];
-    const tasksWeekPlaner = [];
-    const tasksPlaner = [];
+    const tasksRunningList = []
+    const tasksWeekDaysPlaner = []
+    const tasksThisWeekList = []
+    const tasksNextWeekList = []
+    const tasksPlaner = []
+
+    const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
 
     tasks.forEach((task) => {
         // planning
-        if(task.date == '' && task.status == '') {
+        if(task.weekNumber == '' && task.status == '') {
             tasksPlaner.push(task)
         }
         // runnungList
@@ -657,18 +716,36 @@ function checkCorrectRenderTask() {
             tasksRunningList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
         }
         // weekPlaner
-        if(task.date) {
-            tasksWeekPlaner.push(task)
+        if(getThisWeekNumber == task.weekNumber && task.date) {
+            tasksWeekDaysPlaner.push(task)
             // тут сортируем массив по статусу задачи
-            tasksWeekPlaner.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            tasksWeekDaysPlaner.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+        }
+        // thisWeekList
+        if (getThisWeekNumber == task.weekNumber && task.date == '') {
+            tasksThisWeekList.push(task)
+            // тут сортируем массив по статусу задачи
+            tasksThisWeekList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+        }
+        // nextWeekList
+        if (getThisWeekNumber < task.weekNumber) {
+            tasksNextWeekList.push(task)
+            // тут сортируем массив по статусу задачи
+            tasksNextWeekList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
         }
     })
 
     tasksRunningList.forEach((task) => {
         renderTaskToRunningList(task)
     })
-    tasksWeekPlaner.forEach((task) => {
+    tasksWeekDaysPlaner.forEach((task) => {
         renderTaskToWeekPlaner(task)
+    })
+    tasksThisWeekList.forEach((task) => {
+        renderTaskToThisWeekList(task)
+    })
+    tasksNextWeekList.forEach((task) => {
+        renderTaskToNextWeekList(task)
     })
     tasksPlaner.forEach((task) => {
         renderTaskToPlanningList(task)
@@ -763,69 +840,123 @@ function renderTaskToRunningList(task) {
 
 // рендер экземпляра новой задачи в недельный планер
 function renderTaskToWeekPlaner(task) {
-    const taskDay = task.dayName
-    const weekDayList = document.querySelector("[data-name=" + taskDay + "]")
+    let weekDayList = ''
+    if(task.dayName) {
+        const taskDay = task.dayName
+        weekDayList = document.querySelector("[data-name=" + taskDay + "]")
+    }
+    
+
+    if(task.done == true) {
+        const taskHTML = `<li class="day-card-list__item-block done-list__item" id="${task.id}">
+                            <div>
+                                <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
+                                <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                            </div>
+                            <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
+                        </li>`
+                    weekDayList.insertAdjacentHTML('beforeend', taskHTML)
+    } else if(task.storypoints) {
+        const taskHTML = `<li class="running-list__item" id="${task.id}">
+                            <div class="running-list__task-block">
+                                <div class="running-list__task-block-info">
+                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                    <div class="running-list__task-block-settings">
+                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
+                                        <button class="running-list__storypoints">${task.storypoints}</button>
+                                    </div>
+                                    <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                </div>
+                            </div>
+                            <div class="task-list__icon-block">
+                                <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                            </div>
+                        </li>`
+        weekDayList.insertAdjacentHTML('beforebegin', taskHTML)
+    } else {
+        const taskHTML = `<li class="running-list__item" id="${task.id}">
+                            <div class="running-list__task-block">
+                                <div class="running-list__task-block-info">
+                                    <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                    <div class="running-list__task-block-settings">
+                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
+                                    </div>
+                                    <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                </div>
+                            </div>
+                            <div class="task-list__icon-block">
+                                <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                            </div>
+                        </li>`
+        weekDayList.insertAdjacentHTML('beforebegin', taskHTML)
+    }
+}
+
+function renderTaskToThisWeekList(task) {
+    const thisWeekTasksList = document.querySelector('#thisWeekTasks')
+
+    if(task.done == true) {
+        const taskHTML = `<li class="day-card-list__item-block done-list__item" id="${task.id}">
+                            <div>
+                                <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
+                                <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                            </div>
+                            <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
+                        </li>`
+                    weekDayList.insertAdjacentHTML('beforeend', taskHTML)
+    } else if(task.storypoints) {
+        const taskHTML = `<li class="running-list__item" id="${task.id}">
+                                <div class="running-list__task-block">
+                                    <div class="running-list__task-block-info">
+                                        <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                        <div class="running-list__task-block-settings">
+                                            <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
+                                            <button class="running-list__storypoints">${task.storypoints}</button>
+                                        </div>
+                                        <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                    </div>
+                                </div>
+                                <div class="task-list__icon-block">
+                                    <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                </div>
+                            </li>`
+            thisWeekTasksList.insertAdjacentHTML('beforebegin', taskHTML)
+    } else {
+        const taskHTML = `<li class="running-list__item" id="${task.id}">
+                                <div class="running-list__task-block">
+                                    <div class="running-list__task-block-info">
+                                        <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                        <div class="running-list__task-block-settings">
+                                            <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
+                                            
+                                        </div>
+                                        <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                    </div>
+                                </div>
+                                <div class="task-list__icon-block">
+                                    <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                </div>
+                            </li>`
+            thisWeekTasksList.insertAdjacentHTML('beforebegin', taskHTML)
+    }
+}
+
+function renderTaskToNextWeekList(task) {
     const nextWeekTasksList = document.querySelector('#nextWeekTasks')
 
-    const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
-    let weekNumber = document.querySelector('#weekPlanerListCard').getAttribute('week-number')
-    weekNumber = getThisWeekNumber
-
-    if(weekNumber == task.weekNumber) {
-        if(task.done == true) {
-            const taskHTML = `<li class="day-card-list__item-block done-list__item" id="${task.id}">
-                                <div>
-                                    <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
-                                    <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
-                                </div>
-                                <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
-                            </li>`
-                        weekDayList.insertAdjacentHTML('beforeend', taskHTML)
-        } else if(task.storypoints) {
-            const taskHTML = `<li class="running-list__item" id="${task.id}">
-                                <div class="running-list__task-block">
-                                    <div class="running-list__task-block-info">
-                                        <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                        <div class="running-list__task-block-settings">
-                                            <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
-                                            <button class="running-list__storypoints">${task.storypoints}</button>
-                                        </div>
-                                        <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
-                                    </div>
-                                </div>
-                                <div class="task-list__icon-block">
-                                    <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                    <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
-                                </div>
-                            </li>`
-            weekDayList.insertAdjacentHTML('beforebegin', taskHTML)
-        } else {
-            const taskHTML = `<li class="running-list__item" id="${task.id}">
-                                <div class="running-list__task-block">
-                                    <div class="running-list__task-block-info">
-                                        <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                        <div class="running-list__task-block-settings">
-                                            <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
-                                        </div>
-                                        <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
-                                    </div>
-                                </div>
-                                <div class="task-list__icon-block">
-                                    <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                    <span class="icon-secondary"><i class="fa-solid fa-trash task-icon" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
-                                </div>
-                            </li>`
-            weekDayList.insertAdjacentHTML('beforebegin', taskHTML)
-        }
-    } else if(weekNumber < task.weekNumber) {
-        if(task.done == true) {
-            const taskHTML = `<li class="day-card-list__item done-list__item" id="${task.id}">
+    if(task.done == true) {
+        const taskHTML = `<li class="day-card-list__item-block done-list__item" id="${task.id}">
+                            <div>
+                                <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
                                 <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
-                                <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
-                            </li>`
-            nextWeekTasksList.insertAdjacentHTML('beforeend', taskHTML)
-        } else if(task.storypoints) {
-            const taskHTML = `<li class="running-list__item" id="${task.id}">
+                            </div>
+                            <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
+                        </li>`
+                    weekDayList.insertAdjacentHTML('beforeend', taskHTML)
+    } else if(task.storypoints) {
+        const taskHTML = `<li class="running-list__item" id="${task.id}">
                                 <div class="running-list__task-block">
                                     <div class="running-list__task-block-info">
                                         <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
@@ -842,13 +973,14 @@ function renderTaskToWeekPlaner(task) {
                                 </div>
                             </li>`
             nextWeekTasksList.insertAdjacentHTML('beforebegin', taskHTML)
-        } else {
-            const taskHTML = `<li class="running-list__item" id="${task.id}">
+    } else {
+        const taskHTML = `<li class="running-list__item" id="${task.id}">
                                 <div class="running-list__task-block">
                                     <div class="running-list__task-block-info">
                                         <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                         <div class="running-list__task-block-settings">
                                             <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
+                                            
                                         </div>
                                         <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
                                     </div>
@@ -859,7 +991,6 @@ function renderTaskToWeekPlaner(task) {
                                 </div>
                             </li>`
             nextWeekTasksList.insertAdjacentHTML('beforebegin', taskHTML)
-        }
     }
 }
 

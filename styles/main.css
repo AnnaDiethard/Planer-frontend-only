@@ -184,10 +184,6 @@ body::-webkit-scrollbar-button:hover {
     right: 0;
     margin-left: auto;
 }
-
-.card-header__label {
-    display: none;
-}
     
 /* .card-header__text:hover + .card-header__label {
     display: block;
@@ -312,7 +308,7 @@ main.main {
 }
 
 .card-header_day-card {
-    height: 4rem;
+    height: 3rem;
     color: var(--seconday-base-color);
     display: flex;
     flex-direction: row;
@@ -327,8 +323,8 @@ main.main {
 }
 
 .task-card-header__icon-button {
-    height: 4rem;
-    width: 4rem;
+    height: 3rem;
+    width: 3rem;
     border-radius: 100px;
     border: none;
     background-color: var(--primaty-light-color);
@@ -351,6 +347,7 @@ main.main {
 .widget-btn-block__button {
     padding-inline: 0.3rem;
     font-size: 18px;
+    color: var(--seconday-light-color);
 }
 
 .card-body {
@@ -557,11 +554,12 @@ main.main {
     background: none;
     border-radius: 100%;
     border-color: var(--primaty-active-color);
-    color: var(--primaty-base-color);
+    color: var(--seconday-base-color);
     height: 1.5rem;
     width: 1.5rem;
     margin-left: 5px;
     margin-bottom: 3px;
+    font-size: 14px;
 }
 
 .card-item-icon {

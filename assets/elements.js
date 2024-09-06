@@ -340,7 +340,8 @@ function renderWidget() {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="input-group widget-list__input-block">
+                                    <div class="widget-card-body">
+                                        <div class="input-group widget-list__input-block">
                                             <input type="text" class="form-control widget-list__input-text">
                                             <button type="button" class="input-group-text button-dark" onclick="addTaskToListWidget(this)">+</button>
                                             <div class="widget-btn-block">
@@ -348,8 +349,9 @@ function renderWidget() {
                                                 <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                             </div>
                                         </div>
-                                    <div class="card-body widget-card-body widget-list-card-body">
-                                        <ul class="widget-list__list"></ul>
+                                        <div class="card-body widget-list-card-body">
+                                            <ul class="widget-list__list"></ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -380,7 +382,8 @@ function renderWidget() {
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="widget-link-list__input-block ">
+                                        <div class="widget-card-body">
+                                            <div class="widget-link-list__input-block ">
                                                 <div style="width: 100%; padding-left: 1rem">
                                                     <div class="block-between">
                                                         <p style="width: 3rem">text</p>
@@ -391,11 +394,12 @@ function renderWidget() {
                                                         <input type="text" class="form-control widget-link-list__input-text" id="linkListWidgetContentUrl">
                                                     </div>
                                                 </div>
-                                                <button type="button" class="input-group-text button-dark" style="height: 5rem" onclick="addLinkToLinkListWidget(this)">+</button>
+                                                <button type="button" class="input-group-text button-dark" style="height: 4.5rem; border-radius: 0;" onclick="addLinkToLinkListWidget(this)">+</button>
                                                 <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                             </div>
-                                        <div class="card-body widget-card-body widget-link-list-card-body">
-                                            <ul class="widget-link-list__list"></ul>
+                                            <div class="card-body widget-link-list-card-body">
+                                                <ul class="widget-link-list__list"></ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -430,11 +434,24 @@ function addTaskToListWidget(el) {
 // выделение пункта список
 function markTheCompletedTaskInListWidget(el) {
     const value =  el.querySelector('p').innerHTML
-    const item = `<li class="widget-list__item widget-list__item-text-done">
+    const item = `<li class="widget-list__item widget-list__item-text-done" onclick="reMarkTheCompletedTaskInListWidget(this)">
                     <p class="">${value}</p>
                 </li>`
     const list = el.closest('ul')
     list.insertAdjacentHTML('beforeend', item)
+    el.parentNode.removeChild(el);
+
+    saveWidgets()
+}
+
+// отмена выделения пункта список
+function reMarkTheCompletedTaskInListWidget(el) {
+    const value =  el.querySelector('p').innerHTML
+    const item = `<li class="widget-list__item" onclick="markTheCompletedTaskInListWidget(this)">
+                        <p class="widget-list__item-text">${value}</p>
+                    </li>`
+    const list = el.closest('ul')
+    list.insertAdjacentHTML('afterbegin', item)
     el.parentNode.removeChild(el);
 
     saveWidgets()
@@ -475,7 +492,7 @@ function addLinkToLinkListWidget(el) {
 
     if(linkValue && linkUrl) {
         const item = `<li class="widget-list__item-link">
-                        <a href="${linkUrl}" class="widget-list__item-link">${linkValue}</a>
+                        <a href="${linkUrl}" class="widget-list__item-link" target="_blank">${linkValue}</a>
                         <span onclick="deleteLink(this)"><i class="fa-solid fa-trash widget-btn-block__button" style="font-size: 14px;"></i></span>
                     </li>`
         const list = widget.querySelector('.widget-link-list__list')
