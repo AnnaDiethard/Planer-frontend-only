@@ -554,11 +554,12 @@ main.main {
     background: none;
     border-radius: 100%;
     border-color: var(--primaty-active-color);
-    color: var(--primaty-base-color);
+    color: var(--seconday-base-color);
     height: 1.5rem;
     width: 1.5rem;
     margin-left: 5px;
     margin-bottom: 3px;
+    font-size: 14px;
 }
 
 .card-item-icon {

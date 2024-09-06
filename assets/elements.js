@@ -434,11 +434,24 @@ function addTaskToListWidget(el) {
 // выделение пункта список
 function markTheCompletedTaskInListWidget(el) {
     const value =  el.querySelector('p').innerHTML
-    const item = `<li class="widget-list__item widget-list__item-text-done">
+    const item = `<li class="widget-list__item widget-list__item-text-done" onclick="reMarkTheCompletedTaskInListWidget(this)">
                     <p class="">${value}</p>
                 </li>`
     const list = el.closest('ul')
     list.insertAdjacentHTML('beforeend', item)
+    el.parentNode.removeChild(el);
+
+    saveWidgets()
+}
+
+// отмена выделения пункта список
+function reMarkTheCompletedTaskInListWidget(el) {
+    const value =  el.querySelector('p').innerHTML
+    const item = `<li class="widget-list__item" onclick="markTheCompletedTaskInListWidget(this)">
+                        <p class="widget-list__item-text">${value}</p>
+                    </li>`
+    const list = el.closest('ul')
+    list.insertAdjacentHTML('afterbegin', item)
     el.parentNode.removeChild(el);
 
     saveWidgets()
