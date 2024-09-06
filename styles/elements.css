@@ -291,13 +291,17 @@
     overflow-y: auto;
 }
 
+.widget-list-card-body {
+    padding: 0;
+}
+
 .widget-list__item {
     display: flex;
     flex-direction: row;
     justify-content: start;
     list-style-type: none;
     padding: 3px;
-    padding-inline: 1rem;
+    padding-inline: 0.3rem;
     cursor: pointer;
 }
 
@@ -325,6 +329,10 @@
     flex-direction: row;
 }
 
+.widget-link-list-card-body {
+    padding: 0;
+}
+
 .widget-list__item-link {
     color: var(--extra-dark-text-color);
     text-decoration: none;
@@ -332,7 +340,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-inline: 1rem;
+    padding-inline: 0.3rem;
 }
 
 /* еженедельные дела */

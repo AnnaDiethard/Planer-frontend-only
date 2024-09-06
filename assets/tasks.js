@@ -840,6 +840,7 @@ function renderTaskToRunningList(task) {
 
 // рендер экземпляра новой задачи в недельный планер
 function renderTaskToWeekPlaner(task) {
+    console.log('task', task)
     let weekDayList = ''
     if(task.dayName) {
         const taskDay = task.dayName
