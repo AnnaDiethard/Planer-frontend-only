@@ -8,7 +8,7 @@ console.log('calendar', moment().calendar())
 function alertWindow() {
     alert('функционал в разработке')
 }
-
+ 
 // сброс номера недели задачи при смене недели на следующую
 const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
 let thisWeekNumber = document.querySelector('#weekPlanerListCard').getAttribute('week-number')
@@ -18,6 +18,8 @@ if(getTasksForCheckWeekNumber != null) {
     getTasksForCheckWeekNumber.forEach(el => {
         if(el.weekNumber < thisWeekNumber) {
             el.weekNumber = ""
+            el.date = ""
+            el.dayName = ""
         }
     })
 }
@@ -894,6 +896,7 @@ function renderTaskToWeekPlaner(task) {
     }
 }
 
+// рендер задач в карточку текущей недели
 function renderTaskToThisWeekList(task) {
     const thisWeekTasksList = document.querySelector('#thisWeekTasks')
 
@@ -943,6 +946,7 @@ function renderTaskToThisWeekList(task) {
     }
 }
 
+// рендер задач в карточку следующей недели
 function renderTaskToNextWeekList(task) {
     const nextWeekTasksList = document.querySelector('#nextWeekTasks')
 
