@@ -20,6 +20,7 @@ if(getTasksForCheckWeekNumber != null) {
             el.weekNumber = ""
             el.date = ""
             el.dayName = ""
+            el.expired = true
         }
     })
 }
@@ -562,6 +563,8 @@ function createNewTask() {
             icon: iconClass || '',
             color: textColor || 'base-text-color',
             done: false,
+            doneDate: '',
+            expired: false,
             // определяется в конфиге календаря
             date: taskDate || '',
             dayName: dayOfWeek || '',
@@ -701,6 +704,7 @@ function checkCorrectRenderTask() {
     const tasksRunningList = []
     const tasksWeekDaysPlaner = []
     const tasksThisWeekList = []
+    const tasksExpiredList = []
     const tasksNextWeekList = []
     const tasksPlaner = []
 
@@ -723,6 +727,12 @@ function checkCorrectRenderTask() {
             // тут сортируем массив по статусу задачи
             tasksWeekDaysPlaner.sort((a, b) => parseInt(a.status) - parseInt(b.status))
         }
+        // expiredList
+        if (task.expired == true) {
+            tasksExpiredList.push(task)
+            // тут сортируем массив по статусу задачи
+            tasksExpiredList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+        }
         // thisWeekList
         if (getThisWeekNumber == task.weekNumber && task.date == '') {
             tasksThisWeekList.push(task)
@@ -742,6 +752,9 @@ function checkCorrectRenderTask() {
     })
     tasksWeekDaysPlaner.forEach((task) => {
         renderTaskToWeekPlaner(task)
+    })
+    tasksExpiredList.forEach((task) => {
+        renderTaskToExpiredList(task)
     })
     tasksThisWeekList.forEach((task) => {
         renderTaskToThisWeekList(task)
@@ -894,6 +907,56 @@ function renderTaskToWeekPlaner(task) {
                         </li>`
         weekDayList.insertAdjacentHTML('beforebegin', taskHTML)
     }
+}
+
+// рендер задач предыдущей недели в карточку просроченных
+function renderTaskToExpiredList(task) {
+    const expiredTasksList = document.querySelector('#expiredTasks')
+
+    if(task.done == true) {
+        const taskHTML = `<li class="day-card-list__item-block done-list__item" id="${task.id}">
+                            <div>
+                                <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
+                                <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                            </div>
+                            <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
+                        </li>`
+            expiredTasksList.insertAdjacentHTML('beforeend', taskHTML)
+    } else if(task.storypoints) {
+            const taskHTML = `<li class="running-list__item" id="${task.id}">
+                                    <div class="running-list__task-block">
+                                        <div class="running-list__task-block-info">
+                                            <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                            <div class="running-list__task-block-settings">
+                                                <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
+                                                <button class="running-list__storypoints">${task.storypoints}</button>
+                                            </div>
+                                            <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                        </div>
+                                    </div>
+                                    <div class="task-list__icon-block">
+                                        <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                    </div>
+                                </li>`
+                expiredTasksList.insertAdjacentHTML('beforebegin', taskHTML)
+        } else {
+            const taskHTML = `<li class="running-list__item" id="${task.id}">
+                                    <div class="running-list__task-block">
+                                        <div class="running-list__task-block-info">
+                                            <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                            <div class="running-list__task-block-settings">
+                                                <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
+                                                
+                                            </div>
+                                            <p class="form-check-label ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                        </div>
+                                    </div>
+                                    <div class="task-list__icon-block">
+                                        <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent task-icon" style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                    </div>
+                                </li>`
+                expiredTasksList.insertAdjacentHTML('beforebegin', taskHTML)
+        }
 }
 
 // рендер задач в карточку текущей недели
