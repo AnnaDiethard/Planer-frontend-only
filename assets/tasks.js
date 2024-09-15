@@ -369,7 +369,15 @@ function addTaskOpenDialog() {
     })
     taskCalendarDaysArr.forEach(el => {
         el.addEventListener('click', () => {
-            taskWeekNumber = el.innerHTML
+            checkWeekNumber = el.innerHTML
+            const cardEditCheckNumberBlock = document.querySelector('#cardEditCheckNumberBlock')
+            if(checkWeekNumber >= getThisWeekNumber) {
+                taskWeekNumber = checkWeekNumber
+                cardEditCheckNumberBlock.classList.add('hide-class')
+            } else {
+                cardEditCheckNumberBlock.classList.remove('hide-class')
+            }
+            
         })
     })
 
