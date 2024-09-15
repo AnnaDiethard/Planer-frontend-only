@@ -861,7 +861,6 @@ function renderTaskToWeekPlaner(task) {
         weekDayList = document.querySelector("[data-name=" + taskDay + "]")
     }
     
-
     if(task.done == true) {
         const taskHTML = `<li class="day-card-list__item-block done-list__item" id="${task.id}">
                             <div>
@@ -971,7 +970,7 @@ function renderTaskToThisWeekList(task) {
                             </div>
                             <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                         </li>`
-                    weekDayList.insertAdjacentHTML('beforeend', taskHTML)
+            thisWeekTasksList.insertAdjacentHTML('beforeend', taskHTML)
     } else if(task.storypoints) {
         const taskHTML = `<li class="running-list__item" id="${task.id}">
                                 <div class="running-list__task-block">
