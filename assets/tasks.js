@@ -564,6 +564,7 @@ function chooseTaskTextColor(el) {
     textColor = colorClass
     dropdownBtn.classList.add(colorClass)
     dropdownBtn.setAttribute('data-color', textColor)
+    dropdownBtn.closest('.dropdown').querySelector('ul').classList.remove('show')
 }
 
 // очистка дропдауна выбора цвета текста задачи
