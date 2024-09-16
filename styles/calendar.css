@@ -4,8 +4,10 @@
     background-color: var(--primaty-background-color) !important;
 }
 
-.vanilla-calendar-week-numbers {
-    /* display: none; */
+.vanilla-calendar-week-number-check {
+    font-size: 16px;
+    background-color: var(--accent-base-color) !important;
+    border-radius: 50%;
 }
 
 .vanilla-calendar-day__btn {

@@ -375,6 +375,11 @@ function addTaskOpenDialog() {
     })
     taskCalendarDaysArr.forEach(el => {
         el.addEventListener('click', () => {
+            console.log('el', el)
+            taskCalendarDaysArr.forEach(el => {
+                el.classList.remove('vanilla-calendar-week-number-check')
+            })
+            el.classList.add('vanilla-calendar-week-number-check')
             checkWeekNumber = el.innerHTML
             const cardEditCheckNumberBlock = document.querySelector('#cardEditCheckNumberBlock')
             if(checkWeekNumber >= getThisWeekNumber) {
