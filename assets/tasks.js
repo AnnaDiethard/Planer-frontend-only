@@ -127,8 +127,7 @@ function openSearchBlock() {
     }
 }
 
-// поиск по задачам
-function searchTasks() {
+function search() {
     const searchListCardItems = document.querySelector("#search").querySelectorAll('li')
     searchListCardItems.forEach(el => {
         el.remove()
@@ -151,10 +150,28 @@ function searchTasks() {
     const searchListCard = document.querySelector('#search')
     searchListCard.classList.add('show')
     searchListCard.classList.add('active')
+    
+}
+
+// поиск по задачам (по тексту)
+function searchTasks() {
+    search()
+
     const searchTasksInputValue = document.querySelector('#searchTasksInput').value
+    tasks.forEach(el => {
+        if(el.text.includes(searchTasksInputValue) || el.description.includes(searchTasksInputValue)) {
+            renderTaskForSearch(el)
+        }
+    })
+}
+
+function chooseSearchTextColor(el) {
+    const color = el.getAttribute('data-color')
+
+    search()
 
     tasks.forEach(el => {
-        if(el.text.includes(searchTasksInputValue)) {
+        if(el.color.includes(color)) {
             renderTaskForSearch(el)
         }
     })
@@ -251,6 +268,10 @@ function renderTaskForSearch(task) {
 function cleanSearchInput() {
     const searchTasksInput = document.querySelector('#searchTasksInput')
     searchTasksInput.value = ''
+    const searchListCardItems = document.querySelector("#search").querySelectorAll('li')
+    searchListCardItems.forEach(el => {
+        el.remove()
+    })
     // window.location.reload()
 }
 

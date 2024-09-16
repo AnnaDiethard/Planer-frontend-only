@@ -190,6 +190,33 @@ body::-webkit-scrollbar-button:hover {
     position: relative;
     right: 0;
     margin-left: auto;
+    margin-bottom: 1rem;
+}
+
+.color-search-dropdown {
+    
+    width: 5rem !important;
+    right: 3.5rem !important;
+}
+
+.color-search-dropdown-toggle {
+    margin-bottom: 12px !important;
+}
+
+.color-search-dropdown-menu {
+    width: 5rem;
+}
+
+.color-search-dropdown-item {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    /* width: 5rem; */
+    padding-inline: 1rem;
+}
+
+.color-search-dropdown-link {
+    width: 5rem;
 }
     
 /* .card-header__text:hover + .card-header__label {
