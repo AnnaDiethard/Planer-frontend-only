@@ -24,6 +24,7 @@ if(getTasksForCheckWeekNumber != null) {
         }
     })
 }
+localStorage.setItem('tasksList', JSON.stringify(getTasksForCheckWeekNumber))
 
 // определение текущего дня недели  
 const thisDayName = new Date().toString().substring(0, 3).toLocaleLowerCase()
@@ -84,7 +85,12 @@ const openValidationDialogBtn = document.querySelector('#validationDialogConfirm
 // рендер тудушника из LS
 if (localStorage.getItem('tasksList')) {
 	tasks = JSON.parse(localStorage.getItem('tasksList'))
-    checkCorrectRenderTask()
+    if(tasks != null) {
+        checkCorrectRenderTask()
+    } else {
+        tasks = []
+    }
+    
 }
 
 // сохранение задач в LS
@@ -726,61 +732,61 @@ function checkCorrectRenderTask() {
 
     const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
 
-    tasks.forEach((task) => {
-        // planning
-        if(task.weekNumber == '' && task.status == '') {
-            tasksPlaner.push(task)
-        }
-        // runnungList
-        if (task.icon) {
-            tasksRunningList.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksRunningList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
-        }
-        // weekPlaner
-        if(getThisWeekNumber == task.weekNumber && task.date) {
-            tasksWeekDaysPlaner.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksWeekDaysPlaner.sort((a, b) => parseInt(a.status) - parseInt(b.status))
-        }
-        // expiredList
-        if (task.expired == true) {
-            tasksExpiredList.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksExpiredList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
-        }
-        // thisWeekList
-        if (getThisWeekNumber == task.weekNumber && task.date == '') {
-            tasksThisWeekList.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksThisWeekList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
-        }
-        // nextWeekList
-        if (getThisWeekNumber < task.weekNumber) {
-            tasksNextWeekList.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksNextWeekList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
-        }
-    })
-
-    tasksRunningList.forEach((task) => {
-        renderTaskToRunningList(task)
-    })
-    tasksWeekDaysPlaner.forEach((task) => {
-        renderTaskToWeekPlaner(task)
-    })
-    tasksExpiredList.forEach((task) => {
-        renderTaskToExpiredList(task)
-    })
-    tasksThisWeekList.forEach((task) => {
-        renderTaskToThisWeekList(task)
-    })
-    tasksNextWeekList.forEach((task) => {
-        renderTaskToNextWeekList(task)
-    })
-    tasksPlaner.forEach((task) => {
-        renderTaskToPlanningList(task)
-    })
+        tasks.forEach((task) => {
+            // planning
+            if(task.weekNumber == '' && task.status == '') {
+                tasksPlaner.push(task)
+            }
+            // runnungList
+            if (task.icon) {
+                tasksRunningList.push(task)
+                // тут сортируем массив по статусу задачи
+                tasksRunningList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            }
+            // weekPlaner
+            if(getThisWeekNumber == task.weekNumber && task.date) {
+                tasksWeekDaysPlaner.push(task)
+                // тут сортируем массив по статусу задачи
+                tasksWeekDaysPlaner.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            }
+            // expiredList
+            if (task.expired == true) {
+                tasksExpiredList.push(task)
+                // тут сортируем массив по статусу задачи
+                tasksExpiredList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            }
+            // thisWeekList
+            if (getThisWeekNumber == task.weekNumber && task.date == '') {
+                tasksThisWeekList.push(task)
+                // тут сортируем массив по статусу задачи
+                tasksThisWeekList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            }
+            // nextWeekList
+            if (getThisWeekNumber < task.weekNumber) {
+                tasksNextWeekList.push(task)
+                // тут сортируем массив по статусу задачи
+                tasksNextWeekList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            }
+        })
+    
+        tasksRunningList.forEach((task) => {
+            renderTaskToRunningList(task)
+        })
+        tasksWeekDaysPlaner.forEach((task) => {
+            renderTaskToWeekPlaner(task)
+        })
+        tasksExpiredList.forEach((task) => {
+            renderTaskToExpiredList(task)
+        })
+        tasksThisWeekList.forEach((task) => {
+            renderTaskToThisWeekList(task)
+        })
+        tasksNextWeekList.forEach((task) => {
+            renderTaskToNextWeekList(task)
+        })
+        tasksPlaner.forEach((task) => {
+            renderTaskToPlanningList(task)
+        })
 }
 
 // рендер экземпляра новой задачи в Rl
