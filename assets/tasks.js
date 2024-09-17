@@ -3,6 +3,7 @@
   .forEach(el => new bootstrap.Tooltip(el))
 
 // moment().calendar();
+moment.locale('ru')
 console.log('calendar', moment().calendar())
 
 function alertWindow() {
@@ -1211,7 +1212,8 @@ function markTheTaskCompleted(el) {
 
     tasks.forEach((task) => {
         if(task.id == id) {
-            task.done = true
+            task.done = true,
+            task.doneDate = moment().format('L')
         } 
     })
 
@@ -1225,6 +1227,7 @@ function removeDoneTask(el) {
     tasks.forEach(el => {
         if(taskId == el.id) {
             el.done = false
+            el.doneDate = ''
         }
     })
 

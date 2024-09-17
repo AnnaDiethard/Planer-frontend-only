@@ -91,7 +91,7 @@
     
                             <div class="icon-tasks">
                                 <button id="addTaskToRunningList" type="button" class="btn search-tasks__btn" onclick="addTaskOpenDialog()" title="add task"><i class="button-icon-accent fa-solid fa-plus nav-tasks__add-icon"></i></button>
-                                <button id="cleanTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="openSearchBlock()" title="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                <button id="cleanTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="openSearchBlock()" title="search"><i class="button-icon-accent fa-solid fa-magnifying-glass"></i></button>
                                 <button id="cleanTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="deleteDoneTasks()" title="delete done tasks"><i class="fa-solid fa-eraser"></i></button>
                                 <button id="deleteAllTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="deleteAllTasks()" title="delete all tasks"><i class="fa-solid fa-ban"></i></button>
                             </div>
@@ -266,8 +266,12 @@
         
 
         <footer style="padding-left: 3rem;">
-            <a href="views/info.html">information</a>
-            <p>feedback: support@onlain-planer.ru</p>
+            <div class="row footer-row">
+                <div class="col-12">
+                    <a href="views/info.html">information</a>
+                    <p>feedback: support@onlain-planer.ru</p>
+                </div>
+            </div>
         </footer>
     </div>
 
