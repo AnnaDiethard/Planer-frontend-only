@@ -17,7 +17,7 @@ thisWeekNumber = getThisWeekNumber
 const getTasksForCheckWeekNumber = JSON.parse(localStorage.getItem('tasksList'))
 if(getTasksForCheckWeekNumber != null) {
     getTasksForCheckWeekNumber.forEach(el => {
-        if(el.weekNumber < thisWeekNumber) {
+        if(el.weekNumber != '' && el.weekNumber < thisWeekNumber) {
             el.weekNumber = ""
             el.date = ""
             el.dayName = ""
@@ -536,7 +536,7 @@ const addNewTaskButton = document.querySelector('#addTaskBtn')
 addNewTaskButton.addEventListener('click', () => {
     createNewTask()
     cleanTaskForm()
-    closeTaskDialog()
+    // closeTaskDialog()
 })
 
 // сохранение новой (следующей) задачи
@@ -625,6 +625,8 @@ function createNewTask() {
             dayName: dayOfWeek || '',
             weekNumber: taskWeekNumber || ''
         }
+
+        console.log('newTask', newTask)
     
         tasks.push(newTask)
         saveTasksListInLocalStorage(tasks)
@@ -1214,11 +1216,12 @@ function markTheTaskCompleted(el) {
         if(task.id == id) {
             task.done = true,
             task.doneDate = moment().format('L')
+            console.log('task', task)
         } 
     })
 
     saveTasksListInLocalStorage(tasks)
-    window.location.reload();
+    // window.location.reload();
 }
 
 // отмена выделения выполненных задач
