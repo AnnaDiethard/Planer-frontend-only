@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta test="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
     <!-- bootstrap -->
@@ -34,12 +34,146 @@
                     <div class="col-12 header-row">
                         <i class="fa-solid fa-genderless logo"></i>
                         <div class="links-block">
-                            <a class="link-header" href="../index.html">home</a>
+                            <a class="link-header" href="calendar.html"><i class="fa-regular fa-calendar-days logo-sm"></i></a>
+                            <a class="link-header" href="settings.html"><i class="fa-regular fa-user logo-sm"></i></a>
+                            <a class="link-header" href="../index.html"><i class="fa-solid fa-house logo-sm"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
+
+        <div class="row content-row" style="padding-inline: 15rem;">
+            <div class="col-3">
+                <ul class="nav nav-settings" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-settings-btn active" id="user-settings-tab" data-bs-toggle="tab" data-bs-target="#user-settings-tab-pane" type="button" role="tab" href="#"
+                            aria-controls="user-settings-tab-pane" aria-selected="true">Профиль
+                        </button>
+                    </li>
+                    <li class="nav-item " role="presentation">
+                        <button class="nav-settings-btn" id="calendar-settings-tab" data-bs-toggle="tab" data-bs-target="#calendar-settings-tab-pane" type="button" role="tab" href="#"
+                            aria-controls="calendar-settings-tab-pane" aria-selected="true">Календарь
+                        </button>
+                    </li>
+                    <li class="nav-item " role="presentation">
+                        <button class="nav-settings-btn" id="tasks-settings-tab" data-bs-toggle="tab" data-bs-target="#tasks-settings-tab-pane" type="button" role="tab" href="#"
+                            aria-controls="tasks-settings-tab-pane" aria-selected="true">Задачи
+                        </button>
+                    </li>
+                    <li class="nav-item " role="presentation">
+                        <button class="nav-settings-btn" id="widgets-settings-tab" data-bs-toggle="tab" data-bs-target="#widgets-settings-tab-pane" type="button" role="tab" href="#"
+                            aria-controls="widgets-settings-tab-pane" aria-selected="true">Виджеты
+                        </button>
+                    </li>
+                    <li class="nav-item " role="presentation">
+                        <button class="nav-settings-btn" id="news-tab" data-bs-toggle="tab" data-bs-target="#news-tab-pane" type="button" role="tab" href="#"
+                            aria-controls="news-tab-pane" aria-selected="true">Обновления
+                        </button>
+                    </li>
+                    <!-- <li class="nav-item " role="presentation">
+                        <button class="nav-settings-btn" id="test-tab" data-bs-toggle="tab" data-bs-target="#test-tab-pane" type="button" role="tab" href="#"
+                            aria-controls="test-tab-pane" aria-selected="true">Test
+                        </button>
+                    </li> -->
+                </ul>
+            </div>
+            <div class="col-9">
+                <div class="tab-content" id="tabContent">
+                    <div class="tab-pane fade show active" id="user-settings-tab-pane" role="tabpanel" aria-labelledby="user-settings-tab" tabindex="0">
+                        <h4>Настройки профиля</h4>
+                        <ul>
+                            <li>
+                                <p>1. личная информация</p>
+                            </li>
+                            <li>
+                                <p>2. выбор темы оформления</p>
+                            </li>
+                            <li>
+                                <p>3. показ/скрытие погоды по-умолчанию</p>
+                            </li>
+                            <li>
+                                <p>4. настройки показа доп.функционала (таймеры и тд)</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="calendar-settings-tab-pane" role="tabpanel" aria-labelledby="user-settings-tab" tabindex="0">
+                        <h4>Настройки календаря</h4>
+                        <ul>
+                            <li>
+                                <p>1. выбор цветов для категорий</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="tasks-settings-tab-pane" role="tabpanel" aria-labelledby="tasks-settings-tab" tabindex="0">
+                        <h4>Настройки задач</h4>
+                        <ul>
+                            <li>
+                                <p>1. выбор основного активного таба</p>
+                            </li>
+                            <li>
+                                <p>2. выбор настроек для задачи</p>
+                            </li>
+                            <li>
+                                <p>3. подпись цветов для категорий задач</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="widgets-settings-tab-pane" role="tabpanel" aria-labelledby="widgets-settings-tab" tabindex="0">
+                        <h4>Настройки виджетов</h4>
+                        <ul>
+                            <li>
+                                <p>1. добавление/удаление дополнительных полей</p>
+                            </li>
+                            <li>
+                                <p>2. выбор последовательности полей и выбор активного</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="news-tab-pane" role="tabpanel" aria-labelledby="news-tab" tabindex="0">
+                        <h4>Обновления</h4>
+                        <ul>
+                            <li>
+                                <p>1. список релизов с описанием</p>
+                            </li>
+                            <li>
+                                <p>2. новости</p>
+                            </li>
+                            <li>
+                                <p>3. плашка с непрочитанными новостями</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- <div class="tab-pane fade" id="test-tab-pane" role="tabpanel" aria-labelledby="test-tab" tabindex="0">
+                        <h4>test</h4>
+                        <ul>
+                            <li>
+                                <p>1. </p>
+                            </li>
+                            <li>
+                                <p>2. </p>
+                            </li>
+                            <li>
+                                <p>3. </p>
+                            </li>
+                            <li>
+                                <p>4. </p>
+                            </li>
+                            <li>
+                                <p>5. </p>
+                            </li>
+                            
+                        </ul>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <footer style="padding-left: 3rem;">
+            <a href="info.html">information</a>
+            <p>feedback: support@onlain-planer.ru</p>
+        </footer>
 
     </div>
 
@@ -53,7 +187,7 @@
     <!-- dragula -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
     <!-- rusmeteo -->
-    <script async src="https://rusmeteo.net/api/informerV2/b75499d689da58d5fce2ad1837a0e347/" type="text/javascript"></script>
+    <!-- <script async src="https://rusmeteo.net/api/informerV2/b75499d689da58d5fce2ad1837a0e347/" type="text/javascript"></script> -->
     <!-- js -->
     <!-- <script src="../assets/tasks.js"></script> -->
     <script src="../assets/settings.js"></script>

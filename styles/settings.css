@@ -1,0 +1,13 @@
+.nav-settings {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-settings-btn {
+    width: 100%;
+    margin-bottom: 1rem;
+    background: none;
+    /* border: none; */
+    /* border-color: blueviolet; */
+    height: 3rem;
+}

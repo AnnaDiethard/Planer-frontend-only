@@ -36,6 +36,7 @@
                             <div class="links-block">
                                 <a class="link-header" href="views/calendar.html"><i class="fa-regular fa-calendar-days logo-sm"></i></a>
                                 <a class="link-header" href="views/settings.html"><i class="fa-regular fa-user logo-sm"></i></a>
+                                <a class="link-header" href="newindex.html"><i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -50,6 +51,43 @@
                                 <div id="mainCalendar" class="shadow-class"></div>
                             </div>
     
+                            
+    
+                            <div class="search-tasks " id="searchTasksBlock">
+                                <!-- <div> -->
+                                    <input type="text" id="searchTasksInput" class="shadow-class">
+                                    <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button>
+                                    <button id="searchTasksToRunningList" type="button" class="btn" onclick="searchTasks()" title="search"><i class="button-icon-extra-light icon-max fa-solid fa-magnifying-glass"></i></button>
+                                <!-- </div> -->
+                                <div>
+                                    <div class="dropdown color-search-dropdown">
+                                        <button class="btn dropdown-toggle color-search-dropdown-toggle" type="button" id="searchColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">color</button>
+                                        <ul class="dropdown-menu color-search-dropdown-menu" aria-labelledby="searchColorDropdown"  id="myTab" role="tablist">
+                                            <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(136, 136, 136) !important;">
+                                                <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseSearchTextColor(this)">.</button>
+                                            </li>
+                                            <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(9, 196, 9) !important;">
+                                                <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="green-text-color" href="#" onclick="chooseSearchTextColor(this)">.</button>
+                                            </li>
+                                            <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(135, 6, 167)  !important;">
+                                                <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="violet-text-color" onclick="chooseSearchTextColor(this)">.</button>
+                                            </li>
+                                            <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(226, 131, 23) !important;">
+                                                <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="orange-text-color" onclick="chooseSearchTextColor(this)">.</button>
+                                            </li>
+                                            <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(231, 61, 61) !important;">
+                                                <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="red-text-color" onclick="chooseSearchTextColor(this)">.</button>
+                                            </li>
+                                            <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(58, 83, 223) !important;">
+                                                <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="blue-text-color" onclick="chooseSearchTextColor(this)">.</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button id="toHighStorypointsSearchInput" type="button" class="btn search-tasks__btn" onclick="" title="search" style="right: 3.5rem;"><i class="button-icon-accent fa-solid fa-arrow-down-wide-short"></i></button>
+                                    <button id="toLowStorypointsSearchInput" type="button" class="btn search-tasks__btn" onclick="" title="search" style="right: 3.5rem;"><i class="button-icon-accent fa-solid fa-arrow-up-short-wide"></i></button>
+                                </div>
+                            </div>
+
                             <div class="nav-tasks" id="tasksTab" role="tablist">
                                 <button class="nav-link tasks-link shadow-class" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
                                     type="button" role="tab" aria-controls="running-list" aria-selected="true" onclick="saveActiveTaskTab(this)">running list</button>
@@ -57,36 +95,6 @@
                                     type="button" role="tab" aria-controls="week-planer" aria-selected="false" onclick="saveActiveTaskTab(this)">week planer</button>
                                 <button class="nav-link tasks-link shadow-class" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
                                     type="button" role="tab" aria-controls="planning" aria-selected="false" onclick="saveActiveTaskTab(this)">planning</button>
-                            </div>
-    
-                            <div class="search-tasks hide-class" id="searchTasksBlock">
-                                <input type="text" id="searchTasksInput" class="shadow-class">
-                                <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button>
-                                
-                                <div class="dropdown color-search-dropdown ">
-                                    <button class="btn dropdown-toggle color-search-dropdown-toggle" type="button" id="searchColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">color</button>
-                                    <ul class="dropdown-menu color-search-dropdown-menu" aria-labelledby="searchColorDropdown"  id="myTab" role="tablist">
-                                        <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(136, 136, 136) !important;">
-                                            <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseSearchTextColor(this)">.</button>
-                                        </li>
-                                        <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(9, 196, 9) !important;">
-                                            <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="green-text-color" href="#" onclick="chooseSearchTextColor(this)">.</button>
-                                        </li>
-                                        <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(135, 6, 167)  !important;">
-                                            <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="violet-text-color" onclick="chooseSearchTextColor(this)">.</button>
-                                        </li>
-                                        <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(226, 131, 23) !important;">
-                                            <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="orange-text-color" onclick="chooseSearchTextColor(this)">.</button>
-                                        </li>
-                                        <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(231, 61, 61) !important;">
-                                            <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="red-text-color" onclick="chooseSearchTextColor(this)">.</button>
-                                        </li>
-                                        <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(58, 83, 223) !important;">
-                                            <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="blue-text-color" onclick="chooseSearchTextColor(this)">.</button>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <button id="searchTasksToRunningList" type="button" class="btn" onclick="searchTasks()" title="search"><i class="button-icon-extra-light icon-max fa-solid fa-magnifying-glass"></i></button>
                             </div>
     
                             <div class="icon-tasks">
@@ -384,7 +392,7 @@
                 </div>
                 <div class="modal-body">
                     <div>
-                        <div id="addDateCalendar"></div>
+                        <!-- <div id="addDateCalendar"></div> -->
                     </div>
                     <div class="input-form-time" style="display: flex; flex-direction: row; width: 10rem;">
                         <div class="input-form" style="padding-right: 1rem;">

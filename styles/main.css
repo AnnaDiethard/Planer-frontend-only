@@ -163,7 +163,7 @@ body::-webkit-scrollbar-button:hover {
 #searchTasksInput {
     height: 3rem;
     width: 100%;
-    background-color: var(--primaty-background-color);
+    /* background-color: var(--primaty-background-color); */
     border: none;
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
@@ -186,7 +186,23 @@ body::-webkit-scrollbar-button:hover {
 }
 
 #cleanSearchInput {
-    right: 6rem;
+    /* right: 4rem; */
+    position: relative;
+    right: 0 !important;
+    margin-left: auto;
+    margin-bottom: 6rem;
+}
+
+#toHighStorypointsSearchInput {
+    right: 7;
+    position: relative;
+    right: 0;
+    margin-left: auto;
+    margin-bottom: 1rem;
+}
+
+#toLowStorypointsSearchInput {
+    right: 8;
     position: relative;
     right: 0;
     margin-left: auto;
@@ -194,13 +210,16 @@ body::-webkit-scrollbar-button:hover {
 }
 
 .color-search-dropdown {
-    
     width: 5rem !important;
-    right: 3.5rem !important;
+    /* right: 3.5rem !important; */
+    padding-top: 5rem !important;
+    
 }
 
 .color-search-dropdown-toggle {
     margin-bottom: 12px !important;
+    font-size: 20px;
+    color: var(--accent-base-color);
 }
 
 .color-search-dropdown-menu {
@@ -467,7 +486,7 @@ main.main {
     display: flex;
     flex-direction: row;
     justify-content:space-between;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     /* align-items: center; */
     /* padding: 1rem 1rem 0 0.5rem; */
 }
@@ -976,9 +995,10 @@ main.main {
     /* border-color: var(--light-btn-background); */
 }
 
-.add-input_label{
+.add-input_label {
     position: absolute;
     color: var(--dark-text-color);
+    opacity: 30%;
     left: 1rem;
     top: 0.8rem;
     padding: 0 0.5rem;
@@ -995,6 +1015,7 @@ main.main {
   /* background-color: var(--primaty-background-color); */
   border-radius: 10px;
   font-size: 18px;
+
 }
 
 .nav-tabs {
