@@ -415,6 +415,26 @@ function renderWidget() {
 // ФУНКЦИИ ДЛЯ ВИДЖЕТА СПИСОК
 
 // добавление пункта списка
+const widgetListInputArr = document.querySelectorAll('.widget-list__input-text')
+widgetListInputArr.forEach(el => {
+    el.addEventListener("keyup", (event) => {
+        if (event.which === 13) {
+            const widget = el.closest('.card')
+            let taskValue = widget.querySelector('.widget-list__input-text').value
+        
+            if(taskValue) {
+                const item = `<li class="widget-list__item" onclick="markTheCompletedTaskInListWidget(this)">
+                                <p class="widget-list__item-text">${taskValue}</p>
+                            </li>`
+                const list = widget.querySelector('.widget-list__list')
+                list.insertAdjacentHTML('afterbegin', item)
+                cleanWidgetCard()
+                saveWidgets()
+                window.location.reload();
+            }
+        }
+      });
+})
 function addTaskToListWidget(el) {
     const widget = el.closest('.card')
     let taskValue = widget.querySelector('.widget-list__input-text').value

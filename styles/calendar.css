@@ -1,15 +1,17 @@
 .vanilla-calendar {
     width: 100%;
     margin-bottom: 1rem;
-    background-color: var(--primaty-background-color) !important;
+    background-color: #d7d5e4 !important;
 }
 
-.vanilla-calendar-week-numbers {
-    /* display: none; */
+.vanilla-calendar-week-number-check {
+    font-size: 16px;
+    background-color: var(--accent-base-color) !important;
+    border-radius: 50%;
 }
 
 .vanilla-calendar-day__btn {
-    background-color: var(--primaty-light-color) !important;
+    background-color: #c7c4df !important;
     color: var(--seconday-base-color) !important;
     font-size: 14px;
     margin: 3px 3px 3px 3px !important;
@@ -30,7 +32,7 @@
 }
 
 .vanilla-calendar-day__btn_today {
-    background-color: var(--primaty-active-color) !important;
+    background-color: #5f598a !important;
     color: var(--seconday-base-color);
     height: 2rem;
     width: 2rem;
