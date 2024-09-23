@@ -302,13 +302,16 @@ weekPlanerCardHeaders.forEach(el => {
         let allStorypointsSum = 0
         allTasksArr.forEach(el => {
             let storypoints = '' 
-            if(el.querySelector('.running-list__storypoints')) {
-                storypoints = el.querySelector('.running-list__storypoints').innerText
+            if(el.querySelector('.task-list__storypoints')) {
+                storypoints = el.querySelector('.task-list__storypoints').innerText
+                console.log('storypointssss', storypoints)
             } else {
                 storypoints = 0
             }
             storypoints = Number(storypoints)
+            console.log('storypoints', storypoints)
             allStorypointsSum = allStorypointsSum + storypoints
+            console.log('allStorypointsSum', allStorypointsSum)
         })
 
         const doneTasksArr = card.querySelector('.card-body').querySelectorAll('.day-card-list__item-block')
@@ -316,8 +319,8 @@ weekPlanerCardHeaders.forEach(el => {
         let doneStorypointsSum = 0
         doneTasksArr.forEach(el => {
             let storypoints = '' 
-            if(el.querySelector('.running-list__storypoints')) {
-                storypoints = el.querySelector('.running-list__storypoints').innerText
+            if(el.querySelector('.task-list__storypoints')) {
+                storypoints = el.querySelector('.task-list__storypoints').innerText
             } else {
                 storypoints = 0
             }
@@ -325,13 +328,13 @@ weekPlanerCardHeaders.forEach(el => {
             doneStorypointsSum = doneStorypointsSum + storypoints
         })
 
-        const tasksInProgressArr = card.querySelector('.card-body').querySelectorAll('.running-list__task-block')
+        const tasksInProgressArr = card.querySelector('.card-body').querySelectorAll('.task-list__task-block')
         const tasksInProgressSum = tasksInProgressArr.length
         let storypointsInProgressSum = 0
         tasksInProgressArr.forEach(el => {
             let storypoints = '' 
-            if(el.querySelector('.running-list__storypoints')) {
-                storypoints = el.querySelector('.running-list__storypoints').innerText
+            if(el.querySelector('.task-list__storypoints')) {
+                storypoints = el.querySelector('.task-list__storypoints').innerText
             } else {
                 storypoints = 0
             }
@@ -557,7 +560,7 @@ addMoreNewTaskButton.addEventListener('click', () => {
 // переменные для создания задачи
 let taskStatus = ''
 let iconClass = ''
-let taskStorypoints = ''
+let taskStorypoints = 0
 
 // выбор иконки
 function chooseIcon(el) {
