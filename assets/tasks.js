@@ -190,12 +190,12 @@ function renderTaskForSearch(task) {
                         </li>`
         searchListCard.insertAdjacentHTML('beforeend', taskHTML)
     } else if(task.date && task.storypoints == 0) {
-        const taskHTML = `<li class="running-list__item" id="${task.id}">
-                            <div class="running-list__task-block">
-                                <div class="running-list__task-block-info">
+        const taskHTML = `<li class="task-list__item" id="${task.id}">
+                            <div class="task-list__task-block">
+                                <div class="task-list__task-block-info">
                                     <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                    <div class="running-list__task-block-settings">
-                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
+                                    <div class="task-list__task-block-settings">
+                                        <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -208,13 +208,13 @@ function renderTaskForSearch(task) {
                         </li>`
         searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
     } else if(task.storypoints && task.date == '') {
-        const taskHTML = `<li class="running-list__item" id="${task.id}">
-                            <div class="running-list__task-block">
-                                <div class="running-list__task-block-info">
+        const taskHTML = `<li class="task-list__item" id="${task.id}">
+                            <div class="task-list__task-block">
+                                <div class="task-list__task-block-info">
                                     <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                    <div class="running-list__task-block-settings">
-                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
-                                        <button class="running-list__storypoints">${task.storypoints}</button>
+                                    <div class="task-list__task-block-settings">
+                                        <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
+                                        <button class="task-list__storypoints">${task.storypoints}</button>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -226,13 +226,13 @@ function renderTaskForSearch(task) {
                         </li>`
         searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
     } else if(task.date && task.storypoints) {
-        const taskHTML = `<li class="running-list__item" id="${task.id}">
-                            <div class="running-list__task-block">
-                                <div class="running-list__task-block-info">
+        const taskHTML = `<li class="task-list__item" id="${task.id}">
+                            <div class="task-list__task-block">
+                                <div class="task-list__task-block-info">
                                     <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                    <div class="running-list__task-block-settings">
-                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
-                                        <button class="running-list__storypoints">${task.storypoints}</button>
+                                    <div class="task-list__task-block-settings">
+                                        <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
+                                        <button class="task-list__storypoints">${task.storypoints}</button>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -245,13 +245,13 @@ function renderTaskForSearch(task) {
                         </li>`
         searchListCard.insertAdjacentHTML('beforebegin', taskHTML)
     } else {
-        const taskHTML = `<li class="running-list__item" id="${task.id}">
-                            <div class="running-list__task-block">
-                                <div class="running-list__task-block-info">
+        const taskHTML = `<li class="task-list__item" id="${task.id}">
+                            <div class="task-list__task-block">
+                                <div class="task-list__task-block-info">
                                     <input class="form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                    <div class="running-list__task-block-settings">
-                                        <span class="running-list__status-icon"><i class="${task.icon}"></i></span>
-                                        <button class="running-list__storypoints">${task.storypoints}</button>
+                                    <div class="task-list__task-block-settings">
+                                        <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
+                                        <button class="task-list__storypoints">${task.storypoints}</button>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -864,7 +864,7 @@ function renderTaskToRunningList(task) {
                             <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                         </li>`
         runningListCard.insertAdjacentHTML('beforeend', taskHTML)
-    } else if(task.date && task.storypoints == 0) {
+    } else if(task.date && task.storypoints == '') {
         const taskHTML = `<li class="task-list__item" id="${task.id}">
                             <div class="task-list__task-block">
                                 <div class="task-list__task-block-info">
@@ -880,6 +880,7 @@ function renderTaskToRunningList(task) {
                                     <span class="icon-secondary"><i class="fa-solid fa-trash" style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                                 </div>
                             </div>
+                            <p class="form-date-label">дедлайн ${task.date}</p>
                             <p class="task-text__label hide-class">${task.description}</p>
                         </li>`
         runningListCard.insertAdjacentHTML('beforebegin', taskHTML)
@@ -931,7 +932,6 @@ function renderTaskToRunningList(task) {
                                     <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
-                                        <button class="task-list__storypoints">${task.storypoints}</button>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
