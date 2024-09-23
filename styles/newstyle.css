@@ -14,10 +14,38 @@
     --accent-base-color: rgb(250, 175, 89);
     --accent-light-color: rgba(196, 121, 35, 0.5);
     --accent-dark-color: rgb(209, 119, 16);
-    /* цвета статусов задач */
-    --icon-high-color: #9E3131;
-    --icon-medium-color: #B28136;
-    --icon-light-color: #23459E;
+}
+
+
+.base-text-color {
+    color: var(--seconday-base-color);
+}
+
+.green-text-color {
+    color: rgb(9, 196, 9) !important;
+}
+.violet-text-color {
+    color: rgb(135, 6, 167) !important;
+}
+.orange-text-color {
+    color: rgb(226, 131, 23) !important;
+}
+.red-text-color {
+    color: rgb(231, 61, 61) !important;
+}
+.blue-text-color {
+    color: rgb(58, 83, 223) !important;
+}
+
+/* цвета статусов задач */
+.icon-high-color  {
+    color: #9E3131;
+}
+.icon-medium-color  {
+    color: #B28136;
+}
+.icon-light-color  {
+    color: #23459E;
 }
 
 
@@ -213,6 +241,11 @@ input {
     padding-top: 1rem;
 }
 
+.task-list__icon-block {
+    display: flex;
+    flex-direction: row;
+}
+
 .block-col {
     display: flex;
     flex-direction: column;
@@ -224,6 +257,11 @@ input {
     height: 15rem;
     /* border: solid; */
     /* border-color:#5a4e9b; */
+}
+
+.task-list__task-block-settings {
+    display: flex;
+    flex-direction: row;
 }
 
 .search-block {
@@ -298,6 +336,10 @@ footer {
     padding-top: 3px;
 }
 
+.icon-secondary {
+    padding-inline: 3px;
+}
+
 /* КНОПКИ */
 .accent-btn {
     /* min-width: 20rem; */
@@ -355,6 +397,11 @@ footer {
     margin: 0.5rem;
 }
 
+.nav-link-active {
+    /* border: solid;
+    border-color: #5a4e9b;
+    border-width: 1px; */
+}
 
 
 
