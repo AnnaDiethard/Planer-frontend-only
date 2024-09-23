@@ -304,14 +304,11 @@ weekPlanerCardHeaders.forEach(el => {
             let storypoints = '' 
             if(el.querySelector('.task-list__storypoints')) {
                 storypoints = el.querySelector('.task-list__storypoints').innerText
-                console.log('storypointssss', storypoints)
             } else {
                 storypoints = 0
             }
             storypoints = Number(storypoints)
-            console.log('storypoints', storypoints)
             allStorypointsSum = allStorypointsSum + storypoints
-            console.log('allStorypointsSum', allStorypointsSum)
         })
 
         const doneTasksArr = card.querySelector('.card-body').querySelectorAll('.day-card-list__item-block')
@@ -969,7 +966,7 @@ function renderTaskToWeekPlaner(task) {
     if(task.done == true) {
         const taskHTML = `<li class="day-card-list__item-block done-list__item" id="${task.id}">
                             <div>
-                                <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
+                                <button class="task-list__storypoints" style="display: none">${task?.storypoints}</button>
                                 <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
                             </div>
                             <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
@@ -1024,7 +1021,7 @@ function renderTaskToExpiredList(task) {
     if(task.done == true) {
         const taskHTML = `<li class="day-card-list__item-block done-list__item" id="${task.id}">
                             <div>
-                                <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
+                                <button class="task-list__storypoints" style="display: none">${task?.storypoints}</button>
                                 <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
                             </div>
                             <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
@@ -1079,7 +1076,7 @@ function renderTaskToThisWeekList(task) {
     if(task.done == true) {
         const taskHTML = `<li class="day-card-list__item-block done-list__item" id="${task.id}">
                             <div>
-                                <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
+                                <button class="task-list__storypoints" style="display: none">${task?.storypoints}</button>
                                 <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
                             </div>
                             <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
@@ -1134,7 +1131,7 @@ function renderTaskToNextWeekList(task) {
     if(task.done == true) {
         const taskHTML = `<li class="day-card-list__item-block done-list__item" id="${task.id}">
                             <div>
-                                <button class="running-list__storypoints" style="display: none">${task?.storypoints}</button>
+                                <button class="task-list__storypoints" style="display: none">${task?.storypoints}</button>
                                 <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
                             </div>
                             <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
