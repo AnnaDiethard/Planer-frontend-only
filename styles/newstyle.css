@@ -38,13 +38,13 @@
 }
 
 /* цвета статусов задач */
-.icon-high-color  {
+.fa-hourglass-end  {
     color: #9E3131;
 }
-.icon-medium-color  {
+.fa-hourglass-half  {
     color: #B28136;
 }
-.icon-light-color  {
+.fa-hourglass-start  {
     color: #23459E;
 }
 
