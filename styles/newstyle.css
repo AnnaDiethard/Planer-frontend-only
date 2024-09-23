@@ -16,7 +16,6 @@
     --accent-dark-color: rgb(209, 119, 16);
 }
 
-
 .base-text-color {
     color: var(--seconday-base-color);
 }
@@ -46,6 +45,12 @@
 }
 .fa-hourglass-start  {
     color: #23459E;
+}
+
+.light-text-class {
+    color: var(--seconday-light-color);
+    text-decoration: line-through;
+    font-style: italic;
 }
 
 
