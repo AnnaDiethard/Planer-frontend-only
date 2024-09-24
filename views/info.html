@@ -20,7 +20,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <!-- css style -->
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/newstyle.css">
+    <link rel="stylesheet" href="../styles/cards.css">
     <link rel="stylesheet" href="../styles/calendar.css">
     <link rel="stylesheet" href="../styles/elements.css">
     <link rel="stylesheet" href="../styles/settings.css">
@@ -45,13 +46,67 @@
                 </div>
             </header>
 
+            <div class="row info-row">
+                    <div class="col-4" >
+                        <nav id="navbar-information" class="h-100 flex-column align-items-stretch pe-4 border-end" >
+                            <nav class="nav nav-pills flex-column">
+                                <a class="nav-link" href="#navbar-information-tasks">Задачи</a>
+                                <nav class="nav nav-pills flex-column">
+                                    <a class="nav-link ms-3 my-1" href="#navbar-information-tasks-lists">Списки задач</a>
+                                    <a class="nav-link ms-3 my-1" href="#navbar-information-tasks-add">Добавление задачи</a>
+                                    <a class="nav-link ms-3 my-1" href="#navbar-information-tasks-actions">Действия с задачами</a>
+                                </nav>
+                                <a class="nav-link" href="#navbar-information-widgets">Виджеты</a>
+                                <nav class="nav nav-pills flex-column">
+                                    <a class="nav-link ms-3 my-1" href="#navbar-information-widgets-add">Создание и редактирование</a>
+                                    <a class="nav-link ms-3 my-1" href="#navbar-information-widgets-list">Виджет "список"</a>
+                                    <a class="nav-link ms-3 my-1" href="#navbar-information-widgets-link-list">Виджет "список ссылок"</a>
+                                    <a class="nav-link ms-3 my-1" href="#navbar-information-widgets-week-planer">Виджет "недельный планер"</a>
+                                </nav>
+                            </nav>
+                        </nav>
+                    </div>
+                  
+                    <div class="col-8" >
+                        <div data-bs-spy="scroll" data-bs-target="#navbar-information" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0" >
+                            <div id="navbar-information-tasks">
+                                <h4>Задачи</h4>
+                            </div>
+                            <div id="navbar-information-tasks-lists">
+                                <h5>Списки задач</h5>
+                            </div>
+                            <div id="navbar-information-tasks-add">
+                                <h5>Добавление задачи</h5>
+                            </div>
+                            <div id="navbar-information-tasks-actions">
+                                <h5>Действия с задачами</h5>
+                            </div>
+                            <div id="navbar-information-widgets">
+                                <h4>Виджеты</h4>
+                            </div>
+                            <div id="navbar-information-widgets-add">
+                                <h5>Создание и редактирование</h5>
+                            </div>
+                            <div id="navbar-information-widgets-list">
+                                <h5>Виджет "список"</h5>
+                            </div>
+                            <div id="navbar-information-widgets-link-list">
+                                <h5>Виджет "список ссылок"</h5>
+                            </div>
+                            <div id="navbar-information-widgets-week-planer">
+                                <h5>Виджет "недельный планер"</h5>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
         </div>
 
         
 
         <footer style="padding-left: 3rem;">
-            <a href="info.html">information</a>
-            <p>feedback: support@onlain-planer.ru</p>
+            <a href="info.html">информация</a>
+            <p>обратная связь: support@onlain-planer.ru</p>
         </footer>
 
     </div>

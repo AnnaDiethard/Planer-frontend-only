@@ -281,7 +281,7 @@ function cleanSearchInput() {
     searchListCardItems.forEach(el => {
         el.remove()
     })
-    // window.location.reload()
+    window.location.reload()
 }
 
 // очистка строки поиска при выборе табов с задачами

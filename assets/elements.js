@@ -686,8 +686,9 @@ function markTheTaskOfEveryWeekGoalWidgetCompleted(el) {
 function removeEveryWeekGoal(el) {
     el.classList.add('hide-class')
     const item = el.closest('li')
-    item.classList.remove('light-text-class')
+    item.querySelector('p').classList.remove('light-text-class')
     item.querySelector('input').classList.remove('hide-class')
+    item.querySelector('input')
 
     saveWidgets()
 }
