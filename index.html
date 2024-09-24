@@ -20,10 +20,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <!-- css style -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/newstyle.css">
     <link rel="stylesheet" href="styles/calendar.css">
     <link rel="stylesheet" href="styles/elements.css">
-
+    <link rel="stylesheet" href="styles/settings.css">
+    <link rel="stylesheet" href="styles/cards.css">
 </head>
 <body>
     <div class="wrapper">
@@ -36,254 +37,271 @@
                             <div class="links-block">
                                 <a class="link-header" href="views/calendar.html"><i class="fa-regular fa-calendar-days logo-sm"></i></a>
                                 <a class="link-header" href="views/settings.html"><i class="fa-regular fa-user logo-sm"></i></a>
-                                <a class="link-header" href="newindex.html"><i class="fa-solid fa-arrow-right"></i></a>
+                                <a class="link-header" href="index.html"><i class="fa-solid fa-house logo-sm"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </header>
-            
-            <div class="row row-content">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="calendar-block">
-                                <div id="mainCalendar" class="shadow-class"></div>
-                            </div>
     
-                            
-    
-                            <div class="search-tasks " id="searchTasksBlock">
-                                <!-- <div> -->
-                                    <input type="text" id="searchTasksInput" class="shadow-class">
-                                    <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button>
-                                    <button id="searchTasksToRunningList" type="button" class="btn" onclick="searchTasks()" title="search"><i class="button-icon-extra-light icon-max fa-solid fa-magnifying-glass"></i></button>
-                                <!-- </div> -->
-                                <div>
-                                    <div class="dropdown color-search-dropdown">
-                                        <button class="btn dropdown-toggle color-search-dropdown-toggle" type="button" id="searchColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">color</button>
-                                        <ul class="dropdown-menu color-search-dropdown-menu" aria-labelledby="searchColorDropdown"  id="myTab" role="tablist">
-                                            <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(136, 136, 136) !important;">
-                                                <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseSearchTextColor(this)">.</button>
-                                            </li>
-                                            <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(9, 196, 9) !important;">
-                                                <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="green-text-color" href="#" onclick="chooseSearchTextColor(this)">.</button>
-                                            </li>
-                                            <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(135, 6, 167)  !important;">
-                                                <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="violet-text-color" onclick="chooseSearchTextColor(this)">.</button>
-                                            </li>
-                                            <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(226, 131, 23) !important;">
-                                                <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="orange-text-color" onclick="chooseSearchTextColor(this)">.</button>
-                                            </li>
-                                            <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(231, 61, 61) !important;">
-                                                <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="red-text-color" onclick="chooseSearchTextColor(this)">.</button>
-                                            </li>
-                                            <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(58, 83, 223) !important;">
-                                                <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="blue-text-color" onclick="chooseSearchTextColor(this)">.</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <button id="toHighStorypointsSearchInput" type="button" class="btn search-tasks__btn" onclick="" title="search" style="right: 3.5rem;"><i class="button-icon-accent fa-solid fa-arrow-down-wide-short"></i></button>
-                                    <button id="toLowStorypointsSearchInput" type="button" class="btn search-tasks__btn" onclick="" title="search" style="right: 3.5rem;"><i class="button-icon-accent fa-solid fa-arrow-up-short-wide"></i></button>
-                                </div>
-                            </div>
-
-                            <div class="nav-tasks" id="tasksTab" role="tablist">
-                                <button class="nav-link tasks-link shadow-class" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
-                                    type="button" role="tab" aria-controls="running-list" aria-selected="true" onclick="saveActiveTaskTab(this)">running list</button>
-                                <button class="nav-link tasks-link shadow-class " id="week-planer-tab" data-bs-toggle="tab" data-bs-target="#week-planer"
-                                    type="button" role="tab" aria-controls="week-planer" aria-selected="false" onclick="saveActiveTaskTab(this)">week planer</button>
-                                <button class="nav-link tasks-link shadow-class" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
-                                    type="button" role="tab" aria-controls="planning" aria-selected="false" onclick="saveActiveTaskTab(this)">planning</button>
-                            </div>
-    
-                            <div class="icon-tasks">
-                                <button id="addTaskToRunningList" type="button" class="btn search-tasks__btn" onclick="addTaskOpenDialog()" title="add task"><i class="button-icon-accent fa-solid fa-plus nav-tasks__add-icon"></i></button>
-                                <button id="cleanTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="openSearchBlock()" title="search"><i class="button-icon-accent fa-solid fa-magnifying-glass"></i></button>
-                                <button id="cleanTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="deleteDoneTasks()" title="delete done tasks"><i class="fa-solid fa-eraser"></i></button>
-                                <button id="deleteAllTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="deleteAllTasks()" title="delete all tasks"><i class="fa-solid fa-ban"></i></button>
-                            </div>
-                            
-                            <div class="tab-content" id="tasksTabContent">
-                                <div class="tab-pane fade" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
-                                    <ul class="card-body__list" id="runningListCard"></ul>
-                                </div>
-                                <div class="tab-pane fade" id="week-planer" role="tabpanel" aria-labelledby="week-planer-tab">
-                                    <div id="weekPlanerListCard" week-number="">
-                                        <div class="card card_day-card border-bottom-right-radius">
-                                            <div class="card-header card-header_day-card shadow-class">
-                                                <p class="card-header__text">expired tasks</p>
-                                                <div class="card-header__label"></div>
-                                                <div>
-                                                    <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
-                                                    <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body week-planer-card-body hide-class">
-                                                <ul class="card-body__list" id="expiredTasks"></ul>
-                                            </div>
-                                        </div>
-                                        <div class="card card_day-card border-bottom-right-radius">
-                                            <div class="card-header card-header_day-card shadow-class">
-                                                <p class="card-header__text">this week tasks</p>
-                                                <div class="card-header__label"></div>
-                                                <div>
-                                                    <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
-                                                    <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body week-planer-card-body hide-class">
-                                                <ul class="card-body__list" id="thisWeekTasks"></ul>
-                                            </div>
-                                        </div>
-                                        <hr/>
-                                        <div class="card card_day-card border-bottom-right-radius">
-                                            <div class="card-header card-header_day-card shadow-class">
-                                                <p class="card-header__text">monday</p>
-                                                <div class="card-header__label"></div>
-                                                <div>
-                                                    <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
-                                                    <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body week-planer-card-body hide-class">
-                                                <ul class="card-body__list" data-name="mon"></ul>
-                                            </div>
-                                        </div>
-                                        <div class="card card_day-card border-bottom-right-radius">
-                                            <div class="card-header card-header_day-card shadow-class">
-                                                <p class="card-header__text">tuesday</p>
-                                                <div class="card-header__label"></div>
-                                                <div>
-                                                    <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
-                                                    <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body week-planer-card-body hide-class">
-                                                <ul class="card-body__list" data-name="tue"></ul>
-                                            </div>
-                                        </div>
-                                        <div class="card card_day-card border-bottom-right-radius">
-                                            <div class="card-header card-header_day-card shadow-class">
-                                                <p class="card-header__text">wednesday</p>
-                                                <div class="card-header__label"></div>
-                                                <div>
-                                                    <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
-                                                    <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body week-planer-card-body hide-class">
-                                                <ul class="card-body__list" data-name="wed"></ul>
-                                            </div>
-                                        </div>
-                                        <div class="card card_day-card border-bottom-right-radius">
-                                            <div class="card-header card-header_day-card shadow-class">
-                                                <p class="card-header__text">thursday</p>
-                                                <div class="card-header__label"></div>
-                                                <div>
-                                                    <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
-                                                    <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body week-planer-card-body hide-class">
-                                                <ul class="card-body__list" data-name="thu"></ul>
-                                            </div>
-                                        </div>
-                                        <div class="card card_day-card border-bottom-right-radius">
-                                            <div class="card-header card-header_day-card shadow-class">
-                                                <p class="card-header__text">friday</p>
-                                                <div class="card-header__label"></div>
-                                                <div>
-                                                    <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
-                                                    <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body week-planer-card-body hide-class">
-                                                <ul class="card-body__list" data-name="fri"></ul>
-                                            </div>
-                                        </div>
-                                        <div class="card card_day-card border-bottom-right-radius">
-                                            <div class="card-header card-header_day-card shadow-class">
-                                                <p class="card-header__text">saturday</p>
-                                                <div class="card-header__label"></div>
-                                                <div>
-                                                    <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
-                                                    <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body week-planer-card-body hide-class">
-                                                <ul class="card-body__list" data-name="sat"></ul>
-                                            </div>
-                                        </div>
-                                        <div class="card card_day-card border-bottom-right-radius">
-                                            <div class="card-header card-header_day-card shadow-class">
-                                                <p class="card-header__text">sunday</p>
-                                                <div class="card-header__label"></div>
-                                                <div>
-                                                    <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
-                                                    <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body week-planer-card-body hide-class">
-                                                <ul class="card-body__list" data-name="sun"></ul>
-                                            </div>
-                                        </div>
-                                        <hr/>
-                                        <div class="card card_day-card border-bottom-right-radius">
-                                            <div class="card-header card-header_day-card shadow-class">
-                                                <p class="card-header__text">next weeks tasks</p>
-                                                <div class="card-header__label"></div>
-                                                <div>
-                                                    <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
-                                                    <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body week-planer-card-body hide-class">
-                                                <ul class="card-body__list" id="nextWeekTasks"></ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
-                                    <ul class="card-body__list" id="planningListCard"></ul>
-                                </div>
-                                <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
-                                    <ul class="card-body__list" id="searchListCard"></ul>
-                                </div>
+            <div class="row content-row">
+                <div class="col-4">
+                    <div class="calendar-block shadow-class" style="display: flex; align-items: center; justify-content: center;">
+                        <p>новый календарь в разработке</p>
+                    </div>
+                    <div class="search-tasks " id="searchTasksBlock">
+                        <div class="search-block">
+                            <input type="text" id="searchTasksInput" class="">
+                            <div class="block_left">
+                                <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button>
+                                <button id="searchTasksBtn" type="button" class="btn round-btn" onclick="searchTasks()" title="search"><i class="button-icon-extra-light icon-max fa-solid fa-magnifying-glass"></i></button>
                             </div>
                         </div>
-    
-                        <div class="col-8 " id="widgetBlock">
-                            <div class="row weather-row" style="padding-left: 2rem;">
-                                <div class="col-2 card-button-block-col">
-                                    <button class="btn button-dark shadow-class" id="addDateToCalendarBtn" onclick="addCalendarDateOpenDialog()">add event</button>
-                                    <button class="btn button-dark shadow-class" id="addWidgetBtn" onclick="addWidgetOpenDialog()">add widget</button>
-                                </div>
-                                <div class="col-10">
-                                    <div class="weather-dashboard shadow-class">
-                                        <a href="https://rusmeteo.net/weather/moskva/" class="widget-brick" id="b75499d689da58d5fce2ad1837a0e347">Погода в Москве</a>
+                        <div class="block_left">
+                            <button id="toHighStorypointsSearchInput" type="button" class="btn search-tasks__btn" onclick="" title="search" style="right: 3.5rem;"><i class="button-icon-accent fa-solid fa-arrow-down-wide-short"></i></button>
+                            <button id="toLowStorypointsSearchInput" type="button" class="btn search-tasks__btn" onclick="" title="search" style="right: 3.5rem;"><i class="button-icon-accent fa-solid fa-arrow-up-short-wide"></i></button>
+                            <div class="dropdown color-search-dropdown">
+                                <button class="btn dropdown-toggle color-search-dropdown-toggle" type="button" id="searchColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">color</button>
+                                <ul class="dropdown-menu color-search-dropdown-menu" aria-labelledby="searchColorDropdown"  id="myTab" role="tablist">
+                                    <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(136, 136, 136) !important;">
+                                        <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseSearchTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(9, 196, 9) !important;">
+                                        <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="green-text-color" href="#" onclick="chooseSearchTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(135, 6, 167)  !important;">
+                                        <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="violet-text-color" onclick="chooseSearchTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(226, 131, 23) !important;">
+                                        <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="orange-text-color" onclick="chooseSearchTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(231, 61, 61) !important;">
+                                        <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="red-text-color" onclick="chooseSearchTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(58, 83, 223) !important;">
+                                        <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="blue-text-color" onclick="chooseSearchTextColor(this)">.</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="nav-tasks" id="tasksTab" role="tablist">
+                            <button class="nav-link tasks-link shadow-class" style="width: 10rem" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
+                                type="button" role="tab" aria-controls="running-list" aria-selected="true" onclick="saveActiveTaskTab(this)">бегущий список</button>
+                            <button class="nav-link tasks-link shadow-class" style="width: 10rem" id="week-planer-tab" data-bs-toggle="tab" data-bs-target="#week-planer"
+                                type="button" role="tab" aria-controls="week-planer" aria-selected="false" onclick="saveActiveTaskTab(this)">недельный планер</button>
+                            <button class="nav-link tasks-link shadow-class" style="width: 10rem" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
+                                type="button" role="tab" aria-controls="planning" aria-selected="false" onclick="saveActiveTaskTab(this)">планирование</button>
+                        </div>
+
+                        <div class="block_left" style="padding: 0.5rem 0 0.5rem 0;">
+                            <button id="addTaskToRunningList" type="button" class="btn search-tasks__btn" onclick="addTaskOpenDialog()" title="add task"><i class="button-icon-accent fa-solid fa-plus nav-tasks__add-icon"></i></button>
+                            <button id="cleanTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="openSearchBlock()" title="search"><i class="button-icon-accent fa-solid fa-magnifying-glass"></i></button>
+                            <button id="cleanTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="deleteDoneTasks()" title="delete done tasks"><i class="fa-solid fa-eraser"></i></button>
+                            <button id="deleteAllTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="deleteAllTasks()" title="delete all tasks"><i class="fa-solid fa-ban"></i></button>
+                        </div>
+
+                        <div class="tab-content" id="tasksTabContent">
+                            <div class="tab-pane fade" id="running-list" role="tabpanel" aria-labelledby="running-list-tab">
+                                <ul class="card-body__list" id="runningListCard"></ul>
+                            </div>
+                            <div class="tab-pane fade" id="week-planer" role="tabpanel" aria-labelledby="week-planer-tab">
+                                <div id="weekPlanerListCard" week-number="">
+                                    <div class="card card_day-card border-bottom-right-radius">
+                                        <div class="card-header card-header_day-card shadow-class">
+                                            <p class="card-header__text">просроченные задачи</p>
+                                            <div class="card-header__label"></div>
+                                            <div>
+                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
+                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body week-planer-card-body hide-class">
+                                            <ul class="card-body__list" id="expiredTasks"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="card card_day-card border-bottom-right-radius">
+                                        <div class="card-header card-header_day-card shadow-class">
+                                            <p class="card-header__text">задачи текущей недели</p>
+                                            <div class="card-header__label"></div>
+                                            <div>
+                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
+                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body week-planer-card-body hide-class">
+                                            <ul class="card-body__list" id="thisWeekTasks"></ul>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="card card_day-card border-bottom-right-radius">
+                                        <div class="card-header card-header_day-card shadow-class">
+                                            <p class="card-header__text">понедельник</p>
+                                            <div class="card-header__label"></div>
+                                            <div>
+                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
+                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body week-planer-card-body hide-class">
+                                            <ul class="card-body__list" data-name="mon"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="card card_day-card border-bottom-right-radius">
+                                        <div class="card-header card-header_day-card shadow-class">
+                                            <p class="card-header__text">вторник</p>
+                                            <div class="card-header__label"></div>
+                                            <div>
+                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
+                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body week-planer-card-body hide-class">
+                                            <ul class="card-body__list" data-name="tue"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="card card_day-card border-bottom-right-radius">
+                                        <div class="card-header card-header_day-card shadow-class">
+                                            <p class="card-header__text">среда</p>
+                                            <div class="card-header__label"></div>
+                                            <div>
+                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
+                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body week-planer-card-body hide-class">
+                                            <ul class="card-body__list" data-name="wed"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="card card_day-card border-bottom-right-radius">
+                                        <div class="card-header card-header_day-card shadow-class">
+                                            <p class="card-header__text">четверг</p>
+                                            <div class="card-header__label"></div>
+                                            <div>
+                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
+                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body week-planer-card-body hide-class">
+                                            <ul class="card-body__list" data-name="thu"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="card card_day-card border-bottom-right-radius">
+                                        <div class="card-header card-header_day-card shadow-class">
+                                            <p class="card-header__text">пятница</p>
+                                            <div class="card-header__label"></div>
+                                            <div>
+                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
+                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body week-planer-card-body hide-class">
+                                            <ul class="card-body__list" data-name="fri"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="card card_day-card border-bottom-right-radius">
+                                        <div class="card-header card-header_day-card shadow-class">
+                                            <p class="card-header__text">суббота</p>
+                                            <div class="card-header__label"></div>
+                                            <div>
+                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
+                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body week-planer-card-body hide-class">
+                                            <ul class="card-body__list" data-name="sat"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="card card_day-card border-bottom-right-radius">
+                                        <div class="card-header card-header_day-card shadow-class">
+                                            <p class="card-header__text">воскресенье</p>
+                                            <div class="card-header__label"></div>
+                                            <div>
+                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
+                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body week-planer-card-body hide-class">
+                                            <ul class="card-body__list" data-name="sun">
+
+                                                <!-- <li class="done-list__item" id="${task.id}">
+                                                    <p class="form-check-label_done" for="flexCheckDefault">text</p>
+                                                    <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
+                                                </li>
+
+                                                <li class="task-list__item" id="${task.id}">
+                                                    <div class="task-list__task-block">
+                                                        <div class="task-list__task-block-info">
+                                                            <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                                            <div class="running-list__task-block-settings">
+                                                                <span class="running-list__status-icon hide-class"><i class="fa-solid fa-hourglass-start"></i></span>
+                                                                <button class="running-list__storypoints hide-class">13</button>
+                                                            </div>
+                                                            <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">text</p>
+                                                        </div>
+                                                        <div class="task-list__icon-block">
+                                                            <span class="icon-secondary"><i class="fa-solid fa-info button-icon-accent" style="font-size: 16px; padding-right: 5px"></i></span>
+                                                            <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                                            <span class="icon-secondary"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <p class="form-date-label hide-class">дедлайн</p>
+                                                    <p class="task-text__label hide-class">описание</p>
+                                                </li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="card card_day-card border-bottom-right-radius">
+                                        <div class="card-header card-header_day-card shadow-class">
+                                            <p class="card-header__text">задачи следующих недель</p>
+                                            <div class="card-header__label"></div>
+                                            <div>
+                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
+                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body week-planer-card-body hide-class">
+                                            <ul class="card-body__list" id="nextWeekTasks"></ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="widgets-row" id="widgetsCol"></div>
+                            <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
+                                <ul class="card-body__list" id="planningListCard"></ul>
+                            </div>
+                            <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
+                                <ul class="card-body__list" id="searchListCard"></ul>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-8" style="padding-left: 2rem;">
+                    <div class="weather-dashboard shadow-class" style="margin-bottom: 2rem;">
+                        <a href="https://rusmeteo.net/weather/moskva/" class="widget-brick" id="b75499d689da58d5fce2ad1837a0e347">Погода в Москве</a>
+                    </div>
+                    <div class="block-row">
+                        <button class="accent-btn shadow-class" style="width: 3rem" onclick="addWidgetOpenDialog()"><i class="fa-solid fa-plus"></i></button>
+                        <div class="slider-block">
+                            <!-- <button class="accent-btn shadow-class" style="min-width: 20rem">осовное поле</button> -->
+                            <!-- <button class="accent-btn shadow-class" style="min-width: 20rem">дополнтельное поле</button> -->
+                            <!-- <button class="accent-btn shadow-class" style="min-width: 20rem">ещё дополнтельное поле</button> -->
+                        </div>
+                        
+                    </div>
+                    <div class="row widgets-row" id="widgetsCol" style="padding-top: 0.5rem;"></div>
+                </div>
+                    
             </div>
 
-        
 
         <footer style="padding-left: 3rem;">
-            <div class="row footer-row">
-                <div class="col-12">
-                    <a href="views/info.html">information</a>
-                    <p>feedback: support@onlain-planer.ru</p>
-                </div>
-            </div>
+            <a href="views/info.html">информация</a>
+            <p>обратная связь: support@onlain-planer.ru</p>
         </footer>
-    </div>
 
-    
+    </div>
 
     <dialog id="validationDialog" class="add-dialog" taskId="">
         <div class="modal-dialog">
@@ -362,9 +380,9 @@
                         </div>
                         <div>
                             <div class="modal-dialog__btn-block" id="checkedIconBlock">
-                                <button id="3" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-start"></i></button>
-                                <button id="2" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-half"></i></button>
-                                <button id="1" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)" data-day-name="monday"><i class="fa-solid fa-hourglass-end"></i></button>
+                                <button id="3" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)"><i class="fa-solid fa-hourglass-start "></i></button>
+                                <button id="2" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)"><i class="fa-solid fa-hourglass-half"></i></button>
+                                <button id="1" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)"><i class="fa-solid fa-hourglass-end"></i></button>
                             </div>
                             <li class="block_right hide-class" id="cardEditStatusBlock">
                                 <input type="radio" name="runningListRadio" style="margin-right: 0.5rem;" id="cardEditStatusDelete">
@@ -378,39 +396,6 @@
                     <button type="button" class="btn button-dark" id="addTaskBtn">add</button>
                     <button type="reset" class="btn button-dark" id="addMoreTaskBtn">add more</button>
                     <button type="button" class="btn button-dark hide-class" id="editTaskBtn">update</button>
-                </div>
-            </div>
-        </div>
-    </dialog>
-
-    <dialog id="calendarDateDialog" class="add-dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleAdd">add event</h5>
-                    <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <!-- <div id="addDateCalendar"></div> -->
-                    </div>
-                    <div class="input-form-time" style="display: flex; flex-direction: row; width: 10rem;">
-                        <div class="input-form" style="padding-right: 1rem;">
-                            <input type="text" id="addEventInputHour" class="add-input " autocomplete="off" placeholder = "">
-                            <label for="addEventInputHour" class="add-input_label">hour</label>
-                        </div>
-                        <div class="input-form" style="padding-right: 1rem;">
-                            <input type="text" id="addEventInputMin" class="add-input " autocomplete="off" placeholder = "">
-                            <label for="addEventInputMin" class="add-input_label">min</label>
-                        </div>
-                    </div>
-                    <div class="input-form">
-                        <input type="text" id="addEventInput" class="add-input " autocomplete="off" placeholder = "">
-                        <label for="addEventInput" class="add-input_label">event</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn button-dark" id="addTaskBtn" onclick="createNewEvent()" data-bs-dismiss="modal">create</button>
                 </div>
             </div>
         </div>
@@ -508,7 +493,7 @@
             </div>
         </div>
     </dialog>
-        
+
 
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -521,8 +506,9 @@
     <!-- rusmeteo -->
     <script async src="https://rusmeteo.net/api/informerV2/b75499d689da58d5fce2ad1837a0e347/" type="text/javascript"></script>
     <!-- js -->
-    <script src="assets/calendar.js"></script>
     <script src="assets/tasks.js"></script>
+    <script src="assets/settings.js"></script>
+    <script src="assets/calendar.js"></script>
     <script src="assets/elements.js"></script>
 </body>
 </html>

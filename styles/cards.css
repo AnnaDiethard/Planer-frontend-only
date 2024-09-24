@@ -123,7 +123,10 @@
 }
 
 
-.add-input {
-    background-color: #d7d5e4 !important;
-    border-radius: 0;
-}
+/* .add-input {
+    background: none !important;
+    background-color: none !important;
+    border-radius: 0 !important;
+    border: solid !important;
+    border-color: #5a4e9b !important;
+} */

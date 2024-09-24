@@ -565,7 +565,7 @@ function chooseWeekDay(el) {
     } else {
         chooseDayNameIDArr.push(chooseDayNameID)
         el.classList.add('btn-outline-dark')
-    }  
+    }
 
     return chooseDayNameIDArr
 }
@@ -675,9 +675,9 @@ function addMoreTaskToEveryWeekGoalWidget() {
 // выделение элемента недельного виджета как выполненного
 function markTheTaskOfEveryWeekGoalWidgetCompleted(el) {
     const item = el.closest('li')
-    item.classList.add('light-text-class')
+    item.querySelector('p').classList.add('light-text-class')
     item.querySelector('.hide-class').classList.remove('hide-class')
-    item.querySelector('input').classList.add('hide-class')
+    el.classList.add('hide-class')
     
     saveWidgets()
 }
@@ -686,8 +686,9 @@ function markTheTaskOfEveryWeekGoalWidgetCompleted(el) {
 function removeEveryWeekGoal(el) {
     el.classList.add('hide-class')
     const item = el.closest('li')
-    item.classList.remove('light-text-class')
+    item.querySelector('p').classList.remove('light-text-class')
     item.querySelector('input').classList.remove('hide-class')
+    item.querySelector('input')
 
     saveWidgets()
 }

@@ -508,10 +508,10 @@ main.main {
     margin-inline: 1rem;
 }
 
-/* .tasks-link .active {
+.tasks-link .active {
     color: var(--seconday-base-color);
     color: var(--seconday-light-color);
-} */
+}
 
 .tasks-link:hover {
     /* color: var(--extra-dark-text-color); */
@@ -706,10 +706,11 @@ main.main {
 
 .btn-outline-light:focus-visible {
     color: var(--accent-base-color);
-    border-color: var(--accent-base-color);
+    /* border-color: var(--accent-base-color); */
     /* background-color: var(--accent-light-color); */
     background: none !important;
     margin: 0.5rem;
+    background-color: #74767c;
 }
 
 .btn-outline-dark {
@@ -971,7 +972,7 @@ main.main {
 
 .btn-secondary {
     background: none !important;
-    border-color: var(--primaty-base-color);
+    /* border-color: var(--primaty-base-color); */
 }
 
 .add-input{

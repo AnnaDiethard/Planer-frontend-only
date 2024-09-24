@@ -3,9 +3,25 @@
     flex-direction: column;
 }
 
-.nav-settings-btn {
+.nav-tasks-analytics {
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-settings-btn-x {
     width: 100%;
     margin-bottom: 1rem;
+    padding-inline: 0.5rem;
+    background: none;
+    /* border: none; */
+    /* border-color: blueviolet; */
+    height: 3rem;
+}
+
+.nav-settings-btn-y {
+    /* width: 100%; */
+    margin-inline: 0.5rem;
+    padding-inline: 0.5rem;
     background: none;
     /* border: none; */
     /* border-color: blueviolet; */

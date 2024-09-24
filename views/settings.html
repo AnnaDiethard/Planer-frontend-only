@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <!-- css style -->
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/newstyle.css">
     <link rel="stylesheet" href="../styles/calendar.css">
     <link rel="stylesheet" href="../styles/elements.css">
     <link rel="stylesheet" href="../styles/settings.css">
@@ -45,41 +45,46 @@
 
         <div class="row content-row" style="padding-inline: 15rem;">
             <div class="col-3">
-                <ul class="nav nav-settings" id="myTab" role="tablist">
+                <ul class="nav nav-settings" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-settings-btn active" id="user-settings-tab" data-bs-toggle="tab" data-bs-target="#user-settings-tab-pane" type="button" role="tab" href="#"
+                        <button class="nav-settings-btn-x active" id="user-settings-tab" data-bs-toggle="tab" data-bs-target="#user-settings-tab-pane" type="button" role="tab" href="#"
                             aria-controls="user-settings-tab-pane" aria-selected="true">Профиль
                         </button>
                     </li>
                     <li class="nav-item " role="presentation">
-                        <button class="nav-settings-btn" id="calendar-settings-tab" data-bs-toggle="tab" data-bs-target="#calendar-settings-tab-pane" type="button" role="tab" href="#"
+                        <button class="nav-settings-btn-x" id="calendar-settings-tab" data-bs-toggle="tab" data-bs-target="#calendar-settings-tab-pane" type="button" role="tab" href="#"
                             aria-controls="calendar-settings-tab-pane" aria-selected="true">Календарь
                         </button>
                     </li>
                     <li class="nav-item " role="presentation">
-                        <button class="nav-settings-btn" id="tasks-settings-tab" data-bs-toggle="tab" data-bs-target="#tasks-settings-tab-pane" type="button" role="tab" href="#"
+                        <button class="nav-settings-btn-x" id="tasks-settings-tab" data-bs-toggle="tab" data-bs-target="#tasks-settings-tab-pane" type="button" role="tab" href="#"
                             aria-controls="tasks-settings-tab-pane" aria-selected="true">Задачи
                         </button>
                     </li>
                     <li class="nav-item " role="presentation">
-                        <button class="nav-settings-btn" id="widgets-settings-tab" data-bs-toggle="tab" data-bs-target="#widgets-settings-tab-pane" type="button" role="tab" href="#"
+                        <button class="nav-settings-btn-x" id="widgets-settings-tab" data-bs-toggle="tab" data-bs-target="#widgets-settings-tab-pane" type="button" role="tab" href="#"
                             aria-controls="widgets-settings-tab-pane" aria-selected="true">Виджеты
                         </button>
                     </li>
                     <li class="nav-item " role="presentation">
-                        <button class="nav-settings-btn" id="news-tab" data-bs-toggle="tab" data-bs-target="#news-tab-pane" type="button" role="tab" href="#"
+                        <button class="nav-settings-btn-x" id="analytics-tab" data-bs-toggle="tab" data-bs-target="#analytics-tab-pane" type="button" role="tab" href="#"
+                            aria-controls="analytics-tab-pane" aria-selected="true">Статистика
+                        </button>
+                    </li>
+                    <li class="nav-item " role="presentation">
+                        <button class="nav-settings-btn-x" id="news-tab" data-bs-toggle="tab" data-bs-target="#news-tab-pane" type="button" role="tab" href="#"
                             aria-controls="news-tab-pane" aria-selected="true">Обновления
                         </button>
                     </li>
                     <!-- <li class="nav-item " role="presentation">
-                        <button class="nav-settings-btn" id="test-tab" data-bs-toggle="tab" data-bs-target="#test-tab-pane" type="button" role="tab" href="#"
+                        <button class="nav-settings-btn-x" id="test-tab" data-bs-toggle="tab" data-bs-target="#test-tab-pane" type="button" role="tab" href="#"
                             aria-controls="test-tab-pane" aria-selected="true">Test
                         </button>
                     </li> -->
                 </ul>
             </div>
             <div class="col-9">
-                <div class="tab-content" id="tabContent">
+                <div class="tab-content">
                     <div class="tab-pane fade show active" id="user-settings-tab-pane" role="tabpanel" aria-labelledby="user-settings-tab" tabindex="0">
                         <h4>Настройки профиля</h4>
                         <ul>
@@ -129,6 +134,48 @@
                                 <p>2. выбор последовательности полей и выбор активного</p>
                             </li>
                         </ul>
+                    </div>
+                    <div class="tab-pane fade" id="analytics-tab-pane" role="tabpanel" aria-labelledby="analytics-tab" tabindex="0">
+                        <ul class="nav nav-tasks-analytics" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-settings-btn-y active" id="tasks-statistics-tab" data-bs-toggle="tab" data-bs-target="#tasks-statistics-tab-pane" type="button" role="tab" href="#"
+                                    aria-controls="tasks-statistics-tab-pane" aria-selected="true">Статистика по дням
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-settings-btn-y " id="tasks-history-tab" data-bs-toggle="tab" data-bs-target="#tasks-history-tab-pane" type="button" role="tab" href="#"
+                                    aria-controls="tasks-history-tab-pane" aria-selected="true">История изменений
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="tasks-statistics-tab-pane" role="tabpanel" aria-labelledby="tasks-statistics-tab" tabindex="0">
+                                <ul style="padding-top: 1rem;">
+                                <li>
+                                    <p>1. активная страница - таблица текущей недели</p>
+                                </li>
+                                <li>
+                                    <p>2. при изменении карточки текущего дня - данные пишутся в БД</p>
+                                </li>
+                                <li>
+                                    <p>3. при смене дня на следующий - последний пинг в таблицу и начало записи следующего дня</p>
+                                </li>
+                            </ul>
+                            </div>
+                            <div class="tab-pane fade  " id="tasks-history-tab-pane" role="tabpanel" aria-labelledby="tasks-history-tab" tabindex="0">
+                                <ul style="padding-top: 1rem;">
+                                <li>
+                                    <p>1. список всех задач со статусами</p>
+                                </li>
+                                <li>
+                                    <p>2. по-умолчанию наверх добавляются новые задачи</p>
+                                </li>
+                                <li>
+                                    <p>3. при разворачивании карточки - по датам все внесённые изменения</p>
+                                </li>
+                            </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="news-tab-pane" role="tabpanel" aria-labelledby="news-tab" tabindex="0">
                         <h4>Обновления</h4>
