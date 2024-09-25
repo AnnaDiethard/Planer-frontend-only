@@ -117,6 +117,7 @@
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
                                             </div>
                                         </div>
+                                        <div class="table-block"></div>
                                         <div class="card-body week-planer-card-body hide-class">
                                             <ul class="card-body__list" id="expiredTasks"></ul>
                                         </div>
@@ -130,6 +131,7 @@
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
                                             </div>
                                         </div>
+                                        <div class="table-block"></div>
                                         <div class="card-body week-planer-card-body hide-class">
                                             <ul class="card-body__list" id="thisWeekTasks"></ul>
                                         </div>
@@ -144,6 +146,7 @@
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
                                             </div>
                                         </div>
+                                        <div class="table-block"></div>
                                         <div class="card-body week-planer-card-body hide-class">
                                             <ul class="card-body__list" data-name="mon"></ul>
                                         </div>
@@ -157,6 +160,7 @@
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
                                             </div>
                                         </div>
+                                        <div class="table-block"></div>
                                         <div class="card-body week-planer-card-body hide-class">
                                             <ul class="card-body__list" data-name="tue"></ul>
                                         </div>
@@ -170,6 +174,7 @@
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
                                             </div>
                                         </div>
+                                        <div class="table-block"></div>
                                         <div class="card-body week-planer-card-body hide-class">
                                             <ul class="card-body__list" data-name="wed"></ul>
                                         </div>
@@ -183,6 +188,7 @@
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
                                             </div>
                                         </div>
+                                        <div class="table-block"></div>
                                         <div class="card-body week-planer-card-body hide-class">
                                             <ul class="card-body__list" data-name="thu"></ul>
                                         </div>
@@ -196,6 +202,7 @@
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
                                             </div>
                                         </div>
+                                        <div class="table-block"></div>
                                         <div class="card-body week-planer-card-body hide-class">
                                             <ul class="card-body__list" data-name="fri"></ul>
                                         </div>
@@ -209,6 +216,7 @@
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
                                             </div>
                                         </div>
+                                        <div class="table-block"></div>
                                         <div class="card-body week-planer-card-body hide-class">
                                             <ul class="card-body__list" data-name="sat"></ul>
                                         </div>
@@ -222,33 +230,9 @@
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
                                             </div>
                                         </div>
+                                        <div class="table-block"></div>
                                         <div class="card-body week-planer-card-body hide-class">
                                             <ul class="card-body__list" data-name="sun">
-
-                                                <!-- <li class="done-list__item" id="${task.id}">
-                                                    <p class="form-check-label_done" for="flexCheckDefault">text</p>
-                                                    <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
-                                                </li>
-
-                                                <li class="task-list__item" id="${task.id}">
-                                                    <div class="task-list__task-block">
-                                                        <div class="task-list__task-block-info">
-                                                            <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                                            <div class="running-list__task-block-settings">
-                                                                <span class="running-list__status-icon hide-class"><i class="fa-solid fa-hourglass-start"></i></span>
-                                                                <button class="running-list__storypoints hide-class">13</button>
-                                                            </div>
-                                                            <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">text</p>
-                                                        </div>
-                                                        <div class="task-list__icon-block">
-                                                            <span class="icon-secondary"><i class="fa-solid fa-info button-icon-accent" style="font-size: 16px; padding-right: 5px"></i></span>
-                                                            <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                                            <span class="icon-secondary"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
-                                                        </div>
-                                                    </div>
-                                                    <p class="form-date-label hide-class">дедлайн</p>
-                                                    <p class="task-text__label hide-class">описание</p>
-                                                </li> -->
                                             </ul>
                                         </div>
                                     </div>
@@ -262,6 +246,7 @@
                                                 <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
                                             </div>
                                         </div>
+                                        <div class="table-block"></div>
                                         <div class="card-body week-planer-card-body hide-class">
                                             <ul class="card-body__list" id="nextWeekTasks"></ul>
                                         </div>

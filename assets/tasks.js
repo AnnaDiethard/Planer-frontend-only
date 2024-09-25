@@ -118,7 +118,7 @@ function validationDialogConfirm() {
     validationDialog.close()
 }
 
-// открытие/скрытие поиска
+// открытие/скрытие поиска TODO: переписать чтобы можно было переиспользовать
 function openSearchBlock() {
     const searchTasksBlock = document.querySelector('#searchTasksBlock')
     if(searchTasksBlock.classList.contains('hide-class')) {
@@ -128,6 +128,51 @@ function openSearchBlock() {
     }
 }
 
+// поиск по задачам (по тексту) TODO: переписать чтобы можно было переиспользовать
+function searchTasks() {
+    search()
+
+    const searchTasksInputValue = document.querySelector('#searchTasksInput').value
+    tasks.forEach(el => {
+        if(el.text.includes(searchTasksInputValue) || el.description.includes(searchTasksInputValue)) {
+            renderTaskForSearch(el)
+        }
+    })
+}
+
+// поиск по цвету текста
+function chooseSearchTextColor(el) {
+    const color = el.getAttribute('data-color')
+
+    search()
+
+    tasks.forEach(el => {
+        if(el.color.includes(color)) {
+            renderTaskForSearch(el)
+        }
+    })
+}
+
+// очистка строки поиска по кнопке TODO: переписать чтобы можно было переиспользовать
+function cleanSearchInput() {
+    const searchTasksInput = document.querySelector('#searchTasksInput')
+    searchTasksInput.value = ''
+    const searchListCardItems = document.querySelector("#search").querySelectorAll('li')
+    searchListCardItems.forEach(el => {
+        el.remove()
+    })
+    window.location.reload()
+}
+
+// очистка строки поиска при выборе табов с задачами TODO: переписать чтобы можно было переиспользовать
+const tasksTabItems = document.querySelector('#tasksTab').querySelectorAll('.nav-link')
+tasksTabItems.forEach(el => {
+    el.addEventListener('click', () => {
+        cleanSearchInput()
+    })
+})
+
+// рендер поисковика по задачам - в планерах
 function search() {
     const searchListCardItems = document.querySelector("#search").querySelectorAll('li')
     searchListCardItems.forEach(el => {
@@ -154,31 +199,7 @@ function search() {
     
 }
 
-// поиск по задачам (по тексту)
-function searchTasks() {
-    search()
-
-    const searchTasksInputValue = document.querySelector('#searchTasksInput').value
-    tasks.forEach(el => {
-        if(el.text.includes(searchTasksInputValue) || el.description.includes(searchTasksInputValue)) {
-            renderTaskForSearch(el)
-        }
-    })
-}
-
-function chooseSearchTextColor(el) {
-    const color = el.getAttribute('data-color')
-
-    search()
-
-    tasks.forEach(el => {
-        if(el.color.includes(color)) {
-            renderTaskForSearch(el)
-        }
-    })
-}
-
-// рендер задачи для поиска
+// рендер задачи для поиска - в планерах
 function renderTaskForSearch(task) {
     const searchListCard = document.querySelector("#searchListCard")
 
@@ -273,28 +294,13 @@ function renderTaskForSearch(task) {
     }
 }
 
-// очистка строки поиска по кнопке
-function cleanSearchInput() {
-    const searchTasksInput = document.querySelector('#searchTasksInput')
-    searchTasksInput.value = ''
-    const searchListCardItems = document.querySelector("#search").querySelectorAll('li')
-    searchListCardItems.forEach(el => {
-        el.remove()
-    })
-    window.location.reload()
-}
-
-// очистка строки поиска при выборе табов с задачами
-const tasksTabItems = document.querySelector('#tasksTab').querySelectorAll('.nav-link')
-tasksTabItems.forEach(el => {
-    el.addEventListener('click', () => {
-        cleanSearchInput()
-    })
-})
-
 // всплывающий блок с информацией по задачам дневной карточки
 const weekPlanerCardHeaders = document.querySelector('#weekPlanerListCard').querySelectorAll('.card-header__text')
 weekPlanerCardHeaders.forEach(el => {
+    const tableBlock = el.closest('.card').querySelector('.table-block')
+    // console.log('tableBlock', tableBlock)
+    
+
     el.addEventListener('mouseover', function handleMouseOver() {
         const card = el.closest('.card')
         const allTasksArr = card.querySelectorAll('li')
@@ -339,42 +345,38 @@ weekPlanerCardHeaders.forEach(el => {
             storypointsInProgressSum = storypointsInProgressSum + storypoints
         })
 
-
-        const label = el.closest('.card-header').querySelector('.card-header__label')
         labelHTML = `<table class="table">
-                        <tr class="table-row">
-                            <td class="table-row-item">tasks</td>
-                            <td class="table-row-item">${allTasksSum}</td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-row-item">storypoints</td>
-                            <td class="table-row-item">${allStorypointsSum}</td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-row-item">done tasks</td>
-                            <td class="table-row-item">${doneTasksSum}</td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-row-item">done storypoints</td>
-                            <td class="table-row-item">${doneStorypointsSum}</td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-row-item">tasks in progress</td>
-                            <td class="table-row-item">${tasksInProgressSum}</td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-row-item">storypoints in progress</td>
-                            <td class="table-row-item">${storypointsInProgressSum}</td>
-                        </tr>
-                    </table>`
-        
-        label.insertAdjacentHTML('beforebegin', labelHTML)
-        const table = el.closest('.card-header').querySelector('.table')
-        table.style.display = 'block'
+                    <tr class="table-row">
+                        <td class="table-row-item">количество задач</td>
+                        <td class="table-row-item">${allTasksSum}</td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="table-row-item">общий вес</td>
+                        <td class="table-row-item">${allStorypointsSum}</td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="table-row-item">закрытые задачи</td>
+                        <td class="table-row-item">${doneTasksSum}</td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="table-row-item">закрытые сторипоинты</td>
+                        <td class="table-row-item">${doneStorypointsSum}</td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="table-row-item">задачи в процессе</td>
+                        <td class="table-row-item">${tasksInProgressSum}</td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="table-row-item">сторипоинты в процессе</td>
+                        <td class="table-row-item">${storypointsInProgressSum}</td>
+                    </tr>
+                </table>`
+        tableBlock.insertAdjacentHTML('beforebegin', labelHTML)
+        tableBlock.classList.add('show-class')
     })
     el.addEventListener('mouseout', function handleMouseOut() {
-        const table = el.closest('.card-header').querySelector('.table')
-        table.style.display = 'none'
+        const table = el.closest('.card').querySelector('.table')
+        table.remove()
     })
 })
 
