@@ -122,6 +122,11 @@ input {
     display: none;
 }
 
+.show-class {
+    display: block;
+    z-index: 10;
+}
+
 .scroll-class {
     overflow-y: auto;
     min-height: 5rem !important;
