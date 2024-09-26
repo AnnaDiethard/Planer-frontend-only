@@ -572,16 +572,31 @@ function closeTaskDialog() {
 // сохранение новой задачи
 const addNewTaskButton = document.querySelector('#addTaskBtn')
 addNewTaskButton.addEventListener('click', () => {
-    createNewTask()
-    cleanTaskForm()
-    closeTaskDialog()
+    const taskInputValueText = document.querySelector("#addTaskInputText").value
+
+    if(taskInputValueText == '') {
+        const errorText = document.querySelector('#taskDialog').querySelector('#errorText')
+        errorText.classList.remove('hide-class')
+    } else {
+        createNewTask()
+        cleanTaskForm()
+        closeTaskDialog()
+    }
+    
 })
 
 // сохранение новой (следующей) задачи
 const addMoreNewTaskButton = document.querySelector('#addMoreTaskBtn')
 addMoreNewTaskButton.addEventListener('click', () => {
-    createNewTask()
-    cleanTaskForm()
+    const taskInputValueText = document.querySelector("#addTaskInputText").value
+
+    if(taskInputValueText == '') {
+        const errorText = document.querySelector('#taskDialog').querySelector('#errorText')
+        errorText.classList.remove('hide-class')
+    } else {
+        createNewTask()
+        cleanTaskForm()
+    }
 })
 
 // переменные для создания задачи
@@ -591,7 +606,6 @@ let taskStorypoints = ''
 
 // выбор иконки
 function chooseIcon(el) {
-    console.log('el', el.id)
     taskStatus = el.id
     iconClass = el.querySelector('i').classList.value
 
@@ -644,10 +658,6 @@ function createNewTask() {
     const taskInputValueText = document.querySelector("#addTaskInputText").value
     const taskInputValueDescription = document.querySelector("#addTaskInputDescription").value
 
-    if(taskInputValueText == '') {
-        const errorText = document.querySelector('#errorText')
-        errorText.classList.remove('hide-class')
-    } else {
         const newTask = {
             id: Date.now(),
             text: taskInputValueText,
@@ -671,7 +681,6 @@ function createNewTask() {
         saveTasksListInLocalStorage(tasks)
     
         checkCorrectRenderTask()
-    }
 }
 
 // очистка элементов формы создания задачи
@@ -992,7 +1001,6 @@ function markTheTaskCompleted(el) {
         if(task.id == id) {
             task.done = true,
             task.doneDate = moment().format('L')
-            console.log('task', task)
         } 
     })
 
