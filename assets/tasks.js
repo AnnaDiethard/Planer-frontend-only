@@ -137,6 +137,7 @@ function searchTasks() {
     search()
 
     const searchTasksInputValue = document.querySelector('#searchTasksInput').value
+    tasks.sort((a, b) => a.status - b.status)
     tasks.forEach(el => {
         if(el.text.includes(searchTasksInputValue) || el.description.includes(searchTasksInputValue)) {
             renderTaskForSearch(el)
@@ -430,7 +431,6 @@ function addTaskOpenDialog() {
 
 // открытие окна задачи (редактирование)
 function editTaskOpenDialog(el) {
-    // cleanTaskForm()
 
     const titleAdd = document.querySelector('#modalTitleAdd')
     const buttonAdd = document.querySelector('#addTaskBtn')
