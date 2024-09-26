@@ -302,8 +302,6 @@ function renderTaskForSearch(task) {
 const weekPlanerCardHeaders = document.querySelector('#weekPlanerListCard').querySelectorAll('.card-header__text')
 weekPlanerCardHeaders.forEach(el => {
     const tableBlock = el.closest('.card').querySelector('.table-block')
-    // console.log('tableBlock', tableBlock)
-    
 
     el.addEventListener('mouseover', function handleMouseOver() {
         const card = el.closest('.card')
@@ -321,7 +319,7 @@ weekPlanerCardHeaders.forEach(el => {
             allStorypointsSum = allStorypointsSum + storypoints
         })
 
-        const doneTasksArr = card.querySelector('.card-body').querySelectorAll('.day-card-list__item-block')
+        const doneTasksArr = card.querySelector('.card-body').querySelectorAll('.task-list__task-block')
         const doneTasksSum = doneTasksArr.length
         let doneStorypointsSum = 0
         doneTasksArr.forEach(el => {
@@ -902,6 +900,7 @@ function renderTask(task) {
     // выполненная задача
     doneTaskTemplate = `<li class="done-list__item" id="${task.id}">
                             <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                            <span class="task-list__storypoints hide-class">${task.storypoints}</span>
                             <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                         </li>`
     // в RL с датой
