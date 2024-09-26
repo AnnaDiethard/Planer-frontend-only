@@ -145,6 +145,30 @@ function searchTasks() {
     })
 }
 
+// рендеринг задач по весу сторипоинтов (по уменьшению)
+function toHighStorypointsSearchInput() {
+    search()
+
+    tasks.sort((a, b) => b.storypoints - a.storypoints)
+    tasks.forEach(el => {
+        if(el.storypoints && el.done == false) {
+            renderTaskForSearch(el)
+        }
+    })
+}
+
+// рендеринг задач по весу сторипоинтов (по увеличению)
+function toLowStorypointsSearchInput() {
+    search()
+
+    tasks.sort((a, b) => a.storypoints - b.storypoints)
+    tasks.forEach(el => {
+        if(el.storypoints && el.done == false) {
+            renderTaskForSearch(el)
+        }
+    })
+}
+
 // поиск по цвету текста
 function chooseSearchTextColor(el) {
     const color = el.getAttribute('data-color')
