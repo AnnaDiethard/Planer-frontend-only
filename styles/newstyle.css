@@ -225,6 +225,13 @@ input {
     justify-content: end;
 }
 
+.block_right {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
 .card-header_day-card {
     height: 3rem;
     color: var(--seconday-base-color);
