@@ -90,14 +90,14 @@
 
 .task-list__storypoints {
     background: none;
-    border-radius: 100%;
-    border-color: var(--primaty-active-color);
     color: var(--seconday-base-color);
-    height: 1.5rem;
-    width: 1.5rem;
-    margin: 0 5px 3px 3px;
+    margin: 0 5px 5px 3px;
     padding-top: 3px;
-    font-size: 14px;
+    font-size: 18px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .task-list__task-block-settings {
@@ -110,7 +110,7 @@
 }
 
 .task-text__text {
-    padding-left: 0.5rem;
+    /* padding-left: 0.5rem; */
 }
 
 .form-date-label {
