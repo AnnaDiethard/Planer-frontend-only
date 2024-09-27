@@ -556,12 +556,17 @@ function editTaskOpenDialog(el) {
     colorBtn.setAttribute('data-color', taskTextColor)
 
     const additionalIconBtn = document.querySelector('#taskAdditionalDropdown').querySelector('i')
+    console.log('additionalIconBtn', additionalIconBtn)
     const taskAdditional = task?.additionalIcon
+    console.log('taskAdditional', taskAdditional)
     if(taskAdditional != '') {
+        console.log('taskAdditional', additiontaskAdditionalalIconBtn)
         const classArr = taskAdditional.split(' ')
         classArr.forEach(el => {
             additionalIconBtn.classList.add(el)
         })
+    } else {
+        console.log(1111)
     }
     
     taskDialog.showModal()
