@@ -559,7 +559,8 @@ function editTaskOpenDialog(el) {
     console.log('additionalIconBtn', additionalIconBtn)
     const taskAdditional = task.additionalIcon
     console.log('taskAdditional', taskAdditional)
-    if(taskAdditional != '') {
+    if(taskAdditional == '') {
+        console.log(2222)
         console.log('taskAdditional', taskAdditional)
         const classArr = taskAdditional.split(' ')
         classArr.forEach(el => {
