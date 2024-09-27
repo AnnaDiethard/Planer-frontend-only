@@ -1,18 +1,19 @@
-// без этого не работают бутстраповские тултипы
-[...document.querySelectorAll('[data-bs-toggle="tooltip"]')]
-  .forEach(el => new bootstrap.Tooltip(el))
-
-// moment().calendar();
-moment.locale('ru')
-console.log('calendar', moment().calendar())
-
-function alertWindow() {
-    alert('функционал в разработке')
-}
-
+// объявление темплейтов для рендера задач
 let taskTemplate = ''
 let taskDateTemplate = ''
 let doneTaskTemplate = ''
+
+// объявление переменных для задач
+let tasks = []
+let doneTasks = []
+let taskDate = ''
+let dayOfWeek = ''
+let taskWeekNumber = ''
+let taskStatus = ''
+let iconClass = ''
+let taskStorypoints = ''
+
+const taskDialog = document.querySelector('#taskDialog')
  
 // сброс номера недели задачи при смене недели на следующую
 const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
@@ -31,8 +32,6 @@ if(getTasksForCheckWeekNumber != null) {
 }
 localStorage.setItem('tasksList', JSON.stringify(getTasksForCheckWeekNumber))
 
-// определение текущего дня недели  
-const thisDayName = new Date().toString().substring(0, 3).toLocaleLowerCase()
 // открытие карточки текущего дня в недельном планере
 const weekPlanerListCardArr = document.querySelector('#weekPlanerListCard').querySelectorAll('.card-body__list')
 weekPlanerListCardArr.forEach(el => {
@@ -78,16 +77,12 @@ function saveActiveTaskTab(el) {
     sessionStorage.setItem('saveActiveTaskTabItem', JSON.stringify(getActiveTaskTabItem))
 }
 
-// устнановка глобальных переменных
-let tasks = []
-let doneTasks = []
-let taskDate = ''
-let dayOfWeek = ''
-let taskWeekNumber = ''
-const taskDialog = document.querySelector('#taskDialog')
-const openValidationDialogBtn = document.querySelector('#validationDialogConfirm')
+// сортировка массива задач по статусу
+function sortTasksOnStatus(arr) {
+    arr.sort((a, b) => (a.status) - (b.status))
+}
 
-// рендер тудушника из LS
+// получение списка задач из LS
 if (localStorage.getItem('tasksList')) {
 	tasks = JSON.parse(localStorage.getItem('tasksList'))
     if(tasks != null) {
@@ -95,7 +90,6 @@ if (localStorage.getItem('tasksList')) {
     } else {
         tasks = []
     }
-    
 }
 
 // сохранение задач в LS
@@ -110,34 +104,12 @@ function getTasksListFromLocalStorage() {
     return tasksList
 }
 
-const validationDialog = document.querySelector('#validationDialog')
-// окно валидации для подтверждения действия
-function openValidationDialog() {
-    validationDialog.showModal()
-}
-function validationDialogCancel() {
-    window.location.reload()
-}
-function validationDialogConfirm() {
-    validationDialog.close()
-}
-
-// открытие/скрытие поиска TODO: переписать чтобы можно было переиспользовать
-function openSearchBlock() {
-    const searchTasksBlock = document.querySelector('#searchTasksBlock')
-    if(searchTasksBlock.classList.contains('hide-class')) {
-        searchTasksBlock.classList.remove('hide-class')
-    } else {
-        searchTasksBlock.classList.add('hide-class')
-    }
-}
-
 // поиск по задачам (по тексту) TODO: переписать чтобы можно было переиспользовать
 function searchTasks() {
     search()
 
     const searchTasksInputValue = document.querySelector('#searchTasksInput').value
-    tasks.sort((a, b) => a.status - b.status)
+    sortTasksOnStatus(tasks)
     tasks.forEach(el => {
         if(el.text.includes(searchTasksInputValue) || el.description.includes(searchTasksInputValue)) {
             renderTaskForSearch(el)
@@ -148,8 +120,7 @@ function searchTasks() {
 // рендеринг задач по весу сторипоинтов (по уменьшению)
 function toHighStorypointsSearchInput() {
     search()
-
-    tasks.sort((a, b) => b.storypoints - a.storypoints)
+    sortTasksOnStatus(tasks)
     tasks.forEach(el => {
         if(el.storypoints && el.done == false) {
             renderTaskForSearch(el)
@@ -160,8 +131,7 @@ function toHighStorypointsSearchInput() {
 // рендеринг задач по весу сторипоинтов (по увеличению)
 function toLowStorypointsSearchInput() {
     search()
-
-    tasks.sort((a, b) => a.storypoints - b.storypoints)
+    sortTasksOnStatus(tasks)
     tasks.forEach(el => {
         if(el.storypoints && el.done == false) {
             renderTaskForSearch(el)
@@ -228,7 +198,7 @@ function search() {
     
 }
 
-// рендер задачи для поиска - в планерах
+// рендер задачи для поиска - в планерах - переписать
 function renderTaskForSearch(task) {
     const searchListCard = document.querySelector("#searchListCard")
 
@@ -582,7 +552,6 @@ addNewTaskButton.addEventListener('click', () => {
         cleanTaskForm()
         closeTaskDialog()
     }
-    
 })
 
 // сохранение новой (следующей) задачи
@@ -598,11 +567,6 @@ addMoreNewTaskButton.addEventListener('click', () => {
         cleanTaskForm()
     }
 })
-
-// переменные для создания задачи
-let taskStatus = ''
-let iconClass = ''
-let taskStorypoints = ''
 
 // выбор иконки
 function chooseIcon(el) {
@@ -827,32 +791,27 @@ function checkCorrectRenderTask() {
         // runnungList
         if (task.icon) {
             tasksRunningList.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksRunningList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            sortTasksOnStatus(tasksRunningList)
         }
         // weekPlaner
         if(getThisWeekNumber == task.weekNumber && task.date) {
             tasksWeekDaysPlaner.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksWeekDaysPlaner.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            sortTasksOnStatus(tasksWeekDaysPlaner)
         }
         // expiredList
         if (task.expired == true) {
             tasksExpiredList.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksExpiredList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            sortTasksOnStatus(tasksExpiredList)
         }
         // thisWeekList
         if (getThisWeekNumber == task.weekNumber && task.date == '') {
             tasksThisWeekList.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksThisWeekList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            sortTasksOnStatus(tasksThisWeekList)
         }
         // nextWeekList
         if (getThisWeekNumber < task.weekNumber) {
             tasksNextWeekList.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksNextWeekList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            sortTasksOnStatus(tasksNextWeekList)
         }
     })
 
@@ -1076,8 +1035,4 @@ function rollUpWeekDayCard(el) {
     btn.classList.remove('hide-class')
     el.closest('.card_day-card').querySelector('.card-body').classList.add('hide-class')
     el.closest('.card_day-card').classList.add('border-bottom-right-radius')
-}
-
-function addCalendarDateOpenDialog() {
-    alertWindow()
 }
