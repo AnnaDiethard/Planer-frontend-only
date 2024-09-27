@@ -151,6 +151,11 @@ input {
     /* justify-content: space-between; */
 }
 
+.block-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .slider-block {
     display: flex;
     flex-direction: row;
@@ -364,6 +369,11 @@ footer {
     padding-inline: 3px;
 }
 
+.task-list__additional-icon {
+    font-size: 18px;
+    padding-right: 5px;
+}
+
 /* КНОПКИ */
 .accent-btn {
     /* min-width: 20rem; */
@@ -434,6 +444,11 @@ footer {
     border: solid;
     border-color: #5a4e9b;
     border-width: 3px;
+}
+
+.content-dropdown {
+    height: 2.5rem;
+    width: 6rem;
 }
 
 
@@ -623,11 +638,11 @@ footer {
     width: 12rem;
     height: 4rem;
 } */
-
+/* 
 .color-dropdown {
     width: 8rem;
     height: 3rem;
-}
+} */
 
 .color-search-dropdown-link {
     width: 100%;

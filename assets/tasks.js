@@ -10,7 +10,9 @@ let taskDate = ''
 let dayOfWeek = ''
 let taskWeekNumber = ''
 let taskStatus = ''
+let textColor = ''
 let iconClass = ''
+let additionalIconClass = ''
 let taskStorypoints = ''
 
 const taskDialog = document.querySelector('#taskDialog')
@@ -218,6 +220,7 @@ function renderTaskForSearch(task) {
                                     <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
+                                        <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -240,6 +243,7 @@ function renderTaskForSearch(task) {
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                         <button class="task-list__storypoints">${task.storypoints}</button>
+                                        <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -260,6 +264,7 @@ function renderTaskForSearch(task) {
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                         <button class="task-list__storypoints">${task.storypoints}</button>
+                                        <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -280,6 +285,7 @@ function renderTaskForSearch(task) {
                                     <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
+                                        <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -529,6 +535,15 @@ function editTaskOpenDialog(el) {
     const taskTextColor = task?.color
     colorBtn.classList.add(taskTextColor)
     colorBtn.setAttribute('data-color', taskTextColor)
+
+    const additionalIconBtn = document.querySelector('#taskAdditionalDropdown').querySelector('i')
+    const taskAdditional = task?.additionalIcon
+    if(taskAdditional != '') {
+        const classArr = taskAdditional.split(' ')
+        classArr.forEach(el => {
+            additionalIconBtn.classList.add(el)
+        })
+    }
     
     taskDialog.showModal()
 }
@@ -570,36 +585,45 @@ addMoreNewTaskButton.addEventListener('click', () => {
     }
 })
 
-// выбор иконки
-function chooseIcon(el) {
-    if(el.classList.contains('active')) {
-        console.log('chooseIconRemove')
-        el.classList.remove('active')
-        taskStatus = 0
-        iconClass = ''
-    } else {
-        console.log('chooseIconAdd')
-        taskStatus = el.id
-        iconClass = el.querySelector('i').classList.value
+// установка цвета текста задачи
+const dropdownColorBtn = document.querySelector('#taskTextColorDropdown')
+function chooseTaskTextColor(el) {
+    cleanTaskTextColorDropdownClass()
+    
+    const colorClass = el.getAttribute('data-color')
+    textColor = colorClass
+    dropdownColorBtn.classList.add(colorClass)
+    dropdownColorBtn.setAttribute('data-color', textColor)
+    dropdownColorBtn.closest('.dropdown').querySelector('ul').classList.remove('show')
+}
 
-        const btnArr = el.closest('.modal-dialog__btn-block').querySelectorAll('.btn-outline-light')
-        btnArr.forEach(el => {
-            if(el.classList.contains('active')) {
-                el.classList.remove('active')
-            }
-        })
-        el.classList.add('active')
-    }
+// очистка дропдауна выбора цвета текста задачи
+function cleanTaskTextColorDropdownClass() {
+    dropdownColorBtn.classList = ''
+    dropdownColorBtn.classList.add('btn')
+    dropdownColorBtn.classList.add('btn-secondary')
+    dropdownColorBtn.classList.add('dropdown-toggle')
+}
+
+// установка дополнительной иконки задачи
+const dropdownAdditionalIconBtn = document.querySelector('#taskAdditionalDropdown')
+function chooseTaskAdditionalIcon(el) {
+    dropdownAdditionalIconBtn.querySelector('i').classList.value = ''
+    
+    const additionalIcon = el.querySelector('i').classList.value
+    additionalIconClass = additionalIcon
+    const classArr = additionalIcon.split(' ')
+    classArr.forEach(el => {
+        dropdownAdditionalIconBtn.querySelector('i').classList.add(el)
+    })
 }
 
 // сторипоинты - выбор и отмена
 function chooseStorypoints(el) {
     if(el.classList.contains('active')) {
-        console.log('chooseStorypointsRemove')
         el.classList.remove('active')
         taskStorypoints = ''
     } else {
-        console.log('chooseStorypointsAdd')
         let storypoints = el.innerHTML
         taskStorypoints = Number(storypoints)
 
@@ -613,25 +637,24 @@ function chooseStorypoints(el) {
     }
 }
 
-// установка цвета текста задачи
-let textColor = ''
-const dropdownBtn = document.querySelector('#taskTextColorDropdown')
-function chooseTaskTextColor(el) {
-    cleanTaskTextColorDropdownClass()
-    
-    const colorClass = el.getAttribute('data-color')
-    textColor = colorClass
-    dropdownBtn.classList.add(colorClass)
-    dropdownBtn.setAttribute('data-color', textColor)
-    dropdownBtn.closest('.dropdown').querySelector('ul').classList.remove('show')
-}
+// выбор статуса
+function chooseStatus(el) {
+    if(el.classList.contains('active')) {
+        el.classList.remove('active')
+        taskStatus = 0
+        iconClass = ''
+    } else {
+        taskStatus = el.id
+        iconClass = el.querySelector('i').classList.value
 
-// очистка дропдауна выбора цвета текста задачи
-function cleanTaskTextColorDropdownClass() {
-    dropdownBtn.classList = ''
-    dropdownBtn.classList.add('btn')
-    dropdownBtn.classList.add('btn-secondary')
-    dropdownBtn.classList.add('dropdown-toggle')
+        const btnArr = el.closest('.modal-dialog__btn-block').querySelectorAll('.btn-outline-light')
+        btnArr.forEach(el => {
+            if(el.classList.contains('active')) {
+                el.classList.remove('active')
+            }
+        })
+        el.classList.add('active')
+    }
 }
 
 // создание новой задачи
@@ -646,6 +669,7 @@ function createNewTask() {
             status: taskStatus || '',
             storypoints: taskStorypoints || '',
             icon: iconClass || '',
+            additionalIcon: additionalIconClass || '',
             color: textColor || 'base-text-color',
             done: false,
             doneDate: '',
@@ -696,6 +720,7 @@ function cleanTaskForm() {
         }
     })
 
+    dropdownAdditionalIconBtn.querySelector('i').classList.value = ''
     cleanTaskTextColorDropdownClass()
 }
 
@@ -744,8 +769,13 @@ editTaskBtn.addEventListener('click', (el) => {
             iconClass = ''
         }
 
-        const dropdownBtn = document.querySelector('#taskTextColorDropdown')
-        textColor = dropdownBtn.getAttribute('data-color')
+        const dropdownColorBtn = document.querySelector('#taskTextColorDropdown')
+        textColor = dropdownColorBtn.getAttribute('data-color')
+
+        // const dropdownAdditionalIconBtn = document.querySelector('#taskAdditionalDropdown').querySelector('i')
+        // console.log('dropdownAdditionalIconBtn1', dropdownAdditionalIconBtn)
+        // dropdownAdditionalIconBtn.classList.value = changedTask.additionalIcon
+        // console.log('dropdownAdditionalIconBtn2', dropdownAdditionalIconBtn)
 
         let weekDay = ''
         if(dayOfWeek == '') {
@@ -778,6 +808,7 @@ editTaskBtn.addEventListener('click', (el) => {
         changedTask.status = taskStatus
         changedTask.color = textColor
         changedTask.icon = iconClass
+        changedTask.additionalIcon = additionalIconClass
         changedTask.date = date
         changedTask.dayName = weekDay
         changedTask.weekNumber = weekNumber
@@ -920,6 +951,7 @@ function renderTask(task) {
                                 <div class="task-list__task-block-settings">
                                     <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                     <span class="task-list__storypoints">${task.storypoints}</span>
+                                    <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
                                 </div>
                                 <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                             </div>  
@@ -940,6 +972,7 @@ function renderTask(task) {
                                 <div class="task-list__task-block-settings">
                                     <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                     <button class="task-list__storypoints">${task.storypoints}</button>
+                                    <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
                                 </div>
                                 <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                             </div>

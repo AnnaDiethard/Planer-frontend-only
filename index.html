@@ -345,28 +345,103 @@
                         <label for="addTaskInputDescription" class="add-input_label">description</label>
                     </div>
                     <div class="task-settings-block">
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle color-dropdown btn-outline-light" type="button" id="taskTextColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">choose text color</button>
-                            <ul class="dropdown-menu" aria-labelledby="taskTextColorDropdown"  id="myTab" role="tablist">
-                                <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(136, 136, 136) !important;">
-                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseTaskTextColor(this)">.</button>
-                                </li>
-                                <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(9, 196, 9) !important;">
-                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="green-text-color" href="#" onclick="chooseTaskTextColor(this)">.</button>
-                                </li>
-                                <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(135, 6, 167)  !important;">
-                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="violet-text-color" onclick="chooseTaskTextColor(this)">.</button>
-                                </li>
-                                <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(226, 131, 23) !important;">
-                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="orange-text-color" onclick="chooseTaskTextColor(this)">.</button>
-                                </li>
-                                <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(231, 61, 61) !important;">
-                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="red-text-color" onclick="chooseTaskTextColor(this)">.</button>
-                                </li>
-                                <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(58, 83, 223) !important;">
-                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="blue-text-color" onclick="chooseTaskTextColor(this)">.</button>
-                                </li>
-                            </ul>
+                        <div class="block-column">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle content-dropdown btn-outline-light" type="button" id="taskTextColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">цвет текста</button>
+                                <ul class="dropdown-menu" aria-labelledby="taskTextColorDropdown"  id="myTab" role="tablist">
+                                    <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(136, 136, 136) !important;">
+                                        <button class="nav-link widget-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseTaskTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(9, 196, 9) !important;">
+                                        <button class="nav-link widget-dropdown-link" id="" type="button" data-color="green-text-color" href="#" onclick="chooseTaskTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(135, 6, 167)  !important;">
+                                        <button class="nav-link widget-dropdown-link" id="" type="button" data-color="violet-text-color" onclick="chooseTaskTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(226, 131, 23) !important;">
+                                        <button class="nav-link widget-dropdown-link" id="" type="button" data-color="orange-text-color" onclick="chooseTaskTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(231, 61, 61) !important;">
+                                        <button class="nav-link widget-dropdown-link" id="" type="button" data-color="red-text-color" onclick="chooseTaskTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(58, 83, 223) !important;">
+                                        <button class="nav-link widget-dropdown-link" id="" type="button" data-color="blue-text-color" onclick="chooseTaskTextColor(this)">.</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle content-dropdown btn-outline-light" type="button" id="taskAdditionalDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color=""><i class="" style="padding-right: 5px;"></i>иконка</button>
+                                <table class="dropdown-menu" aria-labelledby="taskAdditionalDropdown">
+                                    <tr>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-star"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-heart"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-brush"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-paint-roller"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-flask"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-anchor"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-feather"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-bug"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-bag-shopping"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-sitemap"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-crown"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-trophy"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-dragon"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-recycle"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-dollar-sign"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-yin-yang"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-user-group"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-truck-plane"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-snowman"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-pizza-slice"></i></button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                         <div class="storypoints-input" id="checkedStorypointsBlock">
                             <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">1</button>
@@ -381,9 +456,9 @@
                         </div>
                         <div>
                             <div class="modal-dialog__btn-block" id="checkedIconBlock">
-                                <button id="3" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)"><i class="fa-solid fa-hourglass-start "></i></button>
-                                <button id="2" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)"><i class="fa-solid fa-hourglass-half"></i></button>
-                                <button id="1" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)"><i class="fa-solid fa-hourglass-end"></i></button>
+                                <button id="3" type="button" class="btn btn-outline-light" onclick="chooseStatus(this)"><i class="fa-solid fa-hourglass-start "></i></button>
+                                <button id="2" type="button" class="btn btn-outline-light" onclick="chooseStatus(this)"><i class="fa-solid fa-hourglass-half"></i></button>
+                                <button id="1" type="button" class="btn btn-outline-light" onclick="chooseStatus(this)"><i class="fa-solid fa-hourglass-end"></i></button>
                             </div>
                             <li class="block_right hide-class" id="cardEditStatusBlock">
                                 <input type="radio" name="runningListRadio" style="margin-right: 0.5rem;" id="cardEditStatusDelete">
