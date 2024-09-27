@@ -151,6 +151,11 @@ input {
     /* justify-content: space-between; */
 }
 
+.block-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .slider-block {
     display: flex;
     flex-direction: row;
@@ -223,6 +228,13 @@ input {
     display: flex;
     flex-direction: row;
     justify-content: end;
+}
+
+.block_right {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
 }
 
 .card-header_day-card {
@@ -357,6 +369,11 @@ footer {
     padding-inline: 3px;
 }
 
+.task-list__additional-icon {
+    font-size: 18px;
+    padding-right: 5px;
+}
+
 /* КНОПКИ */
 .accent-btn {
     /* min-width: 20rem; */
@@ -429,6 +446,18 @@ footer {
     border-width: 3px;
 }
 
+.content-dropdown {
+    height: 2.5rem;
+    width: 6rem;
+}
+
+.button-dark {
+    border: solid;
+    border-color: #6c6e75;
+    border-width: 3px;
+    border-radius: 0;
+    margin-inline: 5px;
+}
 
 
 
@@ -616,10 +645,14 @@ footer {
     width: 12rem;
     height: 4rem;
 } */
-
+/* 
 .color-dropdown {
     width: 8rem;
     height: 3rem;
+} */
+
+.color-search-dropdown-link {
+    width: 100%;
 }
 
 .input-form{

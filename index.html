@@ -37,7 +37,6 @@
                             <div class="links-block">
                                 <a class="link-header" href="views/calendar.html"><i class="fa-regular fa-calendar-days logo-sm"></i></a>
                                 <a class="link-header" href="views/settings.html"><i class="fa-regular fa-user logo-sm"></i></a>
-                                <a class="link-header" href="index.html"><i class="fa-solid fa-house logo-sm"></i></a>
                             </div>
                         </div>
                     </div>
@@ -58,10 +57,10 @@
                             </div>
                         </div>
                         <div class="block_left">
-                            <button id="toHighStorypointsSearchInput" type="button" class="btn search-tasks__btn" onclick="" title="search" style="right: 3.5rem;"><i class="button-icon-accent fa-solid fa-arrow-down-wide-short"></i></button>
-                            <button id="toLowStorypointsSearchInput" type="button" class="btn search-tasks__btn" onclick="" title="search" style="right: 3.5rem;"><i class="button-icon-accent fa-solid fa-arrow-up-short-wide"></i></button>
+                            <button id="toHighStorypointsSearchInput" type="button" class="btn search-tasks__btn" onclick="toHighStorypointsSearchInput()" title="search" style="right: 3.5rem;"><i class="button-icon-accent fa-solid fa-arrow-down-wide-short"></i></button>
+                            <button id="toLowStorypointsSearchInput" type="button" class="btn search-tasks__btn" onclick="toLowStorypointsSearchInput()" title="search" style="right: 3.5rem;"><i class="button-icon-accent fa-solid fa-arrow-up-short-wide"></i></button>
                             <div class="dropdown color-search-dropdown">
-                                <button class="btn dropdown-toggle color-search-dropdown-toggle" type="button" id="searchColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">color</button>
+                                <button class="btn dropdown-toggle color-search-dropdown-toggle" type="button" id="searchColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">цвет текста</button>
                                 <ul class="dropdown-menu color-search-dropdown-menu" aria-labelledby="searchColorDropdown"  id="myTab" role="tablist">
                                     <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(136, 136, 136) !important;">
                                         <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseSearchTextColor(this)">.</button>
@@ -83,6 +82,79 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle color-search-dropdown-toggle" type="button" id="taskSearchAdditionalDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color=""><i class="" style="padding-right: 5px; font-style: normal;">иконка</i></button>
+                                <table class="dropdown-menu" aria-labelledby="taskAdditionalDropdown">
+                                    <tr>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-star"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-heart"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-brush"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-paint-roller"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-flask"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-anchor"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-feather"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-bug"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-bag-shopping"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-sitemap"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-crown"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-trophy"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-dragon"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-recycle"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-dollar-sign"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-yin-yang"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-user-group"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-truck-plane"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-snowman"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseSearchAdditionalIcon(this)"><i class="fa-solid fa-pizza-slice"></i></button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -97,7 +169,6 @@
 
                         <div class="block_left" style="padding: 0.5rem 0 0.5rem 0;">
                             <button id="addTaskToRunningList" type="button" class="btn search-tasks__btn" onclick="addTaskOpenDialog()" title="add task"><i class="button-icon-accent fa-solid fa-plus nav-tasks__add-icon"></i></button>
-                            <button id="cleanTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="openSearchBlock()" title="search"><i class="button-icon-accent fa-solid fa-magnifying-glass"></i></button>
                             <button id="cleanTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="deleteDoneTasks()" title="delete done tasks"><i class="fa-solid fa-eraser"></i></button>
                             <button id="deleteAllTasksToRunningList" type="button" class="btn search-tasks__btn" onclick="deleteAllTasks()" title="delete all tasks"><i class="fa-solid fa-ban"></i></button>
                         </div>
@@ -139,7 +210,10 @@
                                     <hr/>
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
-                                            <p class="card-header__text">понедельник</p>
+                                            <div class="card-header_day-card-block block_right">
+                                                <p class="card-header__text">понедельник</p>
+                                                <span class="hide-class"><i class="fa-solid fa-circle-exclamation icon-secondary"></i></span>
+                                            </div>
                                             <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
@@ -153,7 +227,10 @@
                                     </div>
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
-                                            <p class="card-header__text">вторник</p>
+                                            <div class="card-header_day-card-block block_right">
+                                                <p class="card-header__text">вторник</p>
+                                                <span class="hide-class"><i class="fa-solid fa-circle-exclamation icon-secondary"></i></span>
+                                            </div>
                                             <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
@@ -167,7 +244,10 @@
                                     </div>
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
-                                            <p class="card-header__text">среда</p>
+                                            <div class="card-header_day-card-block block_right">
+                                                <p class="card-header__text">среда</p>
+                                                <span class="hide-class"><i class="fa-solid fa-circle-exclamation icon-secondary"></i></span>
+                                            </div>
                                             <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
@@ -181,7 +261,10 @@
                                     </div>
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
-                                            <p class="card-header__text">четверг</p>
+                                            <div class="card-header_day-card-block block_right">
+                                                <p class="card-header__text">четверг</p>
+                                                <span class="hide-class"><i class="fa-solid fa-circle-exclamation icon-secondary"></i></span>
+                                            </div>
                                             <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
@@ -195,7 +278,10 @@
                                     </div>
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
-                                            <p class="card-header__text">пятница</p>
+                                            <div class="card-header_day-card-block block_right">
+                                                <p class="card-header__text">пятница</p>
+                                                <span class="hide-class"><i class="fa-solid fa-circle-exclamation icon-secondary"></i></span>
+                                            </div>
                                             <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
@@ -209,7 +295,10 @@
                                     </div>
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
-                                            <p class="card-header__text">суббота</p>
+                                            <div class="card-header_day-card-block block_right">
+                                                <p class="card-header__text">суббота</p>
+                                                <span class="hide-class"><i class="fa-solid fa-circle-exclamation icon-secondary"></i></span>
+                                            </div>
                                             <div class="card-header__label"></div>
                                             <div>
                                                 <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
@@ -292,11 +381,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <p>are you sure?</p>
+                    <p>вы уверены?</p>
                 </div>
                 <div class="modal-body validation-dialog__btn-block">
-                    <button type="button" class="btn button-dark button-dark-lg" onclick="validationDialogCancel()">cancel</button>
-                    <button type="button" class="btn button-dark button-dark-lg" onclick="validationDialogConfirm()" id="validationDialogConfirm">do it</button>
+                    <button type="button" class="btn button-dark button-dark-lg" onclick="validationDialogCancel()">отмена</button>
+                    <button type="button" class="btn button-dark button-dark-lg" onclick="validationDialogConfirm()" id="validationDialogConfirm">продолжить</button>
                 </div>
             </div>
         </div>
@@ -306,8 +395,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleAdd">add task</h5>
-                    <h5 class="modal-title hide-class" id="modalTitleEdit">edit task</h5>
+                    <h5 class="modal-title" id="modalTitleAdd">добавление задачи</h5>
+                    <h5 class="modal-title hide-class" id="modalTitleEdit">редактирование задачи</h5>
                     <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
@@ -317,40 +406,115 @@
                             <input type="checkbox" name="runningListRadio"  style="margin-right: 0.5rem;" id="deleteTaskDateCheckbox">
                             <p>delete date</p>
                         </div>
-                        <p class="hide-class" id="cardEditCheckNumberBlock">unable to select past weeks</p>
+                        <p class="hide-class" id="cardEditCheckNumberBlock">нельзя выбирать прошедшие недели</p>
                     </div>
                     <div class="input-form shadow-class">
                         <input type="text" id="addTaskInputText" class="add-input " autocomplete="off" placeholder = "">
-                        <label for="addTaskInputText" class="add-input_label">text</label>
-                        <p id="errorText" class="hide-class input-validation-message">field is required</p>
+                        <label for="addTaskInputText" class="add-input_label">текст</label>
+                        <p id="errorText" class="hide-class input-validation-message">поле обязательно</p>
                     </div>
                     <div class="input-form shadow-class">
                         <input type="text" id="addTaskInputDescription" class="add-input " autocomplete="off" placeholder = "">
-                        <label for="addTaskInputDescription" class="add-input_label">description</label>
+                        <label for="addTaskInputDescription" class="add-input_label">описание</label>
                     </div>
                     <div class="task-settings-block">
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle color-dropdown btn-outline-light" type="button" id="taskTextColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">choose text color</button>
-                            <ul class="dropdown-menu" aria-labelledby="taskTextColorDropdown"  id="myTab" role="tablist">
-                                <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(136, 136, 136) !important;">
-                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseTaskTextColor(this)">.</button>
-                                </li>
-                                <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(9, 196, 9) !important;">
-                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="green-text-color" href="#" onclick="chooseTaskTextColor(this)">.</button>
-                                </li>
-                                <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(135, 6, 167)  !important;">
-                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="violet-text-color" onclick="chooseTaskTextColor(this)">.</button>
-                                </li>
-                                <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(226, 131, 23) !important;">
-                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="orange-text-color" onclick="chooseTaskTextColor(this)">.</button>
-                                </li>
-                                <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(231, 61, 61) !important;">
-                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="red-text-color" onclick="chooseTaskTextColor(this)">.</button>
-                                </li>
-                                <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(58, 83, 223) !important;">
-                                    <button class="nav-link widget-dropdown-link" id="" type="button" data-color="blue-text-color" onclick="chooseTaskTextColor(this)">.</button>
-                                </li>
-                            </ul>
+                        <div class="block-column">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle content-dropdown btn-outline-light" type="button" id="taskTextColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">цвет текста</button>
+                                <ul class="dropdown-menu" aria-labelledby="taskTextColorDropdown"  id="myTab" role="tablist">
+                                    <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(136, 136, 136) !important;">
+                                        <button class="nav-link widget-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseTaskTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(9, 196, 9) !important;">
+                                        <button class="nav-link widget-dropdown-link" id="" type="button" data-color="green-text-color" href="#" onclick="chooseTaskTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(135, 6, 167)  !important;">
+                                        <button class="nav-link widget-dropdown-link" id="" type="button" data-color="violet-text-color" onclick="chooseTaskTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(226, 131, 23) !important;">
+                                        <button class="nav-link widget-dropdown-link" id="" type="button" data-color="orange-text-color" onclick="chooseTaskTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(231, 61, 61) !important;">
+                                        <button class="nav-link widget-dropdown-link" id="" type="button" data-color="red-text-color" onclick="chooseTaskTextColor(this)">.</button>
+                                    </li>
+                                    <li class="nav-item widget-dropdown-item" role="presentation" style="background-color: rgb(58, 83, 223) !important;">
+                                        <button class="nav-link widget-dropdown-link" id="" type="button" data-color="blue-text-color" onclick="chooseTaskTextColor(this)">.</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle content-dropdown btn-outline-light" type="button" id="taskAdditionalDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color=""><i class="" style="padding-right: 5px;"></i>иконка</button>
+                                <table class="dropdown-menu" aria-labelledby="taskAdditionalDropdown">
+                                    <tr>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-star"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-heart"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-brush"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-paint-roller"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-flask"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-anchor"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-feather"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-bug"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-bag-shopping"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-sitemap"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-crown"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-trophy"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-dragon"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-recycle"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-dollar-sign"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-yin-yang"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-user-group"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-truck-plane"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-snowman"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="nav-link icon-dropdown-link btn btn-outline-light" id="" type="button"onclick="chooseTaskAdditionalIcon(this)"><i class="fa-solid fa-pizza-slice"></i></button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                         <div class="storypoints-input" id="checkedStorypointsBlock">
                             <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">1</button>
@@ -365,22 +529,22 @@
                         </div>
                         <div>
                             <div class="modal-dialog__btn-block" id="checkedIconBlock">
-                                <button id="3" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)"><i class="fa-solid fa-hourglass-start "></i></button>
-                                <button id="2" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)"><i class="fa-solid fa-hourglass-half"></i></button>
-                                <button id="1" type="button" class="btn btn-outline-light" onclick="chooseIcon(this)"><i class="fa-solid fa-hourglass-end"></i></button>
+                                <button id="3" type="button" class="btn btn-outline-light" onclick="chooseStatus(this)"><i class="fa-solid fa-hourglass-start "></i></button>
+                                <button id="2" type="button" class="btn btn-outline-light" onclick="chooseStatus(this)"><i class="fa-solid fa-hourglass-half"></i></button>
+                                <button id="1" type="button" class="btn btn-outline-light" onclick="chooseStatus(this)"><i class="fa-solid fa-hourglass-end"></i></button>
                             </div>
                             <li class="block_right hide-class" id="cardEditStatusBlock">
                                 <input type="radio" name="runningListRadio" style="margin-right: 0.5rem;" id="cardEditStatusDelete">
                                 <span id="" class="status-icon"><i></i></span>
-                                <p>delete status</p>
+                                <p>удалить статус</p>
                             </li>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn button-dark" id="addTaskBtn">add</button>
-                    <button type="reset" class="btn button-dark" id="addMoreTaskBtn">add more</button>
-                    <button type="button" class="btn button-dark hide-class" id="editTaskBtn">update</button>
+                    <button type="button" class="btn button-dark" id="addTaskBtn">создать</button>
+                    <button type="reset" class="btn button-dark" id="addMoreTaskBtn">создать ещё</button>
+                    <button type="button" class="btn button-dark hide-class" id="editTaskBtn">обновить</button>
                 </div>
             </div>
         </div>
@@ -390,36 +554,36 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleAdd">add widget</h5>
+                    <h5 class="modal-title" id="modalTitleAdd">добавить виджет</h5>
                     <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div class="dropdown" style="width: auto;">
-                        <button class="btn btn-secondary shadow-class dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">choose widget</button>
+                        <button class="btn btn-secondary shadow-class dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">выберите виджет</button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
                             <li class="nav-item widget-dropdown-item" role="presentation">
                                 <button class="nav-link widget-dropdown-link" id="week-plans-widget-tab" data-bs-toggle="tab" data-bs-target="#week-plans-widget"
-                                type="button" role="tab" aria-controls="week-plans-widget" aria-selected="false" onclick="cleanWidgetCard()">week planer</button>
+                                type="button" role="tab" aria-controls="week-plans-widget" aria-selected="false" onclick="cleanWidgetCard()">недельный планер</button>
                             </li>
                             <li class="nav-item widget-dropdown-item" role="presentation">
                                 <button class="nav-link widget-dropdown-link" id="list-widget-tab" data-bs-toggle="tab" data-bs-target="#list-widget"
-                                type="button" role="tab" aria-controls="list-widget" aria-selected="false" onclick="cleanWidgetCard()">list</button>
+                                type="button" role="tab" aria-controls="list-widget" aria-selected="false" onclick="cleanWidgetCard()">список</button>
                             </li>
                             <li class="nav-item widget-dropdown-item" role="presentation">
                                 <button class="nav-link widget-dropdown-link" id="link-list-widget-tab" data-bs-toggle="tab" data-bs-target="#link-list-widget"
-                                type="button" role="tab" aria-controls="link-list-widget" aria-selected="false" onclick="cleanWidgetCard()">link list</button>
+                                type="button" role="tab" aria-controls="link-list-widget" aria-selected="false" onclick="cleanWidgetCard()">список ссылок</button>
                             </li>
                         </ul>
                     </div>
                     <div class="tab-content widget-content" id="widgetContent">
                         <div class="tab-pane fade" id="week-plans-widget" role="tabpanel" aria-labelledby="week-plans-widget-tab">
-                            <h5 class="widget-card-title">week planer</h5>
+                            <h5 class="widget-card-title">недельный планер</h5>
                         </div>
                         <div class="tab-pane fade" id="list-widget" role="tabpanel" aria-labelledby="list-widget-tab">
-                            <h5 class="widget-card-title">list</h5>
+                            <h5 class="widget-card-title">список</h5>
                         </div>
                         <div class="tab-pane fade" id="link-list-widget" role="tabpanel" aria-labelledby="link-list-widget-tab">
-                            <h5 class="widget-card-title">link list</h5>
+                            <h5 class="widget-card-title">список ссылок</h5>
                         </div>
                         <!-- <div class="tab-pane fade" id="traker" role="tabpanel" aria-labelledby="traker-tab">
                             <h5 class="widget-card-title">tracker</h5>
@@ -427,12 +591,12 @@
                     </div>
                     <div class="input-form hide-class shadow-class">
                         <input type="text" id="weekPlansTitleWidgetInput" class="add-input " autocomplete="off" placeholder = "">
-                        <label for="weekPlansTitleWidgetInput" class="add-input_label">title</label>
-                        <p id="errorText" class="hide-class input-validation-message">field is required</p>
+                        <label for="weekPlansTitleWidgetInput" class="add-input_label">заголовок</label>
+                        <p id="errorText" class="hide-class input-validation-message">поле обязательно</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn button-dark" id="addNewWidgetBtn">create</button>
+                    <button type="button" class="btn button-dark" id="addNewWidgetBtn">создать</button>
                 </div>
             </div>
         </div>
@@ -442,38 +606,38 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleAdd">add</h5>
+                    <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleAdd">добавить</h5>
                     <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div class="block-wrap" id="dataDayNamesBlock">
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="monday">monday</button>
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="tuesday">tuesday</button>
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="wednesday">wednesday</button>
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="thusday">thusday</button>
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="friday">friday</button>
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="saturday">saturday</button>
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="sunday">sunday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseAllWeekDays()">choose all</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="monday">понедельник</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="tuesday">вторник</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="wednesday">среда</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="thusday">четверг</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="friday">пятница</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="saturday">суббота</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="sunday">воскресенье</button>
+                        <button type="button" class="btn btn-outline-light" onclick="chooseAllWeekDays()">выбрать все</button>
                     </div>
                     <div class="tab-content widget-content">
                         <div style="width: -webkit-fill-available;">
                             <div class="form-check-label__block-header">
-                                <p class="form-check-label__block-header-text">text*</p>
+                                <p class="form-check-label__block-header-text">текст*</p>
                                 <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContentText">
                             </div>
-                            <button class="btn btn-outline-light-min" id="addUrlToEveryWeekGoalWidgetItem" onclick="addUrlToEveryWeekGoalWidgetItem()">add url</button>
+                            <button class="btn btn-outline-light-min" id="addUrlToEveryWeekGoalWidgetItem" onclick="addUrlToEveryWeekGoalWidgetItem()">добавить ссылку</button>
                             <div class="form-check-label__block-header hide-class" id="addUrlToEveryWeekGoalWidgetItemBlock">
-                                <p class="form-check-label__block-header-text">url</p>
+                                <p class="form-check-label__block-header-text">ссылка</p>
                                 <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContentUrl">
                             </div>
                         </div>
-                        <p id="errorText" class="hide-class input-validation-message" style="padding: 0;">select a day and add text</p>
+                        <p id="errorText" class="hide-class input-validation-message" style="padding: 0;">выберите день и введите текст</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn button-dark" id="addEveryWeekGoalBtn" onclick="addTaskToEveryWeekGoalWidget()">add</button>
-                    <button type="button" class="btn button-dark" id="addEveryWeekGoalBtn" onclick="addMoreTaskToEveryWeekGoalWidget()">add more</button>
+                    <button type="button" class="btn button-dark" id="addEveryWeekGoalBtn" onclick="addTaskToEveryWeekGoalWidget()">создать</button>
+                    <button type="button" class="btn button-dark" id="addEveryWeekGoalBtn" onclick="addMoreTaskToEveryWeekGoalWidget()">создать ещё</button>
                 </div>
             </div>
         </div>
@@ -491,6 +655,7 @@
     <!-- rusmeteo -->
     <script async src="https://rusmeteo.net/api/informerV2/b75499d689da58d5fce2ad1837a0e347/" type="text/javascript"></script>
     <!-- js -->
+    <script src="assets/main.js"></script>
     <script src="assets/tasks.js"></script>
     <script src="assets/settings.js"></script>
     <script src="assets/calendar.js"></script>

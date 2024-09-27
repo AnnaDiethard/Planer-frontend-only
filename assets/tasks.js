@@ -1,18 +1,21 @@
-// без этого не работают бутстраповские тултипы
-[...document.querySelectorAll('[data-bs-toggle="tooltip"]')]
-  .forEach(el => new bootstrap.Tooltip(el))
-
-// moment().calendar();
-moment.locale('ru')
-console.log('calendar', moment().calendar())
-
-function alertWindow() {
-    alert('функционал в разработке')
-}
-
+// объявление темплейтов для рендера задач
 let taskTemplate = ''
 let taskDateTemplate = ''
 let doneTaskTemplate = ''
+
+// объявление переменных для задач
+let tasks = []
+let doneTasks = []
+let taskDate = ''
+let dayOfWeek = ''
+let taskWeekNumber = ''
+let taskStatus = ''
+let textColor = ''
+let iconClass = ''
+let additionalIconClass = ''
+let taskStorypoints = ''
+
+const taskDialog = document.querySelector('#taskDialog')
  
 // сброс номера недели задачи при смене недели на следующую
 const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
@@ -31,8 +34,6 @@ if(getTasksForCheckWeekNumber != null) {
 }
 localStorage.setItem('tasksList', JSON.stringify(getTasksForCheckWeekNumber))
 
-// определение текущего дня недели  
-const thisDayName = new Date().toString().substring(0, 3).toLocaleLowerCase()
 // открытие карточки текущего дня в недельном планере
 const weekPlanerListCardArr = document.querySelector('#weekPlanerListCard').querySelectorAll('.card-body__list')
 weekPlanerListCardArr.forEach(el => {
@@ -78,16 +79,12 @@ function saveActiveTaskTab(el) {
     sessionStorage.setItem('saveActiveTaskTabItem', JSON.stringify(getActiveTaskTabItem))
 }
 
-// устнановка глобальных переменных
-let tasks = []
-let doneTasks = []
-let taskDate = ''
-let dayOfWeek = ''
-let taskWeekNumber = ''
-const taskDialog = document.querySelector('#taskDialog')
-const openValidationDialogBtn = document.querySelector('#validationDialogConfirm')
+// сортировка массива задач по статусу
+function sortTasksOnStatus(arr) {
+    arr.sort((a, b) => (a.status) - (b.status))
+}
 
-// рендер тудушника из LS
+// получение списка задач из LS
 if (localStorage.getItem('tasksList')) {
 	tasks = JSON.parse(localStorage.getItem('tasksList'))
     if(tasks != null) {
@@ -95,7 +92,6 @@ if (localStorage.getItem('tasksList')) {
     } else {
         tasks = []
     }
-    
 }
 
 // сохранение задач в LS
@@ -110,35 +106,36 @@ function getTasksListFromLocalStorage() {
     return tasksList
 }
 
-const validationDialog = document.querySelector('#validationDialog')
-// окно валидации для подтверждения действия
-function openValidationDialog() {
-    validationDialog.showModal()
-}
-function validationDialogCancel() {
-    window.location.reload()
-}
-function validationDialogConfirm() {
-    validationDialog.close()
-}
-
-// открытие/скрытие поиска TODO: переписать чтобы можно было переиспользовать
-function openSearchBlock() {
-    const searchTasksBlock = document.querySelector('#searchTasksBlock')
-    if(searchTasksBlock.classList.contains('hide-class')) {
-        searchTasksBlock.classList.remove('hide-class')
-    } else {
-        searchTasksBlock.classList.add('hide-class')
-    }
-}
-
 // поиск по задачам (по тексту) TODO: переписать чтобы можно было переиспользовать
 function searchTasks() {
     search()
 
     const searchTasksInputValue = document.querySelector('#searchTasksInput').value
+    sortTasksOnStatus(tasks)
     tasks.forEach(el => {
         if(el.text.includes(searchTasksInputValue) || el.description.includes(searchTasksInputValue)) {
+            renderTaskForSearch(el)
+        }
+    })
+}
+
+// рендеринг задач по весу сторипоинтов (по уменьшению)
+function toHighStorypointsSearchInput() {
+    search()
+    sortTasksOnStatus(tasks)
+    tasks.forEach(el => {
+        if(el.storypoints && el.done == false) {
+            renderTaskForSearch(el)
+        }
+    })
+}
+
+// рендеринг задач по весу сторипоинтов (по увеличению)
+function toLowStorypointsSearchInput() {
+    search()
+    sortTasksOnStatus(tasks)
+    tasks.forEach(el => {
+        if(el.storypoints && el.done == false) {
             renderTaskForSearch(el)
         }
     })
@@ -147,11 +144,32 @@ function searchTasks() {
 // поиск по цвету текста
 function chooseSearchTextColor(el) {
     const color = el.getAttribute('data-color')
+    const searchColorDropdownBtn = document.querySelector('#searchColorDropdown')
+    searchColorDropdownBtn.classList.add(color)
 
     search()
 
     tasks.forEach(el => {
         if(el.color.includes(color)) {
+            renderTaskForSearch(el)
+        }
+    })
+}
+
+function chooseSearchAdditionalIcon(el) {
+    console.log('el', el)
+    const taskSearchAdditionalDropdownBtn = document.querySelector('#taskSearchAdditionalDropdown').querySelector('i')
+    const iconValue = el.querySelector('i').classList.value
+    const iconValueArr = iconValue.split(' ')
+    iconValueArr.forEach(el => {
+        taskSearchAdditionalDropdownBtn.classList.add(el)
+    })
+    taskSearchAdditionalDropdownBtn.innerText = ''
+
+    search()
+
+    tasks.forEach(el => {
+        if(el.additionalIcon.includes(iconValue)) {
             renderTaskForSearch(el)
         }
     })
@@ -203,7 +221,7 @@ function search() {
     
 }
 
-// рендер задачи для поиска - в планерах
+// рендер задачи для поиска - в планерах - переписать
 function renderTaskForSearch(task) {
     const searchListCard = document.querySelector("#searchListCard")
 
@@ -221,6 +239,7 @@ function renderTaskForSearch(task) {
                                     <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
+                                        <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -243,6 +262,7 @@ function renderTaskForSearch(task) {
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                         <button class="task-list__storypoints">${task.storypoints}</button>
+                                        <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -263,6 +283,7 @@ function renderTaskForSearch(task) {
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                         <button class="task-list__storypoints">${task.storypoints}</button>
+                                        <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -283,6 +304,7 @@ function renderTaskForSearch(task) {
                                     <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
+                                        <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
                                     </div>
                                     <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                                 </div>
@@ -302,8 +324,6 @@ function renderTaskForSearch(task) {
 const weekPlanerCardHeaders = document.querySelector('#weekPlanerListCard').querySelectorAll('.card-header__text')
 weekPlanerCardHeaders.forEach(el => {
     const tableBlock = el.closest('.card').querySelector('.table-block')
-    // console.log('tableBlock', tableBlock)
-    
 
     el.addEventListener('mouseover', function handleMouseOver() {
         const card = el.closest('.card')
@@ -321,7 +341,7 @@ weekPlanerCardHeaders.forEach(el => {
             allStorypointsSum = allStorypointsSum + storypoints
         })
 
-        const doneTasksArr = card.querySelector('.card-body').querySelectorAll('.day-card-list__item-block')
+        const doneTasksArr = card.querySelector('.card-body').querySelectorAll('.task-list__task-block')
         const doneTasksSum = doneTasksArr.length
         let doneStorypointsSum = 0
         doneTasksArr.forEach(el => {
@@ -432,7 +452,6 @@ function addTaskOpenDialog() {
 
 // открытие окна задачи (редактирование)
 function editTaskOpenDialog(el) {
-    // cleanTaskForm()
 
     const titleAdd = document.querySelector('#modalTitleAdd')
     const buttonAdd = document.querySelector('#addTaskBtn')
@@ -535,6 +554,15 @@ function editTaskOpenDialog(el) {
     const taskTextColor = task?.color
     colorBtn.classList.add(taskTextColor)
     colorBtn.setAttribute('data-color', taskTextColor)
+
+    const additionalIconBtn = document.querySelector('#taskAdditionalDropdown').querySelector('i')
+    const taskAdditional = task?.additionalIcon
+    if(taskAdditional != '') {
+        const classArr = taskAdditional.split(' ')
+        classArr.forEach(el => {
+            additionalIconBtn.classList.add(el)
+        })
+    }
     
     taskDialog.showModal()
 }
@@ -550,106 +578,137 @@ function closeTaskDialog() {
 // сохранение новой задачи
 const addNewTaskButton = document.querySelector('#addTaskBtn')
 addNewTaskButton.addEventListener('click', () => {
-    createNewTask()
-    cleanTaskForm()
-    closeTaskDialog()
+    const taskInputValueText = document.querySelector("#addTaskInputText").value
+
+    if(taskInputValueText == '') {
+        const errorText = document.querySelector('#taskDialog').querySelector('#errorText')
+        errorText.classList.remove('hide-class')
+    } else {
+        createNewTask()
+        cleanTaskForm()
+        closeTaskDialog()
+    }
 })
 
 // сохранение новой (следующей) задачи
 const addMoreNewTaskButton = document.querySelector('#addMoreTaskBtn')
 addMoreNewTaskButton.addEventListener('click', () => {
-    createNewTask()
-    cleanTaskForm()
+    const taskInputValueText = document.querySelector("#addTaskInputText").value
+
+    if(taskInputValueText == '') {
+        const errorText = document.querySelector('#taskDialog').querySelector('#errorText')
+        errorText.classList.remove('hide-class')
+    } else {
+        createNewTask()
+        cleanTaskForm()
+    }
 })
 
-// переменные для создания задачи
-let taskStatus = ''
-let iconClass = ''
-let taskStorypoints = ''
-
-// выбор иконки
-function chooseIcon(el) {
-    console.log('el', el.id)
-    taskStatus = el.id
-    iconClass = el.querySelector('i').classList.value
-
-    const btnArr = el.closest('.modal-dialog__btn-block').querySelectorAll('.btn-outline-light')
-    btnArr.forEach(el => {
-        if(el.classList.contains('active')) {
-            el.classList.remove('active')
-        }
-    })
-    el.classList.add('active')
-}
-
-// выбор сторипоинтов
-function chooseStorypoints(el) {
-    let storypoints = el.innerHTML
-    taskStorypoints = Number(storypoints)
-
-    const btnArr = el.closest('.storypoints-input').querySelectorAll('.btn-outline-light')
-    btnArr.forEach(el => {
-        if(el.classList.contains('active')) {
-            el.classList.remove('active')
-        }
-    })
-    el.classList.add('active')
-}
-
 // установка цвета текста задачи
-let textColor = ''
-const dropdownBtn = document.querySelector('#taskTextColorDropdown')
+const dropdownColorBtn = document.querySelector('#taskTextColorDropdown')
 function chooseTaskTextColor(el) {
     cleanTaskTextColorDropdownClass()
     
     const colorClass = el.getAttribute('data-color')
     textColor = colorClass
-    dropdownBtn.classList.add(colorClass)
-    dropdownBtn.setAttribute('data-color', textColor)
-    dropdownBtn.closest('.dropdown').querySelector('ul').classList.remove('show')
+    dropdownColorBtn.classList.add(colorClass)
+    dropdownColorBtn.setAttribute('data-color', textColor)
+    dropdownColorBtn.closest('.dropdown').querySelector('ul').classList.remove('show')
 }
 
 // очистка дропдауна выбора цвета текста задачи
 function cleanTaskTextColorDropdownClass() {
-    dropdownBtn.classList = ''
-    dropdownBtn.classList.add('btn')
-    dropdownBtn.classList.add('btn-secondary')
-    dropdownBtn.classList.add('dropdown-toggle')
+    dropdownColorBtn.classList = ''
+    dropdownColorBtn.classList.add('btn')
+    dropdownColorBtn.classList.add('btn-secondary')
+    dropdownColorBtn.classList.add('dropdown-toggle')
+}
+
+// установка дополнительной иконки задачи
+const dropdownAdditionalIconBtn = document.querySelector('#taskAdditionalDropdown')
+function chooseTaskAdditionalIcon(el) {
+    dropdownAdditionalIconBtn.querySelector('i').classList.value = ''
+    
+    const additionalIcon = el.querySelector('i').classList.value
+    additionalIconClass = additionalIcon
+    const classArr = additionalIcon.split(' ')
+    classArr.forEach(el => {
+        dropdownAdditionalIconBtn.querySelector('i').classList.add(el)
+    })
+}
+
+// сторипоинты - выбор и отмена
+function chooseStorypoints(el) {
+    if(el.classList.contains('active')) {
+        el.classList.remove('active')
+        taskStorypoints = ''
+    } else {
+        let storypoints = el.innerHTML
+        taskStorypoints = Number(storypoints)
+
+        const btnArr = el.closest('.storypoints-input').querySelectorAll('.btn-outline-light')
+        btnArr.forEach(el => {
+            if(el.classList.contains('active')) {
+                el.classList.remove('active')
+            }
+        })
+        el.classList.add('active')
+    }
+}
+
+// выбор статуса
+function chooseStatus(el) {
+    if(el.classList.contains('active')) {
+        el.classList.remove('active')
+        taskStatus = 0
+        iconClass = ''
+    } else {
+        taskStatus = el.id
+        iconClass = el.querySelector('i').classList.value
+
+        const btnArr = el.closest('.modal-dialog__btn-block').querySelectorAll('.btn-outline-light')
+        btnArr.forEach(el => {
+            if(el.classList.contains('active')) {
+                el.classList.remove('active')
+            }
+        })
+        el.classList.add('active')
+    }
 }
 
 // создание новой задачи
 function createNewTask() {
     const taskInputValueText = document.querySelector("#addTaskInputText").value
     const taskInputValueDescription = document.querySelector("#addTaskInputDescription").value
+    const taskDateCreateMoment = moment().format('L')
+    const taskTimeCreateMoment = moment().format('LT')
 
-    if(taskInputValueText == '') {
-        const errorText = document.querySelector('#errorText')
-        errorText.classList.remove('hide-class')
-    } else {
-        const newTask = {
-            id: Date.now(),
-            text: taskInputValueText,
-            description: taskInputValueDescription,
-            status: taskStatus || '',
-            storypoints: taskStorypoints || '',
-            icon: iconClass || '',
-            color: textColor || 'base-text-color',
-            done: false,
-            doneDate: '',
-            expired: false,
-            // определяется в конфиге календаря
-            date: 'дедлайн' && taskDate || '',
-            dayName: dayOfWeek || '',
-            weekNumber: taskWeekNumber || ''
-        }
-
-        console.log('newTask', newTask)
-    
-        tasks.push(newTask)
-        saveTasksListInLocalStorage(tasks)
-    
-        checkCorrectRenderTask()
+    const newTask = {
+        id: Date.now(),
+        text: taskInputValueText,
+        description: taskInputValueDescription,
+        status: taskStatus || '',
+        storypoints: taskStorypoints || '',
+        icon: iconClass || '',
+        additionalIcon: additionalIconClass || '',
+        color: textColor || 'base-text-color',
+        done: false,
+        doneDate: '',
+        expired: false,
+        taskDateCreate: taskDateCreateMoment,
+        taskTimeCreate: taskTimeCreateMoment,
+        // определяется в конфиге календаря
+        date: 'дедлайн' && taskDate || '',
+        dayName: dayOfWeek || '',
+        weekNumber: taskWeekNumber || ''
     }
+
+    console.log('newTask', newTask)
+
+    tasks.push(newTask)
+    saveTasksListInLocalStorage(tasks)
+
+    checkCorrectRenderTask()
 }
 
 // очистка элементов формы создания задачи
@@ -684,6 +743,7 @@ function cleanTaskForm() {
         }
     })
 
+    dropdownAdditionalIconBtn.querySelector('i').classList.value = ''
     cleanTaskTextColorDropdownClass()
 }
 
@@ -732,8 +792,13 @@ editTaskBtn.addEventListener('click', (el) => {
             iconClass = ''
         }
 
-        const dropdownBtn = document.querySelector('#taskTextColorDropdown')
-        textColor = dropdownBtn.getAttribute('data-color')
+        const dropdownColorBtn = document.querySelector('#taskTextColorDropdown')
+        textColor = dropdownColorBtn.getAttribute('data-color')
+
+        // const dropdownAdditionalIconBtn = document.querySelector('#taskAdditionalDropdown').querySelector('i')
+        // console.log('dropdownAdditionalIconBtn1', dropdownAdditionalIconBtn)
+        // dropdownAdditionalIconBtn.classList.value = changedTask.additionalIcon
+        // console.log('dropdownAdditionalIconBtn2', dropdownAdditionalIconBtn)
 
         let weekDay = ''
         if(dayOfWeek == '') {
@@ -766,6 +831,7 @@ editTaskBtn.addEventListener('click', (el) => {
         changedTask.status = taskStatus
         changedTask.color = textColor
         changedTask.icon = iconClass
+        changedTask.additionalIcon = additionalIconClass
         changedTask.date = date
         changedTask.dayName = weekDay
         changedTask.weekNumber = weekNumber
@@ -796,32 +862,27 @@ function checkCorrectRenderTask() {
         // runnungList
         if (task.icon) {
             tasksRunningList.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksRunningList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            sortTasksOnStatus(tasksRunningList)
         }
         // weekPlaner
         if(getThisWeekNumber == task.weekNumber && task.date) {
             tasksWeekDaysPlaner.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksWeekDaysPlaner.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            sortTasksOnStatus(tasksWeekDaysPlaner)
         }
         // expiredList
         if (task.expired == true) {
             tasksExpiredList.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksExpiredList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            sortTasksOnStatus(tasksExpiredList)
         }
         // thisWeekList
         if (getThisWeekNumber == task.weekNumber && task.date == '') {
             tasksThisWeekList.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksThisWeekList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            sortTasksOnStatus(tasksThisWeekList)
         }
         // nextWeekList
         if (getThisWeekNumber < task.weekNumber) {
             tasksNextWeekList.push(task)
-            // тут сортируем массив по статусу задачи
-            tasksNextWeekList.sort((a, b) => parseInt(a.status) - parseInt(b.status))
+            sortTasksOnStatus(tasksNextWeekList)
         }
     })
 
@@ -902,6 +963,7 @@ function renderTask(task) {
     // выполненная задача
     doneTaskTemplate = `<li class="done-list__item" id="${task.id}">
                             <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
+                            <span class="task-list__storypoints hide-class">${task.storypoints}</span>
                             <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                         </li>`
     // в RL с датой
@@ -912,6 +974,7 @@ function renderTask(task) {
                                 <div class="task-list__task-block-settings">
                                     <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                     <span class="task-list__storypoints">${task.storypoints}</span>
+                                    <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
                                 </div>
                                 <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                             </div>  
@@ -932,6 +995,7 @@ function renderTask(task) {
                                 <div class="task-list__task-block-settings">
                                     <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                     <button class="task-list__storypoints">${task.storypoints}</button>
+                                    <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
                                 </div>
                                 <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
                             </div>
@@ -969,7 +1033,6 @@ function markTheTaskCompleted(el) {
         if(task.id == id) {
             task.done = true,
             task.doneDate = moment().format('L')
-            console.log('task', task)
         } 
     })
 
@@ -1045,8 +1108,4 @@ function rollUpWeekDayCard(el) {
     btn.classList.remove('hide-class')
     el.closest('.card_day-card').querySelector('.card-body').classList.add('hide-class')
     el.closest('.card_day-card').classList.add('border-bottom-right-radius')
-}
-
-function addCalendarDateOpenDialog() {
-    alertWindow()
 }
