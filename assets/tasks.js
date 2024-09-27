@@ -341,7 +341,7 @@ weekPlanerCardHeaders.forEach(el => {
             allStorypointsSum = allStorypointsSum + storypoints
         })
 
-        const doneTasksArr = card.querySelector('.card-body').querySelectorAll('.task-list__task-block')
+        const doneTasksArr = card.querySelector('.card-body').querySelectorAll('.done-list__item')
         const doneTasksSum = doneTasksArr.length
         let doneStorypointsSum = 0
         doneTasksArr.forEach(el => {
@@ -352,10 +352,10 @@ weekPlanerCardHeaders.forEach(el => {
                 storypoints = 0
             }
             storypoints = Number(storypoints)
-            doneStorypointsSum = doneStorypointsSum + storypoints
+            doneStorypointsSum = doneStorypointsSum + storypoints 
         })
 
-        const tasksInProgressArr = card.querySelector('.card-body').querySelectorAll('.task-list__task-block')
+        const tasksInProgressArr = card.querySelector('.card-body').querySelectorAll('.task-list__item')
         const tasksInProgressSum = tasksInProgressArr.length
         let storypointsInProgressSum = 0
         tasksInProgressArr.forEach(el => {
