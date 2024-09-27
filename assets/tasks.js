@@ -680,31 +680,35 @@ function chooseStatus(el) {
 function createNewTask() {
     const taskInputValueText = document.querySelector("#addTaskInputText").value
     const taskInputValueDescription = document.querySelector("#addTaskInputDescription").value
+    const taskDateCreateMoment = moment().format('L')
+    const taskTimeCreateMoment = moment().format('LT')
 
-        const newTask = {
-            id: Date.now(),
-            text: taskInputValueText,
-            description: taskInputValueDescription,
-            status: taskStatus || '',
-            storypoints: taskStorypoints || '',
-            icon: iconClass || '',
-            additionalIcon: additionalIconClass || '',
-            color: textColor || 'base-text-color',
-            done: false,
-            doneDate: '',
-            expired: false,
-            // определяется в конфиге календаря
-            date: 'дедлайн' && taskDate || '',
-            dayName: dayOfWeek || '',
-            weekNumber: taskWeekNumber || ''
-        }
+    const newTask = {
+        id: Date.now(),
+        text: taskInputValueText,
+        description: taskInputValueDescription,
+        status: taskStatus || '',
+        storypoints: taskStorypoints || '',
+        icon: iconClass || '',
+        additionalIcon: additionalIconClass || '',
+        color: textColor || 'base-text-color',
+        done: false,
+        doneDate: '',
+        expired: false,
+        taskDateCreate: taskDateCreateMoment,
+        taskTimeCreate: taskTimeCreateMoment,
+        // определяется в конфиге календаря
+        date: 'дедлайн' && taskDate || '',
+        dayName: dayOfWeek || '',
+        weekNumber: taskWeekNumber || ''
+    }
 
-        console.log('newTask', newTask)
-    
-        tasks.push(newTask)
-        saveTasksListInLocalStorage(tasks)
-    
-        checkCorrectRenderTask()
+    console.log('newTask', newTask)
+
+    tasks.push(newTask)
+    saveTasksListInLocalStorage(tasks)
+
+    checkCorrectRenderTask()
 }
 
 // очистка элементов формы создания задачи
