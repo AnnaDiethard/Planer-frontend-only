@@ -60,7 +60,7 @@
                             <button id="toHighStorypointsSearchInput" type="button" class="btn search-tasks__btn" onclick="toHighStorypointsSearchInput()" title="search" style="right: 3.5rem;"><i class="button-icon-accent fa-solid fa-arrow-down-wide-short"></i></button>
                             <button id="toLowStorypointsSearchInput" type="button" class="btn search-tasks__btn" onclick="toLowStorypointsSearchInput()" title="search" style="right: 3.5rem;"><i class="button-icon-accent fa-solid fa-arrow-up-short-wide"></i></button>
                             <div class="dropdown color-search-dropdown">
-                                <button class="btn dropdown-toggle color-search-dropdown-toggle" type="button" id="searchColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">color</button>
+                                <button class="btn dropdown-toggle color-search-dropdown-toggle" type="button" id="searchColorDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-color="">цвет текста</button>
                                 <ul class="dropdown-menu color-search-dropdown-menu" aria-labelledby="searchColorDropdown"  id="myTab" role="tablist">
                                     <li class="nav-item color-search-dropdown-item" role="presentation" style="background-color: rgb(136, 136, 136) !important;">
                                         <button class="nav-link color-search-dropdown-link" id="" type="button" data-color="base-text-color" onclick="chooseSearchTextColor(this)">.</button>
@@ -381,11 +381,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <p>are you sure?</p>
+                    <p>вы уверены?</p>
                 </div>
                 <div class="modal-body validation-dialog__btn-block">
-                    <button type="button" class="btn button-dark button-dark-lg" onclick="validationDialogCancel()">cancel</button>
-                    <button type="button" class="btn button-dark button-dark-lg" onclick="validationDialogConfirm()" id="validationDialogConfirm">do it</button>
+                    <button type="button" class="btn button-dark button-dark-lg" onclick="validationDialogCancel()">отмена</button>
+                    <button type="button" class="btn button-dark button-dark-lg" onclick="validationDialogConfirm()" id="validationDialogConfirm">продолжить</button>
                 </div>
             </div>
         </div>
@@ -395,8 +395,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleAdd">add task</h5>
-                    <h5 class="modal-title hide-class" id="modalTitleEdit">edit task</h5>
+                    <h5 class="modal-title" id="modalTitleAdd">добавление задачи</h5>
+                    <h5 class="modal-title hide-class" id="modalTitleEdit">редактирование задачи</h5>
                     <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
@@ -406,16 +406,16 @@
                             <input type="checkbox" name="runningListRadio"  style="margin-right: 0.5rem;" id="deleteTaskDateCheckbox">
                             <p>delete date</p>
                         </div>
-                        <p class="hide-class" id="cardEditCheckNumberBlock">unable to select past weeks</p>
+                        <p class="hide-class" id="cardEditCheckNumberBlock">нельзя выбирать прошедшие недели</p>
                     </div>
                     <div class="input-form shadow-class">
                         <input type="text" id="addTaskInputText" class="add-input " autocomplete="off" placeholder = "">
-                        <label for="addTaskInputText" class="add-input_label">text</label>
-                        <p id="errorText" class="hide-class input-validation-message">field is required</p>
+                        <label for="addTaskInputText" class="add-input_label">текст</label>
+                        <p id="errorText" class="hide-class input-validation-message">поле обязательно</p>
                     </div>
                     <div class="input-form shadow-class">
                         <input type="text" id="addTaskInputDescription" class="add-input " autocomplete="off" placeholder = "">
-                        <label for="addTaskInputDescription" class="add-input_label">description</label>
+                        <label for="addTaskInputDescription" class="add-input_label">описание</label>
                     </div>
                     <div class="task-settings-block">
                         <div class="block-column">
@@ -536,15 +536,15 @@
                             <li class="block_right hide-class" id="cardEditStatusBlock">
                                 <input type="radio" name="runningListRadio" style="margin-right: 0.5rem;" id="cardEditStatusDelete">
                                 <span id="" class="status-icon"><i></i></span>
-                                <p>delete status</p>
+                                <p>удалить статус</p>
                             </li>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn button-dark" id="addTaskBtn">add</button>
-                    <button type="reset" class="btn button-dark" id="addMoreTaskBtn">add more</button>
-                    <button type="button" class="btn button-dark hide-class" id="editTaskBtn">update</button>
+                    <button type="button" class="btn button-dark" id="addTaskBtn">создать</button>
+                    <button type="reset" class="btn button-dark" id="addMoreTaskBtn">создать ещё</button>
+                    <button type="button" class="btn button-dark hide-class" id="editTaskBtn">обновить</button>
                 </div>
             </div>
         </div>
@@ -554,36 +554,36 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleAdd">add widget</h5>
+                    <h5 class="modal-title" id="modalTitleAdd">добавить виджет</h5>
                     <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div class="dropdown" style="width: auto;">
-                        <button class="btn btn-secondary shadow-class dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">choose widget</button>
+                        <button class="btn btn-secondary shadow-class dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">выберите виджет</button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
                             <li class="nav-item widget-dropdown-item" role="presentation">
                                 <button class="nav-link widget-dropdown-link" id="week-plans-widget-tab" data-bs-toggle="tab" data-bs-target="#week-plans-widget"
-                                type="button" role="tab" aria-controls="week-plans-widget" aria-selected="false" onclick="cleanWidgetCard()">week planer</button>
+                                type="button" role="tab" aria-controls="week-plans-widget" aria-selected="false" onclick="cleanWidgetCard()">недельный планер</button>
                             </li>
                             <li class="nav-item widget-dropdown-item" role="presentation">
                                 <button class="nav-link widget-dropdown-link" id="list-widget-tab" data-bs-toggle="tab" data-bs-target="#list-widget"
-                                type="button" role="tab" aria-controls="list-widget" aria-selected="false" onclick="cleanWidgetCard()">list</button>
+                                type="button" role="tab" aria-controls="list-widget" aria-selected="false" onclick="cleanWidgetCard()">список</button>
                             </li>
                             <li class="nav-item widget-dropdown-item" role="presentation">
                                 <button class="nav-link widget-dropdown-link" id="link-list-widget-tab" data-bs-toggle="tab" data-bs-target="#link-list-widget"
-                                type="button" role="tab" aria-controls="link-list-widget" aria-selected="false" onclick="cleanWidgetCard()">link list</button>
+                                type="button" role="tab" aria-controls="link-list-widget" aria-selected="false" onclick="cleanWidgetCard()">список ссылок</button>
                             </li>
                         </ul>
                     </div>
                     <div class="tab-content widget-content" id="widgetContent">
                         <div class="tab-pane fade" id="week-plans-widget" role="tabpanel" aria-labelledby="week-plans-widget-tab">
-                            <h5 class="widget-card-title">week planer</h5>
+                            <h5 class="widget-card-title">недельный планер</h5>
                         </div>
                         <div class="tab-pane fade" id="list-widget" role="tabpanel" aria-labelledby="list-widget-tab">
-                            <h5 class="widget-card-title">list</h5>
+                            <h5 class="widget-card-title">список</h5>
                         </div>
                         <div class="tab-pane fade" id="link-list-widget" role="tabpanel" aria-labelledby="link-list-widget-tab">
-                            <h5 class="widget-card-title">link list</h5>
+                            <h5 class="widget-card-title">список ссылок</h5>
                         </div>
                         <!-- <div class="tab-pane fade" id="traker" role="tabpanel" aria-labelledby="traker-tab">
                             <h5 class="widget-card-title">tracker</h5>
@@ -591,12 +591,12 @@
                     </div>
                     <div class="input-form hide-class shadow-class">
                         <input type="text" id="weekPlansTitleWidgetInput" class="add-input " autocomplete="off" placeholder = "">
-                        <label for="weekPlansTitleWidgetInput" class="add-input_label">title</label>
-                        <p id="errorText" class="hide-class input-validation-message">field is required</p>
+                        <label for="weekPlansTitleWidgetInput" class="add-input_label">заголовок</label>
+                        <p id="errorText" class="hide-class input-validation-message">поле обязательно</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn button-dark" id="addNewWidgetBtn">create</button>
+                    <button type="button" class="btn button-dark" id="addNewWidgetBtn">создать</button>
                 </div>
             </div>
         </div>
@@ -606,38 +606,38 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleAdd">add</h5>
+                    <h5 class="modal-title" id="everyWeekGoalWidgetModalTitleAdd">добавить</h5>
                     <button type="button" class="btn card-body__icon-button" onclick="closeTaskDialog()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div class="block-wrap" id="dataDayNamesBlock">
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="monday">monday</button>
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="tuesday">tuesday</button>
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="wednesday">wednesday</button>
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="thusday">thusday</button>
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="friday">friday</button>
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="saturday">saturday</button>
-                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="sunday">sunday</button>
-                        <button type="button" class="btn btn-outline-light" onclick="chooseAllWeekDays()">choose all</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="monday">понедельник</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="tuesday">вторник</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="wednesday">среда</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="thusday">четверг</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="friday">пятница</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="saturday">суббота</button>
+                        <button type="button" class="btn btn-outline-light data-day-name" onclick="chooseWeekDay(this)" data-day-name="sunday">воскресенье</button>
+                        <button type="button" class="btn btn-outline-light" onclick="chooseAllWeekDays()">выбрать все</button>
                     </div>
                     <div class="tab-content widget-content">
                         <div style="width: -webkit-fill-available;">
                             <div class="form-check-label__block-header">
-                                <p class="form-check-label__block-header-text">text*</p>
+                                <p class="form-check-label__block-header-text">текст*</p>
                                 <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContentText">
                             </div>
-                            <button class="btn btn-outline-light-min" id="addUrlToEveryWeekGoalWidgetItem" onclick="addUrlToEveryWeekGoalWidgetItem()">add url</button>
+                            <button class="btn btn-outline-light-min" id="addUrlToEveryWeekGoalWidgetItem" onclick="addUrlToEveryWeekGoalWidgetItem()">добавить ссылку</button>
                             <div class="form-check-label__block-header hide-class" id="addUrlToEveryWeekGoalWidgetItemBlock">
-                                <p class="form-check-label__block-header-text">url</p>
+                                <p class="form-check-label__block-header-text">ссылка</p>
                                 <input type="text" class="form-control widget-list__input-text"  id="everyWeekGoalWidgetContentUrl">
                             </div>
                         </div>
-                        <p id="errorText" class="hide-class input-validation-message" style="padding: 0;">select a day and add text</p>
+                        <p id="errorText" class="hide-class input-validation-message" style="padding: 0;">выберите день и введите текст</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn button-dark" id="addEveryWeekGoalBtn" onclick="addTaskToEveryWeekGoalWidget()">add</button>
-                    <button type="button" class="btn button-dark" id="addEveryWeekGoalBtn" onclick="addMoreTaskToEveryWeekGoalWidget()">add more</button>
+                    <button type="button" class="btn button-dark" id="addEveryWeekGoalBtn" onclick="addTaskToEveryWeekGoalWidget()">создать</button>
+                    <button type="button" class="btn button-dark" id="addEveryWeekGoalBtn" onclick="addMoreTaskToEveryWeekGoalWidget()">создать ещё</button>
                 </div>
             </div>
         </div>
