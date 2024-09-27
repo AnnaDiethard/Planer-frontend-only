@@ -451,6 +451,13 @@ footer {
     width: 6rem;
 }
 
+.button-dark {
+    border: solid;
+    border-color: #6c6e75;
+    border-width: 3px;
+    border-radius: 0;
+    margin-inline: 5px;
+}
 
 
 

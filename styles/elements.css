@@ -194,7 +194,9 @@
 .input-group-text {
     width: 2rem;
     height: 2rem;
-    background-color: #7D7D7D;
+    border: solid;
+    border-color: #5a4e9b;
+    border-width: 3px;
 }
 
 .input-group {
