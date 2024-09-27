@@ -557,7 +557,7 @@ function editTaskOpenDialog(el) {
 
     const additionalIconBtn = document.querySelector('#taskAdditionalDropdown').querySelector('i')
     console.log('additionalIconBtn', additionalIconBtn)
-    const taskAdditional = task?.additionalIcon
+    const taskAdditional = task.additionalIcon
     console.log('taskAdditional', taskAdditional)
     if(taskAdditional != '') {
         console.log('taskAdditional', taskAdditional)
