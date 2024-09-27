@@ -629,6 +629,10 @@ footer {
     height: 3rem;
 }
 
+.color-search-dropdown-link {
+    width: 100%;
+}
+
 .input-form{
     position: relative;
     width: 100%;

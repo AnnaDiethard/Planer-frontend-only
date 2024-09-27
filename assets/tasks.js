@@ -142,6 +142,8 @@ function toLowStorypointsSearchInput() {
 // поиск по цвету текста
 function chooseSearchTextColor(el) {
     const color = el.getAttribute('data-color')
+    const searchColorDropdownBtn = document.querySelector('#searchColorDropdown')
+    searchColorDropdownBtn.classList.add(color)
 
     search()
 
