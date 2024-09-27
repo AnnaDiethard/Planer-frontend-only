@@ -156,6 +156,25 @@ function chooseSearchTextColor(el) {
     })
 }
 
+function chooseSearchAdditionalIcon(el) {
+    console.log('el', el)
+    const taskSearchAdditionalDropdownBtn = document.querySelector('#taskSearchAdditionalDropdown').querySelector('i')
+    const iconValue = el.querySelector('i').classList.value
+    const iconValueArr = iconValue.split(' ')
+    iconValueArr.forEach(el => {
+        taskSearchAdditionalDropdownBtn.classList.add(el)
+    })
+    taskSearchAdditionalDropdownBtn.innerText = ''
+
+    search()
+
+    tasks.forEach(el => {
+        if(el.additionalIcon.includes(iconValue)) {
+            renderTaskForSearch(el)
+        }
+    })
+}
+
 // очистка строки поиска по кнопке TODO: переписать чтобы можно было переиспользовать
 function cleanSearchInput() {
     const searchTasksInput = document.querySelector('#searchTasksInput')
