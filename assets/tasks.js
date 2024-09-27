@@ -570,30 +570,45 @@ addMoreNewTaskButton.addEventListener('click', () => {
 
 // выбор иконки
 function chooseIcon(el) {
-    taskStatus = el.id
-    iconClass = el.querySelector('i').classList.value
+    if(el.classList.contains('active')) {
+        console.log('chooseIconRemove')
+        el.classList.remove('active')
+        taskStatus = 0
+        iconClass = ''
+    } else {
+        console.log('chooseIconAdd')
+        taskStatus = el.id
+        iconClass = el.querySelector('i').classList.value
 
-    const btnArr = el.closest('.modal-dialog__btn-block').querySelectorAll('.btn-outline-light')
-    btnArr.forEach(el => {
-        if(el.classList.contains('active')) {
-            el.classList.remove('active')
-        }
-    })
-    el.classList.add('active')
+        const btnArr = el.closest('.modal-dialog__btn-block').querySelectorAll('.btn-outline-light')
+        btnArr.forEach(el => {
+            if(el.classList.contains('active')) {
+                el.classList.remove('active')
+            }
+        })
+        el.classList.add('active')
+    }
 }
 
-// выбор сторипоинтов
+// сторипоинты - выбор и отмена
 function chooseStorypoints(el) {
-    let storypoints = el.innerHTML
-    taskStorypoints = Number(storypoints)
+    if(el.classList.contains('active')) {
+        console.log('chooseStorypointsRemove')
+        el.classList.remove('active')
+        taskStorypoints = ''
+    } else {
+        console.log('chooseStorypointsAdd')
+        let storypoints = el.innerHTML
+        taskStorypoints = Number(storypoints)
 
-    const btnArr = el.closest('.storypoints-input').querySelectorAll('.btn-outline-light')
-    btnArr.forEach(el => {
-        if(el.classList.contains('active')) {
-            el.classList.remove('active')
-        }
-    })
-    el.classList.add('active')
+        const btnArr = el.closest('.storypoints-input').querySelectorAll('.btn-outline-light')
+        btnArr.forEach(el => {
+            if(el.classList.contains('active')) {
+                el.classList.remove('active')
+            }
+        })
+        el.classList.add('active')
+    }
 }
 
 // установка цвета текста задачи
