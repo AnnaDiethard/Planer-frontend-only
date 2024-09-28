@@ -3,6 +3,7 @@ let taskTemplate = ''
 let doneTaskTemplate = ''
 let parentTaskTemplate = ''
 let parentTaskSearchTemplate = ''
+let currentParentTaskTemplate = ''
 
 // объявление переменных для задач
 let tasks = []
@@ -23,9 +24,11 @@ let parentText = ''
 
 const taskDialog = document.querySelector('#taskDialog')
 // переменные для подзадач
-const addParentTaskCheckbox = document.querySelector('#addParentTaskCheckbox')
 const addChildTaskBtn = document.querySelector('#addChildTaskBtn')
+const addParentTaskBtn = document.querySelector('#addParentTaskBtn')
+const changeParentTaskBtn = document.querySelector('#changeParentTaskBtn')
 const searchParentTaskBlock = document.querySelector('#searchParentTaskBlock')
+const goToChangeTaskParametrBtn = document.querySelector('#goToChangeTaskParametrBtn')
  
 // сброс номера недели задачи при смене недели на следующую
 const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
@@ -550,6 +553,8 @@ function editTaskOpenDialog(el) {
         return task
     })
 
+    console.log('task', task)
+
     // выбор номера недели (без выбора дня)
     let taskCalendarDaysArr = ''
     taskCalendarDaysArr = document.querySelector("#taskCalendar").querySelectorAll('.vanilla-calendar-week-number')
@@ -588,14 +593,17 @@ function editTaskOpenDialog(el) {
         }
     })
 
+    // текст задачи
     const taskText = task.text
     let taskInputText = document.querySelector("#addTaskInputText")
     taskInputText.value = taskText
 
+    // описание задачи
     const taskDescription = task.description
     let taskInputDescription = document.querySelector("#addTaskInputDescription")
     taskInputDescription.value = taskDescription
 
+    // статус задачи
     let taskStatus = task?.status
     if(taskStatus != '') {
         const btnList = document.querySelector('#checkedIconBlock').querySelectorAll('.btn-outline-light')
@@ -606,16 +614,22 @@ function editTaskOpenDialog(el) {
         })
     }
 
-    let storypointsNumber = task?.storypoints
-    if(storypointsNumber != '') {
-        const btnList = document.querySelector('#checkedStorypointsBlock').querySelectorAll('.btn-outline-light')
-        btnList.forEach(el => {
-            if(el.innerHTML == storypointsNumber) {
-                el.classList.add('active')
-            }
-        })
+    // сторипоинты
+    const btnBlock = document.querySelector('#checkedStorypointsBlock')
+    const btnList = btnBlock.querySelectorAll('.btn-outline-light')
+    if(task.isParent) {
+        btnBlock.classList.add('hide-class')
+    } else {
+        let storypointsNumber = task?.storypoints
+        if(storypointsNumber != '') {
+            btnList.forEach(el => {
+                if(el.innerHTML == storypointsNumber) {
+                    el.classList.add('active')
+                }
+            })
+        }
     }
-
+    
     const colorBtn = document.querySelector('#taskTextColorDropdown')
     const taskTextColor = task?.color
     colorBtn.classList.add(taskTextColor)
@@ -630,7 +644,28 @@ function editTaskOpenDialog(el) {
             additionalIconBtn.classList.add(el)
         })
     }
-    
+
+    if(task.isParent || task.isChild) {
+        addParentTaskBtn.classList.add('hide-class')
+    }
+
+    if(task.isChild) {
+        const addChildTaskBtn = document.querySelector('#addChildTaskBtn')
+        addChildTaskBtn.classList.add('hide-class')
+
+        // const currentParentTaskBlock = document.querySelector('#currentParentTaskBlock')
+        currentParentTaskBlock.classList.remove('hide-class')
+
+        // const changeParentTaskBlock = document.querySelector('#changeParentTaskBlock')
+        changeParentTaskBtn.classList.remove('hide-class')
+
+        tasks.forEach(el => {
+            el.id == task.parentId
+            renderTask(el)
+            currentParentTaskBlock.querySelector('ul').insertAdjacentHTML('beforebegin', parentTaskSearchTemplate)
+        })
+    }
+
     taskDialog.showModal()
 }
 
@@ -745,13 +780,23 @@ function chooseStatus(el) {
 
 // выбор родительской задачи
 function addParentTask() {
-    if(document.querySelector('.subtask-block').querySelector('input[type="checkbox"]:checked')) {
-        searchParentTaskBlock.classList.remove('hide-class')
-        addChildTaskBtn.classList.add('hide-class')
-    } else {
-        searchParentTaskBlock.classList.add('hide-class')
-        addChildTaskBtn.classList.remove('hide-class')
-    }
+    addParentTaskBtn.classList.add('hide-class')
+    addChildTaskBtn.classList.add('hide-class')
+    searchParentTaskBlock.classList.remove('hide-class')
+}
+
+function goToChangeTaskParametr() {
+    addParentTaskBtn.classList.remove('hide-class')
+    addChildTaskBtn.classList.remove('hide-class')
+    searchParentTaskBlock.classList.add('hide-class')
+    parentId = ''
+    parentText = ''
+}
+
+function changeParentTask() {
+    searchParentTaskBlock.classList.remove('hide-class')
+    changeParentTaskBtn.classList.add('hide-class')
+    goToChangeTaskParametrBtn.classList.add('hide-class')
 }
 
 function searchSubtasks() {
@@ -767,8 +812,15 @@ function searchSubtasks() {
     })
 }
 
+// установка родительской задачи
 function checkParentTask(el) {
+    console.log(111)
     parentId = el.closest('li').id
+    tasks.forEach(el => {
+        if(el.id == parentId) {
+            parentText = el.text
+        }
+    })
 }
 
 // добавление подзадачи - показ кнопки
@@ -946,6 +998,12 @@ editTaskBtn.addEventListener('click', (el) => {
             date = `дедлайн ${taskDate}`
         }
 
+        tasks.forEach(el => {
+            if(el.id == parentId) {
+                el.isParent = true
+            }
+        })
+
         changedTask.text = taskInputValueText
         changedTask.description = taskInputValueDescription
         changedTask.storypoints = taskStorypoints
@@ -956,11 +1014,13 @@ editTaskBtn.addEventListener('click', (el) => {
         changedTask.date = date
         changedTask.dayName = weekDay
         changedTask.weekNumber = weekNumber
+        changedTask.parentId = parentId
+        changedTask.parentText = parentText
 
         tasks[taskIndex] = changedTask
         saveTasksListInLocalStorage(tasks)
 
-        closeTaskDialog()
+        // closeTaskDialog()
     }
 })
 
@@ -1180,6 +1240,7 @@ function renderTask(task) {
                                         </div>
                                     </div>
                                     <p class="form-date-label">${task.date}</p>
+                                    <div class="children-block hide-class" style="padding-left: 2rem;"><ul class="children-list"></ul></div>
                                 </li>`
 
     return doneTaskTemplate, taskTemplate, parentTaskTemplate, parentTaskSearchTemplate

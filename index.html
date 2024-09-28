@@ -542,12 +542,15 @@
                     </div>
                     <div class="block-column subtask-block" style="padding-top: 1rem;">
                         <button id="addChildTaskBtn" class="btn btn-outline-light" onclick="addSubtask()">добавить подзадачу</button>
-                        <div class="block_right">
-                            <input id="addParentTaskCheckbox" type="checkbox" style="height: 1rem; width: 1rem; margin-right: 0.5rem;" onclick="addParentTask()">
-                            <p>выбрать родительскую задачу</p>
+                        <button id="addParentTaskBtn" class="btn btn-outline-light" onclick="addParentTask()">выбрать родительскую задачу</button>
+                        <div class="block-col hide-class" id="currentParentTaskBlock">
+                            <p id="currentParentTaskLabel">текущая родительская задача</p>
+                            <ul></ul>
                         </div>
+                        <button id="changeParentTaskBtn" class="btn btn-outline-light hide-class" onclick="changeParentTask()">изменить родительскую задачу</button>
                         <div id="searchParentTaskBlock" class="hide-class" style="padding-top: 1rem;">
                             <div class="search-block">
+                                <button id="goToChangeTaskParametrBtn" class="btn btn-outline-light" style="border: none;" onclick="goToChangeTaskParametr()"><i class="fa-solid fa-left-long"></i></button>
                                 <input type="text" id="searchSubtasksInput" class="search-tasks-input">
                                 <div class="block_left">
                                     <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button>
