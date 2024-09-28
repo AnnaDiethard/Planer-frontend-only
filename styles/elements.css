@@ -360,6 +360,9 @@
 
 .widget-link-list__input-text {
     border-radius: 0;
+    border: solid !important;
+    border-color: #5a4e9b !important;
+    border-width: 1px !important;
 }
 
 /* еженедельные дела */
