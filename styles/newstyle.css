@@ -325,7 +325,7 @@ footer {
 }
 
 /* АЙДИШНИКИ */
-#searchTasksInput {
+.search-tasks-input {
     width: -webkit-fill-available;
 }
 
@@ -338,12 +338,7 @@ footer {
 }
 
 #searchTasksBtn {
-    border: solid;
-    /* border-image: linear-gradient(to right, #3acfd5 0%, #3a4ed5 100%) 1; */
-    height: 3rem;
-    width: 3rem;
-    border-color:#5a4e9b;
-    border-radius: 100%;
+    
 }
 
 
@@ -394,11 +389,18 @@ footer {
 
 .round-btn {
     border-radius: 100px;
+    border: solid;
+    /* border-image: linear-gradient(to right, #3acfd5 0%, #3a4ed5 100%) 1; */
+    height: 3rem;
+    width: 3rem;
+    border-color:#5a4e9b;
+    border-radius: 100%;
 }
 
 .search-tasks__btn {
     padding-inline: 0.2rem;
     font-size: 18px;
+    
 }
 
 .tasks-link {

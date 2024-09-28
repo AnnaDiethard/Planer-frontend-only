@@ -2,12 +2,14 @@
 let taskTemplate = ''
 let doneTaskTemplate = ''
 let parentTaskTemplate = ''
+let parentTaskSearchTemplate = ''
 
 // объявление переменных для задач
 let tasks = []
 let doneTasks = []
 let tasksForSearch = []
 let removeArr = []
+let subtasksArr = []
 let taskDate = ''
 let dayOfWeek = ''
 let taskWeekNumber = ''
@@ -16,8 +18,14 @@ let textColor = ''
 let iconClass = ''
 let additionalIconClass = ''
 let taskStorypoints = ''
+let parentId = ''
+let parentText = ''
 
 const taskDialog = document.querySelector('#taskDialog')
+// переменные для подзадач
+const addParentTaskCheckbox = document.querySelector('#addParentTaskCheckbox')
+const addChildTaskBtn = document.querySelector('#addChildTaskBtn')
+const searchParentTaskBlock = document.querySelector('#searchParentTaskBlock')
  
 // сброс номера недели задачи при смене недели на следующую
 const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
@@ -542,8 +550,6 @@ function editTaskOpenDialog(el) {
         return task
     })
 
-    console.log('task', task)
-
     // выбор номера недели (без выбора дня)
     let taskCalendarDaysArr = ''
     taskCalendarDaysArr = document.querySelector("#taskCalendar").querySelectorAll('.vanilla-calendar-week-number')
@@ -737,8 +743,46 @@ function chooseStatus(el) {
     }
 }
 
+// выбор родительской задачи
+function addParentTask() {
+    if(document.querySelector('.subtask-block').querySelector('input[type="checkbox"]:checked')) {
+        searchParentTaskBlock.classList.remove('hide-class')
+        addChildTaskBtn.classList.add('hide-class')
+    } else {
+        searchParentTaskBlock.classList.add('hide-class')
+        addChildTaskBtn.classList.remove('hide-class')
+    }
+}
+
+function searchSubtasks() {
+    const searchParentList = document.querySelector('#searchParentList')
+    tasks.forEach(el => {
+        if(el.done == false && el.isChild == false) {
+            const searchSubtasksInputValue = document.querySelector('#searchSubtasksInput').value
+            if(el.text.includes(searchSubtasksInputValue)) {
+                renderTask(el)
+                searchParentList.insertAdjacentHTML('beforeend', parentTaskSearchTemplate)
+            }
+        }
+    })
+}
+
+function checkParentTask(el) {
+    parentId = el.closest('li').id
+}
+
+// добавление подзадачи - показ кнопки
+function addSubtask() {
+    const taskInputValueText = document.querySelector("#addTaskInputText").value
+    if(taskInputValueText == '') {
+        console.log('выводить ошибку', taskInputValueText)
+    } else {
+        console.log('далее', taskInputValueText)
+    }
+}
+
 // создание новой задачи
-function createNewTask() {
+function createNewTask() {    
     const taskInputValueText = document.querySelector("#addTaskInputText").value
     const taskInputValueDescription = document.querySelector("#addTaskInputDescription").value
     const taskDateCreateMoment = moment().format('L')
@@ -749,7 +793,7 @@ function createNewTask() {
         dateDay = `дедлайн ${taskDate}`
     }
 
-    const newTask = {
+    let newTask = {
         id: Date.now(),
         text: taskInputValueText,
         description: taskInputValueDescription,
@@ -761,6 +805,11 @@ function createNewTask() {
         done: false,
         doneDate: '',
         expired: false,
+        isParent: false,
+        parentId: parentId || '',
+        parentText: parentText || '',
+        subtasks: subtasksArr,
+        isChild: false,
         taskDateCreate: taskDateCreateMoment,
         taskTimeCreate: taskTimeCreateMoment,
         // определяется в конфиге календаря
@@ -770,6 +819,17 @@ function createNewTask() {
     }
 
     console.log('newTask', newTask)
+
+    if(parentId) {
+        newTask.isChild = true
+        tasks.forEach(el => {
+            if(el.id == parentId) {
+                el.subtasks.push(newTask)
+                el.isParent = true
+                newTask.parentText = el.text
+            }
+        })
+    }
 
     tasks.push(newTask)
     saveTasksListInLocalStorage(tasks)
@@ -906,6 +966,8 @@ editTaskBtn.addEventListener('click', (el) => {
 
 // проверка задач, разделение их на списки и рендер в карточки
 function checkCorrectRenderTask() {
+    const childList = []
+    const renderList = []
     const tasksRunningList = []
     const tasksWeekDaysPlaner = []
     const tasksThisWeekList = []
@@ -915,7 +977,15 @@ function checkCorrectRenderTask() {
 
     const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
 
-    tasks.forEach((task) => {
+    tasks.forEach(el => {
+        if(el.isChild) {
+            childList.push(el)
+        } else {
+            renderList.push(el)
+        }
+    })
+
+    renderList.forEach((task) => {
         // planning
         if(task.weekNumber == '' && task.status == '') {
             tasksPlaner.push(task)
@@ -953,8 +1023,8 @@ function checkCorrectRenderTask() {
         const runningListCard = document.querySelector("#runningListCard")
         if(task.done) {
             runningListCard.insertAdjacentHTML('beforeend', doneTaskTemplate)
-        } else if(task.date) {
-            runningListCard.insertAdjacentHTML('beforebegin', taskTemplate)
+        } else if(task.isParent) {
+            runningListCard.insertAdjacentHTML('beforebegin', parentTaskTemplate)
         } else { 
             runningListCard.insertAdjacentHTML('beforebegin', taskTemplate)
         }
@@ -971,6 +1041,8 @@ function checkCorrectRenderTask() {
 
         if(task.done) {
             weekDayList.insertAdjacentHTML('beforeend', doneTaskTemplate)
+        } else if(task.isParent) {
+            weekDayList.insertAdjacentHTML('beforebegin', parentTaskTemplate)
         } else { 
             weekDayList.insertAdjacentHTML('beforebegin', taskTemplate)
         }
@@ -982,6 +1054,8 @@ function checkCorrectRenderTask() {
         const expiredTasksList = document.querySelector('#expiredTasks')
         if(task.done) {
             expiredTasksList.insertAdjacentHTML('beforeend', doneTaskTemplate)
+        } else if(task.isParent) {
+            expiredTasksList.insertAdjacentHTML('beforebegin', parentTaskTemplate)
         } else { 
             expiredTasksList.insertAdjacentHTML('beforebegin', taskTemplate)
         }
@@ -992,6 +1066,8 @@ function checkCorrectRenderTask() {
         const thisWeekTasksList = document.querySelector('#thisWeekTasks')
         if(task.done) {
             thisWeekTasksList.insertAdjacentHTML('beforeend', doneTaskTemplate)
+        } else if(task.isParent) {
+            thisWeekTasksList.insertAdjacentHTML('beforebegin', parentTaskTemplate)
         } else { 
             thisWeekTasksList.insertAdjacentHTML('beforebegin', taskTemplate)
         }
@@ -1002,6 +1078,8 @@ function checkCorrectRenderTask() {
         const nextWeekTasksList = document.querySelector('#nextWeekTasks')
         if(task.done) {
             nextWeekTasksList.insertAdjacentHTML('beforeend', doneTaskTemplate)
+        } else if(task.isParent) {
+            nextWeekTasksList.insertAdjacentHTML('beforebegin', parentTaskTemplate)
         } else { 
             nextWeekTasksList.insertAdjacentHTML('beforebegin', taskTemplate)
         }
@@ -1012,9 +1090,24 @@ function checkCorrectRenderTask() {
         const planningListCard = document.querySelector("#planningListCard")
         if(task.done) {
             planningListCard.insertAdjacentHTML('beforeend', doneTaskTemplate)
+        } else if(task.isParent) {
+            planningListCard.insertAdjacentHTML('beforebegin', parentTaskTemplate)
         } else { 
             planningListCard.insertAdjacentHTML('beforebegin', taskTemplate)
         }
+    })
+
+    childList.forEach((task) => {
+        const tasksTabContentItems = document.querySelector('#tasksTabContent').querySelectorAll('li')
+        let parentCard = ''
+        tasksTabContentItems.forEach(el => {
+            if(el.id == task.parentId) {
+                renderTask(el)
+                parentCard = el.querySelector('.children-list')
+                renderTask(task)
+                parentCard.insertAdjacentHTML('beforeend', taskTemplate)
+            }
+        })
     })
 }
 
@@ -1027,7 +1120,7 @@ function renderTask(task) {
                             <span class="task-list__storypoints hide-class">${task.storypoints}</span>
                             <span class="remove-icon icon-secondary"><i class="fa-solid fa-rotate-right widget-btn-block__button" style="font-size: 14px;" onclick="removeDoneTask(this)"></i></span>
                         </li>`
-    // в RL с датой
+    // обычная задача
     taskTemplate = `<li class="task-list__item" id="${task.id}">
                         <div class="task-list__task-block">
                             <div class="task-list__task-block-info">
@@ -1047,10 +1140,67 @@ function renderTask(task) {
                         </div>
                         <p class="form-date-label">${task.date}</p>
                         <p class="task-text__label hide-class">${task.description}</p>
+                        <div class="children-block hide-class" style="padding-left: 2rem;"><ul class="children-list"></ul></div>
                     </li>`
-    
+    // родительская задача
+    parentTaskTemplate = `<li class="task-list__item" id="${task.id}">
+                            <div class="task-list__task-block">
+                                <div class="task-list__task-block-info">
+                                    <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
+                                    <div class="task-list__task-block-settings">
+                                        <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
+                                        <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
+                                    </div>
+                                    <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                </div>  
+                                <div class="task-list__icon-block">
+                                    <span class="task-list__storypoints">${task.storypoints}</span>
+                                    <span id="openTaskChildrenBtn" class="icon-secondary"><i class="fa-solid fa-chevron-down button-icon-accent" style="font-size: 20px; padding-right: 15px" onclick="openTaskChildrenBlock(this)"></i></span>
+                                    <span id="closeTaskChildrenBtn" class="icon-secondary hide-class"><i class="fa-solid fa-chevron-up button-icon-accent" style="font-size: 20px; padding-right: 15px" onclick="closeTaskChildrenBlock(this)"></i></span>
+                                    <span class="icon-secondary"><i class="fa-solid fa-info button-icon-accent" style="font-size: 16px; padding-right: 5px"></i></span>
+                                    <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
+                                    <span class="icon-secondary"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
+                                </div>
+                            </div>
+                            <p class="form-date-label">${task.date}</p>
+                            <p class="task-text__label hide-class">${task.description}</p>
+                            <div class="children-block hide-class" style="padding-left: 2rem;"><ul class="children-list"></ul></div>
+                        </li>`
+    // темплейт для поиска родительской задачи
+    parentTaskSearchTemplate = `<li class="task-list__item" id="${task.id}">
+                                    <div class="task-list__task-block">
+                                        <div class="task-list__task-block-info">
+                                            <input class="task-list__form-check-input" type="radio" onclick="checkParentTask(this)">
+                                            <div class="task-list__task-block-settings">
+                                                <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
+                                                <span class="task-list__storypoints">${task.storypoints}</span>
+                                                <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
+                                            </div>
+                                            <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
+                                        </div>
+                                    </div>
+                                    <p class="form-date-label">${task.date}</p>
+                                </li>`
 
-    return doneTaskTemplate, taskTemplate
+    return doneTaskTemplate, taskTemplate, parentTaskTemplate, parentTaskSearchTemplate
+}
+
+// разворачивание блока с подзадачами
+function openTaskChildrenBlock(el) {
+    el.closest('span').classList.add('hide-class')
+    const closeTaskChildrenBtn = el.closest('.task-list__icon-block').querySelector('#closeTaskChildrenBtn')
+    closeTaskChildrenBtn.classList.remove('hide-class')
+    const childrenBlock = el.closest('li').querySelector('.children-block')
+    childrenBlock.classList.remove('hide-class')
+}
+
+// сворачивание блока с подзадачами
+function closeTaskChildrenBlock(el) {
+    el.closest('span').classList.add('hide-class')
+    const openTaskChildrenBtn = el.closest('.task-list__icon-block').querySelector('#openTaskChildrenBtn')
+    openTaskChildrenBtn.classList.remove('hide-class')
+    const childrenBlock = el.closest('li').querySelector('.children-block')
+    childrenBlock.classList.add('hide-class')
 }
 
 // показ/скрытие описания задачи при наведении на иконку

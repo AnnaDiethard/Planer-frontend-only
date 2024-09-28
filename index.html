@@ -50,7 +50,7 @@
                     </div>
                     <div class="search-tasks " id="searchTasksBlock">
                         <div class="search-block">
-                            <input type="text" id="searchTasksInput" class="">
+                            <input type="text" id="searchTasksInput" class="search-tasks-input">
                             <div class="block_left">
                                 <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button>
                                 <button id="searchTasksBtn" type="button" class="btn round-btn" onclick="searchTasks()" title="search"><i class="button-icon-extra-light icon-max fa-solid fa-magnifying-glass"></i></button>
@@ -538,6 +538,23 @@
                                 <span id="" class="status-icon"><i></i></span>
                                 <p>удалить статус</p>
                             </li>
+                        </div>
+                    </div>
+                    <div class="block-column subtask-block" style="padding-top: 1rem;">
+                        <button id="addChildTaskBtn" class="btn btn-outline-light" onclick="addSubtask()">добавить подзадачу</button>
+                        <div class="block_right">
+                            <input id="addParentTaskCheckbox" type="checkbox" style="height: 1rem; width: 1rem; margin-right: 0.5rem;" onclick="addParentTask()">
+                            <p>выбрать родительскую задачу</p>
+                        </div>
+                        <div id="searchParentTaskBlock" class="hide-class" style="padding-top: 1rem;">
+                            <div class="search-block">
+                                <input type="text" id="searchSubtasksInput" class="search-tasks-input">
+                                <div class="block_left">
+                                    <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button>
+                                    <button id="searchSubtaskBtn" type="button" class="btn round-btn" onclick="searchSubtasks()" title="search"><i class="button-icon-extra-light icon-max fa-solid fa-magnifying-glass"></i></button>
+                                </div>
+                            </div>
+                            <ul id="searchParentList"></ul>
                         </div>
                     </div>
                 </div>
