@@ -1,7 +1,7 @@
 // объявление темплейтов для рендера задач
 let taskTemplate = ''
-let taskDateTemplate = ''
 let doneTaskTemplate = ''
+let parentTaskTemplate = ''
 
 // объявление переменных для задач
 let tasks = []
@@ -108,7 +108,7 @@ function getTasksListFromLocalStorage() {
     return tasksList
 }
 
-// поиск по задачам (по тексту) TODO: переписать чтобы можно было переиспользовать
+// поиск по задачам (по тексту) TODO переписать чтобы можно было переиспользовать
 function searchTasks() {
     search()
 
@@ -235,7 +235,7 @@ function chooseSearchAdditionalIcon(el) {
     }
 }
 
-// очистка строки поиска по кнопке TODO: переписать чтобы можно было переиспользовать
+// очистка строки поиска по кнопке TODO переписать чтобы можно было переиспользовать
 function cleanSearchInput() {
     const searchTasksInput = document.querySelector('#searchTasksInput')
     searchTasksInput.value = ''
@@ -246,7 +246,7 @@ function cleanSearchInput() {
     window.location.reload()
 }
 
-// очистка строки поиска при выборе табов с задачами TODO: переписать чтобы можно было переиспользовать
+// очистка строки поиска при выборе табов с задачами TODO переписать чтобы можно было переиспользовать
 const tasksTabItems = document.querySelector('#tasksTab').querySelectorAll('.nav-link')
 tasksTabItems.forEach(el => {
     el.addEventListener('click', () => {
@@ -647,7 +647,7 @@ addNewTaskButton.addEventListener('click', () => {
     } else {
         createNewTask()
         cleanTaskForm()
-        closeTaskDialog()
+        // closeTaskDialog()
     }
 })
 
@@ -744,6 +744,11 @@ function createNewTask() {
     const taskDateCreateMoment = moment().format('L')
     const taskTimeCreateMoment = moment().format('LT')
 
+    let dateDay = ''
+    if(taskDate) {
+        dateDay = `дедлайн ${taskDate}`
+    }
+
     const newTask = {
         id: Date.now(),
         text: taskInputValueText,
@@ -759,7 +764,7 @@ function createNewTask() {
         taskDateCreate: taskDateCreateMoment,
         taskTimeCreate: taskTimeCreateMoment,
         // определяется в конфиге календаря
-        date: 'дедлайн' && taskDate || '',
+        date: dateDay || '',
         dayName: dayOfWeek || '',
         weekNumber: taskWeekNumber || ''
     }
@@ -856,11 +861,6 @@ editTaskBtn.addEventListener('click', (el) => {
         const dropdownColorBtn = document.querySelector('#taskTextColorDropdown')
         textColor = dropdownColorBtn.getAttribute('data-color')
 
-        // const dropdownAdditionalIconBtn = document.querySelector('#taskAdditionalDropdown').querySelector('i')
-        // console.log('dropdownAdditionalIconBtn1', dropdownAdditionalIconBtn)
-        // dropdownAdditionalIconBtn.classList.value = changedTask.additionalIcon
-        // console.log('dropdownAdditionalIconBtn2', dropdownAdditionalIconBtn)
-
         let weekDay = ''
         if(dayOfWeek == '') {
             weekDay = changedTask.dayName
@@ -883,7 +883,7 @@ editTaskBtn.addEventListener('click', (el) => {
         } else if (taskDate == '') {
             date = changedTask.date
         } else {
-            date = taskDate
+            date = `дедлайн ${taskDate}`
         }
 
         changedTask.text = taskInputValueText
@@ -956,7 +956,7 @@ function checkCorrectRenderTask() {
         } else if(task.date) {
             runningListCard.insertAdjacentHTML('beforebegin', taskTemplate)
         } else { 
-            runningListCard.insertAdjacentHTML('beforebegin', taskDateTemplate)
+            runningListCard.insertAdjacentHTML('beforebegin', taskTemplate)
         }
     })
 
@@ -972,7 +972,7 @@ function checkCorrectRenderTask() {
         if(task.done) {
             weekDayList.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else { 
-            weekDayList.insertAdjacentHTML('beforebegin', taskDateTemplate)
+            weekDayList.insertAdjacentHTML('beforebegin', taskTemplate)
         }
     })
 
@@ -983,7 +983,7 @@ function checkCorrectRenderTask() {
         if(task.done) {
             expiredTasksList.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else { 
-            expiredTasksList.insertAdjacentHTML('beforebegin', taskDateTemplate)
+            expiredTasksList.insertAdjacentHTML('beforebegin', taskTemplate)
         }
     })
     tasksThisWeekList.forEach((task) => {
@@ -993,7 +993,7 @@ function checkCorrectRenderTask() {
         if(task.done) {
             thisWeekTasksList.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else { 
-            thisWeekTasksList.insertAdjacentHTML('beforebegin', taskDateTemplate)
+            thisWeekTasksList.insertAdjacentHTML('beforebegin', taskTemplate)
         }
     })
     tasksNextWeekList.forEach((task) => {
@@ -1003,7 +1003,7 @@ function checkCorrectRenderTask() {
         if(task.done) {
             nextWeekTasksList.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else { 
-            nextWeekTasksList.insertAdjacentHTML('beforebegin', taskDateTemplate)
+            nextWeekTasksList.insertAdjacentHTML('beforebegin', taskTemplate)
         }
     })
     tasksPlaner.forEach((task) => {
@@ -1013,7 +1013,7 @@ function checkCorrectRenderTask() {
         if(task.done) {
             planningListCard.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else { 
-            planningListCard.insertAdjacentHTML('beforebegin', taskDateTemplate)
+            planningListCard.insertAdjacentHTML('beforebegin', taskTemplate)
         }
     })
 }
@@ -1045,31 +1045,12 @@ function renderTask(task) {
                                 <span class="icon-secondary"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
                             </div>
                         </div>
-                        <p class="form-date-label">дедлайн ${task.date}</p>
+                        <p class="form-date-label">${task.date}</p>
                         <p class="task-text__label hide-class">${task.description}</p>
                     </li>`
-    // без даты
-    taskDateTemplate = `<li class="task-list__item" id="${task.id}">
-                        <div class="task-list__task-block">
-                            <div class="task-list__task-block-info">
-                                <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
-                                <div class="task-list__task-block-settings">
-                                    <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
-                                    <button class="task-list__storypoints">${task.storypoints}</button>
-                                    <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
-                                </div>
-                                <p class="form-check-label task-text__text ${task.color}" for="flexCheckDefault">${task.text}</p>
-                            </div>
-                            <div class="task-list__icon-block">
-                                <span class="icon-secondary"><i class="fa-solid fa-info button-icon-accent" style="font-size: 16px; padding-right: 5px"></i></span>
-                                <span class="icon-secondary"><i class="fa-solid fa-pencil  button-icon-accent " style="font-size: 14px;" onclick="editTaskOpenDialog(this)"></i></span>
-                                <span class="icon-secondary"><i class="fa-solid fa-trash " style="font-size: 14px;" onclick="deleteTask(this)"></i></span>
-                            </div>
-                        </div>
-                        <p class="task-text__label hide-class">${task.description}</p>
-                    </li>`
+    
 
-    return doneTaskTemplate, taskTemplate, taskDateTemplate
+    return doneTaskTemplate, taskTemplate
 }
 
 // показ/скрытие описания задачи при наведении на иконку
