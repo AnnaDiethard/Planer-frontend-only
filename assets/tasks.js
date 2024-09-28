@@ -6,6 +6,8 @@ let doneTaskTemplate = ''
 // объявление переменных для задач
 let tasks = []
 let doneTasks = []
+let tasksForSearch = []
+let removeArr = []
 let taskDate = ''
 let dayOfWeek = ''
 let taskWeekNumber = ''
@@ -111,34 +113,68 @@ function searchTasks() {
     search()
 
     const searchTasksInputValue = document.querySelector('#searchTasksInput').value
-    sortTasksOnStatus(tasks)
-    tasks.forEach(el => {
-        if(el.text.includes(searchTasksInputValue) || el.description.includes(searchTasksInputValue)) {
-            renderTaskForSearch(el)
-        }
-    })
+
+    if(tasksForSearch.length == 0) {
+        sortTasksOnStatus(tasks)
+        tasks.forEach(el => {
+            if(el.text.includes(searchTasksInputValue) || el.description.includes(searchTasksInputValue)) {
+                renderTaskForSearch(el)
+                tasksForSearch.push(el)
+            }
+        })
+    } else {
+        sortTasksOnStatus(tasksForSearch)
+        tasksForSearch.forEach(el => {
+            if(el.text.includes(searchTasksInputValue) || el.description.includes(searchTasksInputValue)) {
+                renderTaskForSearch(el)
+            } else {
+                removeArr.push(el)
+            }
+        })
+        tasksForSearch = tasksForSearch.filter( ( item ) => !removeArr.includes( item ) )
+    }
 }
 
 // рендеринг задач по весу сторипоинтов (по уменьшению)
 function toHighStorypointsSearchInput() {
     search()
-    sortTasksOnStatus(tasks)
-    tasks.forEach(el => {
-        if(el.storypoints && el.done == false) {
-            renderTaskForSearch(el)
-        }
-    })
+
+    if(tasksForSearch.length == 0) {
+        tasks.sort((a, b) => (b.storypoints) - (a.storypoints))
+        tasks.forEach(el => {
+            if(el.storypoints && el.done == false) {
+                renderTaskForSearch(el)
+            }
+        })
+    } else {
+        tasksForSearch.sort((a, b) => (b.storypoints) - (a.storypoints))
+        tasksForSearch.forEach(el => {
+            if(el.storypoints && el.done == false) {
+                renderTaskForSearch(el)
+            }
+        })
+    }
 }
 
 // рендеринг задач по весу сторипоинтов (по увеличению)
 function toLowStorypointsSearchInput() {
     search()
-    sortTasksOnStatus(tasks)
-    tasks.forEach(el => {
-        if(el.storypoints && el.done == false) {
-            renderTaskForSearch(el)
-        }
-    })
+
+    if(tasksForSearch.length == 0) {
+        tasks.sort((a, b) => (a.storypoints) - (b.storypoints))
+        tasks.forEach(el => {
+            if(el.storypoints && el.done == false) {
+                renderTaskForSearch(el)
+            }
+        })
+    } else {
+        tasksForSearch.sort((a, b) => (a.storypoints) - (b.storypoints))
+        tasksForSearch.forEach(el => {
+            if(el.storypoints && el.done == false) {
+                renderTaskForSearch(el)
+            }
+        })
+    }
 }
 
 // поиск по цвету текста
@@ -149,15 +185,27 @@ function chooseSearchTextColor(el) {
 
     search()
 
-    tasks.forEach(el => {
-        if(el.color.includes(color)) {
-            renderTaskForSearch(el)
-        }
-    })
+    if(tasksForSearch.length == 0) {
+        tasks.forEach(el => {
+            if(el.color.includes(color)) {
+                renderTaskForSearch(el)
+                tasksForSearch.push(el)
+            }
+        })
+    } else {
+        tasksForSearch.forEach(el => {
+            if(el.color.includes(color)) {
+                renderTaskForSearch(el)
+            } else {
+                removeArr.push(el)
+            }
+        })
+        tasksForSearch = tasksForSearch.filter( ( item ) => !removeArr.includes( item ) )
+    }
 }
 
+// поиск по дополнительной иконке
 function chooseSearchAdditionalIcon(el) {
-    console.log('el', el)
     const taskSearchAdditionalDropdownBtn = document.querySelector('#taskSearchAdditionalDropdown').querySelector('i')
     const iconValue = el.querySelector('i').classList.value
     const iconValueArr = iconValue.split(' ')
@@ -168,11 +216,23 @@ function chooseSearchAdditionalIcon(el) {
 
     search()
 
-    tasks.forEach(el => {
-        if(el.additionalIcon.includes(iconValue)) {
-            renderTaskForSearch(el)
-        }
-    })
+    if(tasksForSearch.length == 0) {
+        tasks.forEach(el => {
+            if(el.additionalIcon.includes(iconValue)) {
+                renderTaskForSearch(el)
+                tasksForSearch.push(el)
+            }
+        })
+    } else {
+        tasksForSearch.forEach(el => {
+            if(el.additionalIcon.includes(iconValue)) {
+                renderTaskForSearch(el)
+            } else {
+                removeArr.push(el)
+            }
+        })
+        tasksForSearch = tasksForSearch.filter( ( item ) => !removeArr.includes( item ) )
+    }
 }
 
 // очистка строки поиска по кнопке TODO: переписать чтобы можно было переиспользовать
