@@ -805,7 +805,9 @@ function changeParentTask() {
     goToChangeTaskParametrBtn.classList.add('hide-class')
 }
 
+// поиск подходящих родительских задач
 function searchSubtasks() {
+    console.log('search')
     const searchParentList = document.querySelector('#searchParentList')
     tasks.forEach(el => {
         if(el.done == false && el.isChild == false) {
