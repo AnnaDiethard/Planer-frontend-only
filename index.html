@@ -534,14 +534,13 @@
                                 <button id="1" type="button" class="btn btn-outline-light" onclick="chooseStatus(this)"><i class="fa-solid fa-hourglass-end"></i></button>
                             </div>
                             <li class="block_right hide-class" id="cardEditStatusBlock">
-                                <input type="radio" name="runningListRadio" style="margin-right: 0.5rem;" id="cardEditStatusDelete">
                                 <span id="" class="status-icon"><i></i></span>
-                                <p>удалить статус</p>
                             </li>
                         </div>
                     </div>
                     <div class="block-column subtask-block" style="padding-top: 1rem;">
-                        <button id="addChildTaskBtn" class="btn btn-outline-light" onclick="addSubtask()">добавить подзадачу</button>
+                        <!-- <button id="removeAllChildTasksBtn" class="btn btn-outline-light hide-class" onclick="removeAllChildTasks()">вернуть все подзадачи в общий список</button> -->
+                        <button id="addChildTaskBtn" class="btn btn-outline-light hide-class" onclick="addSubtask()">добавить подзадачу</button>
                         <button id="addParentTaskBtn" class="btn btn-outline-light" onclick="addParentTask()">выбрать родительскую задачу</button>
                         <div class="block-col hide-class" id="currentParentTaskBlock">
                             <p id="currentParentTaskLabel">текущая родительская задача</p>

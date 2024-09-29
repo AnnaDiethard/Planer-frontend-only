@@ -29,6 +29,7 @@ const addParentTaskBtn = document.querySelector('#addParentTaskBtn')
 const changeParentTaskBtn = document.querySelector('#changeParentTaskBtn')
 const searchParentTaskBlock = document.querySelector('#searchParentTaskBlock')
 const goToChangeTaskParametrBtn = document.querySelector('#goToChangeTaskParametrBtn')
+const removeAllChildTasksBtn = document.querySelector('#removeAllChildTasksBtn')
  
 // сброс номера недели задачи при смене недели на следующую
 const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
@@ -553,8 +554,6 @@ function editTaskOpenDialog(el) {
         return task
     })
 
-    console.log('task', task)
-
     // выбор номера недели (без выбора дня)
     let taskCalendarDaysArr = ''
     taskCalendarDaysArr = document.querySelector("#taskCalendar").querySelectorAll('.vanilla-calendar-week-number')
@@ -630,11 +629,13 @@ function editTaskOpenDialog(el) {
         }
     }
     
+    // цвет текста
     const colorBtn = document.querySelector('#taskTextColorDropdown')
     const taskTextColor = task?.color
     colorBtn.classList.add(taskTextColor)
     colorBtn.setAttribute('data-color', taskTextColor)
 
+    // дополнительная иконка
     const additionalIconBtn = document.querySelector('#taskAdditionalDropdown').querySelector('i')
     const taskAdditional = task.additionalIcon
     // я уже не могу думать, потом исправлю
@@ -647,6 +648,11 @@ function editTaskOpenDialog(el) {
 
     if(task.isParent || task.isChild) {
         addParentTaskBtn.classList.add('hide-class')
+    }
+
+    if(task.isParent) {
+        // removeAllChildTasksBtn.classList.remove('hide-class')
+        parentId = task.id
     }
 
     if(task.isChild) {
@@ -814,7 +820,6 @@ function searchSubtasks() {
 
 // установка родительской задачи
 function checkParentTask(el) {
-    console.log(111)
     parentId = el.closest('li').id
     tasks.forEach(el => {
         if(el.id == parentId) {
@@ -822,6 +827,31 @@ function checkParentTask(el) {
         }
     })
 }
+
+// вернуть все подзадачи в общий список
+// function removeAllChildTasks() {
+//     tasks.forEach(task => {
+//         if(task.id == parentId) {
+//             console.log('task1', task)
+//             const subtasks = task.subtasks
+//             console.log('subtasks', subtasks)
+//             subtasks.forEach(el => {
+//                 console.log('subtask1', el)
+//                 el.isChild = false
+//                 el.parentId = ''
+//                 el.parentText = ''
+//                 console.log('subtask2', el)
+//             })
+//             task.subtasks = []
+//             task.isParent = false
+//             console.log('task2', task)
+//         }
+        
+//     })
+//     console.log('tasks', tasks)
+//     saveTasksListInLocalStorage(tasks)
+//     console.log('tasks', tasks)
+// }
 
 // добавление подзадачи - показ кнопки
 function addSubtask() {
@@ -964,12 +994,6 @@ editTaskBtn.addEventListener('click', (el) => {
             }
         })
 
-        const cardEditStatusDelete = document.querySelector('#cardEditStatusDelete')
-        if(cardEditStatusDelete.checked) {
-            taskStatus = ''
-            iconClass = ''
-        }
-
         const dropdownColorBtn = document.querySelector('#taskTextColorDropdown')
         textColor = dropdownColorBtn.getAttribute('data-color')
 
@@ -1017,10 +1041,14 @@ editTaskBtn.addEventListener('click', (el) => {
         changedTask.parentId = parentId
         changedTask.parentText = parentText
 
+        if(changedTask.parentId) {
+            changedTask.isChild = true
+        }
+
         tasks[taskIndex] = changedTask
         saveTasksListInLocalStorage(tasks)
 
-        // closeTaskDialog()
+        closeTaskDialog()
     }
 })
 
