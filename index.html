@@ -50,7 +50,7 @@
                     </div>
                     <div class="search-tasks " id="searchTasksBlock">
                         <div class="search-block">
-                            <input type="text" id="searchTasksInput" class="">
+                            <input type="text" id="searchTasksInput" class="search-tasks-input">
                             <div class="block_left">
                                 <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button>
                                 <button id="searchTasksBtn" type="button" class="btn round-btn" onclick="searchTasks()" title="search"><i class="button-icon-extra-light icon-max fa-solid fa-magnifying-glass"></i></button>
@@ -534,10 +534,29 @@
                                 <button id="1" type="button" class="btn btn-outline-light" onclick="chooseStatus(this)"><i class="fa-solid fa-hourglass-end"></i></button>
                             </div>
                             <li class="block_right hide-class" id="cardEditStatusBlock">
-                                <input type="radio" name="runningListRadio" style="margin-right: 0.5rem;" id="cardEditStatusDelete">
                                 <span id="" class="status-icon"><i></i></span>
-                                <p>удалить статус</p>
                             </li>
+                        </div>
+                    </div>
+                    <div class="block-column subtask-block" style="padding-top: 1rem;">
+                        <!-- <button id="removeAllChildTasksBtn" class="btn btn-outline-light hide-class" onclick="removeAllChildTasks()">вернуть все подзадачи в общий список</button> -->
+                        <button id="addChildTaskBtn" class="btn btn-outline-light hide-class" onclick="addSubtask()">добавить подзадачу</button>
+                        <button id="addParentTaskBtn" class="btn btn-outline-light" onclick="addParentTask()">выбрать родительскую задачу</button>
+                        <div class="block-col hide-class" id="currentParentTaskBlock">
+                            <p id="currentParentTaskLabel">текущая родительская задача</p>
+                            <ul></ul>
+                        </div>
+                        <button id="changeParentTaskBtn" class="btn btn-outline-light hide-class" onclick="changeParentTask()">изменить родительскую задачу</button>
+                        <div id="searchParentTaskBlock" class="hide-class" style="padding-top: 1rem;">
+                            <div class="search-block">
+                                <button id="goToChangeTaskParametrBtn" class="btn btn-outline-light" style="border: none;" onclick="goToChangeTaskParametr()"><i class="fa-solid fa-left-long"></i></button>
+                                <input type="text" id="searchSubtasksInput" class="search-tasks-input">
+                                <div class="block_left">
+                                    <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button>
+                                    <button id="searchSubtaskBtn" type="button" class="btn round-btn" onclick="searchSubtasks()" title="search"><i class="button-icon-extra-light icon-max fa-solid fa-magnifying-glass"></i></button>
+                                </div>
+                            </div>
+                            <ul id="searchParentList"></ul>
                         </div>
                     </div>
                 </div>
