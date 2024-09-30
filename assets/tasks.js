@@ -9,7 +9,6 @@ let currentParentTaskTemplate = ''
 let tasks = []
 let doneTasks = []
 let tasksForSearch = []
-let removeArr = []
 let subtasksArr = []
 let taskDate = ''
 let dayOfWeek = ''
@@ -29,7 +28,9 @@ const addParentTaskBtn = document.querySelector('#addParentTaskBtn')
 const changeParentTaskBtn = document.querySelector('#changeParentTaskBtn')
 const searchParentTaskBlock = document.querySelector('#searchParentTaskBlock')
 const goToChangeTaskParametrBtn = document.querySelector('#goToChangeTaskParametrBtn')
+const removeParentTaskBlock = document.querySelector('#removeParentTaskBlock')
 const removeAllChildTasksBtn = document.querySelector('#removeAllChildTasksBtn')
+const searchParentList = document.querySelector('#searchParentList')
  
 // сброс номера недели задачи при смене недели на следующую
 const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
@@ -550,6 +551,13 @@ function editTaskOpenDialog(el) {
     tasks.filter((el) => {
         if(el.id == getTaskId) {
             task = el
+        } else {
+            const subtasks = el.subtasks
+            subtasks.forEach(el => {
+                if(el.id == getTaskId) {
+                    task = el
+                }
+            })
         }
         return task
     })
@@ -577,11 +585,11 @@ function editTaskOpenDialog(el) {
             } else {
                 cardEditCheckNumberBlock.classList.remove('hide-class')
             }
-            
         })
     })
 
     const taskDate = task?.date.toString()
+    
     const taskCalendarDays = document.querySelector("#taskCalendar").querySelectorAll('.vanilla-calendar-day')
     let calendarDay = {}
     taskCalendarDays.forEach((el) => {
@@ -646,24 +654,14 @@ function editTaskOpenDialog(el) {
         })
     }
 
-    if(task.isParent || task.isChild) {
+    if(task.isParent == true || task.isChild == true) {
         addParentTaskBtn.classList.add('hide-class')
     }
 
-    if(task.isParent) {
-        // removeAllChildTasksBtn.classList.remove('hide-class')
-        parentId = task.id
-    }
-
-    if(task.isChild) {
-        const addChildTaskBtn = document.querySelector('#addChildTaskBtn')
-        addChildTaskBtn.classList.add('hide-class')
-
-        // const currentParentTaskBlock = document.querySelector('#currentParentTaskBlock')
+    if(task.isChild == true) {
         currentParentTaskBlock.classList.remove('hide-class')
-
-        // const changeParentTaskBlock = document.querySelector('#changeParentTaskBlock')
         changeParentTaskBtn.classList.remove('hide-class')
+        removeParentTaskBlock.classList.remove('hide-class')
 
         tasks.forEach(el => {
             el.id == task.parentId
@@ -694,7 +692,7 @@ addNewTaskButton.addEventListener('click', () => {
     } else {
         createNewTask()
         cleanTaskForm()
-        // closeTaskDialog()
+        closeTaskDialog()
     }
 })
 
@@ -787,13 +785,11 @@ function chooseStatus(el) {
 // выбор родительской задачи
 function addParentTask() {
     addParentTaskBtn.classList.add('hide-class')
-    addChildTaskBtn.classList.add('hide-class')
     searchParentTaskBlock.classList.remove('hide-class')
 }
 
 function goToChangeTaskParametr() {
     addParentTaskBtn.classList.remove('hide-class')
-    addChildTaskBtn.classList.remove('hide-class')
     searchParentTaskBlock.classList.add('hide-class')
     parentId = ''
     parentText = ''
@@ -807,8 +803,6 @@ function changeParentTask() {
 
 // поиск подходящих родительских задач
 function searchSubtasks() {
-    console.log('search')
-    const searchParentList = document.querySelector('#searchParentList')
     tasks.forEach(el => {
         if(el.done == false && el.isChild == false) {
             const searchSubtasksInputValue = document.querySelector('#searchSubtasksInput').value
@@ -855,16 +849,6 @@ function checkParentTask(el) {
 //     console.log('tasks', tasks)
 // }
 
-// добавление подзадачи - показ кнопки
-function addSubtask() {
-    const taskInputValueText = document.querySelector("#addTaskInputText").value
-    if(taskInputValueText == '') {
-        console.log('выводить ошибку', taskInputValueText)
-    } else {
-        console.log('далее', taskInputValueText)
-    }
-}
-
 // создание новой задачи
 function createNewTask() {    
     const taskInputValueText = document.querySelector("#addTaskInputText").value
@@ -892,7 +876,7 @@ function createNewTask() {
         isParent: false,
         parentId: parentId || '',
         parentText: parentText || '',
-        subtasks: subtasksArr,
+        subtasks: [],
         isChild: false,
         taskDateCreate: taskDateCreateMoment,
         taskTimeCreate: taskTimeCreateMoment,
@@ -913,9 +897,10 @@ function createNewTask() {
                 newTask.parentText = el.text
             }
         })
+    } else {
+        tasks.push(newTask)
     }
 
-    tasks.push(newTask)
     saveTasksListInLocalStorage(tasks)
 
     checkCorrectRenderTask()
@@ -953,6 +938,14 @@ function cleanTaskForm() {
         }
     })
 
+    const searhItems = searchParentList.querySelectorAll('li')
+    console.log('searhItems', searhItems)
+    searhItems.forEach(el => {
+        el.remove()
+    })
+    parentId = ''
+    parentText = ''
+
     dropdownAdditionalIconBtn.querySelector('i').classList.value = ''
     cleanTaskTextColorDropdownClass()
 }
@@ -975,11 +968,24 @@ editTaskBtn.addEventListener('click', (el) => {
         tasks.forEach((el) => {
             if(el.id == id) {
                 changedTask = el
+            }   else {
+                const subtasks = el.subtasks
+                subtasks.forEach(el => {
+                    if(el.id == id) {
+                        changedTask = el
+                    }
+                })
             }
             return changedTask
         })
 
         const taskIndex = tasks.indexOf(changedTask)
+
+        const currentParentId = changedTask.parentId
+        const currentParentText = changedTask.parentText
+        if(changedTask.parentId) {
+            changedTask.isChild = true
+        }
 
         const btnIconList = document.querySelector('#checkedIconBlock').querySelectorAll('.btn-outline-light')
         btnIconList.forEach((el) => {
@@ -1024,12 +1030,6 @@ editTaskBtn.addEventListener('click', (el) => {
             date = `дедлайн ${taskDate}`
         }
 
-        tasks.forEach(el => {
-            if(el.id == parentId) {
-                el.isParent = true
-            }
-        })
-
         changedTask.text = taskInputValueText
         changedTask.description = taskInputValueDescription
         changedTask.storypoints = taskStorypoints
@@ -1040,24 +1040,63 @@ editTaskBtn.addEventListener('click', (el) => {
         changedTask.date = date
         changedTask.dayName = weekDay
         changedTask.weekNumber = weekNumber
-        changedTask.parentId = parentId
-        changedTask.parentText = parentText
+        changedTask.parentId = currentParentId
+        changedTask.parentText = currentParentText
 
-        if(changedTask.parentId) {
-            changedTask.isChild = true
+        if(removeParentTaskBlock.querySelector('input[type="checkbox"]:checked')) {
+            changedTask.parentId = ''
+            changedTask.parentText = ''
+            changedTask.isChild = false
+            tasks.push(changedTask)
         }
 
-        tasks[taskIndex] = changedTask
+        tasks.forEach(el => {
+            if(el.id == parentId) {
+                el.isParent = true
+                changedTask.parentId = parentId
+                changedTask.parentText = parentText
+                el.subtasks.push(changedTask)
+            }
+            if(el.id == currentParentId) {
+                index = el.subtasks.indexOf(changedTask)
+                el.subtasks.splice(index)
+                if(el.subtasks.length == 0) {
+                    el.isParent = false
+                }
+            }
+        })
+
+        if(changedTask.isChild == true) {
+            index = tasks.indexOf(changedTask)
+            tasks.splice(index)
+        } else {
+            tasks[taskIndex] = changedTask
+        }
+
         saveTasksListInLocalStorage(tasks)
 
         closeTaskDialog()
     }
 })
 
+// рендер подзадач
+function chechSubtasksRender(task, id) {
+    const planerList = document.querySelector(id)
+    const taskId = task.id
+    li = planerList.querySelectorAll('li')
+    li.forEach(li => {
+        if(li.id == taskId) {
+            const card = li.querySelector('ul')
+            task.subtasks.forEach(subtask => {
+                renderTask(subtask)
+                card.insertAdjacentHTML('beforebegin', taskTemplate)
+            })
+        }
+    })
+}
+
 // проверка задач, разделение их на списки и рендер в карточки
 function checkCorrectRenderTask() {
-    const childList = []
-    const renderList = []
     const tasksRunningList = []
     const tasksWeekDaysPlaner = []
     const tasksThisWeekList = []
@@ -1067,15 +1106,7 @@ function checkCorrectRenderTask() {
 
     const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
 
-    tasks.forEach(el => {
-        if(el.isChild) {
-            childList.push(el)
-        } else {
-            renderList.push(el)
-        }
-    })
-
-    renderList.forEach((task) => {
+    tasks.forEach((task) => {
         // planning
         if(task.weekNumber == '' && task.status == '') {
             tasksPlaner.push(task)
@@ -1115,6 +1146,7 @@ function checkCorrectRenderTask() {
             runningListCard.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else if(task.isParent) {
             runningListCard.insertAdjacentHTML('beforebegin', parentTaskTemplate)
+            chechSubtasksRender(task, '#running-list')
         } else { 
             runningListCard.insertAdjacentHTML('beforebegin', taskTemplate)
         }
@@ -1133,6 +1165,7 @@ function checkCorrectRenderTask() {
             weekDayList.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else if(task.isParent) {
             weekDayList.insertAdjacentHTML('beforebegin', parentTaskTemplate)
+            chechSubtasksRender(task, '#week-planer')
         } else { 
             weekDayList.insertAdjacentHTML('beforebegin', taskTemplate)
         }
@@ -1146,6 +1179,7 @@ function checkCorrectRenderTask() {
             expiredTasksList.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else if(task.isParent) {
             expiredTasksList.insertAdjacentHTML('beforebegin', parentTaskTemplate)
+            chechSubtasksRender(task, '#week-planer')
         } else { 
             expiredTasksList.insertAdjacentHTML('beforebegin', taskTemplate)
         }
@@ -1158,6 +1192,7 @@ function checkCorrectRenderTask() {
             thisWeekTasksList.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else if(task.isParent) {
             thisWeekTasksList.insertAdjacentHTML('beforebegin', parentTaskTemplate)
+            chechSubtasksRender(task, '#week-planer')
         } else { 
             thisWeekTasksList.insertAdjacentHTML('beforebegin', taskTemplate)
         }
@@ -1170,6 +1205,7 @@ function checkCorrectRenderTask() {
             nextWeekTasksList.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else if(task.isParent) {
             nextWeekTasksList.insertAdjacentHTML('beforebegin', parentTaskTemplate)
+            chechSubtasksRender(task, '#week-planer')
         } else { 
             nextWeekTasksList.insertAdjacentHTML('beforebegin', taskTemplate)
         }
@@ -1182,22 +1218,10 @@ function checkCorrectRenderTask() {
             planningListCard.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else if(task.isParent) {
             planningListCard.insertAdjacentHTML('beforebegin', parentTaskTemplate)
+            chechSubtasksRender(task, '#planning')
         } else { 
             planningListCard.insertAdjacentHTML('beforebegin', taskTemplate)
         }
-    })
-
-    childList.forEach((task) => {
-        const tasksTabContentItems = document.querySelector('#tasksTabContent').querySelectorAll('li')
-        let parentCard = ''
-        tasksTabContentItems.forEach(el => {
-            if(el.id == task.parentId) {
-                renderTask(el)
-                parentCard = el.querySelector('.children-list')
-                renderTask(task)
-                parentCard.insertAdjacentHTML('beforeend', taskTemplate)
-            }
-        })
     })
 }
 

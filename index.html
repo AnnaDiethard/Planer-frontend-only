@@ -540,10 +540,13 @@
                     </div>
                     <div class="block-column subtask-block" style="padding-top: 1rem;">
                         <!-- <button id="removeAllChildTasksBtn" class="btn btn-outline-light hide-class" onclick="removeAllChildTasks()">вернуть все подзадачи в общий список</button> -->
-                        <button id="addChildTaskBtn" class="btn btn-outline-light hide-class" onclick="addSubtask()">добавить подзадачу</button>
                         <button id="addParentTaskBtn" class="btn btn-outline-light" onclick="addParentTask()">выбрать родительскую задачу</button>
                         <div class="block-col hide-class" id="currentParentTaskBlock">
                             <p id="currentParentTaskLabel">текущая родительская задача</p>
+                            <div id="removeParentTaskBlock" class="block_left hide-class">
+                                <input id="removeParentTaskCheckbox" type="checkbox" name="" id="">
+                                <p>удалить и вернуть задачу в общий список</p>
+                            </div>
                             <ul></ul>
                         </div>
                         <button id="changeParentTaskBtn" class="btn btn-outline-light hide-class" onclick="changeParentTask()">изменить родительскую задачу</button>
