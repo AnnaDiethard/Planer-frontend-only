@@ -27,8 +27,3 @@ function validationDialogCancel() {
 function validationDialogConfirm() {
     validationDialog.close()
 }
-
-
-
-
-

@@ -96,7 +96,8 @@ function saveActiveTaskTab(el) {
 
 // сортировка массива задач по статусу
 function sortTasksOnStatus(arr) {
-    arr.sort((a, b) => (a.status) - (b.status))
+    console.log('arr', arr)
+    arr.sort((a, b) => (b.status) - (a.status))
 }
 
 // получение списка задач из LS
