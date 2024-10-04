@@ -61,30 +61,35 @@
 }
 
 .card-body::-webkit-scrollbar,
+.nav-tasks::-webkit-scrollbar,
 body::-webkit-scrollbar {
     width: 3px;
     height: 5px;
 }
 
 .card-body::-webkit-scrollbar-thumb,
+.nav-tasks::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
     background: linear-gradient(to bottom right, #6d7076 0%, #74767c 100%);
     border-radius: 5px;
 }
 
 .card-body::-webkit-scrollbar-track,
+.nav-tasks::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track {
     background-color: #ddd;
     border: 1px solid #ccc;
 }
 
 .card-body::-webkit-scrollbar-button,
+.nav-tasks::-webkit-scrollbar-button,
 body::-webkit-scrollbar-button {
     background-color: #6c6e75;
     border-radius: 5px;
 }
 
 .card-body::-webkit-scrollbar-button:hover,
+.nav-tasks::-webkit-scrollbar-button:hover,
 body::-webkit-scrollbar-button:hover {
     background-color: #999999;
 }
@@ -331,16 +336,12 @@ footer {
 
 #tasksTab {
     display: flex;
+    flex-wrap: nowrap;
+    overflow-y: auto;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 2rem;
 }
-
-#searchTasksBtn {
-    
-}
-
 
 /* ИКОНКИ */
 .logo {
@@ -406,14 +407,15 @@ footer {
 .tasks-link {
     color: var(--seconday-base-color);
     /* background-color: var(--primaty-light-color) !important; */
-    width: 10rem;
+    width: max-content !important;
+    padding-inline: 1.5rem;
     height: 3rem;
     border-radius: 6px;
     /* border-color: var(--light-background) !important; */
-    margin: 1rem 0 1rem 0;
+    margin: 1rem;
     letter-spacing: 2px;
     font-weight: bold;
-    margin-inline: 1rem;
+    /* margin-inline: 1rem; */
 }
 
 .tasks-link .active {
