@@ -1209,7 +1209,6 @@ function chechSubtasksRender(task, id) {
     const taskId = task.id
     
     li = planerList.querySelectorAll('li')
-    console.log("li", li)
     li.forEach(li => {
         if(li.id == taskId) {
             const card = li.querySelector('ul')
@@ -1231,6 +1230,7 @@ function checkCorrectRenderTask() {
     const tasksPlanerList = []
     const tasksInWorkList = []
     const tasksInBlockList = []
+    const subtasksDateList = []
 
     const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
 
@@ -1274,6 +1274,15 @@ function checkCorrectRenderTask() {
                 tasksNextWeekList.push(task)
                 sortTasksOnStatus(tasksNextWeekList)
             }
+            // subtasksDateList
+            if(task.date == '' && task.subtasks) {
+                const subtasksArr = task.subtasks
+                subtasksArr.forEach(el => {
+                    if(el.date) {
+                        subtasksDateList.push(el)
+                    }
+                })
+            }
     })
 
     tasksRunningList.forEach((task) => {
@@ -1293,19 +1302,35 @@ function checkCorrectRenderTask() {
     tasksWeekDaysPlanerList.forEach((task) => {
         renderTask(task)
 
-        let weekDayList = ''
+        let taskWeekDayList = ''
         if(task.dayName) {
             const taskDay = task.dayName
-            weekDayList = document.querySelector("[data-name=" + taskDay + "]")
+            taskWeekDayList = document.querySelector("[data-name=" + taskDay + "]")
         }
 
         if(task.done) {
-            weekDayList.insertAdjacentHTML('beforeend', doneTaskTemplate)
+            taskWeekDayList.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else if(task.isParent) {
-            weekDayList.insertAdjacentHTML('beforebegin', parentTaskTemplate)
+            taskWeekDayList.insertAdjacentHTML('beforebegin', parentTaskTemplate)
             chechSubtasksRender(task, '#week-planer')
         } else { 
-            weekDayList.insertAdjacentHTML('beforebegin', taskDateTemplate)
+            taskWeekDayList.insertAdjacentHTML('beforebegin', taskDateTemplate)
+        }
+    })
+
+    subtasksDateList.forEach((task) => {
+        renderTask(task)
+
+        let taskWeekDayList = ''
+        if(task.dayName) {
+            const taskDay = task.dayName
+            taskWeekDayList = document.querySelector("[data-name=" + taskDay + "]")
+        }
+
+        if(task.done) {
+            taskWeekDayList.insertAdjacentHTML('beforeend', doneTaskTemplate)
+        } else { 
+            taskWeekDayList.insertAdjacentHTML('beforebegin', taskDateTemplate)
         }
     })
 
