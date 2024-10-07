@@ -1179,12 +1179,12 @@ editTaskBtn.addEventListener('click', (el) => {
             // }
         })
 
-        // if(changedTask.isChild == true) {
-        //     index = tasks.indexOf(changedTask)
-        //     tasks.splice(index)
-        // } else {
-        //     tasks[taskIndex] = changedTask
-        // }
+        if(changedTask.isChild == true) {
+            index = tasks.indexOf(changedTask)
+            tasks.splice(index)
+        } else {
+            tasks[taskIndex] = changedTask
+        }
 
         console.log('blockerId', blockerId)
         tasks.forEach(task => {
