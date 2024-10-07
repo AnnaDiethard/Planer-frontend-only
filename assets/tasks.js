@@ -130,6 +130,8 @@ if (localStorage.getItem('tasksList')) {
                         el.renderClass = 'fa-circle-check icon-done'
                     }
                 })
+            } else {
+                task.isParent = false
             }
             if(task.isParent) {
                 let counter = 0
@@ -1170,13 +1172,6 @@ editTaskBtn.addEventListener('click', (el) => {
                 changedTask.parentText = parentText
                 task.subtasks.push(changedTask)
             }
-            // if(task.id == currentParentId) {
-            //     index = task.subtasks.indexOf(changedTask)
-            //     task.subtasks.splice(index)
-            //     if(task.subtasks.length == 0) {
-            //         task.isParent = false
-            //     }
-            // }
         })
 
         if(changedTask.isChild == true) {
