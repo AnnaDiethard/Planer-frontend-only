@@ -123,13 +123,8 @@ if (localStorage.getItem('tasksList')) {
                 task.renderClass = 'fa-circle-check icon-done'
             }
             if(task?.subtasks.length > 0)  {
-                task.subtasks.forEach(el => {
-                    if(el.isBloked) {
-                        el.renderClass = 'fa-ban'
-                    } else {
-                        el.renderClass = 'fa-circle-check icon-done'
-                    }
-                })
+                task.isParent = true
+                task.renderClass = ''
             } else {
                 task.isParent = false
             }
