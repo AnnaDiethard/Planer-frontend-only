@@ -727,7 +727,7 @@ addNewTaskButton.addEventListener('click', () => {
     } else {
         createNewTask()
         cleanTaskForm()
-        // closeTaskDialog()
+        closeTaskDialog()
     }
 })
 
@@ -1004,7 +1004,6 @@ function createNewTask() {
         tasks.push(newTask)
     }
 
-    console.log('tasks', tasks)
     saveTasksListInLocalStorage(tasks)
 
     checkCorrectRenderTask()
@@ -1158,7 +1157,6 @@ editTaskBtn.addEventListener('click', (el) => {
             tasks.push(changedTask)
         }
 
-        console.log('parentId', parentId)
         tasks.forEach(task => {
             if(task.id == parentId) {
                 task.isParent = true
@@ -1176,7 +1174,6 @@ editTaskBtn.addEventListener('click', (el) => {
             tasks[taskIndex] = changedTask
         }
 
-        console.log('blockerId', blockerId)
         tasks.forEach(task => {
             if(task.id == blockerId) {
                 task.isBloker = true
@@ -1189,7 +1186,7 @@ editTaskBtn.addEventListener('click', (el) => {
 
         saveTasksListInLocalStorage(tasks)
 
-        // closeTaskDialog()
+        closeTaskDialog()
     }
 })
 

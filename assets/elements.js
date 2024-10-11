@@ -82,6 +82,7 @@ function saveWidgets() {
 // создание нового виджета
 const addNewWidgetBtn = document.querySelector('#addNewWidgetBtn')
 addNewWidgetBtn.addEventListener('click', (el) => {
+    console.log(111)
     el.preventDefault()
     
     const input = document.querySelector('#widgetDialog').querySelector('input')
@@ -214,13 +215,15 @@ function deleteWidget(el) {
 
 // рендер виджетов по их типу
 function renderWidget() {
+    console.log(222)
     let valueId = inputWidgetValueId
+    console.log('valueId', valueId)
     let widget = ''
     switch (valueId) {
         case undefined:
             // рендерим пустой див если нет сохранённых виджетов чтобы корректно отображалась пустая страница
             widget = `<div></div>`
-        case 'week planer':
+        case 'недельный планер':
             const id = Date.now()
             widget = `<div class="col-12 widget-col">
                         <div style="padding-bottom: 1rem" class="widget__every-week-goals">
@@ -311,7 +314,7 @@ function renderWidget() {
                         </div>
                     </div>`
             break
-        case 'list':
+        case 'список':
             widget = `<div class="col-12 widget-col">
                             <div class="widget-list" style="padding-bottom: 1rem">
                                 <div class="card widget-card border__widget-card shadow-class">
@@ -353,7 +356,7 @@ function renderWidget() {
                             </div>
                         </div>`
             break
-            case 'link list':
+            case 'список ссылок':
                 widget = `<div class="col-12 widget-col">
                                 <div class="widget-link-list" style="padding-bottom: 1rem">
                                     <div class="card widget-card border__widget-card shadow-class">
