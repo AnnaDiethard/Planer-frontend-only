@@ -357,7 +357,7 @@
                                 <ul class="card-body__list" id="blockedTasksListCard"></ul>
                             </div>
                             <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
-                                <ul class="card-body__list" id="searchListCard"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus beatae cupiditate quis vel. Possimus debitis inventore, sunt excepturi doloribus est, accusantium quis soluta exercitationem numquam sequi totam reiciendis sit. Explicabo.</p></ul>
+                                <ul class="card-body__list" id="searchListCard"></ul>
                             </div>
                         </div>
                     </div>
@@ -547,44 +547,6 @@
                             <li class="block_right hide-class" id="cardEditStatusBlock">
                                 <span id="" class="status-icon"><i></i></span>
                             </li>
-                        </div>
-                    </div>
-                    <div class="block-column" style="padding-top: 1rem;">
-                        <!-- <button id="removeAllChildTasksBtn" class="btn btn-outline-light hide-class" onclick="removeAllChildTasks()">вернуть все подзадачи в общий список</button> -->
-                        <button id="addParentTaskBtn" class="btn btn-outline-light" onclick="addParentTask()">выбрать родительскую задачу</button>
-                        <div class="block-col hide-class" id="currentParentTaskBlock">
-                            <p id="currentParentTaskLabel">текущая родительская задача</p>
-                            <div id="removeParentTaskBlock" class="block_left hide-class">
-                                <input id="removeParentTaskCheckbox" type="checkbox" name="" id="">
-                                <p>удалить и вернуть задачу в общий список</p>
-                            </div>
-                            <ul></ul>
-                        </div>
-                        <button id="changeParentTaskBtn" class="btn btn-outline-light hide-class" onclick="changeParentTask()">изменить родительскую задачу</button>
-                        <div id="searchParentTaskBlock" class="hide-class" style="padding-top: 1rem;">
-                            <div class="search-block">
-                                <button id="goToChangeTaskParametrBtn" class="btn btn-outline-light" style="border: none;" onclick="goToChangeTaskParametr()"><i class="fa-solid fa-left-long"></i></button>
-                                <input type="text" id="searchSubtasksInput" class="search-tasks-input">
-                                <div class="block_left">
-                                    <!-- <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button> -->
-                                    <button id="searchSubtaskBtn" type="button" class="btn round-btn" onclick="searchSubtasks()" title="search"><i class="button-icon-extra-light icon-max fa-solid fa-magnifying-glass"></i></button>
-                                </div>
-                            </div>
-                            <ul id="searchParentList"></ul>
-                        </div>
-                    </div>
-                    <div class="block-column" style="padding-top: 1rem;">
-                        <button id="addBlockerTaskBtn" class="btn btn-outline-light" onclick="addTaskBlocker()">выбрать задачу блокер</button>
-                        <div id="searchBlockTaskBlock" class="hide-class" style="padding-top: 1rem;">
-                            <div class="search-block">
-                                <button id="goToChangeTaskParametrBtn" class="btn btn-outline-light" style="border: none;" onclick="goToChangeTaskParametr()"><i class="fa-solid fa-left-long"></i></button>
-                                <input type="text" id="searchBlockerInput" class="search-tasks-input">
-                                <div class="block_left">
-                                    <!-- <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button> -->
-                                    <button id="searchBlokibgBtn" type="button" class="btn round-btn" onclick="searchBlocking()" title="search"><i class="button-icon-extra-light icon-max fa-solid fa-magnifying-glass"></i></button>
-                                </div>
-                            </div>
-                            <ul id="searchBlockingList"></ul>
                         </div>
                     </div>
                 </div>

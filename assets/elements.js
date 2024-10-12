@@ -82,7 +82,6 @@ function saveWidgets() {
 // создание нового виджета
 const addNewWidgetBtn = document.querySelector('#addNewWidgetBtn')
 addNewWidgetBtn.addEventListener('click', (el) => {
-    console.log(111)
     el.preventDefault()
     
     const input = document.querySelector('#widgetDialog').querySelector('input')
@@ -215,9 +214,7 @@ function deleteWidget(el) {
 
 // рендер виджетов по их типу
 function renderWidget() {
-    console.log(222)
     let valueId = inputWidgetValueId
-    console.log('valueId', valueId)
     let widget = ''
     switch (valueId) {
         case undefined:
