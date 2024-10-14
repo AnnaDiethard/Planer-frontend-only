@@ -677,7 +677,7 @@ addNewTaskButton.addEventListener('click', () => {
     } else {
         createNewTask()
         cleanTaskForm()
-        // closeTaskDialog()
+        closeTaskDialog()
     }
 })
 
