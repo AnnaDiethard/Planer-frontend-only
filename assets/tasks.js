@@ -541,13 +541,6 @@ function editTaskOpenDialog(el) {
     tasks.filter((el) => {
         if(el.id == getTaskId) {
             task = el
-        } else {
-            const subtasks = el.subtasks
-            subtasks.forEach(el => {
-                if(el.id == getTaskId) {
-                    task = el
-                }
-            })
         }
         return task
     })
