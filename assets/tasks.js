@@ -906,18 +906,11 @@ editTaskBtn.addEventListener('click', (el) => {
         tasks.forEach((el) => {
             if(el.id == id) {
                 changedTask = el
-            }   else {
-                const subtasks = el.subtasks
-                subtasks.forEach(el => {
-                    if(el.id == id) {
-                        changedTask = el
-                    }
-                })
             }
             return changedTask
         })
 
-        const taskIndex = tasks.indexOf(changedTask)
+        // const taskIndex = tasks.indexOf(changedTask)
 
         const btnIconList = document.querySelector('#checkedIconBlock').querySelectorAll('.btn-outline-light')
         btnIconList.forEach((el) => {
