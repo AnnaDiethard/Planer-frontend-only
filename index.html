@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="styles/newstyle.css">
     <link rel="stylesheet" href="styles/calendar.css">
     <link rel="stylesheet" href="styles/elements.css">
-    <link rel="stylesheet" href="styles/settings.css">
     <link rel="stylesheet" href="styles/cards.css">
 </head>
 <body>
@@ -34,10 +33,7 @@
                     <div class="row">
                         <div class="col-12 header-row">
                             <i class="fa-solid fa-genderless logo"></i>
-                            <div class="links-block">
-                                <a class="link-header" href="views/calendar.html"><i class="fa-regular fa-calendar-days logo-sm"></i></a>
-                                <a class="link-header" href="views/settings.html"><i class="fa-regular fa-user logo-sm"></i></a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -166,9 +162,7 @@
                             <button class="nav-link tasks-link shadow-class" style="width: 10rem" id="week-planer-tab" data-bs-toggle="tab" data-bs-target="#week-planer"
                                 type="button" role="tab" aria-controls="week-planer" aria-selected="false" onclick="saveActiveTaskTab(this)">недельный планер</button>
                             <button class="nav-link tasks-link shadow-class" style="width: 10rem" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
-                                type="button" role="tab" aria-controls="planning" aria-selected="false" onclick="saveActiveTaskTab(this)">планирование</button>
-                            <button class="nav-link tasks-link shadow-class" style="width: 10rem" id="blocked-tab" data-bs-toggle="tab" data-bs-target="#blocked"
-                                type="button" role="tab" aria-controls="blocked" aria-selected="false" onclick="saveActiveTaskTab(this)">заблокированные задачи</button>
+                                type="button" role="tab" aria-controls="planning" aria-selected="false" onclick="saveActiveTaskTab(this)">бэклог</button>
                         </div>
 
                         <div class="block_left" style="padding: 0.5rem 0 0.5rem 0;">
@@ -353,38 +347,23 @@
                             <div class="tab-pane fade" id="planning" role="tabpanel" aria-labelledby="planning-tab">
                                 <ul class="card-body__list" id="planningListCard"></ul>
                             </div>
-                            <div class="tab-pane fade" id="blocked" role="tabpanel" aria-labelledby="blocked-tab">
-                                <ul class="card-body__list" id="blockedTasksListCard"></ul>
-                            </div>
                             <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
                                 <ul class="card-body__list" id="searchListCard"></ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-8" style="padding-left: 2rem;">
+                <div class="col-8" style="padding: 2rem 0 0 2rem;">
                     <div class="weather-dashboard shadow-class" style="margin-bottom: 2rem;">
                         <a href="https://rusmeteo.net/weather/moskva/" class="widget-brick" id="b75499d689da58d5fce2ad1837a0e347">Погода в Москве</a>
                     </div>
                     <div class="block-row">
                         <button class="accent-btn shadow-class" style="width: 3rem" onclick="addWidgetOpenDialog()"><i class="fa-solid fa-plus"></i></button>
-                        <div class="slider-block">
-                            <!-- <button class="accent-btn shadow-class" style="min-width: 20rem">осовное поле</button> -->
-                            <!-- <button class="accent-btn shadow-class" style="min-width: 20rem">дополнтельное поле</button> -->
-                            <!-- <button class="accent-btn shadow-class" style="min-width: 20rem">ещё дополнтельное поле</button> -->
-                        </div>
-                        
                     </div>
                     <div class="row widgets-row" id="widgetsCol" style="padding-top: 0.5rem;"></div>
                 </div>
                     
             </div>
-
-
-        <footer style="padding-left: 3rem;">
-            <a href="views/info.html">информация</a>
-            <p>обратная связь: support@onlain-planer.ru</p>
-        </footer>
 
     </div>
 
