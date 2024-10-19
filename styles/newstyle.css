@@ -407,6 +407,10 @@ footer {
     border-radius: 100%;
 }
 
+.round-btn:hover {
+    border-color:#5a4e9b;
+}
+
 .search-tasks__btn {
     padding-inline: 0.2rem;
     font-size: 18px;
