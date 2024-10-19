@@ -61,6 +61,7 @@
 }
 
 .card-body::-webkit-scrollbar,
+.widget-card-body::-webkit-scrollbar,
 .nav-tasks::-webkit-scrollbar,
 body::-webkit-scrollbar {
     width: 3px;
@@ -68,6 +69,7 @@ body::-webkit-scrollbar {
 }
 
 .card-body::-webkit-scrollbar-thumb,
+.widget-card-body::-webkit-scrollbar,
 .nav-tasks::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
     background: linear-gradient(to bottom right, #6d7076 0%, #74767c 100%);
@@ -75,6 +77,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .card-body::-webkit-scrollbar-track,
+.widget-card-body::-webkit-scrollbar,
 .nav-tasks::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track {
     background-color: #ddd;
@@ -82,6 +85,7 @@ body::-webkit-scrollbar-track {
 }
 
 .card-body::-webkit-scrollbar-button,
+.widget-card-body::-webkit-scrollbar,
 .nav-tasks::-webkit-scrollbar-button,
 body::-webkit-scrollbar-button {
     background-color: #6c6e75;
@@ -89,6 +93,7 @@ body::-webkit-scrollbar-button {
 }
 
 .card-body::-webkit-scrollbar-button:hover,
+.widget-card-body::-webkit-scrollbar,
 .nav-tasks::-webkit-scrollbar-button:hover,
 body::-webkit-scrollbar-button:hover {
     background-color: #999999;
@@ -410,7 +415,7 @@ footer {
     width: max-content !important;
     padding-inline: 1.5rem;
     height: 3rem;
-    border-radius: 6px;
+    border-radius: 0;
     /* border-color: var(--light-background) !important; */
     margin: 1rem;
     letter-spacing: 2px;
