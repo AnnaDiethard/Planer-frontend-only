@@ -61,6 +61,7 @@
 }
 
 .border__widget-card {
+    border-radius: 0;
     border-top-right-radius: 22px !important;
     border-color: #5a4e9b;
 }
