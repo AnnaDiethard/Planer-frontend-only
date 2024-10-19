@@ -714,7 +714,7 @@ function chooseTaskTextColor(el) {
 function cleanTaskTextColorDropdownClass() {
     dropdownColorBtn.classList = ''
     dropdownColorBtn.classList.add('btn')
-    dropdownColorBtn.classList.add('btn-secondary')
+    dropdownColorBtn.classList.add('btn-outline-light')
     dropdownColorBtn.classList.add('dropdown-toggle')
 }
 
