@@ -299,7 +299,6 @@ function renderTaskForSearch(task) {
         const taskHTML = `<li class="task-list__item" id="${task.id}">
                             <div class="task-list__task-block">
                                 <div class="task-list__task-block-info">
-                                    <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                         <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>
@@ -321,7 +320,6 @@ function renderTaskForSearch(task) {
         const taskHTML = `<li class="task-list__item" id="${task.id}">
                             <div class="task-list__task-block">
                                 <div class="task-list__task-block-info">
-                                    <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                         <button class="task-list__storypoints">${task.storypoints}</button>
@@ -342,7 +340,6 @@ function renderTaskForSearch(task) {
         const taskHTML = `<li class="task-list__item" id="${task.id}">
                             <div class="task-list__task-block">
                                 <div class="task-list__task-block-info">
-                                    <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                         <button class="task-list__storypoints">${task.storypoints}</button>
@@ -364,7 +361,6 @@ function renderTaskForSearch(task) {
         const taskHTML = `<li class="task-list__item" id="${task.id}">
                             <div class="task-list__task-block">
                                 <div class="task-list__task-block-info">
-                                    <input class="task-list__form-check-input" type="checkbox" onclick="markTheTaskCompleted(this)">
                                     <div class="task-list__task-block-settings">
                                         <span class="task-list__status-icon"><i class="${task.icon}"></i></span>
                                         <span class="task-list__additional-icon"><i class="${task.additionalIcon}"></i></span>

@@ -41,9 +41,6 @@
     
             <div class="row content-row">
                 <div class="col-4">
-                    <div class="calendar-block shadow-class" style="display: flex; align-items: center; justify-content: center;">
-                        <p>новый календарь в разработке</p>
-                    </div>
                     <div class="search-tasks " id="searchTasksBlock">
                         <div class="search-block">
                             <input type="text" id="searchTasksInput" class="search-tasks-input">
@@ -155,14 +152,14 @@
                     </div>
                     <div>
                         <div class="nav-tasks" id="tasksTab" role="tablist">
+                            <button class="nav-link tasks-link shadow-class" style="width: 10rem" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
+                                type="button" role="tab" aria-controls="planning" aria-selected="false" onclick="saveActiveTaskTab(this)">бэклог</button>
                             <button class="nav-link tasks-link shadow-class" style="width: 10rem" id="tasks-in-work-tab" data-bs-toggle="tab" data-bs-target="#tasks-in-work"
                                 type="button" role="tab" aria-controls="tasks-in-work" aria-selected="true" onclick="saveActiveTaskTab(this)">в работе</button>
                             <button class="nav-link tasks-link shadow-class" style="width: 10rem" id="running-list-tab" data-bs-toggle="tab" data-bs-target="#running-list"
                                 type="button" role="tab" aria-controls="running-list" aria-selected="true" onclick="saveActiveTaskTab(this)">бегущий список</button>
                             <button class="nav-link tasks-link shadow-class" style="width: 10rem" id="week-planer-tab" data-bs-toggle="tab" data-bs-target="#week-planer"
                                 type="button" role="tab" aria-controls="week-planer" aria-selected="false" onclick="saveActiveTaskTab(this)">недельный планер</button>
-                            <button class="nav-link tasks-link shadow-class" style="width: 10rem" id="planning-tab" data-bs-toggle="tab" data-bs-target="#planning"
-                                type="button" role="tab" aria-controls="planning" aria-selected="false" onclick="saveActiveTaskTab(this)">бэклог</button>
                         </div>
 
                         <div class="block_left" style="padding: 0.5rem 0 0.5rem 0;">

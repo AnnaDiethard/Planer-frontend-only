@@ -339,6 +339,10 @@ footer {
     width: -webkit-fill-available;
 }
 
+.search-tasks-input:focus-visible {
+    outline: none;
+}
+
 #tasksTab {
     display: flex;
     flex-wrap: nowrap;
