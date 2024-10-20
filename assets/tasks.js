@@ -907,6 +907,7 @@ editTaskBtn.addEventListener('click', (el) => {
         })
 
         // const taskIndex = tasks.indexOf(changedTask)
+        console.log('changedTask', changedTask)
 
         const btnIconList = document.querySelector('#checkedIconBlock').querySelectorAll('.btn-outline-light')
         btnIconList.forEach((el) => {
@@ -923,6 +924,12 @@ editTaskBtn.addEventListener('click', (el) => {
                 taskStorypoints = el.innerHTML
             }
         })
+
+        if(additionalIconClass) {
+            changedTask.additionalIcon = additionalIconClass
+        } else {
+            additionalIconClass = changedTask.additionalIcon
+        }
 
         const dropdownColorBtn = document.querySelector('#taskTextColorDropdown')
         textColor = dropdownColorBtn.getAttribute('data-color')
@@ -966,7 +973,7 @@ editTaskBtn.addEventListener('click', (el) => {
 
         saveTasksListInLocalStorage(tasks)
 
-        closeTaskDialog()
+        // closeTaskDialog()
     }
 })
 
