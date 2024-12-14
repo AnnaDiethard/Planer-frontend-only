@@ -165,7 +165,7 @@
 }
 
 .widget-card-body {
-    min-height: 15rem;
+    min-height: 13rem;
     max-height: 15rem;
     overflow-y: auto;
     padding:  0;
@@ -271,6 +271,7 @@
     flex-direction: row;
     z-index: 10;
     width: 100%;
+    padding-bottom: 40px;
 }
 
 .widget-list__input-text {

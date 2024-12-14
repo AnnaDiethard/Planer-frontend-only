@@ -245,8 +245,7 @@ function renderWidget() {
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="card-body widget-card-body ">
-                                    <div class="widget-card-body-header">
+                                <div class="widget-card-body-header">
                                         <ul class="nav nav-tabs widget-every-week-goal__nav" id="tab${id}" role="tablist">
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link nav-widget-link" id="widget__every-week-goals-mon-tab${id}" data-bs-toggle="tab" data-bs-target="#widget__every-week-goals-mon${id}"
@@ -281,6 +280,8 @@ function renderWidget() {
                                         <button class="btn card-body__icon-button" type="button" onclick="reloadTasksInEveryWeekGoalsWidget(this)" title="remove selection"><i class="icon-secondary fa-solid fa-rotate-right widget-btn-block__button"></i></button>
                                         <button class="btn card-body__icon-button" type="button" onclick="deleteTasksFromEveryWeekGoalsWidget(this)" title="delete all content"><i class="icon-secondary fa-solid fa-ban widget-btn-block__button"></i></button>
                                     </div>
+                                <div class="card-body widget-card-body ">
+                                    
                                     <div>
                                         <div class="tab-content widget-tab-content">
                                             <div class="tab-pane fade" id="widget__every-week-goals-mon${id}" data-active-day="mon" role="tabpanel" aria-labelledby="widget__every-week-goals-mon-tab${id}">
@@ -336,15 +337,15 @@ function renderWidget() {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="widget-card-body">
-                                        <div class="input-group widget-list__input-block">
-                                            <input type="text" class="form-control widget-list__input-text">
-                                            <button type="button" class="input-group-text button-dark" onclick="addTaskToListWidget(this)">+</button>
-                                            <div class="widget-btn-block">
-                                                <button id="cleanTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteDoneTasksFromListWidget(this)" title="delete done"><i class="fa-solid fa-eraser"></i></button>
-                                                <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
-                                            </div>
+                                    <div class="input-group widget-list__input-block">
+                                        <input type="text" class="form-control widget-list__input-text">
+                                        <button type="button" class="input-group-text button-dark" onclick="addTaskToListWidget(this)">+</button>
+                                        <div class="widget-btn-block">
+                                            <button id="cleanTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteDoneTasksFromListWidget(this)" title="delete done"><i class="fa-solid fa-eraser"></i></button>
+                                            <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                         </div>
+                                    </div>
+                                    <div class="widget-card-body">
                                         <div class="card-body widget-list-card-body">
                                             <ul class="widget-list__list"></ul>
                                         </div>
@@ -378,8 +379,7 @@ function renderWidget() {
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="widget-card-body">
-                                            <div class="widget-link-list__input-block ">
+                                        <div class="widget-link-list__input-block ">
                                                 <div style="width: 100%; padding-left: 1rem">
                                                     <div class="block-between">
                                                         <p style="width: 3rem">text</p>
@@ -393,6 +393,7 @@ function renderWidget() {
                                                 <button type="button" class="input-group-text button-dark" style="height: 4.5rem; border-radius: 0;" onclick="addLinkToLinkListWidget(this)">+</button>
                                                 <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                             </div>
+                                        <div class="widget-card-body">
                                             <div class="card-body widget-link-list-card-body">
                                                 <ul class="widget-link-list__list"></ul>
                                             </div>

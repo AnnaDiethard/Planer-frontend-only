@@ -5,6 +5,7 @@ let taskDateTemplate = ''
 
 // объявление переменных для задач
 let tasks = []
+let task = {}
 let doneTasks = []
 let tasksForSearch = []
 let taskDate = ''
@@ -531,8 +532,6 @@ function editTaskOpenDialog(el) {
 
     const getTaskId = el.closest('li').id
     taskDialog.taskId = getTaskId
-
-    let task = {}
     
     tasks.filter((el) => {
         if(el.id == getTaskId) {
@@ -722,6 +721,12 @@ function chooseTaskAdditionalIcon(el) {
     classArr.forEach(el => {
         dropdownAdditionalIconBtn.querySelector('i').classList.add(el)
     })
+}
+
+// удаление дополнительной иконки
+function deleteTaskIcon() {
+    console.log('task', task)
+    task.additionalIcon = ''
 }
 
 // сторипоинты - выбор и отмена
@@ -953,13 +958,18 @@ editTaskBtn.addEventListener('click', (el) => {
             changedTask.inWork = true
         }
 
+        if(task.additionalIcon == '') {
+            changedTask.additionalIcon = task.additionalIcon
+        } else {
+            changedTask.additionalIcon = additionalIconClass
+        }
+
         changedTask.text = taskInputValueText
         changedTask.description = taskInputValueDescription
         changedTask.storypoints = taskStorypoints
         changedTask.status = taskStatus
         changedTask.color = textColor
         changedTask.icon = iconClass
-        changedTask.additionalIcon = additionalIconClass
         changedTask.date = date
         changedTask.dayName = weekDay
         changedTask.weekNumber = weekNumber
