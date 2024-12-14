@@ -262,6 +262,7 @@
     min-height: 20rem;
     max-height: 20rem;
     overflow-y: auto;
+    padding-bottom: 45px;
 }
 
 .widget-list__input-block {
@@ -271,7 +272,7 @@
     flex-direction: row;
     z-index: 10;
     width: 100%;
-    padding-bottom: 40px;
+    
 }
 
 .widget-list__input-text {

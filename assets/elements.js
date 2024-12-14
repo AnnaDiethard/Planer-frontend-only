@@ -322,6 +322,7 @@ function renderWidget() {
                                             <input type="text" class="form-control hide-class widget-list__input-text-header">
                                             <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil button-icon-accent "></i></button>
                                             <div class="widget-btn-block hide-class">
+                                                
                                                 <button id="renameWidgetConfirm" class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetConfirm(this)"><i class="button-icon-accent fa-solid fa-check"></i></button>
                                                 <button class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
                                             </div>
@@ -341,6 +342,7 @@ function renderWidget() {
                                         <input type="text" class="form-control widget-list__input-text">
                                         <button type="button" class="input-group-text button-dark" onclick="addTaskToListWidget(this)">+</button>
                                         <div class="widget-btn-block">
+                                            <button class="btn widget-btn-block__button icon-secondary" type="button" onclick="reloadTasksInListWidget(this)" title="remove selection"><i class="icon-secondary fa-solid fa-rotate-right widget-btn-block__button"></i></button>
                                             <button id="cleanTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteDoneTasksFromListWidget(this)" title="delete done"><i class="fa-solid fa-eraser"></i></button>
                                             <button id="deleteAllTasksToRunningList" type="button" class="btn widget-btn-block__button icon-secondary" onclick="deleteAllTasksOnListWidget(this)" title="delete all"><i class="fa-solid fa-ban"></i></button>
                                         </div>
@@ -472,6 +474,24 @@ function reMarkTheCompletedTaskInListWidget(el) {
     el.parentNode.removeChild(el);
 
     saveWidgets()
+}
+
+// отмена выделения у всех пунктов списка
+function reloadTasksInListWidget(el) {
+    const items = el.closest('.widget-card').querySelector('.widget-list__list').querySelectorAll('li')
+    items.forEach(el => {
+        if(el.classList.contains('widget-list__item-text-done')) {
+            const value =  el.querySelector('p').innerHTML
+            const item = `<li class="widget-list__item" onclick="markTheCompletedTaskInListWidget(this)">
+                                <p class="widget-list__item-text">${value}</p>
+                            </li>`
+            const list = el.closest('ul')
+            list.insertAdjacentHTML('afterbegin', item)
+            el.parentNode.removeChild(el);
+        }
+        
+        saveWidgets()
+    })
 }
 
 // удаление отмеченных пунктов
@@ -672,7 +692,6 @@ function addMoreTaskToEveryWeekGoalWidget() {
 // выделение элемента недельного виджета как выполненного
 function markTheTaskOfEveryWeekGoalWidgetCompleted(el) {
     const item = el.closest('li')
-    console.log('item', item)
     if(item.querySelector('p')) {
         item.querySelector('p').classList.add('light-text-class')
     } else {
