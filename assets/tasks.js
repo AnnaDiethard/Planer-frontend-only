@@ -830,7 +830,7 @@ function createNewTask() {
         weekNumber: taskWeekNumber || ''
     }
 
-    if(newTask.date || newTask.status) {
+    if(newTask.weekNumber || newTask.status) {
         newTask.inWork = true
     }
 
@@ -900,6 +900,7 @@ editTaskBtn.addEventListener('click', (el) => {
         })
 
         // const taskIndex = tasks.indexOf(changedTask)
+        console.log('changedTask', changedTask)
 
         const btnIconList = document.querySelector('#checkedIconBlock').querySelectorAll('.btn-outline-light')
         btnIconList.forEach((el) => {
@@ -916,6 +917,12 @@ editTaskBtn.addEventListener('click', (el) => {
                 taskStorypoints = el.innerHTML
             }
         })
+
+        if(additionalIconClass) {
+            changedTask.additionalIcon = additionalIconClass
+        } else {
+            additionalIconClass = changedTask.additionalIcon
+        }
 
         const dropdownColorBtn = document.querySelector('#taskTextColorDropdown')
         textColor = dropdownColorBtn.getAttribute('data-color')
@@ -957,9 +964,16 @@ editTaskBtn.addEventListener('click', (el) => {
         changedTask.dayName = weekDay
         changedTask.weekNumber = weekNumber
 
+        let taskInWork = false
+        if(changedTask.status || changedTask.weekNumber) {
+            taskInWork = true
+        }
+        
+        changedTask.inWork = taskInWork
+
         saveTasksListInLocalStorage(tasks)
 
-        closeTaskDialog()
+        // closeTaskDialog()
     }
 })
 
