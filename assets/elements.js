@@ -671,7 +671,16 @@ function addMoreTaskToEveryWeekGoalWidget() {
 // выделение элемента недельного виджета как выполненного
 function markTheTaskOfEveryWeekGoalWidgetCompleted(el) {
     const item = el.closest('li')
-    item.querySelector('p').classList.add('light-text-class')
+    console.log('item', item)
+    if(item.querySelector('p')) {
+        item.querySelector('p').classList.add('light-text-class')
+    } else {
+        item.querySelector('a').classList.add('light-text-class')
+        item.querySelector('a').classList.add('widget-list__item-text')
+        item.querySelector('a').classList.remove('widget-list__item-link')
+    }
+    
+    
     item.querySelector('.hide-class').classList.remove('hide-class')
     el.classList.add('hide-class')
     
@@ -682,7 +691,14 @@ function markTheTaskOfEveryWeekGoalWidgetCompleted(el) {
 function removeEveryWeekGoal(el) {
     el.classList.add('hide-class')
     const item = el.closest('li')
-    item.querySelector('p').classList.remove('light-text-class')
+
+    if(item.querySelector('p')) {
+        item.querySelector('p').classList.remove('light-text-class')
+    } else {
+        item.querySelector('a').classList.remove('light-text-class')
+        item.querySelector('a').classList.remove('widget-list__item-text')
+        item.querySelector('a').classList.add('widget-list__item-link')
+    }
     item.querySelector('input').classList.remove('hide-class')
     item.querySelector('input')
 
