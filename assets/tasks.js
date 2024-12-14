@@ -634,22 +634,6 @@ function editTaskOpenDialog(el) {
         })
     }
 
-    if(task.isParent == true || task.isChild == true) {
-        addParentTaskBtn.classList.add('hide-class')
-    }
-
-    if(task.isChild == true) {
-        currentParentTaskBlock.classList.remove('hide-class')
-        changeParentTaskBtn.classList.remove('hide-class')
-        removeParentTaskBlock.classList.remove('hide-class')
-
-        tasks.forEach(el => {
-            el.id == task.parentId
-            renderTask(el)
-            currentParentTaskBlock.querySelector('ul').insertAdjacentHTML('beforebegin', parentTaskSearchTemplate)
-        })
-    }
-
     taskDialog.showModal()
 }
 
@@ -768,37 +752,6 @@ function chooseStatus(el) {
     }
 }
 
-// выбор родительской задачи
-function addParentTask() {
-    addParentTaskBtn.classList.add('hide-class')
-    searchParentTaskBlock.classList.remove('hide-class')
-}
-
-function goToChangeTaskParametr() {
-    addParentTaskBtn.classList.remove('hide-class')
-    searchParentTaskBlock.classList.add('hide-class')
-    searchBlockTaskBlock.classList.add('hide-class')
-    parentId = ''
-    parentText = ''
-}
-
-function changeParentTask() {
-    searchParentTaskBlock.classList.remove('hide-class')
-    changeParentTaskBtn.classList.add('hide-class')
-    goToChangeTaskParametrBtn.classList.add('hide-class')
-    searchSubtasksInput.value = ''
-}
-
-// установка родительской задачи
-function checkParentTask(el) {
-    parentId = el.closest('li').id
-    tasks.forEach(el => {
-        if(el.id == parentId) {
-            parentText = el.text
-        }
-    })
-}
-
 // создание новой задачи
 function createNewTask() {    
     const taskInputValueText = document.querySelector("#addTaskInputText").value
@@ -904,9 +857,6 @@ editTaskBtn.addEventListener('click', (el) => {
             return changedTask
         })
 
-        // const taskIndex = tasks.indexOf(changedTask)
-        console.log('changedTask', changedTask)
-
         const btnIconList = document.querySelector('#checkedIconBlock').querySelectorAll('.btn-outline-light')
         btnIconList.forEach((el) => {
             if(el.classList.contains('active')) {
@@ -983,7 +933,7 @@ editTaskBtn.addEventListener('click', (el) => {
 
         saveTasksListInLocalStorage(tasks)
 
-        // closeTaskDialog()
+        closeTaskDialog()
     }
 })
 
