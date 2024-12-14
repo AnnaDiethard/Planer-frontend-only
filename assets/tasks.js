@@ -837,7 +837,7 @@ function createNewTask() {
         weekNumber: taskWeekNumber || ''
     }
 
-    if(newTask.date || newTask.status) {
+    if(newTask.weekNumber || newTask.status) {
         newTask.inWork = true
     }
 
@@ -970,6 +970,13 @@ editTaskBtn.addEventListener('click', (el) => {
         changedTask.date = date
         changedTask.dayName = weekDay
         changedTask.weekNumber = weekNumber
+
+        let taskInWork = false
+        if(changedTask.status || changedTask.weekNumber) {
+            taskInWork = true
+        }
+        
+        changedTask.inWork = taskInWork
 
         saveTasksListInLocalStorage(tasks)
 
