@@ -729,10 +729,10 @@ function removeEveryWeekGoal(el) {
 function reloadTasksInEveryWeekGoalsWidget(el) {
     openValidationDialog()
     openValidationDialogBtn.addEventListener('click', () => {
-        const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
+        const items = el.closest('.card').querySelectorAll('.widget-every-week-goal__item')
         items.forEach(el => {
-            if(el.classList.contains('light-text-class')) {
-                el.classList.remove('light-text-class')
+            if(el.querySelector('p').classList.contains('light-text-class')) {
+                el.querySelector('p').classList.remove('light-text-class')
                 el.querySelector('input').classList.remove('hide-class')
                 el.querySelector('.remove-icon').classList.add('hide-class')
             }
