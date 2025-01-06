@@ -681,6 +681,11 @@ footer {
     border-radius: 10px;
 }
 
+.storypoints-input-block {
+    display: flex;
+    flex-direction: column;
+}
+
 .storypoints-input {
     display: flex;
     flex-wrap: wrap;

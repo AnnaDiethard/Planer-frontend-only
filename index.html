@@ -541,16 +541,22 @@
                             </div>
                             <button class="nav-link icon-dropdown-link btn btn-outline-light" id="deleteTaskIconBtn" type="button"onclick="deleteTaskIcon()">удалить иконку</button>
                         </div>
-                        <div class="storypoints-input" id="checkedStorypointsBlock">
-                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">1</button>
-                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">3</button>
-                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">5</button>
-                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">8</button>
-                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">13</button>
-                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">21</button>
-                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">34</button>
-                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">55</button>
-                            <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">89</button>
+                        <div class="storypoints-input-block">
+                            <div class="storypoints-input" id="checkedStorypointsBlock">
+                                <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">1</button>
+                                <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">3</button>
+                                <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">5</button>
+                                <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">8</button>
+                                <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">13</button>
+                                <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">21</button>
+                                <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">34</button>
+                                <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">55</button>
+                                <button type="button" class="btn btn-outline-light number-btn" onclick="chooseStorypoints(this)">89</button>
+                            </div>
+                            <div class="storypoints-input" style="display: flex; align-items: center; padding-top: 10px;">
+                                <p>введите кол-во сторипоинтов</p>
+                                <input type="number" name="" id="userStorypointsInput" class="widget-list__input-text" style="max-width: 5rem; margin-left: 1rem;">
+                            </div>
                         </div>
                         <div>
                             <div class="modal-dialog__btn-block" id="checkedIconBlock">
