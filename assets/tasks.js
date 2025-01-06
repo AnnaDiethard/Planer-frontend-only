@@ -16,6 +16,7 @@ let textColor = ''
 let iconClass = ''
 let additionalIconClass = ''
 let taskStorypoints = ''
+let userStorypointsInputValue = ''
 let editTaskId = ''
 
 const taskDialog = document.querySelector('#taskDialog')
@@ -604,18 +605,17 @@ function editTaskOpenDialog(el) {
     // сторипоинты
     const btnBlock = document.querySelector('#checkedStorypointsBlock')
     const btnList = btnBlock.querySelectorAll('.btn-outline-light')
-    if(task.isParent) {
-        btnBlock.classList.add('hide-class')
-    } else {
-        let storypointsNumber = task?.storypoints
-        if(storypointsNumber != '') {
-            btnList.forEach(el => {
-                if(el.innerHTML == storypointsNumber) {
-                    el.classList.add('active')
-                }
-            })
+
+    let storypointsNumber = task?.storypoints
+    
+    btnList.forEach(el => {
+        if(el.innerHTML == storypointsNumber) {
+            el.classList.add('active')
+        } else {
+            let userStorypointsInputValue = document.querySelector('#userStorypointsInput')
+            userStorypointsInputValue.value = storypointsNumber
         }
-    }
+    })
     
     // цвет текста
     const colorBtn = document.querySelector('#taskTextColorDropdown')
@@ -758,6 +758,7 @@ function createNewTask() {
     const taskInputValueDescription = document.querySelector("#addTaskInputDescription").value
     const taskDateCreateMoment = moment().format('L')
     const taskTimeCreateMoment = moment().format('LT')
+    userStorypointsInputValue = document.querySelector("#userStorypointsInput").value
 
     let dateDay = ''
     if(taskDate) {
@@ -770,7 +771,7 @@ function createNewTask() {
         text: taskInputValueText,
         description: taskInputValueDescription,
         status: taskStatus || '',
-        storypoints: taskStorypoints || '',
+        storypoints: userStorypointsInputValue || taskStorypoints || '',
         icon: iconClass || '',
         additionalIcon: additionalIconClass || '',
         color: textColor || 'base-text-color',
@@ -805,6 +806,8 @@ function cleanTaskForm() {
     addTaskInputValueText.value = ""
     const addTaskInputDescription = document.querySelector("#addTaskInputDescription")
     addTaskInputDescription.value = ""
+    const userStorypointsInputValue = document.querySelector("#userStorypointsInput")
+    userStorypointsInputValue.value = ""
     taskStatus = ''
     iconClass = ''
     taskDate = ''
@@ -842,6 +845,7 @@ editTaskBtn.addEventListener('click', (el) => {
 
     const taskInputValueText = document.querySelector("#addTaskInputText").value
     const taskInputValueDescription = document.querySelector("#addTaskInputDescription").value
+    userStorypointsInputValue = document.querySelector("#userStorypointsInput").value
 
     if(taskInputValueText == '') {
         const errorText = document.querySelector('#errorText')
@@ -870,6 +874,8 @@ editTaskBtn.addEventListener('click', (el) => {
         btnStorypointsList.forEach((el) => {
             if(el.classList.contains('active')) {
                 taskStorypoints = el.innerHTML
+            } else if(userStorypointsInputValue) {
+                taskStorypoints = userStorypointsInputValue
             }
         })
 
