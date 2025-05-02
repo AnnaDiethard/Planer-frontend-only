@@ -404,6 +404,74 @@ function renderWidget() {
                                 </div>
                             </div>`
                 break
+                case 'трекер': 
+                widget = `<div class="col-12 widget-col">
+                            <div class="widget-tracker" style="padding-bottom: 1rem">
+                                <div class="card widget-card border__widget-card shadow-class">
+                                    <div class="card-header block-between widget-card-header card-header__text">
+                                        <div class="card-widget__block-header block-between">
+                                            <p>${inputWidgetValue}</p>
+                                            <input type="text" class="form-control hide-class widget-list__input-text-header">
+                                            <button class="btn card-body__widget-header-btn btn-rename" type="button" onclick="renameWidget(this)" title="rename"><i class="fa-solid fa-pencil button-icon-accent "></i></button>
+                                            <div class="widget-btn-block hide-class">
+                                                
+                                                <button id="renameWidgetConfirm" class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetConfirm(this)"><i class="button-icon-accent fa-solid fa-check"></i></button>
+                                                <button class="btn card-body__widget-header-btn" type="button" onclick="renameWidgetCancel(this)"><i class="fa-solid fa-xmark"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown dropstart dropdown-settings">
+                                            <button class="btn dropdown-settings-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" title="settings"><i class="fa-solid fa-ellipsis"></i></button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"  id="myTab" role="tablist">
+                                                <li><a class="dropdown-item" href="#" onclick="removeTracker(this)">сбросить</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="foolCol(this)">колонка</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="threeQuartersCol(this)">3/4 колонки</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="halfCol(this)">1/2 колонки</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="quarterCol(this)">1/4 колонки</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="deleteWidget(this)">удалить</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="widget-tracker-card-body">
+                                        <div class="card-body">
+                                            <div class="widget-tracker__checkbox-list">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`
+                break
     }
 
     widgetsCol.insertAdjacentHTML('beforeend', widget)
@@ -760,4 +828,40 @@ function deleteEveryWeekGoal(el) {
     el.closest('li').remove()
     saveWidgets()
     window.location.reload();
+}
+
+// ФУНКЦИИ ДЛЯ ВИДЖЕТА ТРЕКЕР
+
+// проверка корректности даты и отрисовка трекеров
+const trackerArr = document.querySelectorAll('.widget-tracker')
+trackerArr.forEach(el => {
+    const inputArr = el.querySelectorAll('input')
+    inputArr.forEach(el => {
+        if(el.classList.contains('widget-tracker__checkbox-done')) {
+            el.checked = true
+            el.disabled = true
+        }
+    })
+})
+
+// выбор чекбокса
+const widgetTrackerCheckboxArr = document.querySelectorAll('.widget-tracker__checkbox')
+widgetTrackerCheckboxArr.forEach(el => {
+    el.addEventListener('click', () => {
+        
+        el.classList.add('widget-tracker__checkbox-done')
+        saveWidgets()
+        window.location.reload()
+    })
+})
+
+// сброс трекера
+function removeTracker(el) {
+    widgetTrackerCheckboxArr.forEach(el => {
+        el.classList.remove('widget-tracker__checkbox-done')
+        el.checked = false
+        el.disabled = false
+    })
+    saveWidgets()
+    window.location.reload()
 }

@@ -22,6 +22,9 @@ let editTaskId = ''
 const taskDialog = document.querySelector('#taskDialog')
  
 // сброс номера недели задачи при смене недели на следующую
+// нахуй ты блять дату скидываешь блять сделай стиль на темплейт с просроченной датой чтоб его видно было сразу в списке с рабочими задачами
+// новое поле в задаче, типа просроченная дата, пустое по-умолчанию, но когда задача перескакивает, то дата остаётся и рендерится в карточки
+// с бегущим списком отдельным темплейтом
 const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
 let thisWeekNumber = document.querySelector('#weekPlanerListCard').getAttribute('week-number')
 thisWeekNumber = getThisWeekNumber

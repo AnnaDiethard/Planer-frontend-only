@@ -397,3 +397,24 @@
     padding: 1rem 0 1rem 0;
     color: #7D7D7D;
 }
+
+/* трекер */
+.widget-tracker-card-body {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.widget-tracker__checkbox-list {
+    width: 100%;
+}
+
+.widget-tracker__checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+.widget-tracker__checkbox-done {
+    width: 18px;
+    height: 18px;
+}
