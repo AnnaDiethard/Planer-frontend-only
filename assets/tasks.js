@@ -11,6 +11,7 @@ let tasksForSearch = []
 let taskDate = ''
 let dayOfWeek = ''
 let taskWeekNumber = ''
+let weekForTask = ''
 let taskStatus = ''
 let textColor = ''
 let iconClass = ''
@@ -788,7 +789,7 @@ function createNewTask() {
         // определяется в конфиге календаря
         date: dateDay || '',
         dayName: dayOfWeek || '',
-        weekNumber: taskWeekNumber || ''
+        weekNumber: weekForTask || taskWeekNumber || ''
     }
 
     tasks.push(newTask)
@@ -885,6 +886,8 @@ editTaskBtn.addEventListener('click', (el) => {
         const dropdownColorBtn = document.querySelector('#taskTextColorDropdown')
         textColor = dropdownColorBtn.getAttribute('data-color')
 
+
+        let date = ''
         let weekDay = ''
         if(dayOfWeek == '') {
             weekDay = changedTask.dayName
@@ -895,18 +898,22 @@ editTaskBtn.addEventListener('click', (el) => {
         let weekNumber = ''
         if(taskWeekNumber == '') {
             weekNumber = changedTask.weekNumber
-        } else {
+        } else if (weekForTask != '') {
+            weekNumber = weekForTask
+            date = ''
+        }  else  {
             weekNumber = taskWeekNumber
         }
 
-        let date = ''
         if(document.querySelector('input[name="runningListRadio"]:checked')) {
             date = ''
             weekDay = ''
             weekNumber = ''
+        }else if(weekForTask != '') {
+            date = ''
         } else if (taskDate == '') {
             date = changedTask.date
-        } else {
+        }  else {
             date = `дедлайн ${taskDate}`
         }
 
@@ -964,7 +971,7 @@ function checkCorrectRenderTask() {
                 sortTasksOnStatus(tasksExpiredList)
             }
             // thisWeekList
-            if (getThisWeekNumber == task.weekNumber && task.date == '') {
+            if (getThisWeekNumber == task.weekNumber) {
                 tasksThisWeekList.push(task)
                 sortTasksOnStatus(tasksThisWeekList)
             }

@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.target.classList.add('vanilla-calendar-day-check')
 
                 taskWeekNumber = Number(e.target.dataset.calendarWeekNumber)
+                weekForTask = ''
                 taskDate = self.selectedDates.toString()
                 
                 const gsDayNames = [
@@ -41,6 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
     taskCalendar.init();
 
     // определение и сохранение номера текущей недели
+    let taskWeekArr = document.querySelectorAll('.vanilla-calendar-week-number')
+    taskWeekArr.forEach( el => {
+        el.addEventListener('click', () => {
+            weekForTask = Number(el.innerHTML)
+        })
+    })
     const thisWeek = document.querySelector('.vanilla-calendar-day__btn_today').getAttribute('data-calendar-week-number')
     console.log('thisWeek', thisWeek)
     let weekPlanerWeekNumber = document.querySelector('#weekPlanerListCard').setAttribute('week-number', thisWeek)
