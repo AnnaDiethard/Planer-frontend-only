@@ -434,37 +434,42 @@ function renderWidget() {
                                     <div class="widget-tracker-card-body">
                                         <div class="card-body">
                                             <div class="widget-tracker__checkbox-list">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
-                                                <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                            <button class="btn card-body__icon-button" type="button" onclick="reloadTrackerWidget(this)" title="remove selection" style="width: fit-content;"><i class="icon-secondary fa-solid fa-rotate-right widget-btn-block__button"></i></button>
+                                                <div>
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                    <input id="" class="widget-tracker__checkbox" type="checkbox">
+                                                </div>
+                                                
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -855,7 +860,18 @@ widgetTrackerCheckboxArr.forEach(el => {
     })
 })
 
-// сброс трекера
+function reloadTrackerWidget(el) {
+    checkboxes = el.closest('.widget-tracker__checkbox-list').querySelectorAll('.widget-tracker__checkbox')
+    checkboxes.forEach(el => {
+        el.classList.remove('widget-tracker__checkbox-done')
+        el.checked = false
+        el.disabled = false
+    })
+    saveWidgets()
+    window.location.reload()
+}
+
+// сброс всех трекеров
 function removeTracker(el) {
     widgetTrackerCheckboxArr.forEach(el => {
         el.classList.remove('widget-tracker__checkbox-done')
