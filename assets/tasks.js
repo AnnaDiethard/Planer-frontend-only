@@ -906,7 +906,7 @@ editTaskBtn.addEventListener('click', (el) => {
         }
 
         let date = ''
-        if(document.querySelector('input[type="checkbox"]:checked')) {
+        if(document.querySelector('input[name="runningListRadio"]:checked')) {
             date = ''
             weekDay = ''
             weekNumber = ''
