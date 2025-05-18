@@ -781,7 +781,6 @@ function createNewTask() {
         // статусы задач
         done: false,
         expired: false,
-        inWork: false,
         // поля, относящиеся к времени
         taskDateCreate: taskDateCreateMoment,
         taskTimeCreate: taskTimeCreateMoment,
@@ -790,10 +789,6 @@ function createNewTask() {
         date: dateDay || '',
         dayName: dayOfWeek || '',
         weekNumber: taskWeekNumber || ''
-    }
-
-    if(newTask.weekNumber || newTask.status) {
-        newTask.inWork = true
     }
 
     tasks.push(newTask)
@@ -869,7 +864,6 @@ editTaskBtn.addEventListener('click', (el) => {
             if(el.classList.contains('active')) {
                 taskStatus = el.id
                 iconClass = el.querySelector('i').classList.value
-                changedTask.inWork = true
             }
         })
 
@@ -906,7 +900,7 @@ editTaskBtn.addEventListener('click', (el) => {
         }
 
         let date = ''
-        if(document.querySelector('input[type="checkbox"]:checked')) {
+        if(document.querySelector('input[name="runningListRadio"]:checked')) {
             date = ''
             weekDay = ''
             weekNumber = ''
@@ -914,7 +908,6 @@ editTaskBtn.addEventListener('click', (el) => {
             date = changedTask.date
         } else {
             date = `дедлайн ${taskDate}`
-            changedTask.inWork = true
         }
 
         if(task.additionalIcon == '') {
@@ -933,13 +926,6 @@ editTaskBtn.addEventListener('click', (el) => {
         changedTask.dayName = weekDay
         changedTask.weekNumber = weekNumber
 
-        let taskInWork = false
-        if(changedTask.status || changedTask.weekNumber) {
-            taskInWork = true
-        }
-        
-        changedTask.inWork = taskInWork
-
         saveTasksListInLocalStorage(tasks)
 
         closeTaskDialog()
@@ -954,16 +940,10 @@ function checkCorrectRenderTask() {
     const tasksExpiredList = []
     const tasksNextWeekList = []
     const tasksPlanerList = []
-    const tasksInWorkList = []
 
     const getThisWeekNumber = JSON.parse(localStorage.getItem('weekPlanerWeekNumber'))
 
     tasks.forEach((task) => {
-            // inWorkList
-            if(task.inWork) {
-                tasksInWorkList.push(task)
-                sortTasksOnStatus(tasksInWorkList)
-            }
             // planningList
             if(task.weekNumber == '' && task.status == '') {
                 tasksPlanerList.push(task)
@@ -1063,17 +1043,6 @@ function checkCorrectRenderTask() {
             planningListCard.insertAdjacentHTML('beforeend', doneTaskTemplate)
         } else { 
             planningListCard.insertAdjacentHTML('beforebegin', taskTemplate)
-        }
-    })
-
-    tasksInWorkList.forEach((task) => {
-        renderTask(task)
-
-        const tasksInWorkListCard = document.querySelector('#tasksInWorkListCard')
-        if(task.done) {
-            tasksInWorkListCard.insertAdjacentHTML('beforeend', doneTaskTemplate)
-        } else {
-            tasksInWorkListCard.insertAdjacentHTML('beforebegin', taskTemplate)
         }
     })
 }

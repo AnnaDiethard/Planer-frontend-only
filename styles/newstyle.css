@@ -37,6 +37,10 @@
 }
 
 /* цвета статусов задач */
+.fa-hourglass {
+    color:var(--seconday-light-color);
+}
+
 .fa-hourglass-end  {
     color: #9E3131;
 }
