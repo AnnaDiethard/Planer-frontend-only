@@ -944,7 +944,7 @@ function checkCorrectRenderTask() {
     const tasksRunningList = []
     const tasksWeekDaysPlanerList = []
     const tasksThisWeekList = []
-    const tasksExpiredList = []
+    // const tasksExpiredList = []
     const tasksNextWeekList = []
     const tasksPlanerList = []
 
@@ -955,6 +955,12 @@ function checkCorrectRenderTask() {
             if(task.weekNumber == '' && task.status == '') {
                 tasksPlanerList.push(task)
             }
+            // expired tasks (возвращаются в бэклог)
+            if (task.expired == true) {
+                task.status = ''
+                tasksPlanerList.push(task)
+                // sortTasksOnStatus(tasksExpiredList)
+            }
             // runnungList
             if (task.icon) {
                 tasksRunningList.push(task)
@@ -964,11 +970,6 @@ function checkCorrectRenderTask() {
             if(getThisWeekNumber == task.weekNumber && task.date) {
                 tasksWeekDaysPlanerList.push(task)
                 sortTasksOnStatus(tasksWeekDaysPlanerList)
-            }
-            // expiredList
-            if (task.expired == true) {
-                tasksExpiredList.push(task)
-                sortTasksOnStatus(tasksExpiredList)
             }
             // thisWeekList
             if (getThisWeekNumber == task.weekNumber) {
@@ -1009,16 +1010,16 @@ function checkCorrectRenderTask() {
         }
     })
 
-    tasksExpiredList.forEach((task) => {
-        renderTask(task)
+    // tasksExpiredList.forEach((task) => {
+    //     renderTask(task)
 
-        const expiredTasksList = document.querySelector('#expiredTasks')
-        if(task.done) {
-            expiredTasksList.insertAdjacentHTML('beforeend', doneTaskTemplate)
-        } else { 
-            expiredTasksList.insertAdjacentHTML('beforebegin', taskTemplate)
-        }
-    })
+    //     const expiredTasksList = document.querySelector('#expiredTasks')
+    //     if(task.done) {
+    //         expiredTasksList.insertAdjacentHTML('beforeend', doneTaskTemplate)
+    //     } else { 
+    //         expiredTasksList.insertAdjacentHTML('beforebegin', taskTemplate)
+    //     }
+    // })
 
     tasksThisWeekList.forEach((task) => {
         renderTask(task)
