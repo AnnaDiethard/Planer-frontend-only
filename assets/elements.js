@@ -819,7 +819,7 @@ function reloadTasksInEveryWeekGoalsWidget(el) {
 function deleteTasksFromEveryWeekGoalsWidget(el) {
     openValidationDialog()
     openValidationDialogBtn.addEventListener('click', () => {
-        const items = el.closest('.card-body').querySelectorAll('.widget-every-week-goal__item')
+        const items = el.closest('.card').querySelectorAll('.widget-every-week-goal__item')
         items.forEach(el => {
             el.remove()
         })
