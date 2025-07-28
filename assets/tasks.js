@@ -713,7 +713,6 @@ function chooseTaskAdditionalIcon(el) {
 
 // удаление дополнительной иконки
 function deleteTaskIcon() {
-    console.log('task', task)
     task.additionalIcon = ''
 }
 
@@ -961,7 +960,7 @@ function checkCorrectRenderTask() {
             if (task.expired == true) {
                 task.status = ''
                 task.icon = ''
-                changedTask.expired = false
+                task.expired = false
                 tasksPlanerList.push(task)
                 // sortTasksOnStatus(tasksExpiredList)
             }
@@ -988,7 +987,6 @@ function checkCorrectRenderTask() {
     })
 
     tasksRunningList.forEach((task) => {
-        console.log('tasksRunningList', task)
         renderTask(task)
         
         const runningListCard = document.querySelector("#runningListCard")
@@ -1000,7 +998,6 @@ function checkCorrectRenderTask() {
     })
 
     tasksWeekDaysPlanerList.forEach((task) => {
-        console.log('tasksWeekDaysPlanerList', task)
         renderTask(task)
 
         let taskWeekDayList = ''
@@ -1028,7 +1025,6 @@ function checkCorrectRenderTask() {
     // })
 
     tasksThisWeekList.forEach((task) => {
-        console.log('tasksThisWeekList', task)
         renderTask(task)
 
         const thisWeekTasksList = document.querySelector('#thisWeekTasks')
@@ -1040,7 +1036,6 @@ function checkCorrectRenderTask() {
     })
 
     tasksNextWeekList.forEach((task) => {
-         console.log('tasksNextWeekList', task)
         renderTask(task)
 
         const nextWeekTasksList = document.querySelector('#nextWeekTasks')
@@ -1052,7 +1047,6 @@ function checkCorrectRenderTask() {
     })
 
     tasksPlanerList.forEach((task) => {
-         console.log('tasksPlanerList', task)
         renderTask(task)
         
         const planningListCard = document.querySelector("#planningListCard")
@@ -1066,7 +1060,6 @@ function checkCorrectRenderTask() {
 
 // рендер задач по карточкам
 function renderTask(task) {
-    // console.log('task', task)
     // выполненная задача
     doneTaskTemplate = `<li class="done-list__item" id="${task.id}">
                             <p class="form-check-label_done" for="flexCheckDefault">${task.text}</p>
