@@ -961,6 +961,7 @@ function checkCorrectRenderTask() {
             if (task.expired == true) {
                 task.status = ''
                 task.icon = ''
+                changedTask.expired = false
                 tasksPlanerList.push(task)
                 // sortTasksOnStatus(tasksExpiredList)
             }
