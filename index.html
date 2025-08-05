@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-4 d-none d-lg-block">
                     <div class="search-tasks " id="searchTasksBlock">
-                        <div class="search-block">
+                        <div class="search-block shadow-class">
                             <input type="text" id="searchTasksInput" class="search-tasks-input">
                             <div class="block_left">
                                 <button id="cleanSearchInput" type="button" class="btn search-tasks__btn" onclick="cleanSearchInput()" title="search" style="right: 3.5rem;"><i class="fa-solid fa-xmark" ></i></button>
@@ -234,20 +234,6 @@
                                 <div id="weekPlanerListCard" week-number="">
                                     <div class="card card_day-card border-bottom-right-radius">
                                         <div class="card-header card-header_day-card shadow-class">
-                                            <p class="card-header__text">просроченные задачи</p>
-                                            <div class="card-header__label"></div>
-                                            <div>
-                                                <button id="weekDayCardHeaderBtnOpen" onclick="expandWeekDayCard(this)"  class="task-card-header__icon-button shadow-class button-icon-extra-light"><i class="fa-solid fa-chevron-down"></i></button>
-                                                <button id="weekDayCardHeaderBtnClose" onclick="rollUpWeekDayCard(this)" class="task-card-header__icon-button shadow-class button-icon-extra-light hide-class"><i class="fa-solid fa-angle-up"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="table-block"></div>
-                                        <!-- <div class="card-body week-planer-card-body hide-class">
-                                            <ul class="card-body__list" id="expiredTasks"></ul>
-                                        </div> -->
-                                    </div>
-                                    <div class="card card_day-card border-bottom-right-radius">
-                                        <div class="card-header card-header_day-card shadow-class">
                                             <p class="card-header__text">задачи текущей недели</p>
                                             <div class="card-header__label"></div>
                                             <div>
@@ -410,7 +396,7 @@
                     </div>
                     <div class="block-row">
                         <button class="accent-btn shadow-class" style="width: 100%" onclick="addWidgetOpenDialog()">добавить виджет</button>
-                        <button class="accent-btn shadow-class" style="width: 100%" onclick="removeTracker()">сброс трекеров</button>
+                        <button class="accent-btn shadow-class" style="margin-left: 2rem;" onclick="removeTracker()">сброс трекеров</button>
                     </div>
                     <div class="row widgets-row" id="widgetsCol" style="padding-top: 0.5rem;"></div>
                 </div>

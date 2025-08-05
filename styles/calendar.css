@@ -1,7 +1,7 @@
 .vanilla-calendar {
     width: 100%;
     margin-bottom: 1rem;
-    background-color: #d7d5e4 !important;
+    background-color: #d0d0d1 !important;
 }
 
 .vanilla-calendar-week-number-check {
@@ -11,7 +11,7 @@
 }
 
 .vanilla-calendar-day__btn {
-    background-color: #c7c4df !important;
+    background-color: #c3c1ce !important;
     color: var(--seconday-base-color) !important;
     font-size: 14px;
     margin: 3px 3px 3px 3px !important;
