@@ -975,7 +975,7 @@ function checkCorrectRenderTask() {
                 sortTasksOnStatus(tasksWeekDaysPlanerList)
             }
             // thisWeekList
-            if (getThisWeekNumber == task.weekNumber) {
+            if (getThisWeekNumber == task.weekNumber && !task.date) {
                 tasksThisWeekList.push(task)
                 sortTasksOnStatus(tasksThisWeekList)
             }
